@@ -15,8 +15,9 @@ export class ProductFactory {
 
         let product = ProductFactory.empty();
 
-        if (Validator.validNumber(obj.productId)) {
-            product.id = obj.productId;
+
+        if (Validator.validNumber(obj.id)) {
+            product.id = obj.id;
         }
 
         if (Validator.validString(obj.name)) {

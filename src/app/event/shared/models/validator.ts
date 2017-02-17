@@ -1,7 +1,7 @@
 export class Validator {
 
     static validNumber(no: number) {
-        return no && typeof no === 'number';
+        return no && typeof no == 'number';
     }
 
     static validString(str: string) {

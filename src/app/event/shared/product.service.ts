@@ -22,4 +22,11 @@ export class ProductService {
       .map(raw => raw.map(p => ProductFactory.fromObj(p)));
   }
 
+  getSingle(id: number): Observable<Product> {
+    return this.http.get(`${this.api}/product/${id}`)
+      .retry(3)
+      .map(res => res.json())
+      .map(raw => ProductFactory.fromObj(raw));
+  }
+
 }

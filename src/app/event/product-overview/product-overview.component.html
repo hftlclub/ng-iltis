@@ -2,5 +2,7 @@
   <div class="page-header">
     <h3>Produkte</h3>
   </div>
-  <il-product-card gridWidth="2" *ngFor="let p of products" [product]="p" [routerLink]="['../newtransfer']"></il-product-card>
+  <il-product-card gridWidth="2" *ngFor="let p of products" [product]="p" [routerLink]="['../newtransfer', p.id]"></il-product-card>
 </div>
+
+{{ products | json }}
