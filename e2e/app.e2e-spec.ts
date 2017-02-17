@@ -1,6 +1,6 @@
 import { IltisPage } from './app.po';
 
-describe('iltis App', function() {
+describe('iltis App', () => {
   let page: IltisPage;
 
   beforeEach(() => {
@@ -9,6 +9,6 @@ describe('iltis App', function() {
 
   it('should display message saying app works', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('app works!');
+    expect(page.getParagraphText()).toEqual('il works!');
   });
 });
