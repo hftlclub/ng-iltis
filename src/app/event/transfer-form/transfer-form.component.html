@@ -3,19 +3,32 @@
     <div class="col-md-12">
       <div class="panel panel-primary">
         <div class="panel-heading">
-          <h3 class="panel-title">Neuer Lagertransfer</h3>
+          <h3 class="panel-title">
+            <i class="fa" [ngClass]="outgoingTransfer ? 'fa-mail-forward' : 'fa-mail-reply'" aria-hidden="true"></i>
+            Neue Lager<span *ngIf="outgoingTransfer">entnahme</span><span *ngIf="!outgoingTransfer">rückgabe</span>
+          </h3>
         </div>
         <div class="panel-body">
           <div class="container-fluid">
             <div class="row">
               <div class="col-md-4 col-md-offset-1">
-                <button type="button" class="btn btn-info btn-block">Entnahme</button>
+                <button type="button" class="btn btn-block"
+                  [ngClass]="outgoingTransfer ? 'btn-info' : 'btn-default'"
+                  (click)="outgoingTransfer = true">
+                  <i class="fa fa-mail-forward" aria-hidden="true"></i>
+                  Entnahme
+                </button>
               </div>
               <div class="col-md-2">
                 <p class="text-center"><strong>ODER</strong></p>
               </div>
               <div class="col-md-4">
-                <button type="button" class="btn btn-default btn-block">Rückgabe</button>
+                <button type="button" class="btn btn-block"
+                  [ngClass]="outgoingTransfer ? 'btn-default' : 'btn-info'"
+                  (click)="outgoingTransfer = false">
+                  <i class="fa fa-mail-reply" aria-hidden="true"></i>
+                  Rückgabe
+                </button>
               </div>
             </div>
 
@@ -32,10 +45,17 @@
 
             <div class="row" style="margin-top: 20px">
               <div class="col-md-3 col-md-offset-3">
-                <button type="button" class="btn btn-danger btn-lg btn-block">Abbrechen</button>
+                <button type="button" class="btn btn-danger btn-lg btn-block">
+                  <i class="fa fa-times" aria-hidden="true"></i>
+                  Abbrechen
+                </button>
               </div>
               <div class="col-md-3">
-                <button type="button" class="btn btn-success btn-lg btn-block">Speichern</button>
+                <button type="button" class="btn btn-success btn-lg btn-block">
+                  <i class="fa fa-check" aria-hidden="true"></i>
+                  <span *ngIf="outgoingTransfer">Entnehmen</span>
+                  <span *ngIf="!outgoingTransfer">Zurücklegen</span>
+                </button>
               </div>
           </div>
         </div>

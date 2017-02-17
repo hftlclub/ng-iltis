@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TransferFormComponent implements OnInit {
 
-  foo= 5;
+  outgoingTransfer = true;
 
   constructor() { }
 
