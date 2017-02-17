@@ -1,0 +1,13 @@
+<div class="input-group">
+  <span class="input-group-btn input-group-lg">
+    <button class="btn btn-default btn-lg" type="button" (click)="decrease()" [disabled]="counterValue <= minValue">
+      <i class="fa fa-minus" aria-hidden="true"></i>
+    </button>
+  </span>
+  <input type="text" class="form-control input-lg" style="text-align: center" [(ngModel)]="counterValue">
+  <span class="input-group-btn">
+    <button class="btn btn-default btn-lg" type="button" (click)="increase()" [disabled]="counterValue >= maxValue">
+      <i class="fa fa-plus" aria-hidden="true"></i>
+    </button>
+  </span>
+</div>

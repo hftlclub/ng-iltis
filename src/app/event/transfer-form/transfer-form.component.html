@@ -22,17 +22,9 @@
             <hr>
 
             <div class="row">
-              <div class="col-md-3" *ngFor="let i of newArray(4)">
+              <div class="col-md-3">
                 <h3 class="text-center">Kasten 20x0,5</h3>
-                <div class="input-group">
-                  <span class="input-group-btn input-group-lg">
-                    <button class="btn btn-default btn-lg" type="button"><i class="fa fa-minus" aria-hidden="true"></i></button>
-                  </span>
-                  <input type="text" class="form-control input-lg" value="0" style="text-align: center">
-                  <span class="input-group-btn">
-                    <button class="btn btn-default btn-lg" type="button"><i class="fa fa-plus" aria-hidden="true"></i></button>
-                  </span>
-                </div>
+                <il-counter-control minValue="0"></il-counter-control>
               </div>
             </div>
 
