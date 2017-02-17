@@ -1,0 +1,6 @@
+<div class="row" *ngFor="let x of newArray(4)">
+  <div class="page-header">
+    <h3>Bier</h3>
+  </div>
+  <il-product-card gridWidth="2" *ngFor="let i of newArray(9)" [routerLink]="['../newtransfer']"></il-product-card>
+</div>
