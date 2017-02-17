@@ -6,20 +6,13 @@
 
 .side{
   position:fixed;
-  top:50px;
+  top:0;
   right:0;
   height:100%;
   padding:0;
+  padding-top: 50px;
   border-left: 1px solid #BBB;
   background-color:#EEE;
 }
 
-.scroll-area{
-  width:100%;
-  height:calc(100% - 200px);
-  margin-top:100px;
-  border-top: 1px solid #BBB;
-  border-bottom: 1px solid #BBB;
-  float:left;
-  overflow-y:scroll;
-}
+
