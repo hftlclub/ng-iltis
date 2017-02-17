@@ -1,4 +1,4 @@
-import { Validator } from '../../modules/validator';
+import { Validator } from '../validator';
 import { Category } from './category';
 
 export class CategoryFactory {
@@ -27,5 +27,5 @@ export class CategoryFactory {
 
         return category;
     }
-  
+
 }

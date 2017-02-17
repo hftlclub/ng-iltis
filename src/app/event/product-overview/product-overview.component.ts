@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
+import { ProductService } from './../shared/product.service';
+import { Product } from '../shared/models/product/product';
+
 @Component({
   selector: 'il-product-overview',
   templateUrl: './product-overview.component.html',
@@ -7,13 +10,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductOverviewComponent implements OnInit {
 
-  constructor() { }
+  products: Product[];
+
+  constructor(private ps: ProductService) { }
 
   ngOnInit() {
-  }
-
-  newArray(num) {
-    return new Array(num);
+    this.ps.getAll().subscribe(res => this.products = res);
   }
 
 }
