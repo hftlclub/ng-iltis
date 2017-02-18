@@ -17,3 +17,16 @@
 }
 
 
+.loader {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: 200px;
+  font-size: 24pt;
+}
+
+.loader p {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
