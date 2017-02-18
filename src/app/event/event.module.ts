@@ -15,6 +15,7 @@ import { CounterControlComponent } from './counter-control/counter-control.compo
 import { ProductService } from './shared/product.service';
 import { ProductGroupComponent } from './product-group/product-group.component';
 import { ProductJumpBarComponent } from './product-jump-bar/product-jump-bar.component';
+import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ProductJumpBarComponent } from './product-jump-bar/product-jump-bar.com
     TransferFormComponent,
     CounterControlComponent,
     ProductGroupComponent,
-    ProductJumpBarComponent
+    ProductJumpBarComponent,
+    NewEventFormComponent
   ],
   providers: [
     ProductService

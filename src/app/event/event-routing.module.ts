@@ -4,12 +4,14 @@ import { Routes, RouterModule } from '@angular/router';
 import { EventComponent } from './event/event.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
+import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 import { ProductsResolver } from './shared/products.resolver';
 import { ProductResolver } from './shared/product.resolver';
 
 const routes: Routes = [
+  { path: 'event/new', component: NewEventFormComponent },
   {
-    path: 'event',
+    path: 'event/:eventId',
     component: EventComponent,
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },
