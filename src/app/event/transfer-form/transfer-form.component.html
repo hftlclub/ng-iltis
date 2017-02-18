@@ -65,7 +65,7 @@
                   </button>
                 </div>
                 <div class="col-md-3">
-                  <button type="submit" class="btn btn-success btn-lg btn-block">
+                  <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="form.invalid">
                     <i class="fa fa-check" aria-hidden="true"></i>
                     <span *ngIf="outgoingTransfer">Entnehmen</span>
                     <span *ngIf="!outgoingTransfer">Zurücklegen</span>

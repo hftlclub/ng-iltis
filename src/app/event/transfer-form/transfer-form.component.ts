@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
 import { Product } from '../shared/models/product/product';
 
@@ -26,7 +26,7 @@ export class TransferFormComponent implements OnInit {
     this.form = this.fb.group({
       sizeTypes: this.fb.array(this.product.sizeTypes.map(s => 0)),
       crateTypes: this.fb.array(this.product.crateTypes.map(c => 0))
-    });
+    }, {validator: this.atLeastOneValidator});
   }
 
 
@@ -69,4 +69,12 @@ export class TransferFormComponent implements OnInit {
     return map[sizesLength] || { col: 2, offset: 0 };
   }
 
+  atLeastOneValidator(controlGroup: FormGroup) {
+    const st = controlGroup.controls['sizeTypes'];
+    const ct = controlGroup.controls['crateTypes'];
+
+    return (ct['controls'].some(e => e.value) || st['controls'].some(e => e.value))
+      ? null
+      : { atLeastOne: false };
+  }
 }
