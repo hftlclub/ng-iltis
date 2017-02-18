@@ -30,7 +30,7 @@ export class TransferFormComponent implements OnInit {
   }
 
 
-  submitForm(event) {
+  submitForm() {
     const sizeTypes = {};
     this.form.controls['sizeTypes'].value
       .map(this.sanitizeNumber)
