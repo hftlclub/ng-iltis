@@ -13,6 +13,7 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { CounterControlComponent } from './counter-control/counter-control.component';
 import { ProductService } from './shared/product.service';
+import { ProductGroupComponent } from './product-group/product-group.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ProductService } from './shared/product.service';
     HistorySidebarComponent,
     ProductOverviewComponent,
     TransferFormComponent,
-    CounterControlComponent
+    CounterControlComponent,
+    ProductGroupComponent
   ],
   providers: [
     ProductService

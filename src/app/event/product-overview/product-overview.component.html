@@ -1,10 +1,7 @@
 <div style="margin-bottom: 60px">
-<div class="row" *ngFor="let c of categories">
-  <h3 [id]="c.id">{{ c.name }}</h3>
-  <il-product-card gridWidth="2" *ngFor="let p of c.products" [product]="p" [routerLink]="['../newtransfer', p.id]"></il-product-card>
+  <il-product-group *ngFor="let c of categories" [category]="c"></il-product-group>
 </div>
 
-</div>
 <nav class="navbar navbar-default navbar-fixed-bottom" style="z-index: 998">
   <div class="navbar-header">
        <span class="navbar-brand"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
