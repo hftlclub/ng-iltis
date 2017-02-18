@@ -6,16 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  array = new Array(90);
-
   constructor() { }
 
   ngOnInit() {
   }
-
-  newArray(num) {
-    return new Array(num);
-  }
-
-
 }

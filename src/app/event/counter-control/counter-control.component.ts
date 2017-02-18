@@ -4,7 +4,6 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 @Component({
   selector: 'il-counter-control',
   templateUrl: './counter-control.component.html',
-  styleUrls: ['./counter-control.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,

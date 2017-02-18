@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
@@ -52,7 +52,6 @@ export class TransferFormComponent implements OnInit {
 
 
     console.log(sizeTypes);
-
     // TODO: Send to server
 
   }
