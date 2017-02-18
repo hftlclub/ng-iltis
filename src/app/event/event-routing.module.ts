@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EventComponent } from './event/event.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
+import { ProductsResolver } from './shared/products.resolver';
 import { ProductResolver } from './shared/product.resolver';
 
 const routes: Routes = [
@@ -12,7 +13,13 @@ const routes: Routes = [
     component: EventComponent,
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },
-      { path: 'products', component: ProductOverviewComponent },
+      {
+        path: 'products',
+        component: ProductOverviewComponent,
+        resolve: {
+          products: ProductsResolver
+        }
+      },
       {
         path: 'newtransfer/:productId',
         component: TransferFormComponent,
@@ -27,6 +34,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
-  providers: [ProductResolver]
+  providers: [
+    ProductsResolver,
+    ProductResolver
+  ]
 })
 export class EventRoutingModule { }

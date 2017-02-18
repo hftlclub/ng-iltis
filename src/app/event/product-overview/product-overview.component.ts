@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from './../shared/product.service';
 import { Product } from '../shared/models/product/product';
@@ -12,23 +13,22 @@ export class ProductOverviewComponent implements OnInit {
 
   categories: any;
 
-  constructor(private ps: ProductService) { }
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.ps.getAll().subscribe(res => {
-      const categories = {};
+    const products = this.route.snapshot.data['products'];
+    const categories = {};
 
-      res.forEach(p => {
-        const key = p.category.id;
-        if (!categories.hasOwnProperty(key)) {
-          categories[key] = p.category;
-          categories[key].products = [];
-        };
+    products.forEach(p => {
+      const key = p.category.id;
+      if (!categories.hasOwnProperty(key)) {
+        categories[key] = p.category;
+        categories[key].products = [];
+      };
 
-        categories[key].products.push(p);
-      });
-      this.categories = Object.keys(categories).map(k => categories[k]);
+      categories[key].products.push(p);
     });
+    this.categories = Object.keys(categories).map(k => categories[k]);
   }
 
 }
