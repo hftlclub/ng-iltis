@@ -11,8 +11,8 @@ export class SizeTypeFactory {
 
         let sizeType = SizeTypeFactory.empty();
 
-        if (Validator.validNumber(obj.sizeTypeId)) {
-            sizeType.id = obj.sizeTypeId;
+        if (Validator.validNumber(obj.id)) {
+            sizeType.id = obj.id;
         }
 
         if (Validator.validNumber(obj.amount)) {

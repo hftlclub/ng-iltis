@@ -11,8 +11,8 @@ export class UnitFactory {
 
         let unit = UnitFactory.empty();
 
-        if (Validator.validNumber(obj.unitId)) {
-            unit.id = obj.unitId;
+        if (Validator.validNumber(obj.id)) {
+            unit.id = obj.id;
         }
 
         if (Validator.validString(obj.short)) {

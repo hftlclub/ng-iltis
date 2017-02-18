@@ -11,8 +11,8 @@ export class CategoryFactory {
 
         let category = CategoryFactory.empty();
 
-        if (Validator.validNumber(obj.categoryId)) {
-            category.id = obj.categoryId;
+        if (Validator.validNumber(obj.d)) {
+            category.id = obj.id;
         }
 
         if (Validator.validString(obj.name)) {

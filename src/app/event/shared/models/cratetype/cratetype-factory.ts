@@ -12,8 +12,8 @@ export class CrateTypeFactory {
 
         let crateType = CrateTypeFactory.empty();
 
-        if (Validator.validNumber(obj.crateTypeId)) {
-            crateType.id = obj.crateTypeId;
+        if (Validator.validNumber(obj.id)) {
+            crateType.id = obj.id;
         }
 
         if(obj.sizeType) crateType.sizeType = SizeTypeFactory.fromObj(obj.sizeType);
