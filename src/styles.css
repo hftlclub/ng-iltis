@@ -13,6 +13,7 @@
   padding-top: 50px;
   border-left: 1px solid #BBB;
   background-color:#EEE;
+  z-index: 999;
 }
 
 

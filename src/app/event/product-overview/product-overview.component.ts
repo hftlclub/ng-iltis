@@ -10,12 +10,25 @@ import { Product } from '../shared/models/product/product';
 })
 export class ProductOverviewComponent implements OnInit {
 
-  products: Product[];
+  categories: any;
 
   constructor(private ps: ProductService) { }
 
   ngOnInit() {
-    this.ps.getAll().subscribe(res => this.products = res);
+    this.ps.getAll().subscribe(res => {
+      const categories = {};
+
+      res.forEach(p => {
+        const key = p.category.id;
+        if (!categories.hasOwnProperty(key)) {
+          categories[key] = p.category;
+          categories[key].products = [];
+        };
+
+        categories[key].products.push(p);
+      });
+      this.categories = Object.keys(categories).map(k => categories[k]);
+    });
   }
 
 }

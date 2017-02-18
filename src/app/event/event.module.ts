@@ -2,6 +2,8 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { PageScrollConfig } from 'ng2-page-scroll';
 
 import { EventRoutingModule } from './event-routing.module';
 import { ProductCardComponent } from './product-card/product-card.component';
@@ -18,7 +20,8 @@ import { ProductService } from './shared/product.service';
     ReactiveFormsModule,
     FormsModule,
     HttpModule,
-    EventRoutingModule
+    EventRoutingModule,
+    Ng2PageScrollModule.forRoot()
   ],
   declarations: [
     ProductCardComponent,
@@ -32,4 +35,9 @@ import { ProductService } from './shared/product.service';
     ProductService
   ]
 })
-export class EventModule { }
+export class EventModule {
+  constructor() {
+    PageScrollConfig.defaultScrollOffset = 70;
+    PageScrollConfig.defaultDuration = 500;
+  }
+}
