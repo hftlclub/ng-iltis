@@ -1,8 +1,22 @@
 {
-  "name": "iltis",
-  "version": "0.0.0",
+  "name": "ng-iltis",
+  "version": "0.0.1",
   "license": "MIT",
   "angular-cli": {},
+  "author": {
+    "name": "HfTL Club",
+    "email": "club@hft-leipzig.de"
+  },
+  "contributors": [
+    {
+      "name": "Ferdinand Malcher",
+      "email": "mail@fmalcher.de"
+    },
+    {
+      "name": "Robert Weiße",
+      "email": "github@robert-weisse.de"
+    }
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
