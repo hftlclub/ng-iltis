@@ -2,12 +2,4 @@
   <il-product-group *ngFor="let c of categories" [category]="c"></il-product-group>
 </div>
 
-<nav class="navbar navbar-default navbar-fixed-bottom" style="z-index: 998">
-  <div class="navbar-header">
-       <span class="navbar-brand"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
-    </div>
-  <ul class="nav navbar-nav">
-    <li *ngFor="let c of categories"><a pageScroll href="#{{c.id}}">{{ c.name }}</a></li>
-  </ul>
-</nav>
-
+<il-product-jump-bar [categories]="categories"></il-product-jump-bar>

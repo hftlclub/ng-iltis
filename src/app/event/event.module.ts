@@ -14,6 +14,7 @@ import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { CounterControlComponent } from './counter-control/counter-control.component';
 import { ProductService } from './shared/product.service';
 import { ProductGroupComponent } from './product-group/product-group.component';
+import { ProductJumpBarComponent } from './product-jump-bar/product-jump-bar.component';
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { ProductGroupComponent } from './product-group/product-group.component';
     ProductOverviewComponent,
     TransferFormComponent,
     CounterControlComponent,
-    ProductGroupComponent
+    ProductGroupComponent,
+    ProductJumpBarComponent
   ],
   providers: [
     ProductService
