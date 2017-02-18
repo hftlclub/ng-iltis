@@ -1,14 +1,14 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
     <div class="navbar-header">
-       <a class="navbar-brand" href="#">ILTIS</a>
+       <a class="navbar-brand" routerLink="/">ILTIS</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Link</a></li>
-      <li><a href="#">Link</a></li>
+      <li [routerLinkActive]="aclass"><a routerLink="/event/new">Neues Event</a></li>
+      <li><a routerLink="/">Link</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a href="#">Link</a></li>
+      <li><a routerLink="/">Link</a></li>
     </ul>
   </div>
 </nav>
