@@ -19,6 +19,8 @@ export class ProductOverviewComponent implements OnInit {
     const products = this.route.snapshot.data['products'];
     const categories = {};
 
+    /* `products` is a list of products each with one category assigned.
+    transform this to a list of categories each with a list of assigned products */
     products.forEach(p => {
       const key = p.category.id;
       if (!categories.hasOwnProperty(key)) {
