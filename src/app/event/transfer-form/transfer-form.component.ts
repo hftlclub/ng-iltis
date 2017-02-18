@@ -31,29 +31,30 @@ export class TransferFormComponent implements OnInit {
 
 
   submitForm(event) {
-    let sizeTypes = this.product.sizeTypes.reduce((acc, cur, i) => {
-      acc[cur.id] = 0;
-      return acc;
-    }, {});
+    const sizeTypes = {};
+    this.form.controls['sizeTypes'].value
+      .map(this.sanitizeNumber)
+      .forEach((e, i) => {
+        const stid = this.product.sizeTypes[i].id;
+        sizeTypes[stid] = e;
+      });
 
-    sizeTypes = this.form.controls['sizeTypes'].value.reduce((acc, cur, i) => {
-      const st = this.product.sizeTypes[i];
-      if (!cur) { return acc; }
-      acc[st.id] += parseInt(cur, 10);
-      return acc;
-    }, sizeTypes);
-
-    sizeTypes = this.form.controls['crateTypes'].value.reduce((acc, cur, i) => {
-      const ct = this.product.crateTypes[i];
-      if (!cur) { return acc; }
-      acc[ct.sizeType.id] += parseInt(cur, 10) * ct.slots;
-      return acc;
-    }, sizeTypes);
-
+    this.form.controls['crateTypes'].value
+      .map(this.sanitizeNumber)
+      .forEach((e, i) => {
+        const ct = this.product.crateTypes[i];
+        const stid = ct.sizeType.id;
+        sizeTypes[stid] += e * ct.slots;
+      });
 
     console.log(sizeTypes);
     // TODO: Send to server
 
+  }
+
+  sanitizeNumber(num: any) {
+    if (!num) { num = 0; }
+    return parseInt(num, 10);
   }
 
 
