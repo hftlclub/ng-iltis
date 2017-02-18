@@ -61,9 +61,9 @@ export class TransferFormComponent implements OnInit {
 
   getGrid(sizesLength: number) {
     const map = {
-      1: { col: 2, offset: 5 },
-      2: { col: 3, offset: 3 },
-      3: { col: 2, offset: 3 },
+      1: { col: 4, offset: 4 },
+      2: { col: 3, offset: 2 },
+      3: { col: 4, offset: 0 },
       4: { col: 3, offset: 0 },
     };
     return map[sizesLength] || { col: 2, offset: 0 };

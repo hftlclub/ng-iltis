@@ -39,16 +39,17 @@
               <div class="row">
                 <div formArrayName="sizeTypes">
                   <div
-                    class="col-md-{{ grid.col }}"
-                    [ngClass]="first ? 'col-md-offset-' + grid.offset : ''"
-                    *ngFor="let st of product.sizeTypes; let first = first; let i = index">
+                    class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
+                    *ngFor="let st of product.sizeTypes; let i = index">
                     <h3 class="text-center">{{ st.description }} {{ st.amount | number }} {{ product.unit.short }}</h3>
                     <il-counter-control minValue="0" [formControlName]="i"></il-counter-control>
                   </div>
                 </div>
 
                 <div formArrayName="crateTypes">
-                  <div class="col-md-{{ grid.col }}" *ngFor="let ct of product.crateTypes; let i = index">
+                  <div
+                    class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
+                    *ngFor="let ct of product.crateTypes; let i = index">
                     <h3 class="text-center">Kasten {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ product.unit.short }}</h3>
                     <il-counter-control minValue="0" [formControlName]="i"></il-counter-control>
                   </div>
