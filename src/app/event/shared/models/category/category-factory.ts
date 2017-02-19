@@ -1,4 +1,4 @@
-import { Validator } from '../validator';
+import { ValueChecker } from '../../valuechecker';
 import { Category } from './category';
 
 export class CategoryFactory {
@@ -11,21 +11,25 @@ export class CategoryFactory {
 
         let category = CategoryFactory.empty();
 
-        if (Validator.validNumber(obj.id)) {
-            category.id = obj.id;
+        if (obj.id) category.id = obj.id;
+        else if (ValueChecker.validNumber(obj.categoryId)) {
+            category.id = obj.categoryId;
         }
 
-        if (Validator.validString(obj.name)) {
-            category.name = obj.name.trim();
+        if (obj.name) category.name = obj.name;
+        else if (ValueChecker.validString(obj.categoryName)) {
+            category.name = obj.categoryName.trim();
         }
 
-        if (Validator.validString(obj.description)) {
-            category.description = obj.description.trim();
+        if (obj.description) category.description = obj.description;
+        else if (ValueChecker.validString(obj.categoryDesc)) {
+            category.description = obj.categoryDesc.trim();
         }
 
-        category.deleted = !!Validator.validNumber(obj.deleted);
+        if (obj.deleted) category.deleted = obj.deleted;
+        else category.deleted = !!ValueChecker.validNumber(obj.categoryDeleted);
 
         return category;
     }
-
+  
 }

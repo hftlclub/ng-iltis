@@ -1,11 +1,11 @@
-export class Validator {
+export class ValueChecker {
 
     static validNumber(no: number) {
         return no && typeof no == 'number';
     }
 
     static validString(str: string) {
-        return str && typeof str === 'string';
+        return str && typeof str == 'string';
     }
 
     static validDate(date: string) {

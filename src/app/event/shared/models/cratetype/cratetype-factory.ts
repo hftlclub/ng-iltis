@@ -1,31 +1,38 @@
-import { Validator } from '../validator';
+import { ValueChecker } from '../../valuechecker';
 import { CrateType } from './cratetype';
 import { SizeTypeFactory } from '../sizetype/sizetype-factory';
 
 export class CrateTypeFactory {
 
     static empty(): CrateType {
-        return new CrateType(0, SizeTypeFactory.empty(), 0);
+        return new CrateType(0, SizeTypeFactory.empty(),'', 0);
     }
 
     static fromObj(obj: any): CrateType {
 
         let crateType = CrateTypeFactory.empty();
 
-        if (Validator.validNumber(obj.id)) {
-            crateType.id = obj.id;
+        if (obj.id) crateType.id = obj.id;
+        else if (ValueChecker.validNumber(obj.crateTypeId)) {
+            crateType.id = obj.crateTypeId;
         }
 
         if(obj.sizeType) crateType.sizeType = SizeTypeFactory.fromObj(obj.sizeType);
-        else if (Validator.validNumber(obj.refSize)) {
-            crateType.sizeType.id = obj.refSize;
+        else if (ValueChecker.validNumber(obj.refSizeType)) {
+            crateType.sizeType = SizeTypeFactory.fromObj(obj);
         }
 
-        if (Validator.validNumber(obj.slots)) {
-            crateType.slots = obj.slots;
+        if (obj.description) crateType.description = obj.description;
+        else if (ValueChecker.validString(obj.crateTypeDesc)) {
+            crateType.description = obj.crateTypeDesc.trim();
+        }
+
+        if (obj.slots) crateType.slots = obj.slots;
+        else if (ValueChecker.validNumber(obj.crateTypeSlots)) {
+            crateType.slots = obj.crateTypeSlots;
         }
 
         return crateType;
     }
-
+  
 }
