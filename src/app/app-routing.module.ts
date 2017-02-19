@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  { path: '', redirectTo: 'event/123', pathMatch: 'full' }
+  { path: '', redirectTo: 'event/3', pathMatch: 'full' }
 ];
 
 @NgModule({

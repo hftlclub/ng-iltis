@@ -13,6 +13,7 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { CounterControlComponent } from './counter-control/counter-control.component';
 import { ProductService } from './shared/product.service';
+import { EventService } from './shared/event.service';
 import { ProductGroupComponent } from './product-group/product-group.component';
 import { ProductJumpBarComponent } from './product-jump-bar/product-jump-bar.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
@@ -38,7 +39,8 @@ import { NewEventFormComponent } from './new-event-form/new-event-form.component
     NewEventFormComponent
   ],
   providers: [
-    ProductService
+    ProductService,
+    EventService
   ]
 })
 export class EventModule {

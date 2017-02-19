@@ -2,10 +2,10 @@
   <div class="col-md-10 content">
     <div class="page-header">
       <h1>
-        <i class="fa fa-unlock" aria-hidden="true"></i>
-        Afterwork
+        <i class="fa" [ngClass]="event.active ? 'fa-unlock' : 'fa-lock'" aria-hidden="true"></i>
+        {{ event.description }}
         <small>
-          21.01.2017
+          {{ event.datetime | date:'dd.MM.yyyy' }}
         </small>
       </h1>
     </div>

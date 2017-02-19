@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Event } from '../shared/models/event/event';
 
 @Component({
   selector: 'il-event',
@@ -6,8 +9,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./event.component.css']
 })
 export class EventComponent implements OnInit {
-  constructor() { }
+
+  event: Event;
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.event = this.route.snapshot.data['event'];
   }
 }
