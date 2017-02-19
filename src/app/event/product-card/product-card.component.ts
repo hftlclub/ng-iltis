@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 
 import { Product } from '../shared/models/product/product';
 
@@ -12,7 +12,7 @@ export class ProductCardComponent implements OnInit {
   @Input() gridWidth = 3;
   @Input() product: Product;
 
-  constructor() { }
+  constructor(@Inject('IMG_URL') private imgUrl) { }
 
   ngOnInit() {
   }

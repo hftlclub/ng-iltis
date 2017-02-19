@@ -2,7 +2,7 @@
   <div class="panel panel-default">
     <div class="panel-body text-center">
       <div class="thumbnail">
-      <img src="/assets/symbolbild.png" [alt]="product.name">
+      <img [src]="imgUrl + product.imgFilename" [alt]="product.name" [title]="product.name">
       </div>
     </div>
     <div class="panel-footer text-center">{{ product.name }}</div>

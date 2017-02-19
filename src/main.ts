@@ -9,5 +9,6 @@ if (environment.production) {
 }
 
 platformBrowserDynamic([
-  { provide: 'API_URL', useValue: environment.apiUrl }
+  { provide: 'API_URL', useValue: environment.apiUrl },
+  { provide: 'IMG_URL', useValue: environment.imgUrl }
 ]).bootstrapModule(AppModule);
