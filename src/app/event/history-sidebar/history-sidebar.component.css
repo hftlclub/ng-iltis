@@ -26,3 +26,8 @@
   float: left;
   overflow-y: auto;
 }
+
+.scroll-area .box-message {
+  margin-top: 50px;
+  font-weight: bold;
+}

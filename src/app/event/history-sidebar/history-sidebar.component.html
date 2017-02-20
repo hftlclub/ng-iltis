@@ -7,11 +7,20 @@
       <div class="list-group-item"
         [title]="t.change < 0 ? 'Entnahme' : 'Rückgabe'"
         *ngFor="let t of transfers">
-        <span class="label pull-right" [ngClass]="t.change < 0 ? 'label-danger' : 'label-success'">{{ t.change | abs }}</span>
+        <span class="label pull-right" [ngClass]="t.change < 0 ? 'label-danger' : 'label-success'">
+          {{ t.change < 0 ? '–' : '+' }}
+          {{ t.change | abs }}
+        </span>
         <h5 class="list-group-item-heading">
           {{ t.product.name }}
         </h5>
         <p class="list-group-item-text small">{{ t.sizeType.description }} {{ t.sizeType.amount | number }} {{ t.product.unit.short }}</p>
+      </div>
+      <div class="text-center box-message" *ngIf="!transfers.length">
+        <div>
+          <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
+        </div>
+        <div>Keine Buchungen vorhanden.</div>
       </div>
     </div>
 </div>
