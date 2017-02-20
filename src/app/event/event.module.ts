@@ -17,6 +17,7 @@ import { EventService } from './shared/event.service';
 import { ProductGroupComponent } from './product-group/product-group.component';
 import { ProductJumpBarComponent } from './product-jump-bar/product-jump-bar.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
+import { AbsPipe } from './shared/abs.pipe';
 
 @NgModule({
   imports: [
@@ -36,7 +37,8 @@ import { NewEventFormComponent } from './new-event-form/new-event-form.component
     CounterControlComponent,
     ProductGroupComponent,
     ProductJumpBarComponent,
-    NewEventFormComponent
+    NewEventFormComponent,
+    AbsPipe
   ],
   providers: [
     ProductService,

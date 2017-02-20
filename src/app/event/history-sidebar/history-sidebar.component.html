@@ -4,13 +4,15 @@
 
 <div class="scroll-area">
     <div>
-      <div class="list-group-item">
-        Cras justo odio
-        <span class="badge">14</span>
+      <div class="list-group-item"
+        [title]="t.change < 0 ? 'Entnahme' : 'Rückgabe'"
+        *ngFor="let t of transfers">
+        <span class="label pull-right" [ngClass]="t.change < 0 ? 'label-danger' : 'label-success'">{{ t.change | abs }}</span>
+        <h5 class="list-group-item-heading">
+          {{ t.product.name }}
+        </h5>
+        <p class="list-group-item-text small">{{ t.sizeType.description }} {{ t.sizeType.amount | number }} {{ t.product.unit.short }}</p>
       </div>
-      <div class="list-group-item">Cras justo odio</div>
-      <div class="list-group-item">Cras justo odio</div>
-      <div class="list-group-item">Cras justo odio</div>
     </div>
 </div>
 

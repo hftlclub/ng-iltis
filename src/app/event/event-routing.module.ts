@@ -5,9 +5,11 @@ import { EventComponent } from './event/event.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
+
 import { ProductsResolver } from './shared/products.resolver';
 import { ProductResolver } from './shared/product.resolver';
 import { EventResolver } from './shared/event.resolver';
+import { TransfersResolver } from './shared/transfers.resolver';
 
 const routes: Routes = [
   { path: 'event/new', component: NewEventFormComponent },
@@ -15,7 +17,8 @@ const routes: Routes = [
     path: 'event/:eventId',
     component: EventComponent,
     resolve: {
-      event: EventResolver
+      event: EventResolver,
+      transfers: TransfersResolver
     },
     children: [
       { path: '', redirectTo: 'products', pathMatch: 'full' },
@@ -43,7 +46,8 @@ const routes: Routes = [
   providers: [
     ProductsResolver,
     ProductResolver,
-    EventResolver
+    EventResolver,
+    TransfersResolver
   ]
 })
 export class EventRoutingModule { }

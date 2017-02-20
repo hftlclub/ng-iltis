@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import { Transfer } from '../shared/models/transfer/transfer';
 
 @Component({
   selector: 'il-history-sidebar',
@@ -7,9 +10,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HistorySidebarComponent implements OnInit {
 
-  constructor() { }
+  transfers: Transfer[];
+
+  constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
+    this.transfers = this.route.snapshot.data['transfers'];
+    console.log(this.transfers);
   }
 
 }

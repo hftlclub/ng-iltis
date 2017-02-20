@@ -7,7 +7,9 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
 import { Event } from './models/event/event';
+import { Transfer } from './models/transfer/transfer';
 import { EventFactory } from './models/event/event-factory';
+import { TransferFactory } from './models/transfer/transfer-factory';
 
 
 @Injectable()
@@ -27,6 +29,13 @@ export class EventService {
       .retry(3)
       .map(res => res.json())
       .map(raw => EventFactory.fromObj(raw));
+  }
+
+  getTransfersByEvent(eventId: number): Observable<Transfer[]> {
+    return this.http.get(`${this.api}/event/${eventId}/transfers`)
+      .retry(3)
+      .map(res => res.json())
+      .map(raw => raw.map(t => TransferFactory.fromObj(t)));
   }
 
 }
