@@ -4,8 +4,9 @@
        <a class="navbar-brand" routerLink="/">ILTIS</a>
     </div>
     <ul class="nav navbar-nav">
-      <li [routerLinkActive]="aclass"><a routerLink="/event/new">Neues Event</a></li>
-      <li><a routerLink="/">Link</a></li>
+      <li [routerLinkActive]="aclass"><a routerLink="/event/new/event">Neue Veranstaltung</a></li>
+      <li [routerLinkActive]="aclass"><a routerLink="/event/new/purchase">Neuer Einkauf</a></li>
+      <li [routerLinkActive]="aclass"><a routerLink="/event/new/private">Neue Spontanentnahme</a></li>
     </ul>
     <ul class="nav navbar-nav navbar-right">
       <li><a routerLink="/">Link</a></li>
