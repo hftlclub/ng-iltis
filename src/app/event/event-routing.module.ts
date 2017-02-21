@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { EventComponent } from './event/event.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
+import { EventOverviewComponent } from './event-overview/event-overview.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 
@@ -21,7 +22,14 @@ const routes: Routes = [
       transfers: TransfersResolver
     },
     children: [
-      { path: '', redirectTo: 'products', pathMatch: 'full' },
+      { path: '', redirectTo: 'overview', pathMatch: 'full' },
+      {
+        path: 'overview',
+        component: EventOverviewComponent,
+        resolve: {
+          event: EventResolver
+        }
+      },
       {
         path: 'products',
         component: ProductOverviewComponent,
