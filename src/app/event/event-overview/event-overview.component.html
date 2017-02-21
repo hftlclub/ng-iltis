@@ -58,21 +58,24 @@
         <h3 class="panel-title">
           <i class="fa fa-bar-chart" aria-hidden="true"></i>
           Finanzen
+          <i *ngIf="calcLoading" class="fa fa-circle-o-notch fa-spin fa-fw pull-right" aria-hidden="true"></i>
         </h3>
       </div>
       <div class="panel-body">
-        <p>
-          <strong>Umsatz:</strong>
-          ...
-        </p>
-        <p>
-          <strong>Kosten:</strong>
-          ...
-        </p>
-        <p>
-          <strong>Gewinn:</strong>
-          ...
-        </p>
+        <div *ngIf="calc">
+          <p>
+            <strong>Umsatz:</strong>
+            {{ calc?.sales | currency:'EUR':true }}
+          </p>
+          <p>
+            <strong>Kosten:</strong>
+            {{ calc?.costs | currency:'EUR':true }}
+          </p>
+          <p>
+            <strong>Gewinn:</strong>
+            {{ calc?.profit | currency:'EUR':true }}
+          </p>
+        </div>
       </div>
     </div>
   </div>

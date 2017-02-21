@@ -2,6 +2,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
 import { Event } from '../shared/models/event/event';
+import { EventService } from '../shared/event.service';
+import { Calculation } from '../shared/models/calculation/calculation';
 
 @Component({
   selector: 'il-event-overview',
@@ -11,11 +13,20 @@ import { Event } from '../shared/models/event/event';
 export class EventOverviewComponent implements OnInit {
 
   event: Event;
+  calc: Calculation;
+  calcLoading: boolean;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute, private es: EventService) { }
 
   ngOnInit() {
     this.event = this.route.parent.snapshot.data['event'];
+    if (!this.event.active) {
+      this.calcLoading = true;
+      this.es.getCalculation(this.event.id).subscribe(res => {
+        this.calc = res;
+        this.calcLoading = false;
+      });
+    }
   }
 
 }

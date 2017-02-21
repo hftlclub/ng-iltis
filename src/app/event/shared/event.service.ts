@@ -10,6 +10,8 @@ import { Event } from './models/event/event';
 import { Transfer } from './models/transfer/transfer';
 import { EventFactory } from './models/event/event-factory';
 import { TransferFactory } from './models/transfer/transfer-factory';
+import { Calculation } from './models/calculation/calculation';
+import { CalculationFactory } from './models/calculation/calculation-factory';
 
 
 @Injectable()
@@ -36,6 +38,13 @@ export class EventService {
       .retry(3)
       .map(res => res.json())
       .map(raw => raw.map(t => TransferFactory.fromObj(t)));
+  }
+
+  getCalculation(id: number): Observable<Calculation> {
+    return this.http.get(`${this.api}/event/${id}/calculation`)
+      .retry(3)
+      .map(res => res.json())
+      .map(raw => CalculationFactory.fromObj(raw));
   }
 
 }
