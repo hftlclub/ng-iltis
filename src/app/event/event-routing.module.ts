@@ -15,9 +15,9 @@ import { EventsResolver } from './shared/resolvers/events.resolver';
 import { TransfersResolver } from './shared/resolvers/transfers.resolver';
 
 const routes: Routes = [
-  { path: 'event/new', component: NewEventFormComponent },
+  { path: 'new', component: NewEventFormComponent },
   {
-    path: 'event',
+    path: '',
     component: EventListComponent,
     pathMatch: 'full',
     resolve: {
@@ -25,7 +25,7 @@ const routes: Routes = [
     }
   },
   {
-    path: 'event/:eventId',
+    path: ':eventId',
     component: EventComponent,
     resolve: {
       event: EventResolver,
