@@ -18,7 +18,7 @@
 
 .scroll-area{
   width: 100%;
-  height: calc(100% - 200px);
+  height: calc(100% - 150px);
   margin-top: 80px;
   border-top: 1px solid #BBB;
   border-bottom: 1px solid #BBB;
@@ -34,6 +34,10 @@
 .bottom {
   bottom: 0;
   width: 100%;
-  height: 100px;
+  height: 60px;
   position: absolute;
+}
+
+.bottom div {
+  padding: 3px 10px;
 }
