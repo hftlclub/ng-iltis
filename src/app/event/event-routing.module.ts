@@ -13,9 +13,18 @@ import { ProductResolver } from './shared/resolvers/product.resolver';
 import { EventResolver } from './shared/resolvers/event.resolver';
 import { EventsResolver } from './shared/resolvers/events.resolver';
 import { TransfersResolver } from './shared/resolvers/transfers.resolver';
+import { EventTypesResolver } from './shared/resolvers/eventtypes.resolver';
 
 const routes: Routes = [
-  { path: 'new', component: NewEventFormComponent },
+  { path: 'new', redirectTo: 'new/event', pathMatch: 'full' },
+  {
+    path: 'new/:uiMode',
+    component: NewEventFormComponent,
+    pathMatch: 'full',
+    resolve: {
+      eventTypes: EventTypesResolver
+    }
+  },
   {
     path: '',
     component: EventListComponent,
@@ -60,7 +69,8 @@ const routes: Routes = [
     ProductResolver,
     EventsResolver,
     EventResolver,
-    TransfersResolver
+    TransfersResolver,
+    EventTypesResolver
   ]
 })
 export class EventRoutingModule { }

@@ -11,3 +11,54 @@
 
   </div>
 </div>
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-4 col-md-offset-4">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            {{ uiMode | i18nSelect:strings.boxHeadline }}
+          </h3>
+        </div>
+        <div class="panel-body">
+          <form [formGroup]="form">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <div class="form-group" *ngIf="eventTypes.length > 1">
+                    <label for="eventType">Veranstaltungstyp</label>
+                    <select class="form-control" id="eventType" formControlName="eventType" placeholder="Bitte auswählen">
+                      <option *ngFor="let et of eventTypes" [value]="et.id">{{ et.description }}</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="description">Beschreibung</label>
+                    <input type="text" formControlName="description" class="form-control" id="description" [placeholder]="uiMode | i18nSelect:strings.descriptionPlaceholder">
+                  </div>
+                  <div class="form-group" *ngIf="uiMode === 'event'">
+                    <label for="date">Datum</label>
+                    <input type="date" formControlName="date" class="form-control" id="date" useValueAsDate>
+                  </div>
+                  <div class="form-group" *ngIf="uiMode === 'event'">
+                    <label for="time">Uhrzeit</label>
+                    <input type="time" formControlName="time" class="form-control" id="time" useValueAsDate>
+                  </div>
+                  <div class="form-group">
+                    <button type="submit" class="btn btn-success btn-lg btn-block">
+                      <i class="fa fa-check" aria-hidden="true"></i>
+                      {{ uiMode | i18nSelect:strings.btnLabel }}
+                    </button>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,6 +12,8 @@ import { EventFactory } from './models/event/event-factory';
 import { TransferFactory } from './models/transfer/transfer-factory';
 import { Calculation } from './models/calculation/calculation';
 import { CalculationFactory } from './models/calculation/calculation-factory';
+import { EventType } from './models/eventtype/eventtype';
+import { EventTypeFactory } from './models/eventtype/eventtype-factory';
 
 
 @Injectable()
@@ -45,6 +47,13 @@ export class EventService {
       .retry(3)
       .map(res => res.json())
       .map(raw => CalculationFactory.fromObj(raw));
+  }
+
+  getEventTypes(): Observable<EventType[]> {
+    return this.http.get(`${this.api}/eventtypes`)
+      .retry(3)
+      .map(res => res.json())
+      .map(raw => raw.map(p => EventTypeFactory.fromObj(p)));
   }
 
 }

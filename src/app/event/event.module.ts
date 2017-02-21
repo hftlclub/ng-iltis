@@ -20,6 +20,8 @@ import { NewEventFormComponent } from './new-event-form/new-event-form.component
 import { AbsPipe } from './shared/abs.pipe';
 import { EventOverviewComponent } from './event-overview/event-overview.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { DateValueAccessorModule } from 'angular-date-value-accessor';
+
 
 @NgModule({
   imports: [
@@ -28,7 +30,8 @@ import { EventListComponent } from './event-list/event-list.component';
     FormsModule,
     HttpModule,
     EventRoutingModule,
-    Ng2PageScrollModule.forRoot()
+    Ng2PageScrollModule.forRoot(),
+    DateValueAccessorModule
   ],
   declarations: [
     ProductCardComponent,
