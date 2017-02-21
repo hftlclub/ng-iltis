@@ -6,24 +6,20 @@
 }
 
 .top {
-  height: 60px;
+  height: 80px;
   position: absolute;
-  padding: 15px 0 0 15px;
-  font-size: 18pt;
-  font-weight: 500;
+  padding-left: 15px;
 }
 
-.bottom {
-  bottom: 0;
-  width: 100%;
-  height: 100px;
-  position: absolute;
+.top h3 {
+  margin-bottom: 0;
 }
+
 
 .scroll-area{
   width: 100%;
   height: calc(100% - 200px);
-  margin-top:60px;
+  margin-top: 80px;
   border-top: 1px solid #BBB;
   border-bottom: 1px solid #BBB;
   float: left;
@@ -33,4 +29,11 @@
 .scroll-area .box-message {
   margin-top: 50px;
   font-weight: bold;
+}
+
+.bottom {
+  bottom: 0;
+  width: 100%;
+  height: 100px;
+  position: absolute;
 }
