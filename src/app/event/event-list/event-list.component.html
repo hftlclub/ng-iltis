@@ -1,5 +1,5 @@
 <div class="row">
-  <div class="col-md-10 content">
+  <div class="col-md-12 content">
     <div class="page-header">
       <h1>
         <i class="fa fa-calendar" aria-hidden="true"></i>
@@ -16,10 +16,16 @@
         </tr>
       </thead>
       <tr *ngFor="let e of events" [routerLink]="e.id" [class.warning]="e.active">
-        <td>{{ e.eventType.description }}</td>
+        <td>
+          <i class="fa" [ngClass]="e.eventType.icon" aria-hidden="true"></i>
+          {{ e.eventType.description }}
+        </td>
         <td>
           {{ e.description }}
-          <span *ngIf="e.active" class="label label-danger pull-right">aktiv</span>
+          <span *ngIf="e.active" class="label label-warning pull-right">
+            <i class="fa fa-unlock" aria-hidden="true"></i>
+            aktiv
+          </span>
         </td>
         <td>{{ e.datetime | date:'dd.MM.yyyy, HH:mm' }} Uhr</td>
       </tr>
