@@ -4,7 +4,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <i class="fa" [ngClass]="outgoingTransfer ? 'fa-mail-forward' : 'fa-mail-reply'" aria-hidden="true"></i>
+            <i class="fa" [ngClass]="outgoingTransfer ? icons.out : icons.in" aria-hidden="true"></i>
             Neue Lager<span *ngIf="outgoingTransfer">entnahme</span><span *ngIf="!outgoingTransfer">rückgabe</span>:
             {{ product.name }}
           </h3>
@@ -17,7 +17,7 @@
                   <button type="button" class="btn btn-block"
                     [ngClass]="outgoingTransfer ? 'btn-info' : 'btn-default'"
                     (click)="outgoingTransfer = true">
-                    <i class="fa fa-mail-forward" aria-hidden="true"></i>
+                    <i class="fa" [ngClass]="icons.out" aria-hidden="true"></i>
                     Entnahme
                   </button>
                 </div>
@@ -28,7 +28,7 @@
                   <button type="button" class="btn btn-block"
                     [ngClass]="outgoingTransfer ? 'btn-default' : 'btn-info'"
                     (click)="outgoingTransfer = false">
-                    <i class="fa fa-mail-reply" aria-hidden="true"></i>
+                    <i class="fa" [ngClass]="icons.in" aria-hidden="true"></i>
                     Rückgabe
                   </button>
                 </div>
