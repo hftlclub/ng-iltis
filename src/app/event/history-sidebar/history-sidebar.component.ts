@@ -11,12 +11,12 @@ import { Transfer } from '../shared/models/transfer/transfer';
 export class HistorySidebarComponent implements OnInit {
 
   transfers: Transfer[];
+  transferCountMapping: {[k: string]: string} = {'=0': 'Keine Buchungen', '=1': 'Eine Buchung', 'other': '# Buchungen'};
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.transfers = this.route.snapshot.data['transfers'];
-    console.log(this.transfers);
   }
 
 }
