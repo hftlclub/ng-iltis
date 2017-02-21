@@ -7,10 +7,10 @@ import { EventOverviewComponent } from './event-overview/event-overview.componen
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 
-import { ProductsResolver } from './shared/products.resolver';
-import { ProductResolver } from './shared/product.resolver';
-import { EventResolver } from './shared/event.resolver';
-import { TransfersResolver } from './shared/transfers.resolver';
+import { ProductsResolver } from './shared/resolvers/products.resolver';
+import { ProductResolver } from './shared/resolvers/product.resolver';
+import { EventResolver } from './shared/resolvers/event.resolver';
+import { TransfersResolver } from './shared/resolvers/transfers.resolver';
 
 const routes: Routes = [
   { path: 'event/new', component: NewEventFormComponent },
