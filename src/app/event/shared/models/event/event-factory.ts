@@ -42,12 +42,14 @@ export class EventFactory {
             event.tip = obj.eventTip;
         }
 
+        if (obj.datetime) event.datetime = obj.datetime;
         if (obj.eventDT) {
             if(ValueChecker.validDate(obj.eventDT)) {
                 event.datetime = obj.eventDT;
             }
         }
 
+        if (obj.timestamp) event.timestamp = obj.timestamp;
         if (obj.eventTS) {
             if(ValueChecker.validDate(obj.eventTS)) {
                 event.timestamp = obj.eventTS;
@@ -58,6 +60,27 @@ export class EventFactory {
         else event.active = !!ValueChecker.validNumber(obj.eventActive);
 
         return event;
+    }
+
+    static fromModel(obj: Event): any {
+
+        var dbEntry: any = {};
+
+        if(obj.eventType) dbEntry.refEventType = obj.eventType.id;
+
+        if (obj.description) dbEntry.eventDesc = obj.description;
+
+        if (obj.cashBefore) dbEntry.eventCashBefore = obj.cashBefore;
+
+        if (obj.cashAfter) dbEntry.eventCashAfter = obj.cashAfter;
+
+        if (obj.tip) dbEntry.eventTip = obj.tip;
+
+        if (obj.datetime) dbEntry.eventDT = obj.datetime;
+
+        if (obj.active) dbEntry.eventActive = obj.active;
+
+        return dbEntry;
     }
   
 }
