@@ -17,25 +17,10 @@ export class NewEventFormComponent implements OnInit {
   uiMode: string;
   form: FormGroup;
 
-  strings = {
-    boxHeadline: {
-      event: 'Infos zur Veranstaltung',
-      purchase: 'Infos zum Einkauf',
-      private: 'Infos zur Spontanentnahme'
-    },
-    btnLabel: {
-      event: 'Veranstaltung anlegen',
-      purchase: 'Einkauf anlegen',
-      private: 'Spontanentnahme durchführen'
-    },
-    descriptionPlaceholder: {
-      event: 'Veranstaltungsinfo, Gastgeber, ...',
-      purchase: 'Zusätzliche Infos zum Einkauf',
-      private: 'Zweck, ...'
-    }
-  }
+
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private es: EventService) { }
+
 
   ngOnInit() {
     this.route.params.subscribe(p => {
@@ -71,6 +56,28 @@ export class NewEventFormComponent implements OnInit {
   newDateHHMM() {
     const date = new Date();
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
+  }
+
+  getString(name: string) {
+    const strings = {
+      boxHeadline: {
+        event: 'Infos zur Veranstaltung',
+        purchase: 'Infos zum Einkauf',
+        private: 'Infos zur Spontanentnahme'
+      },
+      btnLabel: {
+        event: 'Veranstaltung anlegen',
+        purchase: 'Einkauf anlegen',
+        private: 'Spontanentnahme starten'
+      },
+      descriptionPlaceholder: {
+        event: 'Veranstaltungsinfo, Gastgeber, ...',
+        purchase: 'Zusätzliche Infos zum Einkauf',
+        private: 'Zweck, ...'
+      }
+    };
+
+    return strings[name][this.uiMode];
   }
 
 }
