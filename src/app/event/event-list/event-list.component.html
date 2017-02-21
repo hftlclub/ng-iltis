@@ -10,13 +10,18 @@
     <table class="table table-bordered table-hover event-table">
       <thead>
         <tr>
+          <th>Typ</th>
           <th>Event</th>
           <th>Datum</th>
         </tr>
       </thead>
-      <tr *ngFor="let e of events" [routerLink]="e.id">
-        <td>{{ e.description }}</td>
-        <td>{{ e.datetime | date:'dd.MM.yyyy' }}</td>
+      <tr *ngFor="let e of events" [routerLink]="e.id" [class.warning]="e.active">
+        <td>{{ e.eventType.description }}</td>
+        <td>
+          {{ e.description }}
+          <span *ngIf="e.active" class="label label-danger pull-right">aktiv</span>
+        </td>
+        <td>{{ e.datetime | date:'dd.MM.yyyy, HH:mm' }} Uhr</td>
       </tr>
     </table>
 
