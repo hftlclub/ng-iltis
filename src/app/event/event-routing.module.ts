@@ -6,14 +6,24 @@ import { ProductOverviewComponent } from './product-overview/product-overview.co
 import { EventOverviewComponent } from './event-overview/event-overview.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 import { ProductsResolver } from './shared/resolvers/products.resolver';
 import { ProductResolver } from './shared/resolvers/product.resolver';
 import { EventResolver } from './shared/resolvers/event.resolver';
+import { EventsResolver } from './shared/resolvers/events.resolver';
 import { TransfersResolver } from './shared/resolvers/transfers.resolver';
 
 const routes: Routes = [
   { path: 'event/new', component: NewEventFormComponent },
+  {
+    path: 'event',
+    component: EventListComponent,
+    pathMatch: 'full',
+    resolve: {
+      events: EventsResolver
+    }
+  },
   {
     path: 'event/:eventId',
     component: EventComponent,
@@ -54,6 +64,7 @@ const routes: Routes = [
   providers: [
     ProductsResolver,
     ProductResolver,
+    EventsResolver,
     EventResolver,
     TransfersResolver
   ]

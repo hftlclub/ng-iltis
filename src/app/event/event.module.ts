@@ -19,6 +19,7 @@ import { ProductJumpBarComponent } from './product-jump-bar/product-jump-bar.com
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 import { AbsPipe } from './shared/abs.pipe';
 import { EventOverviewComponent } from './event-overview/event-overview.component';
+import { EventListComponent } from './event-list/event-list.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { EventOverviewComponent } from './event-overview/event-overview.componen
     ProductJumpBarComponent,
     NewEventFormComponent,
     AbsPipe,
-    EventOverviewComponent
+    EventOverviewComponent,
+    EventListComponent
   ],
   providers: [
     ProductService,

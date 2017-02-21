@@ -1,0 +1,25 @@
+<div class="row">
+  <div class="col-md-10 content">
+    <div class="page-header">
+      <h1>
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        Events
+      </h1>
+    </div>
+
+    <table class="table table-bordered table-hover event-table">
+      <thead>
+        <tr>
+          <th>Event</th>
+          <th>Datum</th>
+        </tr>
+      </thead>
+      <tr *ngFor="let e of events" [routerLink]="e.id">
+        <td>{{ e.description }}</td>
+        <td>{{ e.datetime | date:'dd.MM.yyyy' }}</td>
+      </tr>
+    </table>
+
+
+  </div>
+</div>
