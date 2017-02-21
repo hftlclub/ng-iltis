@@ -1,5 +1,121 @@
 <div class="row">
-  {{ event | json }}
+  <div class="col-md-2">
+    <div class="panel panel-default overview-card">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-clock-o" aria-hidden="true"></i>
+          Datum
+          <a class="pull-right" href="#" title="Bearbeiten">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </a>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Datum:</strong>
+          {{ event.datetime | date:'dd.MM.yyyy' }}
+        </p>
+        <p>
+          <strong>Uhrzeit:</strong>
+          {{ event.datetime | date:'HH:mm' }} Uhr
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2">
+    <div class="panel panel-default overview-card">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-money" aria-hidden="true"></i>
+          Kasse
+          <a class="pull-right" href="#" title="Bearbeiten">
+            <i class="fa fa-pencil" aria-hidden="true"></i>
+          </a>
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>vorher:</strong>
+          {{ event.cashBefore | currency:'EUR':true }}
+        </p>
+        <p>
+          <strong>nachher:</strong>
+          {{ event.cashAfter | currency:'EUR':true }}
+        </p>
+
+        <a class="btn btn-default btn-block" style="margin-top: 13px">
+          Kassenstand eintragen
+        </a>
+
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2" *ngIf="!event.active">
+    <div class="panel panel-default overview-card">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-bar-chart" aria-hidden="true"></i>
+          Finanzen
+        </h3>
+      </div>
+      <div class="panel-body">
+        <p>
+          <strong>Umsatz:</strong>
+          ...
+        </p>
+        <p>
+          <strong>Kosten:</strong>
+          ...
+        </p>
+        <p>
+          <strong>Gewinn:</strong>
+          ...
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-2" *ngIf="event.active">
+    <div class="panel panel-default overview-card">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-list-ol" aria-hidden="true"></i>
+          Zählung
+        </h3>
+      </div>
+      <div class="panel-body">
+        <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px">
+          <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+          Kühlschrank
+        </a>
+        <a class="btn btn-warning btn-block btn-lg">
+          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+          Lager
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-2" *ngIf="event.active">
+    <div class="panel panel-default overview-card">
+      <div class="panel-heading">
+        <h3 class="panel-title">
+          <i class="fa fa-power-off" aria-hidden="true"></i>
+          Abschließen
+        </h3>
+      </div>
+      <div class="panel-body" style="padding-top: 40px">
+        <a class="btn btn-danger btn-block btn-lg">
+          <i class="fa fa-check" aria-hidden="true"></i>
+          Event schließen
+        </a>
+      </div>
+    </div>
+  </div>
 </div>
 
 

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { Transfer } from '../shared/models/transfer/transfer';
+import { Event } from '../shared/models/event/event';
 
 @Component({
   selector: 'il-history-sidebar',
@@ -11,14 +12,14 @@ import { Transfer } from '../shared/models/transfer/transfer';
 export class HistorySidebarComponent implements OnInit {
 
   transfers: Transfer[];
+  event: Event;
   transferCountMapping: {[k: string]: string} = {'=0': 'Keine Buchungen', '=1': 'Eine Buchung', 'other': '# Buchungen'};
 
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.transfers = this.route.snapshot.data['transfers'];
-    console.log(this.route.snapshot.children);
-
+    this.event = this.route.snapshot.data['event'];
   }
 
   get childUrlSegment() {

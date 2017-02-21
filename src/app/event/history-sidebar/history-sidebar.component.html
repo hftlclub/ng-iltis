@@ -37,7 +37,7 @@
         <i class="fa fa-list" aria-hidden="true"></i>
         Übersicht
       </a>
-      <a class="btn btn-success btn-lg btn-block" routerLink="products" *ngIf="childUrlSegment == 'overview'">
+      <a class="btn btn-success btn-lg btn-block" routerLink="products" *ngIf="childUrlSegment == 'overview' && event.active">
         <i class="fa fa-plus" aria-hidden="true"></i>
         Neue Buchung
       </a>
