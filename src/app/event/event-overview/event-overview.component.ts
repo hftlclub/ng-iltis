@@ -15,8 +15,7 @@ export class EventOverviewComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.event = this.route.snapshot.data['event'];
-    console.log(this.event);
+    this.event = this.route.parent.snapshot.data['event'];
   }
 
 }

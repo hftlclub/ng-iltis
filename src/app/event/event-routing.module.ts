@@ -33,13 +33,7 @@ const routes: Routes = [
     },
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
-      {
-        path: 'overview',
-        component: EventOverviewComponent,
-        resolve: {
-          event: EventResolver
-        }
-      },
+      { path: 'overview', component: EventOverviewComponent },
       {
         path: 'products',
         component: ProductOverviewComponent,
