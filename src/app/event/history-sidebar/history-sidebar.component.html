@@ -33,8 +33,14 @@
 
 <div class="bottom">
     <div class="text-center">
-      <a class="btn btn-primary btn-lg btn-block" routerLink="overview">Zur Übersicht</a>
-      <a class="btn btn-primary btn-lg btn-block" routerLink="products">Neue Buchung</a>
+      <a class="btn btn-primary btn-lg btn-block" routerLink="overview" *ngIf="childUrlSegment == 'products'">
+        <i class="fa fa-list" aria-hidden="true"></i>
+        Übersicht
+      </a>
+      <a class="btn btn-success btn-lg btn-block" routerLink="products" *ngIf="childUrlSegment == 'overview'">
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Neue Buchung
+      </a>
     </div>
 </div>
 

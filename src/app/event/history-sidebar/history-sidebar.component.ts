@@ -17,6 +17,12 @@ export class HistorySidebarComponent implements OnInit {
 
   ngOnInit() {
     this.transfers = this.route.snapshot.data['transfers'];
+    console.log(this.route.snapshot.children);
+
+  }
+
+  get childUrlSegment() {
+    return this.route.snapshot.children[0].url[0].path;
   }
 
 }
