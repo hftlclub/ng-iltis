@@ -1,0 +1,13 @@
+<div class="list-group-item"
+  [title]="transaction.changeTotal < 0 ? 'Entnahme' : 'Rückgabe'">
+  <span class="label pull-right" [ngClass]="transaction.changeTotal < 0 ? 'label-danger' : 'label-success'">
+    {{ transaction.changeTotal < 0 ? '–' : '+' }}
+    {{ transaction.changeTotal | abs }}
+  </span>
+  <h5 class="list-group-item-heading">
+    {{ transaction.product.name }}
+  </h5>
+  <p class="list-group-item-text small">
+    {{ transaction.sizeType.description }} {{ transaction.sizeType.amount | number }} {{ transaction.product.unit.short }}
+  </p>
+</div>

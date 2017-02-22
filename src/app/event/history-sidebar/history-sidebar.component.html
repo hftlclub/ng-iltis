@@ -4,25 +4,20 @@
       Historie
     </h3>
     <small>
-      {{ transfers.length | i18nPlural:transferCountMapping }}
+      {{ itemCount | i18nPlural:itemsCountMapping }}
     </small>
 </div>
 
 <div class="scroll-area">
     <div>
-      <div class="list-group-item"
-        [title]="t.change < 0 ? 'Entnahme' : 'Rückgabe'"
-        *ngFor="let t of transfers">
-        <span class="label pull-right" [ngClass]="t.change < 0 ? 'label-danger' : 'label-success'">
-          {{ t.change < 0 ? '–' : '+' }}
-          {{ t.change | abs }}
-        </span>
-        <h5 class="list-group-item-heading">
-          {{ t.product.name }}
-        </h5>
-        <p class="list-group-item-text small">{{ t.sizeType.description }} {{ t.sizeType.amount | number }} {{ t.product.unit.short }}</p>
-      </div>
-      <div class="text-center box-message" *ngIf="!transfers.length">
+      <template [ngIf]="transfers.length">
+        <il-history-transfer-item *ngFor="let t of transfers" [transfer]="t"></il-history-transfer-item>
+      </template>
+      <template [ngIf]="transactions.length">
+        <il-history-transaction-item *ngFor="let t of transactions" [transaction]="t"></il-history-transaction-item>
+      </template>
+
+      <div class="text-center box-message" *ngIf="!hasItems">
         <div>
           <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
         </div>

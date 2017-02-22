@@ -13,6 +13,7 @@ import { ProductResolver } from './shared/resolvers/product.resolver';
 import { EventResolver } from './shared/resolvers/event.resolver';
 import { EventsResolver } from './shared/resolvers/events.resolver';
 import { TransfersResolver } from './shared/resolvers/transfers.resolver';
+import { TransactionsResolver } from './shared/resolvers/transactions.resolver';
 import { EventTypesResolver } from './shared/resolvers/eventtypes.resolver';
 
 const routes: Routes = [
@@ -38,7 +39,8 @@ const routes: Routes = [
     component: EventComponent,
     resolve: {
       event: EventResolver,
-      transfers: TransfersResolver
+      transfers: TransfersResolver,
+      transactions: TransactionsResolver
     },
     children: [
       { path: '', redirectTo: 'overview', pathMatch: 'full' },
@@ -70,6 +72,7 @@ const routes: Routes = [
     EventsResolver,
     EventResolver,
     TransfersResolver,
+    TransactionsResolver,
     EventTypesResolver
   ]
 })

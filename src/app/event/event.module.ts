@@ -23,6 +23,8 @@ import { AbsPipe } from './shared/abs.pipe';
 import { EventOverviewComponent } from './event-overview/event-overview.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
+import { HistoryTransferItemComponent } from './history-transfer-item/history-transfer-item.component';
+import { HistoryTransactionItemComponent } from './history-transaction-item/history-transaction-item.component';
 
 
 @NgModule({
@@ -49,7 +51,9 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
     NewEventFormComponent,
     AbsPipe,
     EventOverviewComponent,
-    EventListComponent
+    EventListComponent,
+    HistoryTransferItemComponent,
+    HistoryTransactionItemComponent
   ],
   providers: [
     ProductService,

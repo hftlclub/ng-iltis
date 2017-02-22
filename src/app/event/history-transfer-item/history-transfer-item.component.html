@@ -1,0 +1,16 @@
+<div class="list-group-item"
+  [title]="transfer.change < 0 ? 'Entnahme' : 'Rückgabe'">
+
+<div>
+  <span class="label pull-right" [ngClass]="transfer.change < 0 ? 'label-danger' : 'label-success'">
+    {{ transfer.change < 0 ? '–' : '+' }}
+    {{ transfer.change | abs }}
+  </span>
+  <h5 class="list-group-item-heading">
+    {{ transfer.product.name }}
+  </h5>
+  <p class="list-group-item-text small">
+    {{ transfer.sizeType.description }} {{ transfer.sizeType.amount | number }} {{ transfer.product.unit.short }}
+  </p>
+  </div>
+</div>
