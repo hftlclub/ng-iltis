@@ -17,6 +17,7 @@ export class CounterControlComponent implements ControlValueAccessor {
 
   @Input() minValue: number = -Infinity;
   @Input() maxValue: number = Infinity;
+  @Input() disabled = false;
 
   propagateChange: any = () => {};
   validateFn: any = () => {};
