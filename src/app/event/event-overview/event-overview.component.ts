@@ -22,7 +22,7 @@ export class EventOverviewComponent implements OnInit {
     this.event = this.route.parent.snapshot.data['event'];
     if (!this.event.active) {
       this.calcLoading = true;
-      this.es.getCalculation(this.event.id).subscribe(res => {
+      this.es.getCalculationForEvent(this.event.id).subscribe(res => {
         this.calc = res;
         this.calcLoading = false;
       });

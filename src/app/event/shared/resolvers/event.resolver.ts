@@ -10,7 +10,7 @@ export class EventResolver implements Resolve<Event> {
   constructor(private es: EventService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.es.getSingle(route.params['eventId']);
+    return this.es.getEvent(route.params['eventId']);
   }
 
 }

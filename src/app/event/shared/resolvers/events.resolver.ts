@@ -10,7 +10,7 @@ export class EventsResolver implements Resolve<Event[]> {
   constructor(private es: EventService) {}
 
   resolve() {
-    return this.es.getAll();
+    return this.es.getEvents();
   }
 
 }
