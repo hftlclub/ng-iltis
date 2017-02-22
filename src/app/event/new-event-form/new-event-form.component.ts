@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
+import { NotificationsService } from 'angular2-notifications';
 
 import { EventType, EventTypeFactory } from '../shared/models/eventtype';
 import { Event, EventFactory } from '../shared/models/event';
@@ -22,7 +23,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   params$: Subscription;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private es: EventService) { }
+  constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private es: EventService, private ns: NotificationsService) { }
 
 
   ngOnInit() {
@@ -66,14 +67,16 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       datetime: this.mergeDateTime(formValue.date, formValue.time),
       active: true
     });
+      this.ns.success('Fertig!', 'Das Event wurde angelegt.');
 
-    this.loading = true;
+
+/*    this.loading = true;
     this.es.createEvent(newEvent).subscribe(event => {
       this.loading = false;
-      console.log(event);
+      this.ns.success('Fertig!', 'Das Event wurde angelegt.');
 
       this.router.navigate(['../../', event.id], { relativeTo: this.route });
-    });
+    });*/
   }
 
 
