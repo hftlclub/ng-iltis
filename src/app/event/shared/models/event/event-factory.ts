@@ -42,17 +42,17 @@ export class EventFactory {
             event.tip = obj.eventTip;
         }
 
-        if (obj.datetime) event.datetime = obj.datetime;
+        if (obj.datetime) event.datetime = new Date(obj.datetime);
         if (obj.eventDT) {
             if(ValueChecker.validDate(obj.eventDT)) {
-                event.datetime = obj.eventDT;
+                event.datetime = new Date(obj.eventDT);
             }
         }
 
-        if (obj.timestamp) event.timestamp = obj.timestamp;
+        if (obj.timestamp) event.timestamp = new Date(obj.timestamp);
         if (obj.eventTS) {
             if(ValueChecker.validDate(obj.eventTS)) {
-                event.timestamp = obj.eventTS;
+                event.timestamp = new Date(obj.eventTS);
             }
         }
 
