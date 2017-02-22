@@ -93,8 +93,9 @@
                     <input type="time" formControlName="time" class="form-control" id="time" useValueAsDate>
                   </div>
                   <div class="form-group">
-                    <button type="submit" class="btn btn-success btn-lg btn-block">
-                      <i class="fa fa-check" aria-hidden="true"></i>
+                    <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
+                      <i class="fa fa-check" *ngIf="!loading" aria-hidden="true"></i>
+                      <i class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="loading" aria-hidden="true"></i>
                       {{ getString('btnLabel') }}
                     </button>
                   </div>

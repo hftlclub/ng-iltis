@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
@@ -10,11 +10,20 @@ import { Event, EventFactory } from './models/event';
 import { Transfer, TransferFactory } from './models/transfer';
 import { Calculation, CalculationFactory } from './models/calculation';
 import { EventType, EventTypeFactory } from './models/eventtype';
+import { TinyJson } from './tinyjson';
 
 @Injectable()
 export class EventService {
 
-  constructor(@Inject('API_URL') private api, private http: Http) { }
+  private headers: Headers = new Headers();
+
+  constructor(@Inject('API_URL') private api, private http: Http) {
+    this.headers.append('Content-Type', 'application/json');
+  }
+
+  private errorHandler(error: Error | any): Observable<any> {
+    return Observable.throw(error);
+  }
 
   getAll(): Observable<Event[]> {
     return this.http.get(`${this.api}/events`)
@@ -50,5 +59,12 @@ export class EventService {
       .map(res => res.json())
       .map(raw => raw.map(p => EventTypeFactory.fromObj(p)));
   }
+
+  createEvent(event: Event): Observable<any> {
+    return this.http
+      .post(`${this.api}/event`, TinyJson.getJSON(event), { headers: this.headers })
+      .catch(this.errorHandler);
+  }
+
 
 }

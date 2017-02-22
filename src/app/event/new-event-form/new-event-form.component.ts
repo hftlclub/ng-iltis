@@ -1,9 +1,9 @@
-import { EventTypeFactory } from './../shared/models/eventtype/eventtype-factory';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Subscription } from 'rxjs/Subscription';
 
-import { EventType } from '../shared/models/eventtype';
+import { EventType, EventTypeFactory } from '../shared/models/eventtype';
 import { Event, EventFactory } from '../shared/models/event';
 import { EventService } from '../shared/event.service';
 
@@ -12,19 +12,21 @@ import { EventService } from '../shared/event.service';
   templateUrl: './new-event-form.component.html',
   styleUrls: ['./new-event-form.component.css']
 })
-export class NewEventFormComponent implements OnInit {
+export class NewEventFormComponent implements OnInit, OnDestroy {
 
   eventTypes: EventType[];
   uiMode: string;
   form: FormGroup;
+  loading = false;
 
+  params$: Subscription;
 
 
   constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private es: EventService) { }
 
 
   ngOnInit() {
-    this.route.params.subscribe(p => {
+    this.params$ = this.route.params.subscribe(p => {
       this.uiMode = p['uiMode'];
       this.es.getEventTypes().subscribe(et => {
         this.eventTypes = et;
@@ -42,26 +44,33 @@ export class NewEventFormComponent implements OnInit {
     this.initForm();
   }
 
+  ngOnDestroy() {
+    this.params$.unsubscribe();
+  }
+
 
   initForm() {
     this.form = this.fb.group({
-      eventType: [this.eventTypes[0].id],
+      eventType: [this.eventTypes[0].id, Validators.required],
       description: [],
-      date: [new Date()],
-      time: [this.newDateHHMM()]
+      date: [new Date(), Validators.required],
+      time: [this.newDateHHMM(), Validators.required]
     });
   }
 
   submitForm() {
-    let formValue = this.form.value;
+    const formValue = this.form.value;
     const event: Event = EventFactory.fromObj({
       eventType: { id: formValue.eventType },
       description: formValue.description,
-      datetime: this.mergeDateTime(formValue.date, formValue.time)
+      datetime: this.mergeDateTime(formValue.date, formValue.time),
+      active: true
     });
-    console.log(event);
 
-
+    this.loading = true;
+    this.es.createEvent(event).subscribe(res => {
+      this.loading = false;
+    });
   }
 
 
