@@ -4,6 +4,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
 import { EventType } from '../shared/models/eventtype/eventtype';
+import { Event } from '../shared/models/event/event';
+import { EventFactory } from './../shared/models/event/event-factory';
 import { EventService } from '../shared/event.service';
 
 @Component({
@@ -53,9 +55,21 @@ export class NewEventFormComponent implements OnInit {
     });
   }
 
+  submitForm() {
+    const event: Event = EventFactory.fromObj(this.form.value);
+    console.log(event);
+
+
+  }
+
+
   newDateHHMM() {
     const date = new Date();
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
+  }
+
+  get isEventMode() {
+    return this.uiMode === 'event';
   }
 
   getString(name: string) {
