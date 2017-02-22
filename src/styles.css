@@ -34,7 +34,8 @@
   padding-top: 60px;
 }
 
-.marginb10 {
-  margin-bottom: 10px;
+.simple-notification {
+  z-index: 955;
 }
+
 
