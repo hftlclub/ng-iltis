@@ -60,7 +60,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
   submitForm() {
     const formValue = this.form.value;
-    const event: Event = EventFactory.fromObj({
+    const newEvent: Event = EventFactory.fromObj({
       eventType: { id: formValue.eventType },
       description: formValue.description,
       datetime: this.mergeDateTime(formValue.date, formValue.time),
@@ -68,8 +68,11 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
     });
 
     this.loading = true;
-    this.es.createEvent(event).subscribe(res => {
+    this.es.createEvent(newEvent).subscribe(event => {
       this.loading = false;
+      console.log(event);
+
+      this.router.navigate(['../../', event.id], { relativeTo: this.route });
     });
   }
 

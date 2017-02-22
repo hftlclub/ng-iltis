@@ -60,9 +60,11 @@ export class EventService {
       .map(raw => raw.map(p => EventTypeFactory.fromObj(p)));
   }
 
-  createEvent(event: Event): Observable<any> {
+  createEvent(event: Event): Observable<Event> {
     return this.http
       .post(`${this.api}/event`, TinyJson.getJSON(event), { headers: this.headers })
+      .map(res => res.json())
+      .map(raw => EventFactory.fromObj(raw))
       .catch(this.errorHandler);
   }
 
