@@ -15,7 +15,12 @@ export class EventListComponent implements OnInit {
   constructor(private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.events = this.route.snapshot.data['events'];
+    this.events = this.route.snapshot.data['events']
+      .sort(this.orderByDateTime);
+  }
+
+  orderByDateTime(a: Event, b: Event) {
+    return b.datetime.getTime() - a.datetime.getTime();
   }
 
 }
