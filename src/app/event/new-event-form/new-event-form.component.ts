@@ -3,9 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 
-import { EventType } from '../shared/models/eventtype/eventtype';
-import { Event } from '../shared/models/event/event';
-import { EventFactory } from './../shared/models/event/event-factory';
+import { EventType } from '../shared/models/eventtype';
+import { Event, EventFactory } from '../shared/models/event';
 import { EventService } from '../shared/event.service';
 
 @Component({

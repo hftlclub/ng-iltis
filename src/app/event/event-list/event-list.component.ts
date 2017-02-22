@@ -1,8 +1,7 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 
-import { Event } from '../shared/models/event/event';
-
+import { Event } from '../shared/models/event';
 
 @Component({
   selector: 'il-event-list',

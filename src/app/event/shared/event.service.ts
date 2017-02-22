@@ -6,15 +6,10 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import { Event } from './models/event/event';
-import { Transfer } from './models/transfer/transfer';
-import { EventFactory } from './models/event/event-factory';
-import { TransferFactory } from './models/transfer/transfer-factory';
-import { Calculation } from './models/calculation/calculation';
-import { CalculationFactory } from './models/calculation/calculation-factory';
-import { EventType } from './models/eventtype/eventtype';
-import { EventTypeFactory } from './models/eventtype/eventtype-factory';
-
+import { Event, EventFactory } from './models/event';
+import { Transfer, TransferFactory } from './models/transfer';
+import { Calculation, CalculationFactory } from './models/calculation';
+import { EventType, EventTypeFactory } from './models/eventtype';
 
 @Injectable()
 export class EventService {

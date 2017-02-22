@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { Transfer } from '../shared/models/transfer/transfer';
-import { Event } from '../shared/models/event/event';
+import { Transfer } from '../shared/models/transfer';
+import { Event } from '../shared/models/event';
 
 @Component({
   selector: 'il-history-sidebar',

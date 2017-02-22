@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 import { ProductService } from './../shared/product.service';
-import { Product } from '../shared/models/product/product';
+import { Product } from '../shared/models/product';
 
 @Component({
   selector: 'il-product-overview',

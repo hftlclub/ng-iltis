@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { Transfer } from '../models/transfer/transfer';
+import { Transfer } from '../models/transfer';
 import { EventService } from '../event.service';
 
 @Injectable()

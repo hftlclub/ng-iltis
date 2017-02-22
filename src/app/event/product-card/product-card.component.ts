@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 
-import { Product } from '../shared/models/product/product';
+import { Product } from '../shared/models/product';
 
 @Component({
   selector: 'il-product-card',
