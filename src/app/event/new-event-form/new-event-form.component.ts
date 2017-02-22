@@ -37,17 +37,15 @@ export class NewEventFormComponent implements OnInit {
       });
     });
 
+    // init form with one empty event type (as long as we're waiting for data)
     this.eventTypes = [EventTypeFactory.empty()];
     this.initForm();
-
   }
 
 
   initForm() {
-    const preSelectedEventType = (this.eventTypes.length) ? this.eventTypes[0].id : '';
-
     this.form = this.fb.group({
-      eventType: [preSelectedEventType],
+      eventType: [this.eventTypes[0].id],
       description: [],
       date: [new Date()],
       time: [this.newDateHHMM()]
@@ -55,14 +53,34 @@ export class NewEventFormComponent implements OnInit {
   }
 
   submitForm() {
-    const event: Event = EventFactory.fromObj(this.form.value);
+    let formValue = this.form.value;
+    const event: Event = EventFactory.fromObj({
+      eventType: { id: formValue.eventType },
+      description: formValue.description,
+      datetime: this.mergeDateTime(formValue.date, formValue.time)
+    });
     console.log(event);
 
 
   }
 
 
-  newDateHHMM() {
+  setDate(mode: string): void {
+    let newDate;
+    switch (mode) {
+      case 'yesterday': newDate = new Date(Date.now() - 86400000); break;
+      default: newDate = new Date();
+    }
+    this.form.patchValue({
+      date: newDate
+    });
+  }
+
+  mergeDateTime(date: Date, time: Date) {
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
+  }
+
+  newDateHHMM(): Date {
     const date = new Date();
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
   }
@@ -71,7 +89,7 @@ export class NewEventFormComponent implements OnInit {
     return this.uiMode === 'event';
   }
 
-  getString(name: string) {
+  getString(name: string): string {
     const strings = {
       boxHeadline: {
         event: 'Infos zur Veranstaltung',

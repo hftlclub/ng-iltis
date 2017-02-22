@@ -40,8 +40,54 @@
                   </div>
                   <div class="form-group" *ngIf="isEventMode">
                     <label for="date">Datum</label>
-                    <input type="date" formControlName="date" class="form-control" id="date" useValueAsDate>
+                    <div class="input-group">
+                      <input type="text" class="form-control" [value]="form.value.date | date:'fullDate'" (focus)="lgModal.show()">
+                      <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" (click)="lgModal.show()">
+                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </button>
+                      </span>
+
+                    </div>
                   </div>
+
+
+                  <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                      <div class="modal-dialog modal-md">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title pull-left">Datum auswählen</h4>
+                            <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="row">
+                              <div class="col-md-8">
+                                <datepicker formControlName="date"></datepicker>
+                              </div>
+                              <div class="col-md-4">
+                                <button type="button" class="btn btn-primary btn-block" (click)="setDate('today')">
+                                  Heute
+                                </button>
+                                <button type="button" class="btn btn-primary btn-block" (click)="setDate('yesterday')">
+                                  Gestern
+                                </button>
+
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-primary btn-block btn-lg" (click)="lgModal.hide()">
+                              <i class="fa fa-check" aria-hidden="true"></i>
+                              OK
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+
                   <div class="form-group" *ngIf="isEventMode">
                     <label for="time">Uhrzeit</label>
                     <input type="time" formControlName="time" class="form-control" id="time" useValueAsDate>
@@ -62,3 +108,6 @@
     </div>
   </div>
 </div>
+
+
+{{ form.value | json }}

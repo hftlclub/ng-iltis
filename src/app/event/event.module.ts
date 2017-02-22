@@ -4,6 +4,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
 import { PageScrollConfig } from 'ng2-page-scroll';
+import { ModalModule } from 'ng2-bootstrap/modal';
+import { DatepickerModule } from 'ng2-bootstrap/datepicker';
 
 import { EventRoutingModule } from './event-routing.module';
 import { ProductCardComponent } from './product-card/product-card.component';
@@ -31,7 +33,9 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
     HttpModule,
     EventRoutingModule,
     Ng2PageScrollModule.forRoot(),
-    DateValueAccessorModule
+    DateValueAccessorModule,
+    ModalModule.forRoot(),
+    DatepickerModule.forRoot()
   ],
   declarations: [
     ProductCardComponent,
