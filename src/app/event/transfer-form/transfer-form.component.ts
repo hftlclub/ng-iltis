@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { NotificationsService } from 'angular2-notifications';
 
 import { Product } from '../shared/models/product';
+import { TransferFactory } from '../shared/models/transfer/transfer-factory';
+import { EventService } from '../shared/event.service';
 
 @Component({
   selector: 'il-transfer-form',
@@ -21,8 +24,14 @@ export class TransferFormComponent implements OnInit {
   outgoingTransfer = true;
   product: Product;
   grid: any;
+  loading = false;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(
+    private route: ActivatedRoute,
+    private fb: FormBuilder,
+    private es: EventService,
+    private ns: NotificationsService
+  ) { }
 
   ngOnInit() {
     this.product = this.route.snapshot.data['product'];
@@ -32,16 +41,17 @@ export class TransferFormComponent implements OnInit {
       sizeTypes: this.fb.array(this.product.sizeTypes.map(s => 0)),
       crateTypes: this.fb.array(this.product.crateTypes.map(c => 0))
     }, {validator: this.atLeastOneValidator});
+
   }
 
 
   submitForm() {
-    const sizeTypes = {};
+    const stChanges = {};
     this.form.controls['sizeTypes'].value
       .map(this.sanitizeNumber)
       .forEach((e, i) => {
         const stid = this.product.sizeTypes[i].id;
-        sizeTypes[stid] = e;
+        stChanges[stid] = e;
       });
 
     this.form.controls['crateTypes'].value
@@ -49,11 +59,29 @@ export class TransferFormComponent implements OnInit {
       .forEach((e, i) => {
         const ct = this.product.crateTypes[i];
         const stid = ct.sizeType.id;
-        sizeTypes[stid] += e * ct.slots;
+        stChanges[stid] += e * ct.slots;
       });
 
-    console.log(sizeTypes);
-    // TODO: Send to server
+    const transfers = Object.keys(stChanges).map(stid => {
+      return {
+        product: { id: this.product.id },
+        sizeType: { id: this.sanitizeNumber(stid) },
+        change: stChanges[stid],
+      };
+    })
+    .filter(t => t.change);
+
+    this.es.transfersAdded.emit(transfers.map(t => TransferFactory.fromObj(t)));
+
+
+    const mode = this.outgoingTransfer ? 'out' : 'in';
+    const eventId = this.route.parent.snapshot.params['eventId'];
+    this.loading = true;
+    this.es.createStorageTransfer(mode, eventId, transfers).subscribe(res => {
+      this.loading = false;
+      console.log('ANSWER:', res);
+      this.ns.success('Buchung erfasst', 'Die Buchung wurde erfasst.');
+    });
 
   }
 

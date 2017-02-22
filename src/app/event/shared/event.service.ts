@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { Http, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
@@ -17,6 +17,7 @@ import { TinyJson } from './tinyjson';
 export class EventService {
 
   private headers: Headers = new Headers();
+  transfersAdded = new EventEmitter<Transfer[]>();
 
   constructor(@Inject('API_URL') private api, private http: Http) {
     this.headers.append('Content-Type', 'application/json');
@@ -25,6 +26,8 @@ export class EventService {
   private errorHandler(error: Error | any): Observable<any> {
     return Observable.throw(error);
   }
+
+
 
   getEvents(): Observable<Event[]> {
     return this.http.get(`${this.api}/events`)
@@ -73,6 +76,16 @@ export class EventService {
       .post(`${this.api}/event`, TinyJson.getJSON(event), { headers: this.headers })
       .map(res => res.json())
       .map(raw => EventFactory.fromObj(raw))
+      .catch(this.errorHandler);
+  }
+
+  createStorageTransfer(mode: string, eventId: number, data: any): Observable<any> {
+    mode = (mode === 'in') ? 'in' : 'out';
+
+    return this.http
+      .post(`${this.api}/event/${eventId}/transfers/storage/${mode}`, JSON.stringify(data), { headers: this.headers })
+      .map(res => res.json())
+      // .map(raw => TransferFactory.fromObj(raw))
       .catch(this.errorHandler);
   }
 
