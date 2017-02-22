@@ -117,6 +117,11 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
         event: 'Veranstaltungsinfo, Gastgeber, ...',
         purchase: 'Zusätzliche Infos zum Einkauf',
         private: 'Zweck, ...'
+      },
+      headline: {
+        event: 'Neue Veranstaltung',
+        purchase: 'Neuer Einkauf',
+        private: 'Neue Spontanentnahme'
       }
     };
 
