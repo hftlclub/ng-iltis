@@ -1,4 +1,5 @@
 <div class="list-group-item"
+  [ngClass]="transfer.change < 0 ? 'item-out' : 'item-in'"
   [title]="transfer.change < 0 ? 'Entnahme' : 'Rückgabe'">
 
 <div>

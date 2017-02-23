@@ -1,8 +1,8 @@
-.item-storage {
-  border-left: 15px solid #f0ad4e;
+.item-in {
+  border-left: 7px solid #5cb85c;
 }
 
-.item-counter {
-  border-left: 15px solid #337ab7;
+.item-out {
+  border-left: 7px solid #d9534f;
 }
 

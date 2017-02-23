@@ -29,7 +29,6 @@ export class TransferFormContainerComponent implements OnInit {
 
 
   submitForm(data) {
-
     const { controls, outgoing } = data;
     const stChanges = {};
     controls['sizeTypes'].value
