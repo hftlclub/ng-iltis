@@ -34,10 +34,13 @@ export class EditEventComponent implements OnInit {
 
 
   updateEvent(formValue) {
-    const newEvent = this.event;
-    newEvent.datetime = this.mergeDateTime(formValue.date, formValue.time);
-    newEvent.description = formValue.description;
-    newEvent.eventType = this.eventTypes.find(e => e.id == formValue.eventType);
+    const newValues = {
+      datetime: this.mergeDateTime(formValue.date, formValue.time),
+      description: formValue.description,
+      eventType: this.eventTypes.find(e => e.id == formValue.eventType)
+    };
+
+    const newEvent: Event = Object.assign({}, this.event, newValues);
 
     this.loading = true;
     this.es.updateEvent(newEvent.id, newEvent).subscribe(event => {
