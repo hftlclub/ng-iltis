@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
-import { Product } from '../shared/models/product';
-import { TransferFactory } from '../shared/models/transfer/transfer-factory';
+import { Product } from '../../shared/models/product';
+import { TransferFactory } from '../../shared/models/transfer/transfer-factory';
 import { EventService } from '../shared/event.service';
 
 @Component({
