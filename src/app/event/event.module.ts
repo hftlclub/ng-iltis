@@ -12,7 +12,7 @@ import { ProductCardComponent } from './product-card/product-card.component';
 import { EventComponent } from './event/event.component';
 import { HistorySidebarComponent } from './history-sidebar/history-sidebar.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
-import { TransferFormComponent } from './transfer-form/transfer-form.component';
+import { TransferFormContainerComponent } from './transfer-form-container/transfer-form-container.component';
 import { CounterControlComponent } from './counter-control/counter-control.component';
 import { ProductService } from './shared/product.service';
 import { EventService } from './shared/event.service';
@@ -25,6 +25,7 @@ import { EventListComponent } from './event-list/event-list.component';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { HistoryTransferItemComponent } from './history-transfer-item/history-transfer-item.component';
 import { HistoryTransactionItemComponent } from './history-transaction-item/history-transaction-item.component';
+import { TransferFormComponent } from './transfer-form/transfer-form.component';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { HistoryTransactionItemComponent } from './history-transaction-item/hist
     EventComponent,
     HistorySidebarComponent,
     ProductOverviewComponent,
-    TransferFormComponent,
+    TransferFormContainerComponent,
     CounterControlComponent,
     ProductGroupComponent,
     ProductJumpBarComponent,
@@ -53,7 +54,8 @@ import { HistoryTransactionItemComponent } from './history-transaction-item/hist
     EventOverviewComponent,
     EventListComponent,
     HistoryTransferItemComponent,
-    HistoryTransactionItemComponent
+    HistoryTransactionItemComponent,
+    TransferFormComponent
   ],
   providers: [
     ProductService,

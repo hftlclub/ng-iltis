@@ -4,7 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { EventComponent } from './event/event.component';
 import { ProductOverviewComponent } from './product-overview/product-overview.component';
 import { EventOverviewComponent } from './event-overview/event-overview.component';
-import { TransferFormComponent } from './transfer-form/transfer-form.component';
+import { TransferFormContainerComponent } from './transfer-form-container/transfer-form-container.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 import { EventListComponent } from './event-list/event-list.component';
 
@@ -54,7 +54,7 @@ const routes: Routes = [
       },
       {
         path: 'newtransfer/:productId',
-        component: TransferFormComponent,
+        component: TransferFormContainerComponent,
         resolve: {
           product: ProductResolver
         }
