@@ -2,9 +2,9 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Transfer } from '../shared/models/transfer';
-import { Transaction } from '../shared/models/transaction';
-import { Event } from '../shared/models/event';
+import { Transfer } from '../../shared/models/transfer';
+import { Transaction } from '../../shared/models/transaction';
+import { Event } from '../../shared/models/event';
 import { EventService } from './../shared/event.service';
 
 @Component({

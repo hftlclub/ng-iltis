@@ -3,8 +3,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
 
-import { EventType, EventTypeFactory } from '../shared/models/eventtype';
-import { Event, EventFactory } from '../shared/models/event';
+import { EventType, EventTypeFactory } from '../../shared/models/eventtype';
+import { Event, EventFactory } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
 
 @Component({

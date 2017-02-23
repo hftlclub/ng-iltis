@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 
-import { Transaction } from '../models/transaction';
+import { Transaction } from '../../../shared/models/transaction';
 import { EventService } from '../event.service';
 
 @Injectable()

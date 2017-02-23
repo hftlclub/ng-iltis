@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 
-import { Product } from '../shared/models/product';
+import { Product } from '../../shared/models/product';
 
 @Component({
   selector: 'il-transfer-form',

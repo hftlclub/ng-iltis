@@ -1,8 +1,8 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-import { Event, EventFactory } from '../shared/models/event';
-import { EventType } from '../shared/models/eventtype';
+import { Event, EventFactory } from '../../shared/models/event';
+import { EventType } from '../../shared/models/eventtype';
 
 @Component({
   selector: 'il-event-form',

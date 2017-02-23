@@ -9,15 +9,15 @@ import { TransferFormContainerComponent } from './transfer-form-container/transf
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 import { EventListComponent } from './event-list/event-list.component';
 
-import { ProductsResolver } from './shared/resolvers/products.resolver';
-import { ProductResolver } from './shared/resolvers/product.resolver';
+import { ProductsResolver } from '../core/resolvers/products.resolver';
+import { ProductResolver } from '../core/resolvers/product.resolver';
 import { EventResolver } from './shared/resolvers/event.resolver';
 import { EventsResolver } from './shared/resolvers/events.resolver';
 import { TransfersResolver } from './shared/resolvers/transfers.resolver';
 import { TransactionsResolver } from './shared/resolvers/transactions.resolver';
 import { EventTypesResolver } from './shared/resolvers/eventtypes.resolver';
 
-import { HasChangesGuard } from './shared/has-changes.guard';
+import { HasChangesGuard } from '../core/has-changes.guard';
 
 const routes: Routes = [
   { path: 'new', redirectTo: 'new/event', pathMatch: 'full' },
@@ -93,7 +93,6 @@ const routes: Routes = [
     TransfersResolver,
     TransactionsResolver,
     EventTypesResolver,
-    HasChangesGuard
   ]
 })
 export class EventRoutingModule { }

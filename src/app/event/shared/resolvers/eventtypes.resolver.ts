@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Resolve } from '@angular/router';
 
-import { EventType } from '../models/eventtype';
+import { EventType } from '../../../shared/models/eventtype';
 import { EventService } from '../event.service';
 
 @Injectable()

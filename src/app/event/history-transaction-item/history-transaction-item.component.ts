@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { Transaction } from '../shared/models/transaction';
+import { Transaction } from '../../shared/models/transaction';
 
 @Component({
   selector: 'il-history-transaction-item',

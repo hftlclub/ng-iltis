@@ -6,7 +6,7 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
-import { Product, ProductFactory } from './models/product';
+import { Product, ProductFactory } from '../shared/models/product';
 
 @Injectable()
 export class ProductService {

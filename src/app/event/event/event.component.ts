@@ -2,8 +2,8 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { Event } from '../shared/models/event';
-import { EventService } from './../shared/event.service';
+import { Event } from '../../shared/models/event';
+import { EventService } from '../shared/event.service';
 
 @Component({
   selector: 'il-event',

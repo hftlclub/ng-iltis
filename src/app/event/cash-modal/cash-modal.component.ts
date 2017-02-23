@@ -3,7 +3,7 @@ import { EventService } from './../shared/event.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
-import { Event } from '../shared/models/event/event';
+import { Event } from '../../shared/models/event/event';
 
 @Component({
   selector: 'il-cash-modal',

@@ -2,9 +2,9 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 
-import { Event } from '../shared/models/event';
 import { EventService } from '../shared/event.service';
-import { Calculation } from '../shared/models/calculation';
+import { Event } from '../../shared/models/event';
+import { Calculation } from '../../shared/models/calculation';
 
 @Component({
   selector: 'il-event-overview',
