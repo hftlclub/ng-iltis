@@ -43,8 +43,12 @@
           <strong>nachher:</strong>
           {{ event.cashAfter | currency:'EUR':true }}
         </p>
+        <p *ngIf="event.tip">
+          <strong>Trinkgeld:</strong>
+          {{ event.tip | currency:'EUR':true }}
+        </p>
 
-        <a class="btn btn-default btn-block" style="margin-top: 13px">
+        <a class="btn btn-default btn-block btn-sm" style="margin-top: 13px" *ngIf="!event.cashBefore || !event.cashAfter">
           Kassenstand eintragen
         </a>
 
