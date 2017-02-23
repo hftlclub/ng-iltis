@@ -94,13 +94,13 @@ export class EventService {
       .catch(this.errorHandler);
   }
 
-  createStorageTransfer(mode: string, eventId: number, data: any): Observable<any> {
+  createStorageTransfer(mode: string, eventId: number, data: any): Observable<Transfer[]> {
     mode = (mode === 'in') ? 'in' : 'out';
 
     return this.http
       .post(`${this.api}/event/${eventId}/transfers/storage/${mode}`, JSON.stringify(data), { headers: this.headers })
       .map(res => res.json())
-      // .map(raw => TransferFactory.fromObj(raw))
+      .map(raw => raw.map(t => TransferFactory.fromObj(t)))
       .catch(this.errorHandler);
   }
 

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
 import { Product } from '../shared/models/product';
@@ -19,6 +18,7 @@ export class TransferFormContainerComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private es: EventService,
     private ns: NotificationsService
   ) { }
@@ -55,7 +55,6 @@ export class TransferFormContainerComponent implements OnInit {
     })
     .filter(t => t.change);
 
-    this.es.transfersAdded.emit(transfers.map(t => TransferFactory.fromObj(t)));
 
 
     const mode = outgoing ? 'out' : 'in';
@@ -64,8 +63,9 @@ export class TransferFormContainerComponent implements OnInit {
 
     this.es.createStorageTransfer(mode, eventId, transfers).subscribe(res => {
       this.loading = false;
-      console.log('ANSWER:', res);
+      this.es.transfersAdded.emit(res);
       this.ns.success('Buchung erfasst', 'Die Buchung wurde erfasst.');
+      this.router.navigate(['../../products'], { relativeTo: this.route });
     });
 
   }
