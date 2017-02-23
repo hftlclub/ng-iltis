@@ -57,17 +57,14 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       active: true
     });
 
-    console.log(newEvent);
 
-
-/*
     this.loading = true;
     this.es.createEvent(newEvent).subscribe(event => {
       this.loading = false;
-      this.ns.success('Fertig!', 'Das Event wurde angelegt.');
+      this.ns.success('Eregnis', 'Das Ereignis wurde angelegt.');
 
       this.router.navigate(['../../', event.id], { relativeTo: this.route });
-    });*/
+    });
   }
 
 

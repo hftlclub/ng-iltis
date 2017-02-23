@@ -28,6 +28,7 @@ import { HistoryTransactionItemComponent } from './history-transaction-item/hist
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { EventFormComponent } from './event-form/event-form.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
+import { CashModalComponent } from './cash-modal/cash-modal.component';
 
 
 @NgModule({
@@ -59,7 +60,8 @@ import { EditEventComponent } from './edit-event/edit-event.component';
     HistoryTransactionItemComponent,
     TransferFormComponent,
     EventFormComponent,
-    EditEventComponent
+    EditEventComponent,
+    CashModalComponent
   ],
   providers: [
     ProductService,

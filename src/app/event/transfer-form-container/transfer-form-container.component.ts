@@ -32,14 +32,14 @@ export class TransferFormContainerComponent implements OnInit {
     const { controls, outgoing } = data;
     const stChanges = {};
     controls['sizeTypes'].value
-      .map(this.sanitizeNumber)
+      .map(this.sanitizeInt)
       .forEach((e, i) => {
         const stid = this.product.sizeTypes[i].id;
         stChanges[stid] = e;
       });
 
     controls['crateTypes'].value
-      .map(this.sanitizeNumber)
+      .map(this.sanitizeInt)
       .forEach((e, i) => {
         const ct = this.product.crateTypes[i];
         const stid = ct.sizeType.id;
@@ -49,7 +49,7 @@ export class TransferFormContainerComponent implements OnInit {
     const transfers = Object.keys(stChanges).map(stid => {
       return {
         product: { id: this.product.id },
-        sizeType: { id: this.sanitizeNumber(stid) },
+        sizeType: { id: this.sanitizeInt(stid) },
         change: stChanges[stid],
       };
     })
@@ -64,13 +64,13 @@ export class TransferFormContainerComponent implements OnInit {
     this.es.createStorageTransfer(mode, eventId, transfers).subscribe(res => {
       this.loading = false;
       this.es.transfersAdded.emit(res);
-      this.ns.success('Buchung erfasst', 'Die Buchung wurde erfasst.');
+      this.ns.success('Buchung', 'Die Buchung wurde erfasst.');
       this.router.navigate(['../../products'], { relativeTo: this.route });
     });
 
   }
 
-  sanitizeNumber(num: any) {
+  sanitizeInt(num: any) {
     if (!num) { num = 0; }
     return parseInt(num, 10);
   }

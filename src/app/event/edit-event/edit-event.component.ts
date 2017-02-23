@@ -42,7 +42,7 @@ export class EditEventComponent implements OnInit {
     this.loading = true;
     this.es.updateEvent(newEvent.id, newEvent).subscribe(event => {
       this.loading = false;
-      this.ns.success('Fertig!', 'Das Event wurde bearbeitet.');
+      this.ns.success('Ereignis', 'Das Ereignis wurde bearbeitet.');
 
       this.es.eventUpdated.emit(newEvent);
       this.navigateToEventPage();

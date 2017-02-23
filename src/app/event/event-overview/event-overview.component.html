@@ -29,7 +29,7 @@
         <h3 class="panel-title">
           <i class="fa fa-money" aria-hidden="true"></i>
           Kasse
-          <a class="pull-right" href="#" title="Bearbeiten">
+          <a class="pull-right" title="Bearbeiten" (click)="cashModal.show()">
             <i class="fa fa-pencil" aria-hidden="true"></i>
           </a>
         </h3>
@@ -48,7 +48,10 @@
           {{ event.tip | currency:'EUR':true }}
         </p>
 
-        <a class="btn btn-default btn-block btn-sm" style="margin-top: 13px" *ngIf="!event.cashBefore || !event.cashAfter">
+        <a class="btn btn-default btn-block btn-sm"
+          style="margin-top: 13px"
+          *ngIf="!event.cashBefore && !event.cashAfter && !event.tip"
+          (click)="cashModal.show()">
           Kassenstand eintragen
         </a>
 
@@ -123,6 +126,10 @@
       </div>
     </div>
   </div>
+</div>
+
+<div bsModal #cashModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <il-cash-modal [event]="event" (hide)="cashModal.hide()"></il-cash-modal>
 </div>
 
 
