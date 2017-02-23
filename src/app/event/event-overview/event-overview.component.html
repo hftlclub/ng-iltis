@@ -1,132 +1,97 @@
 <div class="row">
-  <div class="col-md-2">
-    <div class="panel panel-default overview-card">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <i class="fa fa-clock-o" aria-hidden="true"></i>
-          Datum
-          <a class="pull-right" routerLink="../edit" title="Bearbeiten">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </a>
-        </h3>
-      </div>
-      <div class="panel-body">
-        <p>
-          <strong>Datum:</strong>
-          {{ event.datetime | date:'dd.MM.yyyy' }}
-        </p>
-        <p>
-          <strong>Uhrzeit:</strong>
-          {{ event.datetime | date:'HH:mm' }} Uhr
-        </p>
-      </div>
+
+  <il-event-overview-card title="Datum" icon="fa-clock-o">
+    <span class="title-right">
+      <a routerLink="../edit" title="Bearbeiten">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </a>
+    </span>
+
+    <p>
+      <strong>Datum:</strong>
+      {{ event.datetime | date:'dd.MM.yyyy' }}
+    </p>
+    <p>
+      <strong>Uhrzeit:</strong>
+      {{ event.datetime | date:'HH:mm' }} Uhr
+    </p>
+  </il-event-overview-card>
+
+
+
+  <il-event-overview-card title="Kasse" icon="fa-money">
+    <span class="title-right">
+      <a title="Bearbeiten" (click)="cashModal.show()">
+        <i class="fa fa-pencil" aria-hidden="true"></i>
+      </a>
+    </span>
+
+    <p>
+      <strong>vorher:</strong>
+      {{ event.cashBefore | currency:'EUR':true }}
+    </p>
+    <p>
+      <strong>nachher:</strong>
+      {{ event.cashAfter | currency:'EUR':true }}
+    </p>
+    <p *ngIf="event.tip">
+      <strong>Trinkgeld:</strong>
+      {{ event.tip | currency:'EUR':true }}
+    </p>
+
+    <a class="btn btn-default btn-block btn-sm"
+      style="margin-top: 13px"
+      *ngIf="!event.cashBefore && !event.cashAfter && !event.tip"
+      (click)="cashModal.show()">
+      Kassenstand eintragen
+    </a>
+  </il-event-overview-card>
+
+
+
+  <il-event-overview-card title="Finanzen" icon="fa-bar-chart" *ngIf="!event.active">
+    <span class="title-right" *ngIf="calcLoading">
+      <i class="fa fa-circle-o-notch fa-spin fa-fw pull-right" aria-hidden="true"></i>
+    </span>
+
+    <div *ngIf="calc">
+      <p>
+        <strong>Umsatz:</strong>
+        {{ calc?.sales | currency:'EUR':true }}
+      </p>
+      <p>
+        <strong>Kosten:</strong>
+        {{ calc?.costs | currency:'EUR':true }}
+      </p>
+      <p>
+        <strong>Gewinn:</strong>
+        {{ calc?.profit | currency:'EUR':true }}
+      </p>
     </div>
-  </div>
-
-  <div class="col-md-2">
-    <div class="panel panel-default overview-card">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <i class="fa fa-money" aria-hidden="true"></i>
-          Kasse
-          <a class="pull-right" title="Bearbeiten" (click)="cashModal.show()">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </a>
-        </h3>
-      </div>
-      <div class="panel-body">
-        <p>
-          <strong>vorher:</strong>
-          {{ event.cashBefore | currency:'EUR':true }}
-        </p>
-        <p>
-          <strong>nachher:</strong>
-          {{ event.cashAfter | currency:'EUR':true }}
-        </p>
-        <p *ngIf="event.tip">
-          <strong>Trinkgeld:</strong>
-          {{ event.tip | currency:'EUR':true }}
-        </p>
-
-        <a class="btn btn-default btn-block btn-sm"
-          style="margin-top: 13px"
-          *ngIf="!event.cashBefore && !event.cashAfter && !event.tip"
-          (click)="cashModal.show()">
-          Kassenstand eintragen
-        </a>
-
-      </div>
-    </div>
-  </div>
-
-  <div class="col-md-2" *ngIf="!event.active">
-    <div class="panel panel-default overview-card">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <i class="fa fa-bar-chart" aria-hidden="true"></i>
-          Finanzen
-          <i *ngIf="calcLoading" class="fa fa-circle-o-notch fa-spin fa-fw pull-right" aria-hidden="true"></i>
-        </h3>
-      </div>
-      <div class="panel-body">
-        <div *ngIf="calc">
-          <p>
-            <strong>Umsatz:</strong>
-            {{ calc?.sales | currency:'EUR':true }}
-          </p>
-          <p>
-            <strong>Kosten:</strong>
-            {{ calc?.costs | currency:'EUR':true }}
-          </p>
-          <p>
-            <strong>Gewinn:</strong>
-            {{ calc?.profit | currency:'EUR':true }}
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
+  </il-event-overview-card>
 </div>
 
 <div class="row">
-  <div class="col-md-2" *ngIf="event.active">
-    <div class="panel panel-default overview-card">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <i class="fa fa-list-ol" aria-hidden="true"></i>
-          Zählung
-        </h3>
-      </div>
-      <div class="panel-body">
-        <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px">
-          <i class="fa fa-snowflake-o" aria-hidden="true"></i>
-          Kühlschrank
-        </a>
-        <a class="btn btn-warning btn-block btn-lg">
-          <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-          Lager
-        </a>
-      </div>
-    </div>
-  </div>
+  <il-event-overview-card title="Zählung" icon="fa-list-ol" *ngIf="event.active">
+    <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px">
+      <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+      Kühlschrank
+    </a>
+    <a class="btn btn-warning btn-block btn-lg">
+      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+      Lager
+    </a>
+  </il-event-overview-card>
 
-  <div class="col-md-2" *ngIf="event.active">
-    <div class="panel panel-default overview-card">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          <i class="fa fa-power-off" aria-hidden="true"></i>
-          Abschließen
-        </h3>
-      </div>
-      <div class="panel-body" style="padding-top: 40px">
-        <a class="btn btn-danger btn-block btn-lg">
-          <i class="fa fa-check" aria-hidden="true"></i>
-          Event schließen
-        </a>
-      </div>
-    </div>
-  </div>
+  <il-event-overview-card title="Abschließen" icon="fa-power-off" *ngIf="event.active">
+    <a class="btn btn-danger btn-block btn-lg" style="margin-top: 40px">
+      <i class="fa fa-check" aria-hidden="true"></i>
+      Event schließen
+    </a>
+  </il-event-overview-card>
 </div>
+
+
 
 <div bsModal #cashModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <il-cash-modal [event]="event" (hide)="cashModal.hide()"></il-cash-modal>

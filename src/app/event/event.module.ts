@@ -29,6 +29,7 @@ import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { EventFormComponent } from './event-form/event-form.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { CashModalComponent } from './cash-modal/cash-modal.component';
+import { EventOverviewCardComponent } from './event-overview-card/event-overview-card.component';
 
 
 @NgModule({
@@ -61,7 +62,8 @@ import { CashModalComponent } from './cash-modal/cash-modal.component';
     TransferFormComponent,
     EventFormComponent,
     EditEventComponent,
-    CashModalComponent
+    CashModalComponent,
+    EventOverviewCardComponent
   ],
   providers: [
     ProductService,

@@ -1,0 +1,16 @@
+<div class="col-md-2">
+  <div class="panel panel-default overview-card">
+    <div class="panel-heading">
+      <h3 class="panel-title">
+        <i *ngIf="icon" class="fa" [ngClass]="icon" aria-hidden="true"></i>
+        {{ title }}
+        <span class="pull-right">
+          <ng-content select=".title-right"></ng-content>
+        </span>
+      </h3>
+    </div>
+    <div class="panel-body">
+      <ng-content></ng-content>
+    </div>
+  </div>
+</div>
