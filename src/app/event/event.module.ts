@@ -26,6 +26,7 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { HistoryTransferItemComponent } from './history-transfer-item/history-transfer-item.component';
 import { HistoryTransactionItemComponent } from './history-transaction-item/history-transaction-item.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
+import { EventFormComponent } from './event-form/event-form.component';
 
 
 @NgModule({
@@ -55,7 +56,8 @@ import { TransferFormComponent } from './transfer-form/transfer-form.component';
     EventListComponent,
     HistoryTransferItemComponent,
     HistoryTransactionItemComponent,
-    TransferFormComponent
+    TransferFormComponent,
+    EventFormComponent
   ],
   providers: [
     ProductService,

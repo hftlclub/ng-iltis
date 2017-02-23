@@ -1,6 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
 
@@ -17,13 +16,17 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
   eventTypes: EventType[];
   uiMode: string;
-  form: FormGroup;
   loading = false;
 
   params$: Subscription;
 
 
-  constructor(private route: ActivatedRoute, private router: Router, private fb: FormBuilder, private es: EventService, private ns: NotificationsService) { }
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private es: EventService,
+    private ns: NotificationsService
+  ) { }
 
 
   ngOnInit() {
@@ -32,7 +35,6 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       this.es.getEventTypes().subscribe(et => {
         this.eventTypes = et;
         this.eventTypes = this.eventTypes.filter(e => e.uiMode === this.uiMode);
-        this.initForm();
 
         if (!this.eventTypes.length) {
           this.router.navigate(['/']);
@@ -42,7 +44,6 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
     // init form with one empty event type (as long as we're waiting for data)
     this.eventTypes = [EventTypeFactory.empty()];
-    this.initForm();
   }
 
   ngOnDestroy() {
@@ -50,17 +51,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   }
 
 
-  initForm() {
-    this.form = this.fb.group({
-      eventType: [this.eventTypes[0].id, Validators.required],
-      description: [],
-      date: [new Date(), Validators.required],
-      time: [this.newDateHHMM(), Validators.required]
-    });
-  }
-
-  submitForm() {
-    const formValue = this.form.value;
+  submitForm(formValue) {
     const newEvent: Event = EventFactory.fromObj({
       eventType: { id: formValue.eventType },
       description: formValue.description,
@@ -78,55 +69,12 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   }
 
 
-  setDate(mode: string): void {
-    let newDate;
-    switch (mode) {
-      case 'yesterday': newDate = new Date(Date.now() - 86400000); break;
-      default: newDate = new Date();
-    }
-    this.form.patchValue({
-      date: newDate
-    });
-  }
-
   mergeDateTime(date: Date, time: Date) {
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
   }
 
-  newDateHHMM(): Date {
-    const date = new Date();
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
-  }
 
-  get isEventMode() {
-    return this.uiMode === 'event';
-  }
 
-  getString(name: string): string {
-    const strings = {
-      boxHeadline: {
-        event: 'Infos zur Veranstaltung',
-        purchase: 'Infos zum Einkauf',
-        private: 'Infos zur Spontanentnahme'
-      },
-      btnLabel: {
-        event: 'Veranstaltung anlegen',
-        purchase: 'Einkauf anlegen',
-        private: 'Spontanentnahme starten'
-      },
-      descriptionPlaceholder: {
-        event: 'Veranstaltungsinfo, Gastgeber, ...',
-        purchase: 'Zusätzliche Infos zum Einkauf',
-        private: 'Zweck, ...'
-      },
-      headline: {
-        event: 'Neue Veranstaltung',
-        purchase: 'Neuer Einkauf',
-        private: 'Neue Spontanentnahme'
-      }
-    };
 
-    return strings[name][this.uiMode];
-  }
 
 }
