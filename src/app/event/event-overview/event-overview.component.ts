@@ -23,6 +23,16 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.event = this.route.snapshot.data['event'];
+    this.loadCalculation();
+
+    this.eventUpdated$ = this.es.eventUpdated.subscribe(event => {
+      this.event = event;
+      this.loadCalculation();
+    });
+
+  }
+
+  loadCalculation() {
     if (!this.event.active) {
       this.calcLoading = true;
       this.es.getCalculationForEvent(this.event.id).subscribe(res => {
@@ -30,9 +40,6 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
         this.calcLoading = false;
       });
     }
-
-    this.eventUpdated$ = this.es.eventUpdated.subscribe(event => this.event = event);
-
   }
 
   ngOnDestroy() {
