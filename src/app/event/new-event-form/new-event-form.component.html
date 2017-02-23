@@ -12,5 +12,6 @@
 <il-event-form
   [eventTypes]="eventTypes"
   [uiMode]="uiMode"
-  (submitted)="createEvent($event)">
+  (submitted)="createEvent($event)"
+  (valueChanged)="hasChanges = true">
 </il-event-form>

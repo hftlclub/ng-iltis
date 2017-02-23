@@ -17,12 +17,15 @@ import { TransfersResolver } from './shared/resolvers/transfers.resolver';
 import { TransactionsResolver } from './shared/resolvers/transactions.resolver';
 import { EventTypesResolver } from './shared/resolvers/eventtypes.resolver';
 
+import { HasChangesGuard } from './shared/has-changes.guard';
+
 const routes: Routes = [
   { path: 'new', redirectTo: 'new/event', pathMatch: 'full' },
   {
     path: 'new/:uiMode',
     component: NewEventFormComponent,
     pathMatch: 'full',
+    canDeactivate: [HasChangesGuard],
     resolve: {
       eventTypes: EventTypesResolver
     }
@@ -62,10 +65,11 @@ const routes: Routes = [
       {
         path: 'edit',
         component: EditEventComponent,
+        canDeactivate: [HasChangesGuard],
         resolve: {
           event: EventResolver,
           eventTypes: EventTypesResolver
-        }
+        },
       },
       {
         path: 'newtransfer/:productId',
@@ -88,7 +92,8 @@ const routes: Routes = [
     EventResolver,
     TransfersResolver,
     TransactionsResolver,
-    EventTypesResolver
+    EventTypesResolver,
+    HasChangesGuard
   ]
 })
 export class EventRoutingModule { }

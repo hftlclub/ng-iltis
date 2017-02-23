@@ -17,6 +17,7 @@ export class EditEventComponent implements OnInit {
   eventTypes: EventType[];
   event: Event;
   loading = false;
+  hasChanges = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -45,6 +46,7 @@ export class EditEventComponent implements OnInit {
     this.loading = true;
     this.es.updateEvent(newEvent.id, newEvent).subscribe(event => {
       this.loading = false;
+      this.hasChanges = false;
       this.ns.success('Ereignis', 'Das Ereignis wurde bearbeitet.');
 
       this.es.eventUpdated.emit(newEvent);

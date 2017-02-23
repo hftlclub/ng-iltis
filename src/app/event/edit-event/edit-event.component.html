@@ -4,5 +4,6 @@
   [edit]="true"
   [initialEvent]="event"
   (submitted)="updateEvent($event)"
-  (cancelled)="cancelForm()">
+  (cancelled)="cancelForm()"
+  (valueChanged)="hasChanges = true">
 </il-event-form>

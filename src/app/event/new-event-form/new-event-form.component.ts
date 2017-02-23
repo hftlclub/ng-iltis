@@ -17,6 +17,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   eventTypes: EventType[];
   uiMode: string;
   loading = false;
+  hasChanges = false;
 
   params$: Subscription;
 
@@ -31,6 +32,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.params$ = this.route.params.subscribe(p => {
       this.uiMode = p['uiMode'];
+      this.hasChanges = false;
       this.es.getEventTypes(this.uiMode).subscribe(et => {
         this.eventTypes = et;
 
@@ -61,6 +63,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
     this.loading = true;
     this.es.createEvent(newEvent).subscribe(event => {
       this.loading = false;
+      this.hasChanges = false;
       this.ns.success('Eregnis', 'Das Ereignis wurde angelegt.');
 
       this.router.navigate(['../../', event.id], { relativeTo: this.route });

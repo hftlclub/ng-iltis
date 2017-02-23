@@ -17,7 +17,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   @Input() eventTypes: EventType[];
   @Output() submitted = new EventEmitter<any>();
   @Output() cancelled = new EventEmitter<any>();
-
+  @Output() valueChanged = new EventEmitter<any>();
 
   form: FormGroup;
 
@@ -57,6 +57,9 @@ export class EventFormComponent implements OnInit, OnChanges {
       date: [initial.date, Validators.required],
       time: [initial.time, Validators.required]
     });
+
+
+    this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
   }
 
 
