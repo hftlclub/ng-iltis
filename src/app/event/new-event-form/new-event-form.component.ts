@@ -67,16 +67,14 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       datetime: this.mergeDateTime(formValue.date, formValue.time),
       active: true
     });
-      this.ns.success('Fertig!', 'Das Event wurde angelegt.');
 
-
-/*    this.loading = true;
+    this.loading = true;
     this.es.createEvent(newEvent).subscribe(event => {
       this.loading = false;
       this.ns.success('Fertig!', 'Das Event wurde angelegt.');
 
       this.router.navigate(['../../', event.id], { relativeTo: this.route });
-    });*/
+    });
   }
 
 
