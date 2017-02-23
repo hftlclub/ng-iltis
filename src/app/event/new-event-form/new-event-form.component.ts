@@ -20,7 +20,6 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
   params$: Subscription;
 
-
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -32,9 +31,8 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.params$ = this.route.params.subscribe(p => {
       this.uiMode = p['uiMode'];
-      this.es.getEventTypes().subscribe(et => {
+      this.es.getEventTypes(this.uiMode).subscribe(et => {
         this.eventTypes = et;
-        this.eventTypes = this.eventTypes.filter(e => e.uiMode === this.uiMode);
 
         if (!this.eventTypes.length) {
           this.router.navigate(['/']);

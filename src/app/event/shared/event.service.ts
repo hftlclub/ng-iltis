@@ -64,11 +64,17 @@ export class EventService {
       .map(raw => CalculationFactory.fromObj(raw));
   }
 
-  getEventTypes(): Observable<EventType[]> {
-    return this.http.get(`${this.api}/eventtypes`)
+  getEventTypes(uiMode?: string): Observable<EventType[]> {
+    let data$ = this.http.get(`${this.api}/eventtypes`)
       .retry(3)
       .map(res => res.json())
       .map(raw => raw.map(p => EventTypeFactory.fromObj(p)));
+
+    if (uiMode) {
+      data$ = data$.map(ets => ets.filter(e => e.uiMode === uiMode));
+    }
+
+    return data$;
   }
 
   createEvent(event: Event): Observable<Event> {
