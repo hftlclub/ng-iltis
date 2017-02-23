@@ -45,7 +45,7 @@ export class EditEventComponent implements OnInit {
       this.ns.success('Fertig!', 'Das Event wurde bearbeitet.');
 
       this.es.eventUpdated.emit(newEvent);
-      this.router.navigate(['../', event.id], { relativeTo: this.route });
+      this.navigateToEventPage();
     });
   }
 
@@ -54,7 +54,11 @@ export class EditEventComponent implements OnInit {
   }
 
   cancelForm() {
-    console.log('CANCEL');
+    this.navigateToEventPage();
+  }
+
+  navigateToEventPage() {
+    this.router.navigate(['../'], { relativeTo: this.route });
   }
 
 
