@@ -27,6 +27,7 @@ import { HistoryTransferItemComponent } from './history-transfer-item/history-tr
 import { HistoryTransactionItemComponent } from './history-transaction-item/history-transaction-item.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { EventFormComponent } from './event-form/event-form.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
 
 
 @NgModule({
@@ -57,7 +58,8 @@ import { EventFormComponent } from './event-form/event-form.component';
     HistoryTransferItemComponent,
     HistoryTransactionItemComponent,
     TransferFormComponent,
-    EventFormComponent
+    EventFormComponent,
+    EditEventComponent
   ],
   providers: [
     ProductService,

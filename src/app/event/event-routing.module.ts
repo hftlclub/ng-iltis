@@ -1,3 +1,4 @@
+import { EditEventComponent } from './edit-event/edit-event.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -50,6 +51,14 @@ const routes: Routes = [
         component: ProductOverviewComponent,
         resolve: {
           products: ProductsResolver
+        }
+      },
+      {
+        path: 'edit',
+        component: EditEventComponent,
+        resolve: {
+          event: EventResolver,
+          eventTypes: EventTypesResolver
         }
       },
       {

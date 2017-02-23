@@ -1,1 +1,16 @@
-<il-event-form [eventTypes]="eventTypes" [uiMode]="uiMode" (formSubmitted)="submitForm($event)"></il-event-form>
+<div class="row">
+  <div class="col-md-12 content">
+    <div class="page-header">
+      <h1>
+        <i class="fa fa-plus" aria-hidden="true"></i>
+        Ereignis anlegen
+      </h1>
+    </div>
+  </div>
+</div>
+
+<il-event-form
+  [eventTypes]="eventTypes"
+  [uiMode]="uiMode"
+  (submitted)="createEvent($event)">
+</il-event-form>

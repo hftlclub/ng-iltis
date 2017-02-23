@@ -1,0 +1,8 @@
+<il-event-form
+  [eventTypes]="eventTypes"
+  [uiMode]="event.eventType.uiMode"
+  [edit]="true"
+  [initialEvent]="event"
+  (submitted)="updateEvent($event)"
+  (cancelled)="cancelForm()">
+</il-event-form>

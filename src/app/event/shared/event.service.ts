@@ -18,6 +18,7 @@ export class EventService {
 
   private headers: Headers = new Headers();
   transfersAdded = new EventEmitter<Transfer[]>();
+  eventUpdated = new EventEmitter<Event>();
 
   constructor(@Inject('API_URL') private api, private http: Http) {
     this.headers.append('Content-Type', 'application/json');
@@ -80,6 +81,14 @@ export class EventService {
   createEvent(event: Event): Observable<Event> {
     return this.http
       .post(`${this.api}/event`, TinyJson.getJSON(event), { headers: this.headers })
+      .map(res => res.json())
+      .map(raw => EventFactory.fromObj(raw))
+      .catch(this.errorHandler);
+  }
+
+  updateEvent(eventId: number, event: Event): Observable<Event> {
+    return this.http
+      .post(`${this.api}/event/${eventId}`, TinyJson.getJSON(event), { headers: this.headers })
       .map(res => res.json())
       .map(raw => EventFactory.fromObj(raw))
       .catch(this.errorHandler);

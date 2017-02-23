@@ -1,6 +1,7 @@
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Event, EventFactory } from '../shared/models/event';
 import { EventType } from '../shared/models/eventtype';
 
 @Component({
@@ -11,8 +12,11 @@ import { EventType } from '../shared/models/eventtype';
 export class EventFormComponent implements OnInit, OnChanges {
 
   @Input() uiMode: string;
+  @Input() edit = false;
+  @Input() initialEvent: Event;
   @Input() eventTypes: EventType[];
-  @Output() formSubmitted = new EventEmitter<any>();
+  @Output() submitted = new EventEmitter<any>();
+  @Output() cancelled = new EventEmitter<any>();
 
 
   form: FormGroup;
@@ -28,16 +32,40 @@ export class EventFormComponent implements OnInit, OnChanges {
   }
 
   initForm() {
+    let initial;
+    if (this.initialEvent) {
+      initial = {
+        eventType: this.initialEvent.eventType.id,
+        description: this.initialEvent.description,
+        date: this.initialEvent.datetime,
+        time: this.initialEvent.datetime
+      };
+
+    } else {
+      initial = {
+        eventType: this.eventTypes[0].id,
+        description: '',
+        date: new Date(),
+        time: this.newDateHHMM()
+      };
+    }
+
+
     this.form = this.fb.group({
-      eventType: [this.eventTypes[0].id, Validators.required],
-      description: [],
-      date: [new Date(), Validators.required],
-      time: [this.newDateHHMM(), Validators.required]
+      eventType: [initial.eventType, Validators.required],
+      description: [initial.description],
+      date: [initial.date, Validators.required],
+      time: [initial.time, Validators.required]
     });
   }
 
+
   submitForm() {
-    this.formSubmitted.emit(this.form.value);
+    this.submitted.emit(this.form.value);
+  }
+
+  cancelForm() {
+    this.cancelled.emit();
   }
 
   setDate(mode: string): void {
@@ -51,10 +79,12 @@ export class EventFormComponent implements OnInit, OnChanges {
     });
   }
 
+
   newDateHHMM(): Date {
     const date = new Date();
     return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
   }
+
 
   get isEventMode() {
     return this.uiMode === 'event';

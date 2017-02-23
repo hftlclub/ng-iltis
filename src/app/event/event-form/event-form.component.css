@@ -1,0 +1,9 @@
+.form-group > .col-md-6:first-child {
+  padding-left: 0;
+  padding-right: 7px;
+}
+
+.form-group > .col-md-6:last-child {
+  padding-left: 7px;
+  padding-right: 0;
+}

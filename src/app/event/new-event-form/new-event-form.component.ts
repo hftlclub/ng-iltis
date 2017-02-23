@@ -49,7 +49,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   }
 
 
-  submitForm(formValue) {
+  createEvent(formValue) {
     const newEvent: Event = EventFactory.fromObj({
       eventType: { id: formValue.eventType },
       description: formValue.description,
@@ -57,13 +57,17 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       active: true
     });
 
+    console.log(newEvent);
+
+
+/*
     this.loading = true;
     this.es.createEvent(newEvent).subscribe(event => {
       this.loading = false;
       this.ns.success('Fertig!', 'Das Event wurde angelegt.');
 
       this.router.navigate(['../../', event.id], { relativeTo: this.route });
-    });
+    });*/
   }
 
 
