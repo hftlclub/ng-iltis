@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Event } from '../shared/models/event';
 import { EventService } from './../shared/event.service';
@@ -9,9 +10,10 @@ import { EventService } from './../shared/event.service';
   templateUrl: './event.component.html',
   styleUrls: ['./event.component.css']
 })
-export class EventComponent implements OnInit {
+export class EventComponent implements OnInit, OnDestroy {
 
   event: Event;
+  eventUpdated$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -20,6 +22,10 @@ export class EventComponent implements OnInit {
 
   ngOnInit() {
     this.event = this.route.snapshot.data['event'];
-    this.es.eventUpdated.subscribe(event => this.event = event);
+    this.eventUpdated$ = this.es.eventUpdated.subscribe(event => this.event = event);
+  }
+
+  ngOnDestroy() {
+    this.eventUpdated$.unsubscribe();
   }
 }
