@@ -6,9 +6,10 @@
   font-size: 24pt;
 }
 
-.loader p {
-  margin-top: 10px;
-  font-weight: bold;
+.loaderzoom {
+  width: 30%;
+  transition: all 20s ease-out;
+  transform: scale(1.5);
 }
 
 .content {
@@ -18,3 +19,5 @@
 .simple-notification {
   z-index: 8000;
 }
+
+
