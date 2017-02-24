@@ -5,7 +5,7 @@
 .sidebar-toggle {
   position: absolute;
   top: 55px;
-  z-index: 1010;
+  z-index: 700;
 }
 
 .sidebar-toggle button {
