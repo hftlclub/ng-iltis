@@ -1,41 +1,42 @@
-<div class="top">
-    <h3>
-      <i class="fa fa-history" aria-hidden="true"></i>
-      Historie
-    </h3>
-    <small>
-      {{ itemCount | i18nPlural:itemsCountMapping }}
-    </small>
-</div>
+<div class="sidebar-container">
+  <div class="top">
+      <h3>
+        <i class="fa fa-history" aria-hidden="true"></i>
+        Historie
+      </h3>
+      <small>
+        {{ itemCount | i18nPlural:itemsCountMapping }}
+      </small>
+  </div>
 
-<div class="scroll-area">
-    <div>
-      <template [ngIf]="transfers.length">
-        <il-history-transfer-item *ngFor="let t of transfers" [transfer]="t"></il-history-transfer-item>
-      </template>
-      <template [ngIf]="transactions.length">
-        <il-history-transaction-item *ngFor="let t of transactions" [transaction]="t"></il-history-transaction-item>
-      </template>
+  <div class="scroll-area">
+      <div>
+        <template [ngIf]="transfers.length">
+          <il-history-transfer-item *ngFor="let t of transfers" [transfer]="t"></il-history-transfer-item>
+        </template>
+        <template [ngIf]="transactions.length">
+          <il-history-transaction-item *ngFor="let t of transactions" [transaction]="t"></il-history-transaction-item>
+        </template>
 
-      <div class="text-center box-message" *ngIf="!hasItems">
-        <div>
-          <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
+        <div class="text-center box-message" *ngIf="!hasItems">
+          <div>
+            <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
+          </div>
+          <div>Keine Buchungen vorhanden.</div>
         </div>
-        <div>Keine Buchungen vorhanden.</div>
       </div>
-    </div>
-</div>
+  </div>
 
-<div class="bottom">
-    <div class="text-center">
-      <a class="btn btn-primary btn-lg btn-block" routerLink="overview" *ngIf="childUrlSegment === 'products'">
-        <i class="fa fa-list" aria-hidden="true"></i>
-        Übersicht
-      </a>
-      <a class="btn btn-success btn-lg btn-block" routerLink="products" *ngIf="childUrlSegment !== 'products' && event.active">
-        <i class="fa fa-plus" aria-hidden="true"></i>
-        Neue Buchung
-      </a>
-    </div>
+  <div class="bottom">
+      <div class="text-center">
+        <a class="btn btn-primary btn-lg btn-block" routerLink="overview" *ngIf="childUrlSegment === 'products'">
+          <i class="fa fa-list" aria-hidden="true"></i>
+          Übersicht
+        </a>
+        <a class="btn btn-success btn-lg btn-block" routerLink="products" *ngIf="childUrlSegment !== 'products' && event.active">
+          <i class="fa fa-plus" aria-hidden="true"></i>
+          Neue Buchung
+        </a>
+      </div>
+  </div>
 </div>
-

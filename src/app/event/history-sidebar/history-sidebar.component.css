@@ -1,7 +1,19 @@
 :host {
+  position:fixed;
+  top:0;
+  right:0;
+  height:100%;
+  padding:0;
+  padding-top: 50px;
+  border-left: 1px solid #BBB;
+  background-color:#EEE;
+  z-index: 995;
+}
+
+.sidebar-container {
   display: block;
   position: relative;
-  width: 100%;
+  width: 250px;
   height: 100%;
 }
 

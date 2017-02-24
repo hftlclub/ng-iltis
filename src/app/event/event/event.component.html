@@ -1,29 +1,40 @@
-<div class="row">
-  <div class="col-md-10 content">
-    <div class="page-header">
-      <h1>
-        <i class="fa"
-          [ngClass]="event.eventType.icon"
-          aria-hidden="true"></i>
-        {{ event.eventType.description }}
-        {{ event.datetime | date:'dd.MM.yyyy' }}
-        <small>
-          {{ event.description }}
-          <a routerLink="edit" title="Bearbeiten" style="margin-left: 10px">
-            <i class="fa fa-pencil" aria-hidden="true"></i>
-          </a>
-        </small>
+<div class="sidebar-toggle" [@btnInOut]="sidebarState">
+  <button (click)="toggleSidebar()">
+    <i class="fa" [ngClass]="sidebar ? 'fa-close' : 'fa-arrow-left'" #toggleIcon aria-hidden="true"></i>
+  </button>
+</div>
+<div class="container-fluid" style="margin: 0" [@containerInOut]="sidebarState">
 
-        <span class="label pull-right" [ngClass]="event.active ? 'label-success' : 'label-danger'">
-          <i class="fa" [ngClass]="event.active ? 'fa-unlock' : 'fa-lock'" aria-hidden="true"></i>
-          {{ event.active ? 'Aktiv' : 'Geschlossen' }}
-        </span>
-      </h1>
+  <div class="row">
+    <div class="col-md-12 content">
+      <div class="page-header">
+        <h1>
+          <i class="fa"
+            [ngClass]="event.eventType.icon"
+            aria-hidden="true"></i>
+          {{ event.eventType.description }}
+          {{ event.datetime | date:'dd.MM.yyyy' }}
+          <small>
+            {{ event.description }}
+            <a routerLink="edit" title="Bearbeiten" style="margin-left: 10px">
+              <i class="fa fa-pencil" aria-hidden="true"></i>
+            </a>
+          </small>
+
+          <span class="label pull-right" [ngClass]="event.active ? 'label-success' : 'label-danger'">
+            <i class="fa" [ngClass]="event.active ? 'fa-unlock' : 'fa-lock'" aria-hidden="true"></i>
+            {{ event.active ? 'Aktiv' : 'Geschlossen' }}
+          </span>
+        </h1>
+      </div>
+
+      <router-outlet></router-outlet>
     </div>
 
-    <router-outlet></router-outlet>
   </div>
-  <div class="col-md-2 col-xs-2 side">
-    <il-history-sidebar></il-history-sidebar>
-  </div>
+
 </div>
+
+
+<il-history-sidebar [@slideInOut]="sidebarState"></il-history-sidebar>
+

@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, trigger, state, style, transition, animate } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -8,9 +8,45 @@ import { EventService } from '../shared/event.service';
 @Component({
   selector: 'il-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css']
+  styleUrls: ['./event.component.css'],
+  animations: [
+    trigger('slideInOut', [
+      state('in', style({
+        transform: 'translateX(0)'
+      })),
+      state('out', style({
+        transform: 'translateX(100%)'
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ]),
+    trigger('btnInOut', [
+      state('in', style({
+        right: '250px',
+        transform: 'rotate(180deg)'
+      })),
+      state('out', style({
+        right: '0',
+        transform: 'rotate(0deg)'
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ]),
+    trigger('containerInOut', [
+      state('in', style({
+        marginRight: '250px'
+      })),
+      state('out', style({
+        marginRight: '0'
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ]),
+  ]
 })
 export class EventComponent implements OnInit, OnDestroy {
+
+  sidebar = true;
 
   event: Event;
   eventUpdated$: Subscription;
@@ -28,4 +64,13 @@ export class EventComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.eventUpdated$.unsubscribe();
   }
+
+  toggleSidebar() {
+    this.sidebar = !this.sidebar;
+  }
+
+  get sidebarState() {
+    return (this.sidebar) ? 'in' : 'out';
+  }
+
 }
