@@ -4,12 +4,36 @@
        <a class="navbar-brand" routerLink="/">ILTIS</a>
     </div>
     <ul class="nav navbar-nav">
-      <li [routerLinkActive]="aclass"><a routerLink="/event/new/event">Neues Event</a></li>
-      <li [routerLinkActive]="aclass"><a routerLink="/event/new/purchase">Neuer Einkauf</a></li>
-      <li [routerLinkActive]="aclass"><a routerLink="/event/new/private">Neue Spontanentnahme</a></li>
-    </ul>
+
+      <li [routerLinkActive]="aclass"><a routerLink="/event">
+        <i class="fa fa-calendar" aria-hidden="true"></i>
+        Ereignisse
+      </a></li>
+
+      <li class="dropdown" dropdown>
+          <a class="dropdown-toggle" dropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
+            <i class="fa fa-plus" aria-hidden="true"></i>
+            Neues Ereignis <span class="caret"></span>
+            </a>
+          <ul class="dropdown-menu" dropdownMenu>
+            <li [routerLinkActive]="aclass"><a routerLink="/event/new/event">
+              <i class="fa fa-glass" aria-hidden="true"></i>
+              Veranstaltung
+            </a></li>
+            <li [routerLinkActive]="aclass"><a routerLink="/event/new/private">
+              <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+              Spontanentnahme
+            </a></li>
+            <li role="separator" class="divider"></li>
+            <li [routerLinkActive]="aclass"><a routerLink="/event/new/purchase">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              Einkauf
+            </a></li>
+          </ul>
+        </li>
+      </ul>
     <ul class="nav navbar-nav navbar-right">
-      <li><a routerLink="/">Link</a></li>
+
     </ul>
   </div>
 </nav>

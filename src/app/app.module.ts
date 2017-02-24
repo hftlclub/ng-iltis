@@ -21,7 +21,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     FormsModule,
     HttpModule,
     AppRoutingModule,
-    EventModule,
+    EventModule
   ],
   providers: [
     { provide: LOCALE_ID, useValue: 'de' },
