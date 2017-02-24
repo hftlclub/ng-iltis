@@ -42,8 +42,12 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
+  get cashEmpty() {
+    return !this.event.cashBefore && !this.event.cashAfter && !this.event.tip;
+  }
+
   ngOnDestroy() {
-    this.eventUpdated$.unsubscribe()
+    this.eventUpdated$.unsubscribe();
   }
 
 }

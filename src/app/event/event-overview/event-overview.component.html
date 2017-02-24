@@ -41,7 +41,7 @@
 
     <a class="btn btn-default btn-block btn-sm"
       style="margin-top: 13px"
-      *ngIf="!event.cashBefore && !event.cashAfter && !event.tip"
+      *ngIf="cashEmpty"
       (click)="cashModal.show()">
       Kassenstand eintragen
     </a>
