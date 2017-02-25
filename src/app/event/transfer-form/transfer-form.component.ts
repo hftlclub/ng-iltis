@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormControl, FormGroup, FormArray } from '@angular/forms';
 
 import { Product } from '../../shared/models/product';
 
@@ -23,15 +23,15 @@ export class TransferFormComponent implements OnInit {
   outgoingTransfer = true;
   grid: any;
 
-  constructor(private fb: FormBuilder) { }
+  constructor() { }
 
   ngOnInit() {
     this.grid = this.getGrid(this.product.sizeTypes.length + this.product.crateTypes.length);
 
-    this.form = this.fb.group({
-      sizeTypes: this.fb.array(this.product.sizeTypes.map(s => 0)),
-      crateTypes: this.fb.array(this.product.crateTypes.map(c => 0))
-    }, {validator: this.atLeastOneValidator});
+    this.form = new FormGroup({
+      sizeTypes: new FormArray(this.product.sizeTypes.map(s => new FormControl(0))),
+      crateTypes: new FormArray(this.product.crateTypes.map(c => new FormControl(0)))
+    }, this.atLeastOneValidator);
   }
 
   submitForm() {
