@@ -1,5 +1,6 @@
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { PageScrollConfig, Ng2PageScrollModule } from 'ng2-page-scroll';
@@ -15,6 +16,7 @@ import { ProductResolver } from './resolvers/product.resolver';
 @NgModule({
   imports: [
     CommonModule,
+    BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
     Ng2PageScrollModule.forRoot(),
     ModalModule.forRoot(),

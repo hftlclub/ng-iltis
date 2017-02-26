@@ -11,12 +11,12 @@
 
   <div class="scroll-area">
       <div>
-        <template [ngIf]="transfers.length">
+        <ng-template [ngIf]="transfers.length">
           <il-history-transfer-item *ngFor="let t of transfers" [transfer]="t"></il-history-transfer-item>
-        </template>
-        <template [ngIf]="transactions.length">
+        </ng-template>
+        <ng-template [ngIf]="transactions.length">
           <il-history-transaction-item *ngFor="let t of transactions" [transaction]="t"></il-history-transaction-item>
-        </template>
+        </ng-template>
 
         <div class="text-center box-message" *ngIf="!hasItems">
           <div>
