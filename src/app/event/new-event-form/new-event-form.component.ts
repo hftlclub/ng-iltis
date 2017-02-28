@@ -14,6 +14,7 @@ import { EventService } from '../shared/event.service';
 })
 export class NewEventFormComponent implements OnInit, OnDestroy {
 
+  eventTypesAll: EventType[];
   eventTypes: EventType[];
   uiMode: string;
   loading = false;
@@ -30,20 +31,16 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
 
   ngOnInit() {
+    this.eventTypesAll = this.route.snapshot.data['eventTypes'];
     this.params$ = this.route.params.subscribe(p => {
       this.uiMode = p['uiMode'];
       this.hasChanges = false;
-      this.es.getEventTypes(this.uiMode).subscribe(et => {
-        this.eventTypes = et;
 
-        if (!this.eventTypes.length) {
-          this.router.navigate(['/']);
-        }
-      });
+      this.eventTypes = this.eventTypesAll.filter(e => e.uiMode === this.uiMode);
+      if (!this.eventTypes.length) {
+        this.router.navigate(['/']);
+      }
     });
-
-    // init form with one empty event type (as long as we're waiting for data)
-    this.eventTypes = [EventTypeFactory.empty()];
   }
 
   ngOnDestroy() {
