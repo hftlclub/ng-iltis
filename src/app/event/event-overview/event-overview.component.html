@@ -74,14 +74,19 @@
 
 <div class="row">
   <il-event-overview-card title="Zählung" icon="fa-list-ol" *ngIf="event.active">
-    <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px">
-      <i class="fa fa-snowflake-o" aria-hidden="true"></i>
-      Kühlschrank
-    </a>
-    <a class="btn btn-warning btn-block btn-lg">
-      <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-      Lager
-    </a>
+    <div *ngIf="event.eventType.countAllowed; else noCountAllowedTpl">
+      <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px">
+        <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+        Kühlschrank
+      </a>
+      <a class="btn btn-warning btn-block btn-lg">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        Lager
+      </a>
+    </div>
+    <ng-template #noCountAllowedTpl>
+      Für dieses Ereignis darf keine Zählung durchgeführt werden.
+    </ng-template>
   </il-event-overview-card>
 
   <il-event-overview-card title="Abschließen" icon="fa-power-off" *ngIf="event.active">

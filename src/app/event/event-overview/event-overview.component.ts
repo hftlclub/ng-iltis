@@ -25,6 +25,9 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
     this.event = this.route.snapshot.data['event'];
     this.loadCalculation();
 
+    console.log(this.event);
+
+
     this.eventUpdated$ = this.es.eventUpdated.subscribe(event => {
       this.event = event;
       this.loadCalculation();
