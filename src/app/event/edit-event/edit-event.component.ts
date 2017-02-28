@@ -38,7 +38,7 @@ export class EditEventComponent implements OnInit {
     const newValues = {
       datetime: this.mergeDateTime(formValue.date, formValue.time),
       description: formValue.description,
-      eventType: this.eventTypes.find(e => e.id == formValue.eventType)
+      eventType: this.eventTypes.find(e => e.id === formValue.eventType.id)
     };
 
     const newEvent: Event = Object.assign({}, this.event, newValues);

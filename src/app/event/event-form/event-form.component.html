@@ -14,10 +14,16 @@
 
                 <div class="form-group">
                   <label for="eventType">{{ getString('eventType') }}</label>
-                  <select class="form-control" id="eventType" formControlName="eventType" placeholder="Bitte auswählen">
-                    <option *ngFor="let et of eventTypes" [value]="et.id">{{ et.description }}</option>
+                  <select class="form-control" id="eventType" formControlName="eventType" placeholder="Bitte auswählen" [compareWith]="compareEventTypes">
+                    <option *ngFor="let et of eventTypes" [ngValue]="et">{{ et.description }}</option>
                   </select>
                 </div>
+
+                <div class="alert alert-warning" role="alert" *ngIf="!form.value.eventType.countAllowed">
+                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                  <strong>Achtung!</strong> Für dieses Ereignis ist keine absolute Zählung möglich!
+                </div>
+
                 <div class="form-group">
                   <label for="description">Beschreibung</label>
                   <input type="text" formControlName="description" class="form-control" id="description" [placeholder]="getString('descriptionPlaceholder')">

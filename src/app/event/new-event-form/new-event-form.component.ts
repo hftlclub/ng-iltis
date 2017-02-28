@@ -50,7 +50,6 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
     if (!this.createCountAllowed) {
       eventTypes = eventTypes.filter(e => !e.countAllowed);
     }
-    console.log(eventTypes);
     if (!eventTypes.length) {
       this.router.navigate(['/']);
     }
@@ -65,7 +64,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
   createEvent(formValue) {
     const newEvent: Event = EventFactory.fromObj({
-      eventType: { id: formValue.eventType },
+      eventType: formValue.eventType,
       description: formValue.description,
       datetime: this.mergeDateTime(formValue.date, formValue.time),
       active: true

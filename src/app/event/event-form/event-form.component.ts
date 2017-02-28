@@ -35,7 +35,7 @@ export class EventFormComponent implements OnInit, OnChanges {
     let initial;
     if (this.initialEvent) {
       initial = {
-        eventType: this.initialEvent.eventType.id,
+        eventType: this.initialEvent.eventType,
         description: this.initialEvent.description,
         date: this.initialEvent.datetime,
         time: this.initialEvent.datetime
@@ -43,7 +43,7 @@ export class EventFormComponent implements OnInit, OnChanges {
 
     } else {
       initial = {
-        eventType: this.eventTypes[0].id,
+        eventType: this.eventTypes[0],
         description: '',
         date: new Date(),
         time: this.newDateHHMM()
@@ -58,12 +58,12 @@ export class EventFormComponent implements OnInit, OnChanges {
       time: [initial.time, Validators.required]
     });
 
-    if (this.eventTypes.length <= 1) {
-      this.form.get('eventType').disable();
-    }
-
 
     this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
+  }
+
+  compareEventTypes(e1: EventType, e2: EventType) {
+    return e1.id === e2.id;
   }
 
 
