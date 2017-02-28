@@ -58,6 +58,10 @@ export class EventFormComponent implements OnInit, OnChanges {
       time: [initial.time, Validators.required]
     });
 
+    if (this.eventTypes.length <= 1) {
+      this.form.get('eventType').disable();
+    }
+
 
     this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
   }
@@ -114,6 +118,11 @@ export class EventFormComponent implements OnInit, OnChanges {
         event: 'Neue Veranstaltung',
         purchase: 'Neuer Einkauf',
         private: 'Neue Spontanentnahme'
+      },
+      eventType: {
+        event: 'Veranstaltungstyp',
+        purchase: 'Ereignistyp',
+        private: 'Ereignistyp'
       }
     };
 

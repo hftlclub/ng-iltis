@@ -17,6 +17,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   eventTypesAll: EventType[];
   eventTypes: EventType[];
   uiMode: string;
+  createCountAllowed: boolean;
   loading = false;
   hasChanges = false;
 
@@ -32,15 +33,29 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.eventTypesAll = this.route.snapshot.data['eventTypes'];
-    this.params$ = this.route.params.subscribe(p => {
-      this.uiMode = p['uiMode'];
-      this.hasChanges = false;
+    this.createCountAllowed = this.route.snapshot.data['permission'].createEventCountAllowed;
 
-      this.eventTypes = this.eventTypesAll.filter(e => e.uiMode === this.uiMode);
-      if (!this.eventTypes.length) {
-        this.router.navigate(['/']);
-      }
-    });
+    this.eventTypes = this.updateUiMode(this.route.snapshot.params['uiMode']);
+    this.params$ = this.route.params.subscribe(p => this.eventTypes = this.updateUiMode(p['uiMode']));
+  }
+
+
+  updateUiMode(uiMode: string) {
+    this.uiMode = uiMode;
+    this.hasChanges = false;
+
+    let eventTypes = this.eventTypesAll.filter(e => e.uiMode === this.uiMode);
+
+
+    if (!this.createCountAllowed) {
+      eventTypes = eventTypes.filter(e => !e.countAllowed);
+    }
+    console.log(eventTypes);
+    if (!eventTypes.length) {
+      this.router.navigate(['/']);
+    }
+
+    return eventTypes;
   }
 
   ngOnDestroy() {

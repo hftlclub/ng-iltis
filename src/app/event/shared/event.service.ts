@@ -104,4 +104,11 @@ export class EventService {
   }
 
 
+  checkPermission(): Observable<any> {
+    return this.http.get(`${this.api}/event/checkpermission`)
+      .retry(3)
+      .map(res => res.json());
+  }
+
+
 }

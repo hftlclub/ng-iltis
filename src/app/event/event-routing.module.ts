@@ -16,6 +16,7 @@ import { EventsResolver } from './shared/resolvers/events.resolver';
 import { TransfersResolver } from './shared/resolvers/transfers.resolver';
 import { TransactionsResolver } from './shared/resolvers/transactions.resolver';
 import { EventTypesResolver } from './shared/resolvers/eventtypes.resolver';
+import { PermissionResolver } from './shared/resolvers/permission.resolver';
 
 import { HasChangesGuard } from '../core/has-changes.guard';
 
@@ -27,7 +28,8 @@ const routes: Routes = [
     pathMatch: 'full',
     canDeactivate: [HasChangesGuard],
     resolve: {
-      eventTypes: EventTypesResolver
+      eventTypes: EventTypesResolver,
+      permission: PermissionResolver
     }
   },
   {
@@ -93,6 +95,7 @@ const routes: Routes = [
     TransfersResolver,
     TransactionsResolver,
     EventTypesResolver,
+    PermissionResolver
   ]
 })
 export class EventRoutingModule { }
