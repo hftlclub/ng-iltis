@@ -5,7 +5,7 @@ import { EventTypeFactory } from '../eventtype';
 export class EventFactory {
 
     static empty(): Event {
-        return new Event(0, EventTypeFactory.empty(), '', 0, 0, 0, new Date(), null, true);
+        return new Event(0, EventTypeFactory.empty(), '', 0, 0, 0, new Date(), null, true, false, false);
     }
 
     static fromObj(obj: any): Event {
@@ -47,19 +47,24 @@ export class EventFactory {
             event.datetime = obj.eventDT;
         }
 
-
         if (obj.timestamp) event.timestamp = new Date(obj.timestamp);
         else if (ValueChecker.validDate(obj.eventTS)) {
             event.timestamp = obj.eventTS;
         }
 
         if (obj.active) event.active = obj.active;
-        else event.active = !!ValueChecker.validNumber(obj.eventActive);
+        else event.active = !!ValueChecker.validBooleanNumber(obj.eventActive);
+
+        if (obj.countedCounter) event.countedCounter = obj.countedCounter;
+        else event.countedCounter = !!ValueChecker.validBooleanNumber(obj.eventCountedCounter);
+
+        if (obj.countedStorage) event.countedStorage = obj.countedStorage;
+        else event.countedStorage = !!ValueChecker.validBooleanNumber(obj.eventCountedStorage);
 
         return event;
     }
 
-    static fromModel(obj: Event): any {
+    static toDbObject(obj: Event): any {
 
         let  dbEntry: any = {};
 
@@ -71,14 +76,19 @@ export class EventFactory {
 
         if (ValueChecker.validNumber(obj.cashAfter)) dbEntry.eventCashAfter = obj.cashAfter;
 
-        if (obj.tip) dbEntry.eventTip = obj.tip;
+        if (ValueChecker.validNumber(obj.tip)) dbEntry.eventTip = obj.tip;
 
         if (obj.datetime) dbEntry.eventDT = obj.datetime;
 
-        if (obj.active) dbEntry.eventActive = true;
+        if (obj.active) dbEntry.eventActive = obj.active;
         else dbEntry.eventActive = false;
+
+        if (obj.countedCounter) dbEntry.eventCountedCounter = obj.countedCounter;
+        else dbEntry.eventCountedCounter = false;
+
+        if (obj.countedStorage) dbEntry.eventCountedStorage = obj.countedStorage;
+        else dbEntry.eventCountedStorage = false;
 
         return dbEntry;
     }
-
 }
