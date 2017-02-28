@@ -21,6 +21,16 @@ import { EventService } from '../shared/event.service';
       transition('in => out', animate('400ms ease-in-out')),
       transition('out => in', animate('400ms ease-in-out'))
     ]),
+    trigger('btnInOut', [
+      state('in', style({
+        right: '250px',
+      })),
+      state('out', style({
+        right: '0',
+      })),
+      transition('in => out', animate('400ms ease-in-out')),
+      transition('out => in', animate('400ms ease-in-out'))
+    ]),
     trigger('containerInOut', [
       state('in', style({
         marginRight: '250px'

@@ -1,4 +1,4 @@
-<div class="sidebar-toggle">
+<div class="sidebar-toggle" [@btnInOut]="sidebarState">
   <button (click)="toggleSidebar()">
     <i class="fa" [ngClass]="sidebar ? 'fa-close' : 'fa-arrow-left'" #toggleIcon aria-hidden="true"></i>
   </button>
