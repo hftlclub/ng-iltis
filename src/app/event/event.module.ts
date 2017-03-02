@@ -22,6 +22,7 @@ import { NewEventFormComponent } from './new-event-form/new-event-form.component
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { TransferFormContainerComponent } from './transfer-form-container/transfer-form-container.component';
+import { CountFormComponent } from './count-form/count-form.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { TransferFormContainerComponent } from './transfer-form-container/transf
     EventFormComponent,
     EditEventComponent,
     CashModalComponent,
-    EventOverviewCardComponent
+    EventOverviewCardComponent,
+    CountFormComponent
   ],
   providers: [
     EventService

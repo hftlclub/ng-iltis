@@ -48,6 +48,7 @@ export class EventService {
     return this.http.get(`${this.api}/event/${eventId}/transfers`)
       .retry(3)
       .map(res => res.json())
+      .map(res => res ? res : [])
       .map(raw => raw.map(t => TransferFactory.fromObj(t)));
   }
 
@@ -55,6 +56,7 @@ export class EventService {
     return this.http.get(`${this.api}/event/${eventId}/transactions`)
       .retry(3)
       .map(res => res.json())
+      .map(res => res ? res : [])
       .map(raw => raw.map(t => TransactionFactory.fromObj(t)));
   }
 

@@ -1,0 +1,31 @@
+td.form-cell {
+  padding: 0;
+  text-align: center;
+}
+
+td.form-cell input {
+  padding: 7px;
+  font-size: 14pt;
+  border: none;
+  background: none;
+  width: 100%;
+  text-align: center;
+}
+
+td.product-cell {
+  text-align: left;
+}
+
+td {
+  text-align: center;
+}
+
+tr.category-header {
+  background-color: #EEE;
+}
+
+
+tr.category-header th:first-child {
+  font-size: 14pt;
+  font-weight: 500;
+}

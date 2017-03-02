@@ -1,0 +1,56 @@
+<form [formGroup]="form">
+  <table class="table table-bordered" formArrayName="categories">
+    <ng-container *ngFor="let c of categories; let ci = index" [formArrayName]="ci">
+      <thead>
+        <tr class="category-header">
+          <th colspan="2">
+            {{ c.name }}
+          </th>
+          <th class="text-center" *ngFor="let st of c.sizeTypes">
+            {{ st.description }} {{ st.amount | number }}
+          </th>
+          <th class="text-center" *ngFor="let ct of c.crateTypes">
+            Kasten {{ ct.slots }} &times; {{ ct.sizeType.amount | number }}
+          </th>
+          <th *ngFor="let x of newArray(maxTypeColsNum - c.typeColsNum)">&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let p of c.products; let pi = index" [formGroupName]="pi">
+          <td>
+            <input type="checkbox">
+          </td>
+          <td class="product-cell">
+            {{ p.name }}
+          </td>
+          <ng-container formGroupName="sizeTypes">
+            <ng-container *ngFor="let st of c.sizeTypes">
+              <td class="form-cell" *ngIf="hasId(p.sizeTypes, st.id); else tdBlocked">
+                <input type="number" [formControlName]="st.id">
+              </td>
+              <ng-template #tdBlocked>
+                <td>–</td>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+
+          <ng-container formGroupName="crateTypes">
+            <ng-container *ngFor="let ct of c.crateTypes">
+              <td class="form-cell" *ngIf="hasId(p.crateTypes, ct.id); else tdBlocked">
+                <input type="number" [formControlName]="ct.id">
+              </td>
+              <ng-template #tdBlocked>
+                <td>–</td>
+              </ng-template>
+            </ng-container>
+          </ng-container>
+
+          <td *ngFor="let x of newArray(maxTypeColsNum - c.typeColsNum)">–</td>
+
+        </tr>
+      </tbody>
+    </ng-container>
+  </table>
+</form>
+
+{{ this.form.value | json }}

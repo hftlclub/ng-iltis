@@ -1,4 +1,3 @@
-import { EditEventComponent } from './edit-event/edit-event.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -8,6 +7,8 @@ import { EventOverviewComponent } from './event-overview/event-overview.componen
 import { TransferFormContainerComponent } from './transfer-form-container/transfer-form-container.component';
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 import { EventListComponent } from './event-list/event-list.component';
+import { EditEventComponent } from './edit-event/edit-event.component';
+import { CountFormComponent } from './count-form/count-form.component';
 
 import { ProductsResolver } from '../core/resolvers/products.resolver';
 import { ProductResolver } from '../core/resolvers/product.resolver';
@@ -71,6 +72,13 @@ const routes: Routes = [
         resolve: {
           event: EventResolver,
           eventTypes: EventTypesResolver
+        },
+      },
+      {
+        path: 'count',
+        component: CountFormComponent,
+        resolve: {
+          products: ProductsResolver
         },
       },
       {
