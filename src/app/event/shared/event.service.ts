@@ -49,7 +49,6 @@ export class EventService {
     return this.http.get(`${this.api}/event/${eventId}/transfers`)
       .retry(3)
       .map(res => res.json())
-      .map(res => res ? res : [])
       .map(raw => raw.map(t => TransferFactory.fromObj(t)));
   }
 
@@ -57,7 +56,6 @@ export class EventService {
     return this.http.get(`${this.api}/event/${eventId}/transactions`)
       .retry(3)
       .map(res => res.json())
-      .map(res => res ? res : [])
       .map(raw => raw.map(t => TransactionFactory.fromObj(t)));
   }
 
@@ -66,6 +64,13 @@ export class EventService {
       .retry(3)
       .map(res => res.json())
       .map(raw => CalculationFactory.fromObj(raw));
+  }
+
+  getInventoryForEvent(id: number): Observable<Inventory[]> {
+    return this.http.get(`${this.api}/event/${id}/inventory`)
+      .retry(3)
+      .map(res => res.json())
+      .map(raw => raw.map(inv => InventoryFactory.fromObj(inv)));
   }
 
   getEventTypes(uiMode?: string): Observable<EventType[]> {
@@ -100,14 +105,12 @@ export class EventService {
     direction = (direction === 'in') ? 'in' : 'out';
     destination = (destination === 'counter') ? 'counter' : 'storage';
 
-
     return this.http
       .post(`${this.api}/event/${eventId}/transfers/${destination}/${direction}`, JSON.stringify(data), { headers: this.headers })
       .map(res => res.json())
       .map(raw => raw.map(t => TransferFactory.fromObj(t)))
       .catch(this.errorHandler);
   }
-
 
   checkPermission(): Observable<any> {
     return this.http.get(`${this.api}/event/checkpermission`)
@@ -116,13 +119,6 @@ export class EventService {
   }
 
 
-  getInventoryForEvent(id: number): Observable<Inventory[]> {
-    return this.http.get(`${this.api}/event/${id}/inventory`)
-      .retry(3)
-      .map(res => res.json())
-      .map(res => res ? res : [])
-      .map(raw => raw.map(inv => InventoryFactory.fromObj(inv)));
-  }
 
 
 }
