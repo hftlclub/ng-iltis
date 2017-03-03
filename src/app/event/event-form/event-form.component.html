@@ -24,6 +24,7 @@
                   <strong>Achtung!</strong> Für dieses Ereignis ist keine absolute Zählung möglich!
                 </div>
 
+                <!-- FORM Date picker -->
                 <div class="form-group">
                   <label for="description">Beschreibung</label>
                   <input type="text" formControlName="description" class="form-control" id="description" [placeholder]="getString('descriptionPlaceholder')">
@@ -31,9 +32,9 @@
                 <div class="form-group" *ngIf="isEventMode">
                   <label for="date">Datum</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" [value]="form.value.date | date:'fullDate'" (focus)="lgModal.show()">
+                    <input type="text" class="form-control" [value]="form.value.date | date:'fullDate'" (focus)="datePickerModal.show()">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" (click)="lgModal.show()">
+                      <button class="btn btn-default" type="button" (click)="datePickerModal.show()">
                         <i class="fa fa-calendar" aria-hidden="true"></i>
                       </button>
                     </span>
@@ -41,13 +42,13 @@
                   </div>
                 </div>
 
-
-                <div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                <!-- MODAL Date picker -->
+                <div bsModal #datePickerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-md">
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title pull-left">Datum auswählen</h4>
-                        <button type="button" class="close pull-right" (click)="lgModal.hide()" aria-label="Close">
+                        <button type="button" class="close pull-right" (click)="datePickerModal.hide()" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
                       </div>
@@ -72,7 +73,60 @@
                         </div>
                       </div>
                       <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-block btn-lg" (click)="lgModal.hide()">
+                        <button type="button" class="btn btn-primary btn-block btn-lg" (click)="datePickerModal.hide()">
+                          <i class="fa fa-check" aria-hidden="true"></i>
+                          OK
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- FORM Time picker -->
+                <div class="form-group" *ngIf="isEventMode">
+                  <label for="time">Uhrzeit</label>
+                  <div class="input-group">
+                    <input type="text" class="form-control" [value]="form.value.time | date:'HH:mm a'" (focus)="timePickerModal.show()">
+                    <span class="input-group-btn">
+                      <button class="btn btn-default" type="button" (click)="timePickerModal.show()">
+                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                      </button>
+                    </span>
+
+                  </div>
+                </div>
+
+                <!-- MODAL Time picker -->
+                <div bsModal #timePickerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-sm">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h4 class="modal-title pull-left">Uhrzeit auswählen</h4>
+                        <button type="button" class="close pull-right" (click)="timePickerModal.hide()" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div stye="width: 150px; margin: auto">
+                          <timepicker formControlName="time" [showMeridian]="false"></timepicker>
+                        </div>
+                        <div class="text-center">
+                          <button type="button" class="btn btn-primary" (click)="setTime()">
+                            Jetzt
+                          </button>
+                          <button type="button" class="btn btn-primary" (click)="setTime(18, 30)">
+                            18:30
+                          </button>
+                          <button type="button" class="btn btn-primary" (click)="setTime(20, 0)">
+                            19:00
+                          </button>
+                          <button type="button" class="btn btn-primary" (click)="setTime(21, 0)">
+                            21:00
+                          </button>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-primary btn-block btn-lg" (click)="timePickerModal.hide()">
                           <i class="fa fa-check" aria-hidden="true"></i>
                           OK
                         </button>
@@ -82,10 +136,7 @@
                 </div>
 
 
-                <div class="form-group" *ngIf="isEventMode">
-                  <label for="time">Uhrzeit</label>
-                  <input type="time" formControlName="time" class="form-control" id="time" useValueAsDate>
-                </div>
+
 
                 <div class="form-group" *ngIf="!edit">
                   <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">

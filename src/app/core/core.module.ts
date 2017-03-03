@@ -7,6 +7,7 @@ import { PageScrollConfig, Ng2PageScrollModule } from 'ng2-page-scroll';
 import { ModalModule } from 'ng2-bootstrap/modal';
 import { DatepickerModule } from 'ng2-bootstrap/datepicker';
 import { DropdownModule } from 'ng2-bootstrap/dropdown';
+import { TimepickerModule } from 'ng2-bootstrap/timepicker';
 
 import { HasChangesGuard } from './has-changes.guard';
 import { ProductService } from './product.service';
@@ -21,7 +22,8 @@ import { ProductResolver } from './resolvers/product.resolver';
     Ng2PageScrollModule.forRoot(),
     ModalModule.forRoot(),
     DatepickerModule.forRoot(),
-    DropdownModule.forRoot()
+    DropdownModule.forRoot(),
+    TimepickerModule.forRoot()
   ],
   exports: [
     SimpleNotificationsModule,

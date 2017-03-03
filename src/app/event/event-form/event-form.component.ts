@@ -81,9 +81,15 @@ export class EventFormComponent implements OnInit, OnChanges {
       case 'yesterday': newDate = new Date(Date.now() - 86400000); break;
       default: newDate = new Date();
     }
-    this.form.patchValue({
-      date: newDate
-    });
+    this.form.get('date').setValue(newDate);
+  }
+
+  setTime(hours: number, min: number): void {
+    let newDate = new Date();
+    if(hours !== undefined) newDate.setHours(hours);
+    if(min !== undefined) newDate.setMinutes(min);
+
+    this.form.get('time').setValue(newDate);
   }
 
 
