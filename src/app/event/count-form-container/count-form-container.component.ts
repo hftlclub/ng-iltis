@@ -39,6 +39,8 @@ export class CountFormContainerComponent implements OnInit {
       });
     }
 
+    // the actual number of items of a sizetype is needed in `Inventory.amount`
+    // depending on the mode (storage or counter), it's in different keys
     this.inventory = this.route.snapshot.data['inventory']
       .map(inv => {
         inv.amount = (this.mode === 'counter') ? inv.counter : inv.storage;
@@ -47,6 +49,7 @@ export class CountFormContainerComponent implements OnInit {
         return inv;
       });
   }
+
 
   processNewValues(items: any[]) {
     const transfers = items.map(it => {
