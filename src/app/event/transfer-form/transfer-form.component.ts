@@ -16,7 +16,8 @@ export class TransferFormComponent implements OnInit {
   };
 
   @Input() product: Product;
-  @Output() formSubmitted = new EventEmitter<any>();
+  @Output() submitted = new EventEmitter<any>();
+  @Output() cancelled = new EventEmitter<any>();
   @Input() loading = false;
   @Input() hideInOutSwitcher = false;
   @Input() hideStorageCounterSwitcher = false;
@@ -38,11 +39,15 @@ export class TransferFormComponent implements OnInit {
   }
 
   submitForm() {
-    this.formSubmitted.emit({
+    this.submitted.emit({
       controls: this.form.controls,
       outgoing: this.outgoingTransfer,
       storage: this.storageTransfer
     });
+  }
+
+  cancelForm() {
+    this.cancelled.emit();
   }
 
 

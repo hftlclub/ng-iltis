@@ -3,4 +3,5 @@
   [loading]="loading"
   [hideInOutSwitcher]="hideInOutSwitcher"
   [hideStorageCounterSwitcher]="hideStorageCounterSwitcher"
-  (formSubmitted)="submitForm($event)"></il-transfer-form>
+  (submitted)="submitForm($event)"
+  (cancelled)="cancelForm()"></il-transfer-form>

@@ -73,9 +73,17 @@ export class TransferFormContainerComponent implements OnInit {
       this.loading = false;
       this.es.transfersAdded.emit(res);
       this.ns.success('Buchung', 'Die Buchung wurde erfasst.');
-      this.router.navigate(['../../products'], { relativeTo: this.route });
+      this.navigateToProductsPage();
     });
 
+  }
+
+  cancelForm() {
+    this.navigateToProductsPage();
+  }
+
+  navigateToProductsPage() {
+    this.router.navigate(['../../products'], { relativeTo: this.route });
   }
 
   sanitizeInt(num: any) {
