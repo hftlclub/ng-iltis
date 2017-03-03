@@ -52,7 +52,7 @@
                   <div
                     class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
                     *ngFor="let ct of product.crateTypes; let i = index">
-                    <h3 class="text-center">Kasten {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ product.unit.short }}</h3>
+                    <h3 class="text-center">{{ ct.description }} {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ product.unit.short }}</h3>
                     <il-counter-control minValue="0" [formControlName]="i"></il-counter-control>
                   </div>
                 </div>
