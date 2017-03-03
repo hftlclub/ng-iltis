@@ -60,6 +60,42 @@ export class CountFormComponent implements OnInit {
     this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
   }
 
+  submitForm() {
+    const products = _.flatMap(this.form.get('categories').value, (category, ci) => {
+      return category.map((product, pi) => {
+        product.id = this.categories[ci].products[pi].id;
+        return product;
+      });
+    })
+    .filter(p => p.active);
+
+    const crateTypesMap = _.keyBy(
+      _.flatMap(this.products, p => p.crateTypes),
+      c => c.id
+    );
+
+    const output = _.flatMap(products, p => {
+      _.forIn(p.crateTypes, (numCrates, ctId) => {
+        const ct = crateTypesMap[ctId];
+        const stId = ct.sizeType.id;
+        p.sizeTypes[stId] += ct.slots * numCrates;
+      });
+
+      const productWithSizeTypes = _.mapValues(p.sizeTypes, (amount, stId) => {
+        return {
+          amount: amount,
+          sizeTypeId: parseInt(stId, 10),
+          productId: p.id
+        };
+      });
+
+      return _.values(productWithSizeTypes);
+    });
+
+    this.submitted.emit(output);
+  }
+
+
   setFormGroupActive(ci: number, pi: number, active = true) {
     this.form.get(['categories', ci, pi, 'active'])
       .setValue(active);
