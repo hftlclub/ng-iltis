@@ -75,11 +75,11 @@
 <div class="row">
   <il-event-overview-card title="Zählung" icon="fa-list-ol" *ngIf="event.active">
     <div *ngIf="event.eventType.countAllowed; else noCountAllowedTpl">
-      <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px">
+      <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px" routerLink="../count/counter">
         <i class="fa fa-snowflake-o" aria-hidden="true"></i>
         Kühlschrank
       </a>
-      <a class="btn btn-warning btn-block btn-lg">
+      <a class="btn btn-warning btn-block btn-lg" routerLink="../count/storage">
         <i class="fa fa-database" aria-hidden="true"></i>
         Lager
       </a>
