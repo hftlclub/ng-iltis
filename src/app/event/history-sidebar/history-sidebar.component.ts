@@ -20,6 +20,7 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
   itemsCountMapping: {[k: string]: string} = {'=0': 'Keine Buchungen', '=1': 'Eine Buchung', 'other': '# Buchungen'};
 
   transfersAdded$: Subscription;
+  countFinished$: Subscription;
 
   constructor(private route: ActivatedRoute, private es: EventService) { }
 
@@ -30,11 +31,15 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
 
     this.transfersAdded$ = this.es.transfersAdded
       .subscribe(t => this.transfers = this.transfers.concat(t));
+
+    this.countFinished$ = this.es.countFinished
+      .subscribe(t => this.transfers = t);
   }
 
 
   ngOnDestroy() {
     this.transfersAdded$.unsubscribe();
+    this.countFinished$.unsubscribe();
   }
 
   get childUrlSegment() {

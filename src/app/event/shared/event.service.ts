@@ -19,6 +19,7 @@ export class EventService {
 
   private headers: Headers = new Headers();
   transfersAdded = new EventEmitter<Transfer[]>();
+  countFinished = new EventEmitter<Transfer[]>();
   eventUpdated = new EventEmitter<Event>();
 
   constructor(@Inject('API_URL') private api, private http: Http) {
@@ -107,6 +108,16 @@ export class EventService {
 
     return this.http
       .post(`${this.api}/event/${eventId}/transfers/${destination}/${direction}`, JSON.stringify(data), { headers: this.headers })
+      .map(res => res.json())
+      .map(raw => raw.map(t => TransferFactory.fromObj(t)))
+      .catch(this.errorHandler);
+  }
+
+  transmitCount(destination: string, eventId: number, items: any[]): Observable<Transfer[]> {
+    destination = (destination === 'counter') ? 'counter' : 'storage';
+
+    return this.http
+      .post(`${this.api}/event/${eventId}/transfers/${destination}/count`, JSON.stringify(items), { headers: this.headers })
       .map(res => res.json())
       .map(raw => raw.map(t => TransferFactory.fromObj(t)))
       .catch(this.errorHandler);
