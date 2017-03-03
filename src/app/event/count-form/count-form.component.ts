@@ -16,6 +16,7 @@ export class CountFormComponent implements OnInit {
   @Input() products: Product[];
   @Input() inventory: any[];
   @Output() submitted = new EventEmitter<any>();
+  @Output() cancelled = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
 
   categories: any = {};
@@ -95,6 +96,10 @@ export class CountFormComponent implements OnInit {
     });
 
     this.submitted.emit(output);
+  }
+
+  cancelForm() {
+    this.cancelled.emit();
   }
 
 

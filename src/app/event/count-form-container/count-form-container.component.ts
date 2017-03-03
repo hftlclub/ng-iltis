@@ -53,9 +53,17 @@ export class CountFormContainerComponent implements OnInit {
         this.hasChanges = false;
         this.es.countFinished.emit(res);
         this.ns.success(this.storageMode ? 'Lagerzählung' : 'Kühlschrankzählung', 'Die Zählung wurde erfasst.');
-        this.router.navigate(['../../overview'], { relativeTo: this.route });
+        this.navigateToEventPage();
       });
 
+  }
+
+  cancelForm() {
+    this.navigateToEventPage();
+  }
+
+  navigateToEventPage() {
+    this.router.navigate(['../../overview'], { relativeTo: this.route });
   }
 
   get storageMode() {
