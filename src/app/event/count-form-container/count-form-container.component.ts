@@ -14,6 +14,7 @@ export class CountFormContainerComponent implements OnInit {
   products: Product[];
   inventory: Inventory[];
   mode: string;
+  hasChanges = false;
 
   constructor(private route: ActivatedRoute) { }
 

@@ -78,6 +78,7 @@ const routes: Routes = [
       {
         path: 'count/:mode',
         component: CountFormContainerComponent,
+        canDeactivate: [HasChangesGuard],
         resolve: {
           products: ProductsResolver,
           inventory: InventoryResolver

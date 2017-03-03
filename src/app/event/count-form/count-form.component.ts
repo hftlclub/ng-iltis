@@ -16,6 +16,7 @@ export class CountFormComponent implements OnInit {
   @Input() products: Product[];
   @Input() inventory: any[];
   @Output() submitted = new EventEmitter<any>();
+  @Output() valueChanged = new EventEmitter<any>();
 
   categories: any = {};
   maxTypeColsNum: number;
@@ -55,6 +56,8 @@ export class CountFormComponent implements OnInit {
         )
       )
     });
+
+    this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
   }
 
   setFormGroupActive(ci: number, pi: number, active = true) {
