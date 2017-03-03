@@ -16,9 +16,12 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let p of c.products; let pi = index" [formGroupName]="pi">
-          <td>
-            <input type="checkbox">
+        <tr
+          *ngFor="let p of c.products; let pi = index"
+          [formGroupName]="pi"
+          [class.success]="form.value.categories[ci][pi].active">
+          <td (click)="setFormGroupActive(ci, pi, !form.value.categories[ci][pi].active)">
+            <input type="checkbox" formControlName="active">
           </td>
           <td class="product-cell">
             {{ p.name }}
@@ -26,7 +29,7 @@
           <ng-container formGroupName="sizeTypes">
             <ng-container *ngFor="let st of c.sizeTypes">
               <td class="form-cell" *ngIf="hasId(p.sizeTypes, st.id); else tdBlocked">
-                <input type="number" [formControlName]="st.id">
+                <input type="number" [formControlName]="st.id" (change)="setFormGroupActive(ci, pi)">
               </td>
               <ng-template #tdBlocked>
                 <td>–</td>
@@ -37,7 +40,7 @@
           <ng-container formGroupName="crateTypes">
             <ng-container *ngFor="let ct of c.crateTypes">
               <td class="form-cell" *ngIf="hasId(p.crateTypes, ct.id); else tdBlocked">
-                <input type="number" [formControlName]="ct.id">
+                <input type="number" [formControlName]="ct.id" (change)="setFormGroupActive(ci, pi)">
               </td>
               <ng-template #tdBlocked>
                 <td>–</td>
@@ -52,5 +55,3 @@
     </ng-container>
   </table>
 </form>
-
-{{ this.form.value | json }}

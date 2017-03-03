@@ -58,6 +58,11 @@ export class CountFormComponent implements OnInit {
     });
   }
 
+  setFormGroupActive(ci: number, pi: number, active = true) {
+    this.form.get(['categories', ci, pi, 'active'])
+      .setValue(active);
+  }
+
 
   productToFormGroup(p: Product, inv: Inventory[]): FormGroup {
     const invForProduct = inv.filter(i => i.product.id === p.id);
@@ -91,6 +96,7 @@ export class CountFormComponent implements OnInit {
     });
 
     return this.fb.group({
+      active: false,
       sizeTypes: this.fb.group(stMap),
       crateTypes: this.fb.group(ctMap)
     });
