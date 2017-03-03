@@ -1,0 +1,9 @@
+<h3>
+  <i class="fa" [ngClass]="storageMode ? 'fa-database' : 'fa-snowflake-o'" aria-hidden="true"></i>
+  {{ storageMode ? 'Lager' : 'Kühlschrank' }} zählen
+</h3>
+
+<il-count-form
+  [products]="products"
+  [inventory]="inventory">
+</il-count-form>

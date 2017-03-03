@@ -23,6 +23,7 @@ import { EditEventComponent } from './edit-event/edit-event.component';
 import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { TransferFormContainerComponent } from './transfer-form-container/transfer-form-container.component';
 import { CountFormComponent } from './count-form/count-form.component';
+import { CountFormContainerComponent } from './count-form-container/count-form-container.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { CountFormComponent } from './count-form/count-form.component';
     EditEventComponent,
     CashModalComponent,
     EventOverviewCardComponent,
-    CountFormComponent
+    CountFormComponent,
+    CountFormContainerComponent
   ],
   providers: [
     EventService

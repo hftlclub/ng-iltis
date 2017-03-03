@@ -9,7 +9,7 @@ import { TransferFormContainerComponent } from './transfer-form-container/transf
 import { NewEventFormComponent } from './new-event-form/new-event-form.component';
 import { EventListComponent } from './event-list/event-list.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
-import { CountFormComponent } from './count-form/count-form.component';
+import { CountFormContainerComponent } from './count-form-container/count-form-container.component';
 
 import { ProductsResolver } from '../core/resolvers/products.resolver';
 import { ProductResolver } from '../core/resolvers/product.resolver';
@@ -76,8 +76,8 @@ const routes: Routes = [
         },
       },
       {
-        path: 'count',
-        component: CountFormComponent,
+        path: 'count/:mode',
+        component: CountFormContainerComponent,
         resolve: {
           products: ProductsResolver,
           inventory: InventoryResolver

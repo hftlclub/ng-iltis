@@ -1,11 +1,10 @@
-import { Inventory } from './../../shared/models/inventory/inventory';
-import { Category } from './../../shared/models/category/category';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import _ from 'lodash';
 
-import { Product } from '../../shared/models/product/product';
+import { Inventory } from '../../shared/models/inventory';
+import { Category } from '../../shared/models/category';
+import { Product } from '../../shared/models/product';
 
 @Component({
   selector: 'il-count-form',
@@ -14,18 +13,18 @@ import { Product } from '../../shared/models/product/product';
 })
 export class CountFormComponent implements OnInit {
 
-  products: Product[];
+  @Input() products: Product[];
+  @Input() inventory: any[];
+  @Output() submitted = new EventEmitter<any>();
+
   categories: any = {};
   maxTypeColsNum: number;
   form: FormGroup;
 
-  constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) { }
 
   ngOnInit() {
-    const products: Product[] = this.route.snapshot.data['products'];
-    const inventory: Inventory[] = this.route.snapshot.data['inventory'];
-
-    this.categories = this.productsToCategoryArray(products);
+    this.categories = this.productsToCategoryArray(this.products);
 
     this.categories = this.categories.map(c => {
       c.sizeTypes = _.uniqBy(
@@ -51,7 +50,7 @@ export class CountFormComponent implements OnInit {
       categories: this.fb.array(
         this.categories.map(
           c => this.fb.array(
-            c.products.map(p => this.productToFormGroup(p, inventory))
+            c.products.map(p => this.productToFormGroup(p, this.inventory))
           )
         )
       )
@@ -64,9 +63,8 @@ export class CountFormComponent implements OnInit {
   }
 
 
-  productToFormGroup(p: Product, inv: Inventory[]): FormGroup {
+  productToFormGroup(p: Product, inv: any[]): FormGroup {
     const invForProduct = inv.filter(i => i.product.id === p.id);
-
 
     const stMap = {};
     const ctMap = {};
@@ -78,8 +76,8 @@ export class CountFormComponent implements OnInit {
 
         let numCrates = 0;
         if (invForSt) {
-          numCrates = Math.floor(invForSt.storage / ct.slots);
-          invForSt.storage -= numCrates * ct.slots;
+          numCrates = Math.floor(invForSt.amount / ct.slots);
+          invForSt.amount -= numCrates * ct.slots;
         }
 
         ctMap[ct.id] = numCrates;
@@ -89,8 +87,8 @@ export class CountFormComponent implements OnInit {
       const invForSt = invForProduct.find(k => k.sizeType.id === st.id);
       let numItems = 0;
       if (invForSt) {
-        numItems = invForSt.storage;
-        invForSt.storage = 0;
+        numItems = invForSt.amount;
+        invForSt.amount = 0;
       }
       stMap[st.id] = numItems;
     });
@@ -119,6 +117,7 @@ export class CountFormComponent implements OnInit {
 
     return Object.keys(categories).map(k => categories[k]);
   }
+
 
   hasId(arr: any[], id: number): boolean {
     return !!arr.find(item => item.id === id);
