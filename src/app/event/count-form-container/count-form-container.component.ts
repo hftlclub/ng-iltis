@@ -30,6 +30,15 @@ export class CountFormContainerComponent implements OnInit {
     this.mode = this.route.snapshot.params['mode'];
     this.eventId = this.route.parent.snapshot.params['eventId'];
     this.products = this.route.snapshot.data['products'];
+
+    // in counter count mode, remove crate types so that only size types can be counted
+    if (this.mode === 'counter') {
+      this.products = this.products.map(p => {
+        p.crateTypes = [];
+        return p;
+      });
+    }
+
     this.inventory = this.route.snapshot.data['inventory']
       .map(inv => {
         inv.amount = (this.mode === 'counter') ? inv.counter : inv.storage;
