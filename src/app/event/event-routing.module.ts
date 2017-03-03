@@ -1,3 +1,4 @@
+import { InventoryResolver } from './shared/resolvers/inventory.resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -78,7 +79,8 @@ const routes: Routes = [
         path: 'count',
         component: CountFormComponent,
         resolve: {
-          products: ProductsResolver
+          products: ProductsResolver,
+          inventory: InventoryResolver
         },
       },
       {
@@ -103,7 +105,8 @@ const routes: Routes = [
     TransfersResolver,
     TransactionsResolver,
     EventTypesResolver,
-    PermissionResolver
+    PermissionResolver,
+    InventoryResolver
   ]
 })
 export class EventRoutingModule { }

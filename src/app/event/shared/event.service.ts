@@ -11,6 +11,7 @@ import { Transfer, TransferFactory } from '../../shared/models/transfer';
 import { Transaction, TransactionFactory } from '../../shared/models/transaction';
 import { Calculation, CalculationFactory } from '../../shared/models/calculation';
 import { EventType, EventTypeFactory } from '../../shared/models/eventtype';
+import { Inventory, InventoryFactory } from '../../shared/models/inventory';
 import { TinyJson } from '../../shared/tinyjson';
 
 @Injectable()
@@ -110,6 +111,15 @@ export class EventService {
     return this.http.get(`${this.api}/event/checkpermission`)
       .retry(3)
       .map(res => res.json());
+  }
+
+
+  getInventoryForEvent(id: number): Observable<Inventory[]> {
+    return this.http.get(`${this.api}/event/${id}/inventory`)
+      .retry(3)
+      .map(res => res.json())
+      .map(res => res ? res : [])
+      .map(raw => raw.map(inv => InventoryFactory.fromObj(inv)));
   }
 
 

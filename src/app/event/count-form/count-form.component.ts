@@ -1,3 +1,4 @@
+import { Inventory } from './../../shared/models/inventory/inventory';
 import { Category } from './../../shared/models/category/category';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -21,7 +22,8 @@ export class CountFormComponent implements OnInit {
   constructor(private route: ActivatedRoute, private fb: FormBuilder) { }
 
   ngOnInit() {
-    const products = this.route.snapshot.data['products'];
+    const products: Product[] = this.route.snapshot.data['products'];
+    const inventory: Inventory[] = this.route.snapshot.data['inventory'];
 
     this.categories = this.productsToCategoryArray(products);
 
@@ -49,24 +51,56 @@ export class CountFormComponent implements OnInit {
       categories: this.fb.array(
         this.categories.map(
           c => this.fb.array(
-            c.products.map(p => this.fb.group({
-              sizeTypes: this.fb.group(_.mapValues(_.keyBy(p.sizeTypes.map(s => s.id), s => s), s => 0)),
-              crateTypes: this.fb.group(_.mapValues(_.keyBy(p.crateTypes.map(s => s.id), s => s), s => 0))
-            }))
+            c.products.map(p => this.productToFormGroup(p, inventory))
           )
         )
       )
     });
-
-    console.log(this.form.value);
-
   }
+
+
+  productToFormGroup(p: Product, inv: Inventory[]): FormGroup {
+    const invForProduct = inv.filter(i => i.product.id === p.id);
+
+
+    const stMap = {};
+    const ctMap = {};
+
+    p.crateTypes.forEach(ct => {
+      console.log(ct);
+
+      const invForSt = invForProduct.find(k => k.sizeType.id === ct.sizeType.id);
+
+      let numCrates = 0;
+      if (invForSt) {
+        numCrates = Math.floor(invForSt.storage / ct.slots);
+        invForSt.storage -= numCrates * ct.slots;
+      }
+
+      ctMap[ct.id] = numCrates;
+    });
+
+    p.sizeTypes.forEach(st => {
+      const invForSt = invForProduct.find(k => k.sizeType.id === st.id);
+      let numItems = 0;
+      if (invForSt) {
+        numItems = invForSt.storage;
+        invForSt.storage = 0;
+      }
+      stMap[st.id] = numItems;
+    });
+
+    return this.fb.group({
+      sizeTypes: this.fb.group(stMap),
+      crateTypes: this.fb.group(ctMap)
+    });
+  }
+
+
 
   productsToCategoryArray(products: Product[]): Category[] {
     const categories = {};
 
-    /* `products` is a list of products each with one category assigned.
-    transform this to a list of categories each with a list of assigned products */
     products.forEach(p => {
       const key = p.category.id;
       if (!categories[key]) {
