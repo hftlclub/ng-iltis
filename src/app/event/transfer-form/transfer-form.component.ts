@@ -21,6 +21,7 @@ export class TransferFormComponent implements OnInit {
   @Input() loading = false;
   @Input() hideInOutSwitcher = false;
   @Input() hideStorageCounterSwitcher = false;
+  @Input() noCounterRemoval = false;
 
   form: FormGroup;
   outgoingTransfer = true;

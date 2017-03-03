@@ -56,7 +56,7 @@
                   </div>
                   <div class="col-md-4">
                     <button type="button" class="btn btn-block"
-                      [disabled]="loading || !outgoingTransfer"
+                      [disabled]="loading || !outgoingTransfer || noCounterRemoval"
                       [ngClass]="storageTransfer ? 'btn-default' : 'btn-primary'"
                       (click)="storageTransfer = false">
                       <i class="fa fa-snowflake-o" aria-hidden="true"></i>

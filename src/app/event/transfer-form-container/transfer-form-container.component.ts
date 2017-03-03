@@ -18,6 +18,7 @@ export class TransferFormContainerComponent implements OnInit {
   loading = false;
   hideInOutSwitcher = false;
   hideStorageCounterSwitcher = false;
+  noCounterRemoval = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,8 +30,13 @@ export class TransferFormContainerComponent implements OnInit {
   ngOnInit() {
     this.product = this.route.snapshot.data['product'];
     const event: Event = this.route.parent.snapshot.data['event'];
+
     this.hideInOutSwitcher = event.eventType.uiMode === 'private';
     this.hideStorageCounterSwitcher = event.eventType.uiMode !== 'private';
+
+    if (event.eventType.uiMode === 'private') {
+      this.es.checkPermission().subscribe(perm => this.noCounterRemoval = !perm.createEventCountAllowed);
+    }
   }
 
 
