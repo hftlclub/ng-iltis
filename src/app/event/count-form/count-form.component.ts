@@ -71,19 +71,19 @@ export class CountFormComponent implements OnInit {
     const stMap = {};
     const ctMap = {};
 
-    p.crateTypes.forEach(ct => {
-      console.log(ct);
+    p.crateTypes
+      .sort((a, b) => b.slots - a.slots)
+      .forEach(ct => {
+        const invForSt = invForProduct.find(k => k.sizeType.id === ct.sizeType.id);
 
-      const invForSt = invForProduct.find(k => k.sizeType.id === ct.sizeType.id);
+        let numCrates = 0;
+        if (invForSt) {
+          numCrates = Math.floor(invForSt.storage / ct.slots);
+          invForSt.storage -= numCrates * ct.slots;
+        }
 
-      let numCrates = 0;
-      if (invForSt) {
-        numCrates = Math.floor(invForSt.storage / ct.slots);
-        invForSt.storage -= numCrates * ct.slots;
-      }
-
-      ctMap[ct.id] = numCrates;
-    });
+        ctMap[ct.id] = numCrates;
+      });
 
     p.sizeTypes.forEach(st => {
       const invForSt = invForProduct.find(k => k.sizeType.id === st.id);
