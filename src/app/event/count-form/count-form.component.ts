@@ -154,7 +154,12 @@ export class CountFormComponent implements OnInit {
       categories[key].products.push(p);
     });
 
-    return Object.keys(categories).map(k => categories[k]);
+    return Object.keys(categories)
+      .map(k => categories[k])
+      .map(c => {
+        c.firstUnit = c.products[0].unit;
+        return c;
+      });
   }
 
 
