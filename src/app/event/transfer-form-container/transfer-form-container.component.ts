@@ -17,6 +17,7 @@ export class TransferFormContainerComponent implements OnInit {
   product: Product;
   loading = false;
   hideInOutSwitcher = false;
+  hideStorageCounterSwitcher = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -29,11 +30,12 @@ export class TransferFormContainerComponent implements OnInit {
     this.product = this.route.snapshot.data['product'];
     const event: Event = this.route.parent.snapshot.data['event'];
     this.hideInOutSwitcher = event.eventType.uiMode === 'private';
+    this.hideStorageCounterSwitcher = event.eventType.uiMode !== 'private';
   }
 
 
   submitForm(data) {
-    const { controls, outgoing } = data;
+    const { controls, outgoing, storage } = data;
     const stChanges = {};
     controls['sizeTypes'].value
       .map(this.sanitizeInt)
@@ -61,11 +63,13 @@ export class TransferFormContainerComponent implements OnInit {
 
 
 
-    const mode = outgoing ? 'out' : 'in';
+    const direction = outgoing ? 'out' : 'in';
+    const destination = storage ? 'storage' : 'counter';
+
     const eventId = this.route.parent.snapshot.params['eventId'];
     this.loading = true;
 
-    this.es.createStorageTransfer(mode, eventId, transfers).subscribe(res => {
+    this.es.createTransfer(direction, destination, eventId, transfers).subscribe(res => {
       this.loading = false;
       this.es.transfersAdded.emit(res);
       this.ns.success('Buchung', 'Die Buchung wurde erfasst.');

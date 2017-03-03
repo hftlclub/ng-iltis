@@ -40,6 +40,34 @@
                 <hr>
               </ng-template>
 
+              <ng-template [ngIf]="!hideStorageCounterSwitcher">
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-1">
+                    <button type="button" class="btn btn-block"
+                      [disabled]="loading"
+                      [ngClass]="storageTransfer ? 'btn-warning' : 'btn-default'"
+                      (click)="storageTransfer = true">
+                      <i class="fa fa-database" aria-hidden="true"></i>
+                      Lager
+                    </button>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="text-center ortext">ODER</p>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-block"
+                      [disabled]="loading || !outgoingTransfer"
+                      [ngClass]="storageTransfer ? 'btn-default' : 'btn-primary'"
+                      (click)="storageTransfer = false">
+                      <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                      Kühlschrank
+                    </button>
+                  </div>
+                </div>
+
+                <hr>
+              </ng-template>
+
               <div class="row">
                 <div formArrayName="sizeTypes">
                   <div

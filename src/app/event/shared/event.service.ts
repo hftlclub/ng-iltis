@@ -96,11 +96,13 @@ export class EventService {
       .catch(this.errorHandler);
   }
 
-  createStorageTransfer(mode: string, eventId: number, data: any): Observable<Transfer[]> {
-    mode = (mode === 'in') ? 'in' : 'out';
+  createTransfer(direction: string, destination: string, eventId: number, data: any): Observable<Transfer[]> {
+    direction = (direction === 'in') ? 'in' : 'out';
+    destination = (destination === 'counter') ? 'counter' : 'storage';
+
 
     return this.http
-      .post(`${this.api}/event/${eventId}/transfers/storage/${mode}`, JSON.stringify(data), { headers: this.headers })
+      .post(`${this.api}/event/${eventId}/transfers/${destination}/${direction}`, JSON.stringify(data), { headers: this.headers })
       .map(res => res.json())
       .map(raw => raw.map(t => TransferFactory.fromObj(t)))
       .catch(this.errorHandler);

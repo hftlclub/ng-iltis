@@ -19,9 +19,11 @@ export class TransferFormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<any>();
   @Input() loading = false;
   @Input() hideInOutSwitcher = false;
+  @Input() hideStorageCounterSwitcher = false;
 
   form: FormGroup;
   outgoingTransfer = true;
+  storageTransfer = true;
   grid: any;
 
   constructor() { }
@@ -38,7 +40,8 @@ export class TransferFormComponent implements OnInit {
   submitForm() {
     this.formSubmitted.emit({
       controls: this.form.controls,
-      outgoing: this.outgoingTransfer
+      outgoing: this.outgoingTransfer,
+      storage: this.storageTransfer
     });
   }
 
