@@ -14,6 +14,7 @@ td.form-cell input {
 
 td.product-cell {
   text-align: left;
+  font-weight: bold;
 }
 
 td {

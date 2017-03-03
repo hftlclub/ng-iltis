@@ -10,7 +10,7 @@
             {{ st.description }} {{ st.amount | number }}
           </th>
           <th class="text-center" *ngFor="let ct of c.crateTypes">
-            Kasten {{ ct.slots }} &times; {{ ct.sizeType.amount | number }}
+            {{ ct.description }} {{ ct.slots }} &times; {{ ct.sizeType.amount | number }}
           </th>
           <th *ngFor="let x of newArray(maxTypeColsNum - c.typeColsNum)">&nbsp;</th>
         </tr>
