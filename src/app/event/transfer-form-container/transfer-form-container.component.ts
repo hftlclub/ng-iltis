@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
 
+import { Event } from '../../shared/models/event/event';
 import { Product } from '../../shared/models/product';
 import { TransferFactory } from '../../shared/models/transfer/transfer-factory';
 import { EventService } from '../shared/event.service';
@@ -15,6 +16,7 @@ export class TransferFormContainerComponent implements OnInit {
 
   product: Product;
   loading = false;
+  hideInOutSwitcher = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +27,8 @@ export class TransferFormContainerComponent implements OnInit {
 
   ngOnInit() {
     this.product = this.route.snapshot.data['product'];
+    const event: Event = this.route.parent.snapshot.data['event'];
+    this.hideInOutSwitcher = event.eventType.uiMode === 'private';
   }
 
 

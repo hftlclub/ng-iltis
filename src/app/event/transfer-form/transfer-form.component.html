@@ -12,31 +12,33 @@
         <div class="panel-body">
           <form (ngSubmit)="submitForm()" [formGroup]="form">
             <div class="container-fluid">
-              <div class="row">
-                <div class="col-md-4 col-md-offset-1">
-                  <button type="button" class="btn btn-block"
-                    [disabled]="loading"
-                    [ngClass]="outgoingTransfer ? 'btn-info' : 'btn-default'"
-                    (click)="outgoingTransfer = true">
-                    <i class="fa" [ngClass]="icons.out" aria-hidden="true"></i>
-                    Entnahme
-                  </button>
+              <ng-template [ngIf]="!hideInOutSwitcher">
+                <div class="row">
+                  <div class="col-md-4 col-md-offset-1">
+                    <button type="button" class="btn btn-block"
+                      [disabled]="loading"
+                      [ngClass]="outgoingTransfer ? 'btn-info' : 'btn-default'"
+                      (click)="outgoingTransfer = true">
+                      <i class="fa" [ngClass]="icons.out" aria-hidden="true"></i>
+                      Entnahme
+                    </button>
+                  </div>
+                  <div class="col-md-2">
+                    <p class="text-center ortext">ODER</p>
+                  </div>
+                  <div class="col-md-4">
+                    <button type="button" class="btn btn-block"
+                      [disabled]="loading"
+                      [ngClass]="outgoingTransfer ? 'btn-default' : 'btn-info'"
+                      (click)="outgoingTransfer = false">
+                      <i class="fa" [ngClass]="icons.in" aria-hidden="true"></i>
+                      Rückgabe
+                    </button>
+                  </div>
                 </div>
-                <div class="col-md-2">
-                  <p class="text-center ortext">ODER</p>
-                </div>
-                <div class="col-md-4">
-                  <button type="button" class="btn btn-block"
-                    [disabled]="loading"
-                    [ngClass]="outgoingTransfer ? 'btn-default' : 'btn-info'"
-                    (click)="outgoingTransfer = false">
-                    <i class="fa" [ngClass]="icons.in" aria-hidden="true"></i>
-                    Rückgabe
-                  </button>
-                </div>
-              </div>
 
-              <hr>
+                <hr>
+              </ng-template>
 
               <div class="row">
                 <div formArrayName="sizeTypes">

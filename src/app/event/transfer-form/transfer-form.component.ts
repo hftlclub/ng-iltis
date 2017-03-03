@@ -18,6 +18,7 @@ export class TransferFormComponent implements OnInit {
   @Input() product: Product;
   @Output() formSubmitted = new EventEmitter<any>();
   @Input() loading = false;
+  @Input() hideInOutSwitcher = false;
 
   form: FormGroup;
   outgoingTransfer = true;
