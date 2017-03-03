@@ -75,13 +75,15 @@ export class CountFormComponent implements OnInit {
     );
 
     const output = _.flatMap(products, p => {
+      const sizeTypesAmounts = _.clone(p.sizeTypes);
+
       _.forIn(p.crateTypes, (numCrates, ctId) => {
         const ct = crateTypesMap[ctId];
         const stId = ct.sizeType.id;
-        p.sizeTypes[stId] += ct.slots * numCrates;
+        sizeTypesAmounts[stId] += ct.slots * numCrates;
       });
 
-      const productWithSizeTypes = _.mapValues(p.sizeTypes, (amount, stId) => {
+      const productWithSizeTypes = _.mapValues(sizeTypesAmounts, (amount, stId) => {
         return {
           amount: amount,
           sizeTypeId: parseInt(stId, 10),
