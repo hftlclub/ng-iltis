@@ -46,7 +46,7 @@ export class EventFormComponent implements OnInit, OnChanges {
         eventType: this.eventTypes[0],
         description: '',
         date: new Date(),
-        time: this.newDateHHMM()
+        time: this.newDateHHMM15()
       };
     }
 
@@ -92,10 +92,11 @@ export class EventFormComponent implements OnInit, OnChanges {
     this.form.get('time').setValue(newDate);
   }
 
-
-  newDateHHMM(): Date {
+  // returns new Date object with nothing "smaller" than HH and MM (thus, no milliseconds)
+  // and minutes ceiled to 00/15/30/45
+  newDateHHMM15(): Date {
     const date = new Date();
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), date.getMinutes());
+    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), Math.ceil(date.getMinutes() / 15) * 15);
   }
 
 

@@ -108,7 +108,7 @@
                       </div>
                       <div class="modal-body">
                         <div stye="width: 150px; margin: auto">
-                          <timepicker formControlName="time" [showMeridian]="false"></timepicker>
+                          <timepicker formControlName="time" [showMeridian]="false" [minuteStep]="15"></timepicker>
                         </div>
                         <div class="text-center">
                           <button type="button" class="btn btn-primary" (click)="setTime()">
@@ -117,7 +117,7 @@
                           <button type="button" class="btn btn-primary" (click)="setTime(18, 30)">
                             18:30
                           </button>
-                          <button type="button" class="btn btn-primary" (click)="setTime(20, 0)">
+                          <button type="button" class="btn btn-primary" (click)="setTime(19, 0)">
                             19:00
                           </button>
                           <button type="button" class="btn btn-primary" (click)="setTime(21, 0)">
