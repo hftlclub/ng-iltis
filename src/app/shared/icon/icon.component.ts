@@ -12,7 +12,7 @@ export class IconComponent {
     this.iconClass = this.iconMap[reason] || reason;
   }
 
-  private iconMap = {
+  private iconMap: { [k: string]: string } = {
     transferOut: 'fa-sign-out',
     transferIn: 'fa-sign-in fa-flip-horizontal',
     edit: 'fa-pencil',
