@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { CoreModule } from './core/core.module';
+import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventModule } from './event/event.module';
@@ -18,6 +19,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
   imports: [
     CoreModule,
     BrowserModule,
+    SharedModule,
     FormsModule,
     HttpModule,
     AppRoutingModule,

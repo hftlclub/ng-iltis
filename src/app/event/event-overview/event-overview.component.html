@@ -1,9 +1,9 @@
 <div class="row">
 
-  <il-event-overview-card title="Datum" icon="fa-clock-o">
+  <il-event-overview-card title="Datum" icon="clock">
     <span class="title-right">
       <a routerLink="../edit" title="Bearbeiten">
-        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <il-icon for="edit"></il-icon>
       </a>
     </span>
 
@@ -19,10 +19,10 @@
 
 
 
-  <il-event-overview-card title="Kasse" icon="fa-money">
+  <il-event-overview-card title="Kasse" icon="cash">
     <span class="title-right">
       <a title="Bearbeiten" (click)="cashModal.show()">
-        <i class="fa fa-pencil" aria-hidden="true"></i>
+        <il-icon for="edit"></il-icon>
       </a>
     </span>
 
@@ -51,7 +51,7 @@
 
   <il-event-overview-card title="Finanzen" icon="fa-bar-chart" *ngIf="!event.active">
     <span class="title-right" *ngIf="calcLoading">
-      <i class="fa fa-circle-o-notch fa-spin fa-fw pull-right" aria-hidden="true"></i>
+      <il-icon for="spinner"></il-icon>
     </span>
 
     <div *ngIf="calc">
@@ -76,11 +76,11 @@
   <il-event-overview-card title="Zählung" icon="fa-list-ol" *ngIf="event.active">
     <div *ngIf="event.eventType.countAllowed; else noCountAllowedTpl">
       <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px" routerLink="../count/counter">
-        <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+        <il-icon for="counter"></il-icon>
         Kühlschrank
       </a>
       <a class="btn btn-warning btn-block btn-lg" routerLink="../count/storage">
-        <i class="fa fa-database" aria-hidden="true"></i>
+        <il-icon for="storage"></il-icon>
         Lager
       </a>
     </div>
@@ -91,7 +91,7 @@
 
   <il-event-overview-card title="Abschließen" icon="fa-power-off" *ngIf="event.active">
     <a class="btn btn-danger btn-block btn-lg" style="margin-top: 28px">
-      <i class="fa fa-check" aria-hidden="true"></i>
+      <il-icon for="ok"></il-icon>
       Event schließen
     </a>
   </il-event-overview-card>

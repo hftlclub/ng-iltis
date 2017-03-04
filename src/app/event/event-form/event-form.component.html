@@ -35,7 +35,7 @@
                     <input type="text" class="form-control" [value]="form.value.date | date:'fullDate'" (focus)="datePickerModal.show()">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button" (click)="datePickerModal.show()">
-                        <i class="fa fa-calendar" aria-hidden="true"></i>
+                        <il-icon for="calendar"></il-icon>
                       </button>
                     </span>
 
@@ -48,7 +48,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title pull-left">
-                          <i class="fa fa-calendar" aria-hidden="true"></i>
+                          <il-icon for="calendar"></il-icon>
                           Datum auswählen
                         </h4>
                         <button type="button" class="close pull-right" (click)="datePickerModal.hide()" aria-label="Close">
@@ -77,7 +77,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary btn-block btn-lg" (click)="datePickerModal.hide()">
-                          <i class="fa fa-check" aria-hidden="true"></i>
+                          <il-icon for="ok"></il-icon>
                           OK
                         </button>
                       </div>
@@ -92,7 +92,7 @@
                     <input type="text" class="form-control" [value]="form.value.time | date:'HH:mm a'" (focus)="timePickerModal.show()">
                     <span class="input-group-btn">
                       <button class="btn btn-default" type="button" (click)="timePickerModal.show()">
-                        <i class="fa fa-clock-o" aria-hidden="true"></i>
+                        <il-icon for="clock"></il-icon>
                       </button>
                     </span>
 
@@ -105,7 +105,7 @@
                     <div class="modal-content">
                       <div class="modal-header">
                         <h4 class="modal-title pull-left">
-                          <i class="fa fa-clock-o" aria-hidden="true"></i>
+                          <il-icon for="clock"></il-icon>
                           Uhrzeit auswählen
                         </h4>
                         <button type="button" class="close pull-right" (click)="timePickerModal.hide()" aria-label="Close">
@@ -133,7 +133,7 @@
                       </div>
                       <div class="modal-footer">
                         <button type="button" class="btn btn-primary btn-block btn-lg" (click)="timePickerModal.hide()">
-                          <i class="fa fa-check" aria-hidden="true"></i>
+                          <il-icon for="ok"></il-icon>
                           OK
                         </button>
                       </div>
@@ -146,8 +146,8 @@
 
                 <div class="form-group" *ngIf="!edit">
                   <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
-                    <i class="fa fa-check" *ngIf="!loading" aria-hidden="true"></i>
-                    <i class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="loading" aria-hidden="true"></i>
+                    <il-icon for="ok" *ngIf="!loading"></il-icon>
+                    <il-icon for="spinner" *ngIf="loading"></il-icon>
                     {{ getString('btnLabel') }}
                   </button>
                 </div>
@@ -155,14 +155,14 @@
                 <div class="form-group" *ngIf="edit">
                   <div class="col-md-6">
                     <button type="button" class="btn btn-danger btn-lg btn-block" (click)="cancelForm()">
-                      <i class="fa fa-times" aria-hidden="true"></i>
+                      <il-icon for="cancel"></il-icon>
                       Abbrechen
                     </button>
                   </div>
                   <div class="col-md-6">
                     <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
-                      <i class="fa fa-check" *ngIf="!loading" aria-hidden="true"></i>
-                      <i class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="loading" aria-hidden="true"></i>
+                      <il-icon for="ok" *ngIf="!loading"></il-icon>
+                      <il-icon for="spinner" *ngIf="loading"></il-icon>
                       Speichern
                     </button>
                   </div>

@@ -9,28 +9,28 @@
 
       <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
         <a routerLink="/event">
-          <i class="fa fa-calendar" aria-hidden="true"></i>
+          <il-icon for="calendar"></il-icon>
           Ereignisse
         </a>
       </li>
 
       <li class="dropdown" dropdown [routerLinkActive]="aclass">
           <a class="dropdown-toggle" dropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
-            <i class="fa fa-plus" aria-hidden="true"></i>
+            <il-icon for="plus"></il-icon>
             Neues Ereignis <span class="caret"></span>
             </a>
           <ul class="dropdown-menu" dropdownMenu>
             <li><a routerLink="/event/new/event">
-              <i class="fa fa-glass" aria-hidden="true"></i>
+              <il-icon for="fa-glass"></il-icon>
               Veranstaltung
             </a></li>
             <li><a routerLink="/event/new/private">
-              <i class="fa fa-hand-paper-o" aria-hidden="true"></i>
+              <il-icon for="fa-hand-paper-o"></il-icon>
               Spontanentnahme
             </a></li>
             <li role="separator" class="divider"></li>
             <li><a routerLink="/event/new/purchase">
-              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <il-icon for="fa-shopping-cart"></il-icon>
               Einkauf
             </a></li>
           </ul>

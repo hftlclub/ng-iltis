@@ -30,11 +30,11 @@
   <div class="bottom">
       <div class="text-center">
         <a class="btn btn-primary btn-lg btn-block" routerLink="overview" *ngIf="childUrlSegment === 'products'">
-          <i class="fa fa-list" aria-hidden="true"></i>
+          <il-icon for="fa-list"></il-icon>
           Übersicht
         </a>
         <a class="btn btn-success btn-lg btn-block" routerLink="products" *ngIf="childUrlSegment !== 'products' && event.active">
-          <i class="fa fa-plus" aria-hidden="true"></i>
+          <il-icon for="plus"></il-icon>
           Neue Buchung
         </a>
       </div>

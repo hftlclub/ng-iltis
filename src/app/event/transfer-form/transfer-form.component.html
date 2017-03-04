@@ -4,7 +4,7 @@
       <div class="panel panel-primary">
         <div class="panel-heading">
           <h3 class="panel-title">
-            <i class="fa" [ngClass]="outgoingTransfer ? icons.out : icons.in" aria-hidden="true"></i>
+            <il-icon [for]="outgoingTransfer ? 'transferOut' : 'transferIn'"></il-icon>
             Neue {{ outgoingTransfer ? 'Entnahme' : 'Rückgabe' }}:
             {{ product.name }}
           </h3>
@@ -19,7 +19,7 @@
                       [disabled]="loading"
                       [ngClass]="outgoingTransfer ? 'btn-info' : 'btn-default'"
                       (click)="outgoingTransfer = true">
-                      <i class="fa" [ngClass]="icons.out" aria-hidden="true"></i>
+                      <il-icon for="transferOut"></il-icon>
                       Entnahme
                     </button>
                   </div>
@@ -31,7 +31,7 @@
                       [disabled]="loading"
                       [ngClass]="outgoingTransfer ? 'btn-default' : 'btn-info'"
                       (click)="outgoingTransfer = false">
-                      <i class="fa" [ngClass]="icons.in" aria-hidden="true"></i>
+                      <il-icon for="transferIn"></il-icon>
                       Rückgabe
                     </button>
                   </div>
@@ -47,7 +47,7 @@
                       [disabled]="loading"
                       [ngClass]="storageTransfer ? 'btn-warning' : 'btn-default'"
                       (click)="storageTransfer = true">
-                      <i class="fa fa-database" aria-hidden="true"></i>
+                      <il-icon for="storage"></il-icon>
                       Lager
                     </button>
                   </div>
@@ -59,7 +59,7 @@
                       [disabled]="loading || !outgoingTransfer || noCounterRemoval"
                       [ngClass]="storageTransfer ? 'btn-default' : 'btn-primary'"
                       (click)="storageTransfer = false">
-                      <i class="fa fa-snowflake-o" aria-hidden="true"></i>
+                      <il-icon for="counter"></il-icon>
                       Kühlschrank
                     </button>
                   </div>
@@ -93,14 +93,14 @@
               <div class="row" style="margin-top: 20px">
                 <div class="col-md-3 col-md-offset-3">
                   <button type="button" class="btn btn-danger btn-lg btn-block" (click)="cancelForm()">
-                    <i class="fa fa-times" aria-hidden="true"></i>
+                    <il-icon for="cancel"></il-icon>
                     Abbrechen
                   </button>
                 </div>
                 <div class="col-md-3">
                   <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="form.invalid || loading">
-                    <i class="fa fa-check" *ngIf="!loading" aria-hidden="true"></i>
-                    <i class="fa fa-circle-o-notch fa-spin fa-fw" *ngIf="loading" aria-hidden="true"></i>
+                    <il-icon for="ok" *ngIf="!loading"></il-icon>
+                    <il-icon for="spinner" *ngIf="loading"></il-icon>
                     <span *ngIf="outgoingTransfer">Entnehmen</span>
                     <span *ngIf="!outgoingTransfer">Zurücklegen</span>
                   </button>

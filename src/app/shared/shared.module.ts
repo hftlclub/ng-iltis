@@ -9,13 +9,14 @@ import { ModalModule } from 'ng2-bootstrap/modal';
 import { TimepickerModule } from 'ng2-bootstrap/timepicker';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
+import { IconComponent } from './icon/icon.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-
+    IconComponent
   ],
   exports: [
     CommonModule,
@@ -26,7 +27,8 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
     ModalModule,
     DatepickerModule,
     TimepickerModule,
-    Ng2PageScrollModule
+    Ng2PageScrollModule,
+    IconComponent
   ]
 })
 export class SharedModule { }

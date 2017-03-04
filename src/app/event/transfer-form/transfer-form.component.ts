@@ -10,11 +10,6 @@ import { Product } from '../../shared/models/product';
 })
 export class TransferFormComponent implements OnInit {
 
-  icons: { [k: string]: string } = {
-    'out': 'fa-sign-out',
-    'in': 'fa-sign-in fa-flip-horizontal'
-  };
-
   @Input() product: Product;
   @Output() submitted = new EventEmitter<any>();
   @Output() cancelled = new EventEmitter<any>();

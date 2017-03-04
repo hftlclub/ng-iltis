@@ -2,7 +2,7 @@
   <div class="panel panel-default overview-card">
     <div class="panel-heading">
       <h3 class="panel-title">
-        <i *ngIf="icon" class="fa" [ngClass]="icon" aria-hidden="true"></i>
+        <il-icon [for]="icon" *ngIf="icon"></il-icon>
         {{ title }}
         <span class="pull-right">
           <ng-content select=".title-right"></ng-content>

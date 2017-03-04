@@ -17,12 +17,12 @@
           <small>
             {{ event.description }}
             <a routerLink="edit" title="Bearbeiten" style="margin-left: 10px">
-              <i class="fa fa-pencil" aria-hidden="true"></i>
+              <il-icon for="edit"></il-icon>
             </a>
           </small>
 
           <span class="label pull-right" [ngClass]="event.active ? 'label-success' : 'label-danger'">
-            <i class="fa" [ngClass]="event.active ? 'fa-unlock' : 'fa-lock'" aria-hidden="true"></i>
+            <il-icon [for]="event.active ? 'evActive' : 'evInactive'"></il-icon>
             {{ event.active ? 'Aktiv' : 'Geschlossen' }}
           </span>
         </h1>
