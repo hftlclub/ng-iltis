@@ -1,0 +1,7 @@
+<span class="fa-stack fa-lg" style="cursor: pointer" (click)="toggleValue()">
+  <i class="fa fa-square-o fa-stack-2x"></i>
+  <i *ngIf="value" class="fa fa-check fa-stack-1x"></i>
+</span>
+<label class="checkbox-label" (click)="toggleValue()">
+  <ng-content></ng-content>
+</label>
