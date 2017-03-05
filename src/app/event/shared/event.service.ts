@@ -21,6 +21,7 @@ export class EventService {
   transfersAdded = new EventEmitter<Transfer[]>();
   countFinished = new EventEmitter<Transfer[]>();
   eventUpdated = new EventEmitter<Event>();
+  eventClosed = new EventEmitter<number>(); // emits eventId
 
   constructor(@Inject('API_URL') private api, private http: Http) {
     this.headers.append('Content-Type', 'application/json');
@@ -98,6 +99,13 @@ export class EventService {
   updateEvent(eventId: number, event: Event): Observable<any> {
     return this.http
       .put(`${this.api}/event/${eventId}`, TinyJson.getJSON(event), { headers: this.headers })
+      .map(res => {})
+      .catch(this.errorHandler);
+  }
+
+  closeEvent(eventId: number): Observable<any> {
+    return this.http
+      .post(`${this.api}/event/${eventId}/close`, {foo: 'bar'}, { headers: this.headers })
       .map(res => {})
       .catch(this.errorHandler);
   }

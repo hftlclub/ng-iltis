@@ -27,4 +27,26 @@ export class CloseFormContainerComponent implements OnInit {
     this.hasTransfers = !!this.route.snapshot.data['transfers'].length;
   }
 
+  processClosing(data: any) {
+    // TODO: Update event with privateCashAfter
+    this.closeEvent();
+  }
+
+
+  closeEvent() {
+    this.es.closeEvent(this.event.id).subscribe(res => {
+      this.es.eventClosed.emit(this.event.id);
+      this.ns.success('Ereignis geschlossen', 'Das Ereignis wurde geschlossen.');
+      this.navigateToEventPage();
+    });
+  }
+
+  cancelForm() {
+    this.navigateToEventPage();
+  }
+
+  navigateToEventPage() {
+    this.router.navigate(['../overview'], { relativeTo: this.route });
+  }
+
 }

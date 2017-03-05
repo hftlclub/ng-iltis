@@ -1,4 +1,6 @@
 <il-close-form
   [event]="event"
-  [hasTransfers]="hasTransfers">
+  [hasTransfers]="hasTransfers"
+  (submitted)="processClosing($event)"
+  (cancelled)="cancelForm()">
 </il-close-form>
