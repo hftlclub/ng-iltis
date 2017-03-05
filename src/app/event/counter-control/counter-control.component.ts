@@ -22,7 +22,7 @@ export class CounterControlComponent implements ControlValueAccessor {
   propagateChange: any = () => {};
   validateFn: any = () => {};
 
-  get counterValue() {
+  get counterValue(): number {
     return this._counterValue;
   }
 
@@ -44,7 +44,7 @@ export class CounterControlComponent implements ControlValueAccessor {
   registerOnTouched() {}
 
   increase() {
-    if(this.counterValue < this.maxValue) {
+    if (this.counterValue < this.maxValue) {
       this.counterValue++;
     }
   }

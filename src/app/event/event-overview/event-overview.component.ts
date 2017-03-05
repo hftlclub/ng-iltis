@@ -42,7 +42,7 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
     }
   }
 
-  get cashEmpty() {
+  get cashEmpty(): boolean {
     return !this.event.cashBefore && !this.event.cashAfter && !this.event.tip;
   }
 

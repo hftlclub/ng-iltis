@@ -53,15 +53,15 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
     this.eventClosed$.unsubscribe();
   }
 
-  get childUrlSegment() {
+  get childUrlSegment(): string {
     return this.route.snapshot.children[0].url[0].path;
   }
 
-  get hasItems() {
+  get hasItems(): boolean {
     return !!this.transfers.length || !!this.transactions.length;
   }
 
-  get itemCount() {
+  get itemCount(): number {
     return (this.event.active) ? this.transfers.length : this.transactions.length;
   }
 

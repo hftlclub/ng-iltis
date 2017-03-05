@@ -16,7 +16,7 @@ export class CloseFormComponent implements OnInit {
   @Output() cancelled = new EventEmitter<any>();
 
   form: FormGroup;
-  deliveryCosts = 0;
+  deliveryCosts = 0; // TODO: fill with actual value
 
   constructor(private fb: FormBuilder) { }
 
@@ -29,7 +29,7 @@ export class CloseFormComponent implements OnInit {
     });
   }
 
-  get isClosable() {
+  get isClosable(): boolean {
     return this.hasTransfers;
   }
 

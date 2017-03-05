@@ -21,7 +21,7 @@ export class CheckboxControlComponent {
   propagateChange: any = () => {};
   validateFn: any = () => {};
 
-  get value() {
+  get value(): boolean {
     return this._value;
   }
 

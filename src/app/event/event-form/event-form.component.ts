@@ -100,7 +100,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   }
 
 
-  get isEventMode() {
+  get isEventMode(): boolean {
     return this.uiMode === 'event';
   }
 

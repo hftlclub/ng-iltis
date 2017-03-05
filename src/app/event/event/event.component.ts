@@ -46,7 +46,7 @@ import { EventService } from '../shared/event.service';
 })
 export class EventComponent implements OnInit, OnDestroy {
 
-  sidebar = true;
+  sidebarVisible = true;
 
   event: Event;
   eventUpdated$: Subscription;
@@ -59,7 +59,9 @@ export class EventComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.event = this.route.snapshot.data['event'];
+
     this.eventUpdated$ = this.es.eventUpdated.subscribe(event => this.event = event);
+
     this.eventClosed$ = this.es.eventClosed
       .switchMap(eventId => this.es.getEvent(eventId))
       .subscribe(event => this.event = event);
@@ -70,12 +72,12 @@ export class EventComponent implements OnInit, OnDestroy {
     this.eventClosed$.unsubscribe();
   }
 
-  toggleSidebar() {
-    this.sidebar = !this.sidebar;
+  toggleSidebar(): void {
+    this.sidebarVisible = !this.sidebarVisible;
   }
 
-  get sidebarState() {
-    return (this.sidebar) ? 'in' : 'out';
+  get sidebarState(): string {
+    return (this.sidebarVisible) ? 'in' : 'out';
   }
 
 }

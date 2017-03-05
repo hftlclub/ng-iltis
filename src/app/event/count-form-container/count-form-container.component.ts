@@ -78,7 +78,7 @@ export class CountFormContainerComponent implements OnInit {
     this.router.navigate(['../../overview'], { relativeTo: this.route });
   }
 
-  get storageMode() {
+  get storageMode(): boolean {
     return this.mode === 'storage';
   }
 
