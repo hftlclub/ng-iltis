@@ -23,15 +23,27 @@ export class EventFormComponent implements OnInit, OnChanges {
 
   constructor(private fb: FormBuilder) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    const initial = this.getInitialFormValues();
+
+    this.form = this.fb.group({
+      eventType: [initial.eventType, Validators.required],
+      description: [initial.description],
+      date: [initial.date, Validators.required],
+      time: [initial.time, Validators.required]
+    });
+
+    this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
+  }
+
 
   ngOnChanges(c: SimpleChanges) {
-    if (c['eventTypes']) {
-      this.initForm();
+    if (c['eventTypes'] && this.form) {
+      this.rebuildForm();
     }
   }
 
-  initForm() {
+  getInitialFormValues() {
     let initial;
     if (this.initialEvent) {
       initial = {
@@ -50,16 +62,13 @@ export class EventFormComponent implements OnInit, OnChanges {
       };
     }
 
-
-    this.form = this.fb.group({
-      eventType: [initial.eventType, Validators.required],
-      description: [initial.description],
-      date: [initial.date, Validators.required],
-      time: [initial.time, Validators.required]
-    });
+    return initial;
+  }
 
 
-    this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
+  rebuildForm() {
+    console.log('rebuildForm');
+    this.form.setValue(this.getInitialFormValues());
   }
 
   compareEventTypes(e1: EventType, e2: EventType) {
