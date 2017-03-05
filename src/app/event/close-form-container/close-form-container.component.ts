@@ -29,8 +29,8 @@ export class CloseFormContainerComponent implements OnInit {
 
   processClosing(data: any) {
     // if cashAfter has changed, change event before closing it. else, just close it
-    if (data.privateCashAfter !== this.event.cashAfter) {
-      const newEvent = Object.assign({}, this.event, { cashAfter: data.privateCashAfter });
+    if (data.cashAfter !== this.event.cashAfter) {
+      const newEvent = Object.assign({}, this.event, { cashAfter: data.cashAfter });
       this.es.updateEvent(this.event.id, newEvent)
         .subscribe(() => this.closeEvent());
     } else {

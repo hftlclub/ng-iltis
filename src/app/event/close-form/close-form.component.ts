@@ -23,7 +23,7 @@ export class CloseFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       ignoreCounterCount: [false],
-      privateCashAfter: [this.event.cashAfter],
+      cashAfter: [this.event.cashAfter],
       ignoreNoCash: [false],
       confirmClose: [false]
     });
@@ -33,20 +33,19 @@ export class CloseFormComponent implements OnInit {
     return this.hasTransfers;
   }
 
-  // true when a countAllowed event has counted counter and counterCount has not been ignored
+  // true when a countAllowed event has not counted the counter and empty values have not been ignored
   get counterCountInvalid(): boolean {
     return this.event.eventType.countAllowed && !(this.event.countedStorage || this.form.value.ignoreCounterCount);
   }
 
   // true when a realEvent has empty cash and empty cash has not been ignored
   get cashInvalid(): boolean {
-    const cashEmpty = !this.event.cashBefore && !this.event.cashAfter;
-    return this.event.eventType.realEvent && cashEmpty && !this.form.value.ignoreNoCash;
+    return this.event.eventType.realEvent && this.cashEmpty && !this.form.value.ignoreNoCash;
   }
 
   // true when there's no cash proided for a private removal
   get privateNoCash(): boolean {
-    return this.event.eventType.uiMode === 'private' && !this.form.value.privateCashAfter;
+    return this.event.eventType.uiMode === 'private' && !this.form.value.cashAfter;
   }
 
   // true when no cash provided
