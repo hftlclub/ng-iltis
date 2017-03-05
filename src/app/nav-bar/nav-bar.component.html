@@ -1,20 +1,25 @@
 <nav class="navbar navbar-default navbar-fixed-top">
   <div class="container-fluid">
+    <button type="button" class="navbar-toggle" [class.collapsed]="collapsed" [attr.aria-expanded]="!collapsed" (click)="collapsed = !collapsed">
+      <span class="sr-only">Toggle navigation</span>
+      <i class="fa" aria-hidden="true" [ngClass]="collapsed ? 'fa-bars' : 'fa-times'"></i>
+    </button>
     <div class="navbar-header">
        <a class="navbar-brand" routerLink="/">
         <img alt="Brand" src="assets/iltis.svg" style="height: 20px">
        </a>
     </div>
-    <ul class="nav navbar-nav">
+    <div class="collapse navbar-collapse" [class.in]="!collapsed">
+      <ul class="nav navbar-nav">
 
-      <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
-        <a routerLink="/event">
-          <il-icon for="calendar"></il-icon>
-          Ereignisse
-        </a>
-      </li>
+        <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/event">
+            <il-icon for="calendar"></il-icon>
+            Ereignisse
+          </a>
+        </li>
 
-      <li class="dropdown" dropdown [routerLinkActive]="aclass">
+        <li class="dropdown" dropdown [routerLinkActive]="aclass">
           <a class="dropdown-toggle" dropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
             <il-icon for="plus"></il-icon>
             Neues Ereignis <span class="caret"></span>
@@ -36,8 +41,9 @@
           </ul>
         </li>
       </ul>
-    <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right">
 
-    </ul>
+      </ul>
+    </div>
   </div>
 </nav>
