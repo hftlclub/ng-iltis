@@ -10,7 +10,11 @@ export class TransfersResolver implements Resolve<Transfer[]> {
   constructor(private es: EventService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.es.getTransfersByEvent(route.params['eventId']);
+    let eventId = route.params['eventId'];
+    if (!eventId) {
+      eventId = route.parent.params['eventId'];
+    }
+    return this.es.getTransfersByEvent(eventId);
   }
 
 }
