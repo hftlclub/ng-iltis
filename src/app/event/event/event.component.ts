@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/switchMap';
 
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
@@ -49,6 +50,7 @@ export class EventComponent implements OnInit, OnDestroy {
 
   event: Event;
   eventUpdated$: Subscription;
+  eventClosed$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -58,10 +60,14 @@ export class EventComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.event = this.route.snapshot.data['event'];
     this.eventUpdated$ = this.es.eventUpdated.subscribe(event => this.event = event);
+    this.eventClosed$ = this.es.eventClosed
+      .switchMap(eventId => this.es.getEvent(eventId))
+      .subscribe(event => this.event = event);
   }
 
   ngOnDestroy() {
     this.eventUpdated$.unsubscribe();
+    this.eventClosed$.unsubscribe();
   }
 
   toggleSidebar() {

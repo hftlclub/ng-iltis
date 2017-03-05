@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import 'rxjs/add/operator/switchMap';
 
 import { Transfer } from '../../shared/models/transfer';
 import { Transaction } from '../../shared/models/transaction';
@@ -21,6 +22,7 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
 
   transfersAdded$: Subscription;
   countFinished$: Subscription;
+  eventClosed$: Subscription;
 
   constructor(private route: ActivatedRoute, private es: EventService) { }
 
@@ -34,12 +36,21 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
 
     this.countFinished$ = this.es.countFinished
       .subscribe(t => this.transfers = t);
+
+    this.eventClosed$ = this.es.eventClosed
+      .switchMap(eventId => this.es.getTransactionsByEvent(eventId))
+      .subscribe(transactions => {
+        this.transfers = [];
+        this.transactions = transactions;
+      });
+
   }
 
 
   ngOnDestroy() {
     this.transfersAdded$.unsubscribe();
     this.countFinished$.unsubscribe();
+    this.eventClosed$.unsubscribe();
   }
 
   get childUrlSegment() {
