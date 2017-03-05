@@ -16,6 +16,7 @@ export class CloseFormComponent implements OnInit {
   @Output() cancelled = new EventEmitter<any>();
 
   form: FormGroup;
+  deliveryCosts = 0;
 
   constructor(private fb: FormBuilder) { }
 
