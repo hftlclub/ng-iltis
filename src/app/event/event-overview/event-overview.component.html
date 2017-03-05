@@ -70,9 +70,7 @@
       <small class="pull-right text-muted">(geschätzte Werte)</small>
     </div>
   </il-event-overview-card>
-</div>
 
-<div class="row">
   <il-event-overview-card title="Zählung" icon="fa-list-ol" *ngIf="event.active">
     <div *ngIf="event.eventType.countAllowed; else noCountAllowedTpl">
       <a class="btn btn-primary btn-block btn-lg" style="margin-bottom: 10px" routerLink="../count/counter">
@@ -100,10 +98,10 @@
     </a>
   </il-event-overview-card>
 
-  <il-event-overview-card title="Abschließen" icon="fa-power-off" *ngIf="event.active">
+  <il-event-overview-card title="Ereignis abschließen" icon="fa-power-off" *ngIf="event.active">
     <a class="btn btn-success btn-block btn-lg" style="margin-top: 28px" routerLink="../close">
       <il-icon for="ok"></il-icon>
-      Ereignis schließen
+      Abschließen
     </a>
   </il-event-overview-card>
 </div>
