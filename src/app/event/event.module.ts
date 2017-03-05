@@ -24,6 +24,9 @@ import { TransferFormComponent } from './transfer-form/transfer-form.component';
 import { TransferFormContainerComponent } from './transfer-form-container/transfer-form-container.component';
 import { CountFormComponent } from './count-form/count-form.component';
 import { CountFormContainerComponent } from './count-form-container/count-form-container.component';
+import { CloseFormComponent } from './close-form/close-form.component';
+import { CloseFormContainerComponent } from './close-form-container/close-form-container.component';
+import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
 
 
 @NgModule({
@@ -52,7 +55,10 @@ import { CountFormContainerComponent } from './count-form-container/count-form-c
     CashModalComponent,
     EventOverviewCardComponent,
     CountFormComponent,
-    CountFormContainerComponent
+    CountFormContainerComponent,
+    CloseFormComponent,
+    CloseFormContainerComponent,
+    CheckboxControlComponent,
   ],
   providers: [
     EventService

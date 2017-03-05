@@ -1,3 +1,4 @@
+import { CloseFormContainerComponent } from './close-form-container/close-form-container.component';
 import { InventoryResolver } from './shared/resolvers/inventory.resolver';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -73,6 +74,14 @@ const routes: Routes = [
         resolve: {
           event: EventResolver,
           eventTypes: EventTypesResolver
+        },
+      },
+      {
+        path: 'close',
+        component: CloseFormContainerComponent,
+        resolve: {
+          event: EventResolver,
+          transfers: TransfersResolver
         },
       },
       {
