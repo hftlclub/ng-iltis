@@ -35,7 +35,7 @@ export class CloseFormComponent implements OnInit {
 
   // true when a countAllowed event has not counted the counter and empty values have not been ignored
   get counterCountInvalid(): boolean {
-    return this.event.eventType.countAllowed && !(this.event.countedStorage || this.form.value.ignoreCounterCount);
+    return this.event.eventType.countAllowed && !this.event.countedCounter && !this.form.value.ignoreCounterCount;
   }
 
   // true when a realEvent has empty cash and empty cash has not been ignored
