@@ -131,7 +131,14 @@
                 <input type="number" class="form-control" step="0.01" formControlName="cashAfter">
                 <span class="input-group-addon">EUR</span>
               </div>
-              <span class="help-block">Mindestbetrag für Deine Entnahme: <strong>{{ deliveryCosts | currency:'EUR':true }}</strong></span>
+              <span class="help-block">
+                Mindestbetrag für Deine Entnahme:
+                <strong *ngIf="costs; else costsLoading">{{ costs | currency:'EUR':true }}</strong>
+                <ng-template #costsLoading>
+                  <il-icon for="spinner"></il-icon>
+                  Wird geladen…
+                </ng-template>
+              </span>
             </div>
 
 

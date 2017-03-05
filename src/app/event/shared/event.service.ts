@@ -68,6 +68,12 @@ export class EventService {
       .map(raw => CalculationFactory.fromObj(raw));
   }
 
+  getCostsForEvent(id: number): Observable<any> {
+    return this.http.get(`${this.api}/event/${id}/costs`)
+      .retry(3)
+      .map(res => res.json());
+  }
+
   getInventoryForEvent(id: number): Observable<Inventory[]> {
     return this.http.get(`${this.api}/event/${id}/inventory`)
       .retry(3)

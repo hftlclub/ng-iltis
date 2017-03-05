@@ -14,6 +14,7 @@ export class CloseFormContainerComponent implements OnInit {
 
   event: Event;
   hasTransfers: boolean;
+  costs: number;
 
   constructor(
     private route: ActivatedRoute,
@@ -25,6 +26,10 @@ export class CloseFormContainerComponent implements OnInit {
   ngOnInit() {
     this.event = this.route.snapshot.data['event'];
     this.hasTransfers = !!this.route.snapshot.data['transfers'].length;
+
+    if (this.event.eventType.uiMode === 'private') {
+      this.es.getCostsForEvent(this.event.id).subscribe(res => this.costs = res.costs);
+    }
   }
 
   processClosing(data: any) {

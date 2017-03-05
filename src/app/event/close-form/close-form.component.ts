@@ -12,11 +12,11 @@ export class CloseFormComponent implements OnInit {
 
   @Input() event: Event;
   @Input() hasTransfers: boolean;
+  @Input() costs: number;
   @Output() submitted = new EventEmitter<any>();
   @Output() cancelled = new EventEmitter<any>();
 
   form: FormGroup;
-  deliveryCosts = 0; // TODO: fill with actual value
 
   constructor(private fb: FormBuilder) { }
 
@@ -43,7 +43,7 @@ export class CloseFormComponent implements OnInit {
     return this.event.eventType.realEvent && this.cashEmpty && !this.form.value.ignoreNoCash;
   }
 
-  // true when there's no cash proided for a private removal
+  // true when there's no cash provided for a private removal
   get privateNoCash(): boolean {
     return this.event.eventType.uiMode === 'private' && !this.form.value.cashAfter;
   }
