@@ -27,6 +27,7 @@ import { CountFormContainerComponent } from './count-form-container/count-form-c
 import { CloseFormComponent } from './close-form/close-form.component';
 import { CloseFormContainerComponent } from './close-form-container/close-form-container.component';
 import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
+import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 
 @NgModule({
@@ -59,6 +60,7 @@ import { CheckboxControlComponent } from './checkbox-control/checkbox-control.co
     CloseFormComponent,
     CloseFormContainerComponent,
     CheckboxControlComponent,
+    DeleteModalComponent,
   ],
   providers: [
     EventService

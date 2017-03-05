@@ -111,7 +111,14 @@ export class EventService {
 
   closeEvent(eventId: number): Observable<any> {
     return this.http
-      .post(`${this.api}/event/${eventId}/close`, {foo: 'bar'}, { headers: this.headers })
+      .post(`${this.api}/event/${eventId}/close`, null, { headers: this.headers })
+      .map(res => {})
+      .catch(this.errorHandler);
+  }
+
+  deleteEvent(eventId: number): Observable<any> {
+    return this.http
+      .delete(`${this.api}/event/${eventId}`)
       .map(res => {})
       .catch(this.errorHandler);
   }

@@ -23,10 +23,12 @@ export class IconComponent {
     storage: 'fa-database',
     evActive: 'fa-unlock',
     evInactive: 'fa-lock',
+    evClose: 'fa-power-off',
     cash: 'fa-money',
     clock: 'fa-clock-o',
     calendar: 'fa-calendar',
-    plus: 'fa-plus'
+    plus: 'fa-plus',
+    delete: 'fa-trash'
   };
 
 }

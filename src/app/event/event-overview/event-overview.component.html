@@ -87,20 +87,20 @@
     </ng-template>
   </il-event-overview-card>
 
-  <il-event-overview-card title="Bearbeiten" icon="edit">
+  <il-event-overview-card title="Ereignis bearbeiten" icon="edit" *ngIf="event.active">
     <a class="btn btn-primary btn-block" style="margin-bottom: 10px" routerLink="../edit">
       <il-icon for="edit"></il-icon>
       Bearbeiten
     </a>
-    <a class="btn btn-danger btn-block">
-      <il-icon for="cancel"></il-icon>
+    <a class="btn btn-danger btn-block" (click)="deleteModal.show()">
+      <il-icon for="delete"></il-icon>
       Ereignis löschen
     </a>
   </il-event-overview-card>
 
-  <il-event-overview-card title="Ereignis abschließen" icon="fa-power-off" *ngIf="event.active">
+  <il-event-overview-card title="Ereignis abschließen" icon="fa-calendar-check-o" *ngIf="event.active">
     <a class="btn btn-success btn-block btn-lg" style="margin-top: 28px" routerLink="../close">
-      <il-icon for="ok"></il-icon>
+      <il-icon for="evClose"></il-icon>
       Abschließen
     </a>
   </il-event-overview-card>
@@ -110,6 +110,11 @@
 
 <div bsModal #cashModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
   <il-cash-modal [event]="event" (hide)="cashModal.hide()"></il-cash-modal>
+</div>
+
+
+<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
+  <il-delete-modal [event]="event" (hide)="deleteModal.hide()"></il-delete-modal>
 </div>
 
 

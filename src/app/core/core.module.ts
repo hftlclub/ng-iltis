@@ -11,6 +11,7 @@ import { TimepickerModule } from 'ng2-bootstrap/timepicker';
 
 import { HasChangesGuard } from './has-changes.guard';
 import { ProductService } from './product.service';
+import { GlobalService } from './global.service';
 import { ProductsResolver } from './resolvers/products.resolver';
 import { ProductResolver } from './resolvers/product.resolver';
 
@@ -32,6 +33,7 @@ import { ProductResolver } from './resolvers/product.resolver';
   providers: [
     HasChangesGuard,
     ProductService,
+    GlobalService,
     ProductResolver,
     ProductsResolver
   ]
