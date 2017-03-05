@@ -89,10 +89,21 @@
     </ng-template>
   </il-event-overview-card>
 
+  <il-event-overview-card title="Bearbeiten" icon="edit">
+    <a class="btn btn-primary btn-block" style="margin-bottom: 10px" routerLink="../edit">
+      <il-icon for="edit"></il-icon>
+      Bearbeiten
+    </a>
+    <a class="btn btn-danger btn-block">
+      <il-icon for="cancel"></il-icon>
+      Ereignis löschen
+    </a>
+  </il-event-overview-card>
+
   <il-event-overview-card title="Abschließen" icon="fa-power-off" *ngIf="event.active">
-    <a class="btn btn-danger btn-block btn-lg" style="margin-top: 28px" routerLink="../close">
+    <a class="btn btn-success btn-block btn-lg" style="margin-top: 28px" routerLink="../close">
       <il-icon for="ok"></il-icon>
-      Event schließen
+      Ereignis schließen
     </a>
   </il-event-overview-card>
 </div>
