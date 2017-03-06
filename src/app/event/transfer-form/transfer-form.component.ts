@@ -17,9 +17,10 @@ export class TransferFormComponent implements OnInit {
   @Input() hideInOutSwitcher = false;
   @Input() hideStorageCounterSwitcher = false;
   @Input() noCounterRemoval = false;
+  @Input() outgoingTransfer = true;
+  @Input() uiMode = 'event';
 
   form: FormGroup;
-  outgoingTransfer = true;
   storageTransfer = true;
   grid: any;
 
@@ -65,4 +66,32 @@ export class TransferFormComponent implements OnInit {
     };
     return map[sizesLength] || { col: 2, offset: 0 };
   }
+
+  getString(name: string): string {
+    const strings = {
+      boxHeadlineOut: {
+        event: 'Neue Entnahme',
+        purchase: '',
+        private: 'Neue Spontanentnahme'
+      },
+      boxHeadlineIn: {
+        event: 'Neue Rückgabe',
+        purchase: 'Neuer Einkauf',
+        private: ''
+      },
+      btnInLabel: {
+        event: 'Zurücklegen',
+        purchase: 'Einlagern',
+        private: ''
+      },
+      btnOutLabel: {
+        event: 'Entnehmen',
+        purchase: '',
+        private: 'Entnehmen'
+      }
+    };
+
+    return strings[name][this.uiMode];
+  }
+
 }

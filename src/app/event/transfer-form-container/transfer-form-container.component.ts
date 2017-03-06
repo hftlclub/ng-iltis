@@ -14,10 +14,12 @@ import { EventService } from '../shared/event.service';
 })
 export class TransferFormContainerComponent implements OnInit {
 
+  event: Event;
   product: Product;
   loading = false;
   hideInOutSwitcher = false;
   hideStorageCounterSwitcher = false;
+  outgoingTransfer = true;
   noCounterRemoval = false;
 
   constructor(
@@ -29,12 +31,27 @@ export class TransferFormContainerComponent implements OnInit {
 
   ngOnInit() {
     this.product = this.route.snapshot.data['product'];
-    const event: Event = this.route.parent.snapshot.data['event'];
+    this.event = this.route.parent.snapshot.data['event'];
 
-    this.hideInOutSwitcher = event.eventType.uiMode === 'private';
-    this.hideStorageCounterSwitcher = event.eventType.uiMode !== 'private';
+    switch (this.event.eventType.uiMode) {
+      case 'event':
+        this.hideInOutSwitcher = false;
+        this.hideStorageCounterSwitcher = true;
+        this.outgoingTransfer = true;
+        break;
+      case 'purchase':
+        this.hideInOutSwitcher = true;
+        this.hideStorageCounterSwitcher = true;
+        this.outgoingTransfer = false;
+        break;
+      case 'private':
+        this.hideInOutSwitcher = true;
+        this.hideStorageCounterSwitcher = false;
+        this.outgoingTransfer = true;
+        break;
+    }
 
-    if (event.eventType.uiMode === 'private') {
+    if (this.event.eventType.uiMode === 'private') {
       this.es.checkPermission().subscribe(perm => this.noCounterRemoval = !perm.createEventCountAllowed);
     }
   }

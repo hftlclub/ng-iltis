@@ -5,7 +5,7 @@
         <div class="panel-heading">
           <h3 class="panel-title">
             <il-icon [for]="outgoingTransfer ? 'transferOut' : 'transferIn'"></il-icon>
-            Neue {{ outgoingTransfer ? 'Entnahme' : 'Rückgabe' }}:
+            {{ getString(outgoingTransfer ? 'boxHeadlineOut' : 'boxHeadlineIn') }}:
             {{ product.name }}
           </h3>
         </div>
@@ -101,8 +101,7 @@
                   <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="form.invalid || loading">
                     <il-icon for="ok" *ngIf="!loading"></il-icon>
                     <il-icon for="spinner" *ngIf="loading"></il-icon>
-                    <span *ngIf="outgoingTransfer">Entnehmen</span>
-                    <span *ngIf="!outgoingTransfer">Zurücklegen</span>
+                    {{ getString(outgoingTransfer ? 'btnOutLabel' : 'btnInLabel') }}
                   </button>
                 </div>
               </div>
