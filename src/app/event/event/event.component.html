@@ -12,8 +12,10 @@
           <i class="fa"
             [ngClass]="event.eventType.icon"
             aria-hidden="true"></i>
-          {{ event.eventType.description }}
-          {{ event.datetime | date:'dd.MM.yyyy' }}
+          <span routerLink="./overview">
+            {{ event.eventType.description }}
+            {{ event.datetime | date:'dd.MM.yyyy' }}
+          </span>
           <small>
             {{ event.description }}
             <a routerLink="edit" title="Bearbeiten" style="margin-left: 10px">

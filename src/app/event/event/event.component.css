@@ -19,3 +19,7 @@
   background-color:#EEE;
   outline: none;
 }
+
+h1 span {
+  outline: none;
+}
