@@ -9,7 +9,6 @@ import { Product } from '../../shared/models/product';
 })
 export class ProductCardComponent implements OnInit {
 
-  @Input() gridWidth = 3;
   @Input() product: Product;
 
   constructor(@Inject('IMG_URL') private imgUrl) { }
