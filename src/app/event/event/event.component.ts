@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import 'rxjs/add/operator/switchMap';
 
+import { GlobalService } from './../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
 
@@ -19,8 +20,8 @@ import { EventService } from '../shared/event.service';
       state('out', style({
         transform: 'translateX(100%)'
       })),
-      transition('in => out', animate('400ms ease-in-out')),
-      transition('out => in', animate('400ms ease-in-out'))
+      transition('in => out', animate('200ms ease-in-out')),
+      transition('out => in', animate('200ms ease-in-out'))
     ]),
     trigger('btnInOut', [
       state('in', style({
@@ -29,8 +30,8 @@ import { EventService } from '../shared/event.service';
       state('out', style({
         right: '0',
       })),
-      transition('in => out', animate('400ms ease-in-out')),
-      transition('out => in', animate('400ms ease-in-out'))
+      transition('in => out', animate('200ms ease-in-out')),
+      transition('out => in', animate('200ms ease-in-out'))
     ]),
     trigger('containerInOut', [
       state('in', style({
@@ -39,8 +40,8 @@ import { EventService } from '../shared/event.service';
       state('out', style({
         marginRight: '0'
       })),
-      transition('in => out', animate('400ms ease-in-out')),
-      transition('out => in', animate('400ms ease-in-out'))
+      transition('in => out', animate('200ms ease-in-out')),
+      transition('out => in', animate('200ms ease-in-out'))
     ]),
   ]
 })
@@ -51,10 +52,12 @@ export class EventComponent implements OnInit, OnDestroy {
   event: Event;
   eventUpdated$: Subscription;
   eventClosed$: Subscription;
+  mobileMode$: Subscription;
 
   constructor(
     private route: ActivatedRoute,
-    private es: EventService
+    private es: EventService,
+    private gs: GlobalService
   ) { }
 
   ngOnInit() {
@@ -65,11 +68,14 @@ export class EventComponent implements OnInit, OnDestroy {
     this.eventClosed$ = this.es.eventClosed
       .switchMap(eventId => this.es.getEvent(eventId))
       .subscribe(event => this.event = event);
+
+    this.mobileMode$ = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
   }
 
   ngOnDestroy() {
     this.eventUpdated$.unsubscribe();
     this.eventClosed$.unsubscribe();
+    this.mobileMode$.unsubscribe();
   }
 
   toggleSidebar(): void {
