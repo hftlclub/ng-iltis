@@ -1,3 +1,7 @@
+:host {
+  cursor: pointer;
+}
+
 .panel-footer {
   font-weight: bold;
 }
