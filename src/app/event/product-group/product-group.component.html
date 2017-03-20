@@ -1,4 +1,6 @@
 <div class="row">
-  <h3 [id]="category.id">{{ category.name }}</h3>
-  <il-product-card *ngFor="let p of category.products" [product]="p" [routerLink]="['../newtransfer', p.id]"></il-product-card>
+  <div class="col-md-12">
+    <h3 [id]="category.id">{{ category.name }}</h3>
+    <il-product-card *ngFor="let p of category.products" [product]="p" [routerLink]="['../newtransfer', p.id]"></il-product-card>
+  </div>
 </div>
