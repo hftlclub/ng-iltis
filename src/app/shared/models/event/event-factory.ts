@@ -1,5 +1,5 @@
 import { ValueChecker } from '../../valuechecker';
-import { Event } from './';
+import { Event } from './event';
 import { EventTypeFactory } from '../eventtype';
 
 export class EventFactory {
