@@ -4,10 +4,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { PageScrollConfig, Ng2PageScrollModule } from 'ng2-page-scroll';
-import { ModalModule } from 'ng2-bootstrap/modal';
-import { DatepickerModule } from 'ng2-bootstrap/datepicker';
-import { DropdownModule } from 'ng2-bootstrap/dropdown';
-import { TimepickerModule } from 'ng2-bootstrap/timepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 import { HasChangesGuard } from './has-changes.guard';
 import { ProductService } from './product.service';
@@ -23,12 +23,12 @@ import { ProductResolver } from './resolvers/product.resolver';
     Ng2PageScrollModule.forRoot(),
     ModalModule.forRoot(),
     DatepickerModule.forRoot(),
-    DropdownModule.forRoot(),
+    BsDropdownModule.forRoot(),
     TimepickerModule.forRoot()
   ],
   exports: [
     SimpleNotificationsModule,
-    DropdownModule
+    BsDropdownModule
   ],
   providers: [
     HasChangesGuard,

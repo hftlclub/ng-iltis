@@ -4,9 +4,9 @@ import { HttpModule } from '@angular/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { Ng2PageScrollModule } from 'ng2-page-scroll';
-import { DatepickerModule } from 'ng2-bootstrap/datepicker';
-import { ModalModule } from 'ng2-bootstrap/modal';
-import { TimepickerModule } from 'ng2-bootstrap/timepicker';
+import { DatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { IconComponent } from './icon/icon.component';
