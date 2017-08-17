@@ -21,7 +21,7 @@
 
   <il-event-overview-card title="Kasse" icon="cash">
     <span class="title-right">
-      <a title="Bearbeiten" (click)="cashModal.show()">
+      <a title="Bearbeiten" (click)="showCashModal()">
         <il-icon for="edit"></il-icon>
       </a>
     </span>
@@ -42,7 +42,7 @@
     <a class="btn btn-default btn-block btn-sm"
       style="margin-top: 13px"
       *ngIf="cashEmpty"
-      (click)="cashModal.show()">
+      (click)="showCashModal()">
       Kassenstand eintragen
     </a>
   </il-event-overview-card>
@@ -106,11 +106,6 @@
   </il-event-overview-card>
 </div>
 
-
-
-<div bsModal #cashModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <il-cash-modal [event]="event" (hide)="cashModal.hide()"></il-cash-modal>
-</div>
 
 
 <div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

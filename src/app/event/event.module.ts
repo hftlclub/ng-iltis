@@ -48,12 +48,12 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     CounterControlComponent,
     EventOverviewComponent,
     EventListComponent,
+    CashModalComponent,
     HistoryTransferItemComponent,
     HistoryTransactionItemComponent,
     TransferFormComponent,
     EventFormComponent,
     EditEventComponent,
-    CashModalComponent,
     EventOverviewCardComponent,
     CountFormComponent,
     CountFormContainerComponent,
@@ -61,6 +61,9 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     CloseFormContainerComponent,
     CheckboxControlComponent,
     DeleteModalComponent,
+  ],
+  entryComponents: [
+    CashModalComponent
   ],
   providers: [
     EventService

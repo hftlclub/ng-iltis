@@ -1,10 +1,14 @@
 import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
 import { EventService } from '../shared/event.service';
 import { Event } from '../../shared/models/event';
 import { Calculation } from '../../shared/models/calculation';
+import { CashModalComponent } from '../cash-modal/cash-modal.component';
+
 
 @Component({
   selector: 'il-event-overview',
@@ -13,13 +17,15 @@ import { Calculation } from '../../shared/models/calculation';
 })
 export class EventOverviewComponent implements OnInit, OnDestroy {
 
+  cashModal: BsModalRef;
+
   event: Event;
   calc: Calculation;
   calcLoading: boolean;
 
   eventUpdated$: Subscription;
 
-  constructor(private route: ActivatedRoute, private es: EventService) { }
+  constructor(private route: ActivatedRoute, private es: EventService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.event = this.route.snapshot.data['event'];
@@ -30,6 +36,11 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
       this.loadCalculation();
     });
 
+  }
+
+  showCashModal() {
+    this.cashModal = this.modalService.show(CashModalComponent);
+    this.cashModal.content.event = this.event;
   }
 
   loadCalculation() {

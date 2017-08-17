@@ -1,9 +1,10 @@
 import { NotificationsService } from 'angular2-notifications';
 import { EventService } from './../shared/event.service';
-import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
+import { Component, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
-import { Event } from '../../shared/models/event/event';
+import { Event, EventFactory } from '../../shared/models/event';
 
 @Component({
   selector: 'il-cash-modal',
@@ -12,8 +13,7 @@ import { Event } from '../../shared/models/event/event';
 })
 export class CashModalComponent implements OnInit {
 
-  @Input() event: Event;
-  @Output() hide = new EventEmitter<any>();
+  event: Event = EventFactory.empty();
 
   form: FormGroup;
   loading = false;
@@ -21,10 +21,17 @@ export class CashModalComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private es: EventService,
-    private ns: NotificationsService
+    private ns: NotificationsService,
+    private modal: BsModalRef,
+    private zone: NgZone
   ) { }
 
   ngOnInit() {
+    this.initForm();
+    this.zone.onStable.subscribe(() => this.initForm());
+  }
+
+  private initForm() {
     this.form = this.fb.group({
       cashBefore: [this.event.cashBefore, Validators.required],
       cashAfter: [this.event.cashAfter, Validators.required],
@@ -60,7 +67,7 @@ export class CashModalComponent implements OnInit {
   }
 
   hideModal() {
-    this.hide.emit();
+    this.modal.hide();
   }
 
 }
