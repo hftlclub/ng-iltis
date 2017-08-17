@@ -72,7 +72,7 @@
                 <div formArrayName="sizeTypes">
                   <div
                     class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
-                    *ngFor="let st of product.sizeTypes; let i = index">
+                    *ngFor="let st of product.sizeTypes; index as i">
                     <h3 class="text-center">{{ st.description }} {{ st.amount | number }} {{ product.unit.short }}</h3>
                     <il-counter-control minValue="0" [formControlName]="i"></il-counter-control>
                   </div>
@@ -81,7 +81,7 @@
                 <div formArrayName="crateTypes">
                   <div
                     class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
-                    *ngFor="let ct of product.crateTypes; let i = index">
+                    *ngFor="let ct of product.crateTypes; index as i">
                     <h3 class="text-center">{{ ct.description }} {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ product.unit.short }}</h3>
                     <il-counter-control minValue="0" [formControlName]="i"></il-counter-control>
                   </div>
