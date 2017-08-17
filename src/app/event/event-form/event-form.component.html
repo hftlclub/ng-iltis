@@ -47,59 +47,15 @@
                 <div class="form-group" *ngIf="isEventMode">
                   <label for="time">Uhrzeit</label>
                   <div class="input-group">
-                    <input type="text" class="form-control" [value]="form.value.time | date:'HH:mm a'" (focus)="timePickerModal.show()">
+                    <input type="text" class="form-control" [value]="form.value.time | date:'HH:mm a'" (focus)="showTimepickerModal()">
                     <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" (click)="timePickerModal.show()">
+                      <button class="btn btn-default" type="button" (click)="showTimepickerModal()">
                         <il-icon for="clock"></il-icon>
                       </button>
                     </span>
 
                   </div>
                 </div>
-
-                <!-- MODAL Time picker -->
-                <div bsModal #timePickerModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-                  <div class="modal-dialog modal-sm">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title pull-left">
-                          <il-icon for="clock"></il-icon>
-                          Uhrzeit auswählen
-                        </h4>
-                        <button type="button" class="close pull-right" (click)="timePickerModal.hide()" aria-label="Close">
-                          <span aria-hidden="true">&times;</span>
-                        </button>
-                      </div>
-                      <div class="modal-body">
-                        <div stye="width: 150px; margin: auto">
-                          <timepicker formControlName="time" [showMeridian]="false" [minuteStep]="15"></timepicker>
-                        </div>
-                        <div class="text-center">
-                          <button type="button" class="btn btn-primary" (click)="setTime()">
-                            Jetzt
-                          </button>
-                          <button type="button" class="btn btn-primary" (click)="setTime(18, 30)">
-                            18:30
-                          </button>
-                          <button type="button" class="btn btn-primary" (click)="setTime(19, 0)">
-                            19:00
-                          </button>
-                          <button type="button" class="btn btn-primary" (click)="setTime(21, 0)">
-                            21:00
-                          </button>
-                        </div>
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-primary btn-block btn-lg" (click)="timePickerModal.hide()">
-                          <il-icon for="ok"></il-icon>
-                          OK
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-
 
 
                 <div class="form-group" *ngIf="!edit">

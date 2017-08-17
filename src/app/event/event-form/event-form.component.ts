@@ -1,10 +1,11 @@
-import { DatepickerModalComponent } from '../datepicker-modal/datepicker-modal.component';
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { Event, EventFactory } from '../../shared/models/event';
 import { EventType } from '../../shared/models/eventtype';
+import { DatepickerModalComponent } from '../datepicker-modal/datepicker-modal.component';
+import { TimepickerModalComponent } from '../timepicker-modal/timepicker-modal.component';
 
 @Component({
   selector: 'il-event-form',
@@ -95,13 +96,10 @@ export class EventFormComponent implements OnInit, OnChanges {
     modal.content.updated.subscribe(date => this.form.patchValue({ date: date }));
   }
 
-
-  setTime(hours: number, min: number): void {
-    const newDate = new Date();
-    if(hours !== undefined) { newDate.setHours(hours); }
-    if(min !== undefined) { newDate.setMinutes(min); }
-
-    this.form.get('time').setValue(newDate);
+  showTimepickerModal() {
+    const modal = this.modalService.show(TimepickerModalComponent, { class: 'modal-sm' });
+    modal.content.date = this.form.get('time').value;
+    modal.content.updated.subscribe(date => this.form.patchValue({ time: date }));
   }
 
   // returns new Date object with nothing "smaller" than HH and MM (thus, no milliseconds)
