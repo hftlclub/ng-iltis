@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../shared/shared.module';
 import { EventRoutingModule } from './event-routing.module';
-import { EventService } from './shared/event.service';
 import { AbsPipe } from './shared/abs.pipe';
 import { CounterControlComponent } from './counter-control/counter-control.component';
 import { EventComponent } from './event/event.component';
@@ -71,9 +70,7 @@ const modals = [
     ...modals
   ],
   entryComponents: [...modals],
-  providers: [
-    EventService
-  ]
+  providers: []
 })
 export class EventModule {
 

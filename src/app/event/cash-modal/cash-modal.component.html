@@ -35,6 +35,11 @@
         </div>
       </div>
 
+      <div class="alert alert-warning" *ngIf="cashAfterIsLess">
+        <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+        Der Kassenstand nachher ist kleiner als vorher. Ist das gewollt?
+      </div>
+
   </div>
   <div class="modal-footer">
     <button type="submit" class="btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">

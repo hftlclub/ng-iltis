@@ -30,9 +30,10 @@
       <strong>vorher:</strong>
       {{ event.cashBefore | currency:'EUR':true }}
     </p>
-    <p>
+    <p [ngClass]="{ 'text-warning': cashAfterIsLess }">
       <strong>nachher:</strong>
       {{ event.cashAfter | currency:'EUR':true }}
+      <i *ngIf="cashAfterIsLess" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
     </p>
     <p *ngIf="event.tip">
       <strong>Trinkgeld:</strong>

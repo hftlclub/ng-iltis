@@ -3,6 +3,7 @@ import { EventService } from './../shared/event.service';
 import { Component, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { Subscription } from 'rxjs/Subscription';
 
 import { Event, EventFactory } from '../../shared/models/event';
 
@@ -17,6 +18,7 @@ export class CashModalComponent implements OnInit {
 
   form: FormGroup;
   loading = false;
+  zoneSubscription: Subscription;
 
   constructor(
     private fb: FormBuilder,
@@ -28,7 +30,10 @@ export class CashModalComponent implements OnInit {
 
   ngOnInit() {
     this.initForm();
-    this.zone.onStable.subscribe(() => this.initForm());
+    this.zoneSubscription = this.zone.onStable.subscribe(() => {
+      this.initForm();
+      this.zoneSubscription.unsubscribe();
+    });
   }
 
   private initForm() {
@@ -47,19 +52,24 @@ export class CashModalComponent implements OnInit {
       tip: this.sanitizeFloat(val.tip)
     };
 
-    const newEvent: Event = Object.assign({}, this.event, newValues);
 
     this.loading = true;
-    this.es.updateEvent(newEvent.id, newEvent).subscribe(event => {
+    this.es.updateEvent(this.event.id, newValues as Event).subscribe(event => {
       this.loading = false;
       this.ns.success('Kassenstand', 'Der Kassenstand wurde übernommen.');
 
-      this.es.eventUpdated.emit(newEvent);
+      this.event.cashBefore = newValues.cashBefore;
+      this.event.cashAfter = newValues.cashAfter;
+      this.event.tip = newValues.tip;
+
+      this.es.eventUpdated.emit(this.event);
       this.hideModal();
     });
-
   }
 
+  get cashAfterIsLess(): boolean {
+    return this.form.get('cashAfter').value < this.form.get('cashBefore').value;
+  }
 
   sanitizeFloat(num: any): number {
     if (!num) { num = 0; }

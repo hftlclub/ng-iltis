@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { EventModule } from './event/event.module';
+import { EventService } from './event/shared/event.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 
@@ -26,7 +27,8 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     EventModule
   ],
   providers: [
-    { provide: LOCALE_ID, useValue: 'de' },
+    EventService,
+    { provide: LOCALE_ID, useValue: 'de' }
   ],
   bootstrap: [AppComponent]
 })

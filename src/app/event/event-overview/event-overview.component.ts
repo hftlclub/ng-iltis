@@ -60,6 +60,10 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
     return !this.event.cashBefore && !this.event.cashAfter && !this.event.tip;
   }
 
+  get cashAfterIsLess(): boolean {
+    return this.event.cashAfter < this.event.cashBefore;
+  }
+
   ngOnDestroy() {
     this.eventUpdated$.unsubscribe();
   }
