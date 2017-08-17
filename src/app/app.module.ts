@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
@@ -22,7 +22,7 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     BrowserModule,
     SharedModule,
     FormsModule,
-    HttpModule,
+    HttpClientModule,
     AppRoutingModule,
     EventModule
   ],

@@ -1,5 +1,5 @@
 import { Injectable, Inject } from '@angular/core';
-import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/retry';
@@ -11,19 +11,20 @@ import { Product, ProductFactory } from '../shared/models/product';
 @Injectable()
 export class ProductService {
 
-  constructor(@Inject('API_URL') private api, private http: Http) { }
+  constructor(
+    private http: HttpClient,
+    @Inject('API_URL') private api
+  ) { }
 
   getAll(): Observable<Product[]> {
-    return this.http.get(`${this.api}/products`)
+    return this.http.get<any[]>(`${this.api}/products`)
       .retry(3)
-      .map(res => res.json())
       .map(raw => raw.map(p => ProductFactory.fromObj(p)));
   }
 
   getSingle(id: number): Observable<Product> {
     return this.http.get(`${this.api}/product/${id}`)
       .retry(3)
-      .map(res => res.json())
       .map(raw => ProductFactory.fromObj(raw));
   }
 
