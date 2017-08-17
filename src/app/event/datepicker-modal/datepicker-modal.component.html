@@ -1,0 +1,37 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="calendar"></il-icon>
+    Datum auswählen
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<form (ngSubmit)="submitForm()">
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-md-8">
+        <datepicker [(ngModel)]="date" name="date"></datepicker>
+      </div>
+      <div class="col-md-4">
+        <button type="button" class="btn btn-primary btn-block" (click)="setDateMode('today')">
+          Heute
+        </button>
+        <button type="button" class="btn btn-primary btn-block" (click)="setDateMode('yesterday')">
+          Gestern
+        </button>
+
+        <p class="text-center date-preview">
+          {{ date | date:'longDate' }}
+        </p>
+
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary btn-block btn-lg">
+      <il-icon for="ok"></il-icon>
+      OK
+    </button>
+  </div>
+</form>

@@ -1,5 +1,7 @@
+import { DatepickerModalComponent } from '../datepicker-modal/datepicker-modal.component';
 import { Component, OnInit, OnChanges, Input, Output, EventEmitter, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { Event, EventFactory } from '../../shared/models/event';
 import { EventType } from '../../shared/models/eventtype';
@@ -21,7 +23,10 @@ export class EventFormComponent implements OnInit, OnChanges {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(
+    private fb: FormBuilder,
+    private modalService: BsModalService
+  ) { }
 
   ngOnInit() {
     const initial = this.getInitialFormValues();
@@ -84,19 +89,17 @@ export class EventFormComponent implements OnInit, OnChanges {
     this.cancelled.emit();
   }
 
-  setDate(mode: string): void {
-    let newDate;
-    switch (mode) {
-      case 'yesterday': newDate = new Date(Date.now() - 86400000); break;
-      default: newDate = new Date();
-    }
-    this.form.get('date').setValue(newDate);
+  showDatepickerModal() {
+    const modal = this.modalService.show(DatepickerModalComponent);
+    modal.content.date = this.form.get('date').value;
+    modal.content.updated.subscribe(date => this.form.patchValue({ date: date }));
   }
 
+
   setTime(hours: number, min: number): void {
-    let newDate = new Date();
-    if(hours !== undefined) newDate.setHours(hours);
-    if(min !== undefined) newDate.setMinutes(min);
+    const newDate = new Date();
+    if(hours !== undefined) { newDate.setHours(hours); }
+    if(min !== undefined) { newDate.setMinutes(min); }
 
     this.form.get('time').setValue(newDate);
   }

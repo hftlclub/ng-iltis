@@ -28,11 +28,13 @@ import { CloseFormComponent } from './close-form/close-form.component';
 import { CloseFormContainerComponent } from './close-form-container/close-form-container.component';
 import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
+import { DatepickerModalComponent } from './datepicker-modal/datepicker-modal.component';
 
 
 const modals = [
   CashModalComponent,
-  DeleteModalComponent
+  DeleteModalComponent,
+  DatepickerModalComponent
 ];
 
 @NgModule({
