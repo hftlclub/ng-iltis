@@ -1,55 +1,51 @@
-<div class="modal-dialog modal-md">
-  <div class="modal-content">
-    <div class="modal-header">
-      <h4 class="modal-title pull-left">
-        <il-icon for="delete"></il-icon>
-        Ereignis löschen
-      </h4>
-      <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="delete"></il-icon>
+    Ereignis löschen
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+
+<form [formGroup]="form" (ngSubmit)="deleteEvent()">
+  <div class="modal-body">
+    <div>
+      <strong>Das Ereignis wird <span class="text-danger">unwiderruflich</span> gelöscht.
+      Alle Buchungen gehen verloren.</strong>
     </div>
 
-    <form [formGroup]="form" (ngSubmit)="deleteEvent()">
-      <div class="modal-body">
-        <div>
-          <strong>Das Ereignis wird <span class="text-danger">unwiderruflich</span> gelöscht.
-          Alle Buchungen gehen verloren.</strong>
-        </div>
+    <div class="alert alert-warning" style="margin-top: 20px">
+      <il-icon for="fa-exclamation-triangle"></il-icon>
+      Lösche das Ereignis nur, wenn Du genau weißt, was Du tust!
+    </div>
 
-        <div class="alert alert-warning" style="margin-top: 20px">
-          <il-icon for="fa-exclamation-triangle"></il-icon>
-          Lösche das Ereignis nur, wenn Du genau weißt, was Du tust!
-        </div>
+    <il-checkbox-control formControlName="confirm">Ja, Ereignis und alle Buchungen löschen.</il-checkbox-control>
 
-        <il-checkbox-control formControlName="confirm">Ja, Ereignis und alle Buchungen löschen.</il-checkbox-control>
+    <hr>
 
-        <hr>
-
-        <div class="form-group form-group-lg has-feedback" [ngClass]="form.controls.challenge.valid ? 'has-success' : 'has-error'">
-          <label>
-            Zur Bestätigung tippe bitte folgendes ein:
-            <code>{{ challenge }}</code>
-          </label>
-          <input type="text" class="form-control" formControlName="challenge" [placeholder]="challenge">
-          <il-icon [for]="form.controls.challenge.valid ? 'ok' : 'cancel'" class="form-control-feedback"></il-icon>
-        </div>
-      </div>
-      <div class="modal-footer">
-        <div class="col-sm-6">
-          <button type="button" class="btn btn-danger btn-block btn-lg" (click)="hideModal()">
-            <il-icon for="cancel"></il-icon>
-            Abbrechen
-          </button>
-        </div>
-        <div class="col-sm-6">
-          <button type="submit" class="btn btn-warning btn-block btn-lg" [disabled]="loading || form.invalid">
-            <il-icon for="delete" *ngIf="!loading"></il-icon>
-            <il-icon for="spinner" *ngIf="loading"></il-icon>
-            Ereignis löschen
-          </button>
-        </div>
-      </div>
-    </form>
+    <div class="form-group form-group-lg has-feedback" [ngClass]="form.get('challenge').valid ? 'has-success' : 'has-error'">
+      <label>
+        Zur Bestätigung tippe bitte folgendes ein:
+        <code>{{ challenge }}</code>
+      </label>
+      <input type="text" class="form-control" formControlName="challenge" [placeholder]="challenge">
+      <il-icon [for]="form.get('challenge').valid ? 'ok' : 'cancel'" class="form-control-feedback"></il-icon>
+    </div>
   </div>
-</div>
+  <div class="modal-footer">
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-danger btn-block btn-lg" (click)="hideModal()">
+        <il-icon for="cancel"></il-icon>
+        Abbrechen
+      </button>
+    </div>
+    <div class="col-sm-6">
+      <button type="submit" class="btn btn-warning btn-block btn-lg" [disabled]="loading || form.invalid">
+        <il-icon for="delete" *ngIf="!loading"></il-icon>
+        <il-icon for="spinner" *ngIf="loading"></il-icon>
+        Ereignis löschen
+      </button>
+    </div>
+  </div>
+</form>

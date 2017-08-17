@@ -92,7 +92,7 @@
       <il-icon for="edit"></il-icon>
       Bearbeiten
     </a>
-    <a class="btn btn-danger btn-block" (click)="deleteModal.show()">
+    <a class="btn btn-danger btn-block" (click)="showDeleteModal()">
       <il-icon for="delete"></il-icon>
       Ereignis löschen
     </a>
@@ -104,12 +104,6 @@
       Abschließen
     </a>
   </il-event-overview-card>
-</div>
-
-
-
-<div bsModal #deleteModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">
-  <il-delete-modal [event]="event" (hide)="deleteModal.hide()"></il-delete-modal>
 </div>
 
 

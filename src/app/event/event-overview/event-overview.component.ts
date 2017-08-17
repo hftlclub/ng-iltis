@@ -2,12 +2,12 @@ import { Subscription } from 'rxjs/Subscription';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
 
 import { EventService } from '../shared/event.service';
 import { Event } from '../../shared/models/event';
 import { Calculation } from '../../shared/models/calculation';
 import { CashModalComponent } from '../cash-modal/cash-modal.component';
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 
 
 @Component({
@@ -16,8 +16,6 @@ import { CashModalComponent } from '../cash-modal/cash-modal.component';
   styleUrls: ['./event-overview.component.css']
 })
 export class EventOverviewComponent implements OnInit, OnDestroy {
-
-  cashModal: BsModalRef;
 
   event: Event;
   calc: Calculation;
@@ -39,8 +37,13 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
   }
 
   showCashModal() {
-    this.cashModal = this.modalService.show(CashModalComponent);
-    this.cashModal.content.event = this.event;
+    const modal = this.modalService.show(CashModalComponent);
+    modal.content.event = this.event;
+  }
+
+  showDeleteModal() {
+    const modal = this.modalService.show(DeleteModalComponent);
+    modal.content.event = this.event;
   }
 
   loadCalculation() {

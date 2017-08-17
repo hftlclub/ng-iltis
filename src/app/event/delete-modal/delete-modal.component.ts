@@ -1,7 +1,8 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
@@ -15,8 +16,7 @@ import { GlobalService } from '../../core/global.service';
 export class DeleteModalComponent implements OnInit {
 
 
-  @Input() event: Event;
-  @Output() hide = new EventEmitter<any>();
+  event: Event;
 
   form: FormGroup;
   loading = false;
@@ -27,12 +27,12 @@ export class DeleteModalComponent implements OnInit {
     private router: Router,
     private es: EventService,
     private ns: NotificationsService,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private modal: BsModalRef
   ) { }
 
   ngOnInit() {
     this.challenge = this.gs.getTrustChallenge();
-
     this.form = new FormGroup({
       challenge: new FormControl('', this.exactValueValidator(this.challenge)),
       confirm: new FormControl(false, this.exactValueValidator(true))
@@ -58,6 +58,6 @@ export class DeleteModalComponent implements OnInit {
   }
 
   hideModal() {
-    this.hide.emit();
+    this.modal.hide()
   }
 }

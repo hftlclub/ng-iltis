@@ -30,6 +30,11 @@ import { CheckboxControlComponent } from './checkbox-control/checkbox-control.co
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 
 
+const modals = [
+  CashModalComponent,
+  DeleteModalComponent
+];
+
 @NgModule({
   imports: [
     SharedModule,
@@ -48,7 +53,6 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     CounterControlComponent,
     EventOverviewComponent,
     EventListComponent,
-    CashModalComponent,
     HistoryTransferItemComponent,
     HistoryTransactionItemComponent,
     TransferFormComponent,
@@ -60,11 +64,9 @@ import { DeleteModalComponent } from './delete-modal/delete-modal.component';
     CloseFormComponent,
     CloseFormContainerComponent,
     CheckboxControlComponent,
-    DeleteModalComponent,
+    ...modals
   ],
-  entryComponents: [
-    CashModalComponent
-  ],
+  entryComponents: [...modals],
   providers: [
     EventService
   ]
