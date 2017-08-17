@@ -16,17 +16,17 @@
             <th>Datum</th>
           </tr>
         </thead>
-        <tr *ngFor="let e of events" [routerLink]="e.id" [class.warning]="e.active">
+        <tr *ngFor="let e of events" [routerLink]="e.id" [class.success]="e.active">
           <td>
             <il-icon [for]="e.eventType.icon"></il-icon>
             {{ e.eventType.description }}
-          </td>
-          <td>
-            {{ e.description }}
-            <span *ngIf="e.active" class="label label-warning pull-right">
+            <span *ngIf="e.active" class="label label-success pull-right">
               <il-icon for="evActive"></il-icon>
               aktiv
             </span>
+          </td>
+          <td>
+            {{ e.description }}
           </td>
           <td>{{ e.datetime | date:'dd.MM.yyyy, HH:mm' }} Uhr</td>
         </tr>
