@@ -1,4 +1,4 @@
-<div class="container-fluid">
+<div class="container">
   <div class="row">
     <div class="col-md-12 content">
       <div class="page-header">
@@ -8,27 +8,32 @@
         </h1>
       </div>
 
-      <table class="table table-bordered table-hover event-table">
+      <table class="table table-hover table-striped event-table">
         <thead>
           <tr>
-            <th>Typ</th>
-            <th>Beschreibung</th>
             <th>Datum</th>
+            <th>Typ</th>
+            <th>Uhrzeit</th>
+            <th>Beschreibung</th>
           </tr>
         </thead>
         <tr *ngFor="let e of events" [routerLink]="e.id" [class.success]="e.active">
           <td>
+            {{ e.datetime | date:'dd. MMMM yyyy' }}
+            <span class="text-muted pull-right small">{{ e.datetime | date:'EE' }}</span>
+          </td>
+          <td>
             <il-icon [for]="e.eventType.icon"></il-icon>
             {{ e.eventType.description }}
+          </td>
+          <td>{{ e.datetime | date:'HH:mm' }} Uhr</td>
+          <td>
+            {{ e.description }}
             <span *ngIf="e.active" class="label label-success pull-right">
               <il-icon for="evActive"></il-icon>
               aktiv
             </span>
           </td>
-          <td>
-            {{ e.description }}
-          </td>
-          <td>{{ e.datetime | date:'dd.MM.yyyy, HH:mm' }} Uhr</td>
         </tr>
       </table>
 
