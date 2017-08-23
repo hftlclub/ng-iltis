@@ -37,15 +37,14 @@
     "@angular/router": "^4.2.4",
     "angular-date-value-accessor": "0.0.1",
     "angular2-notifications": "^0.4.53",
-    "core-js": "^2.4.1",
-    "rxjs": "^5.4.2",
-    "zone.js": "^0.8.14",
     "bootstrap": "^3.3.7",
-    "bootswatch": "^3.3.7",
+    "core-js": "^2.4.1",
     "font-awesome": "^4.7.0",
     "lodash": "^4.17.4",
     "ng2-page-scroll": "^4.0.0-beta.4",
-    "ngx-bootstrap": "^1.8.1"
+    "ngx-bootstrap": "^1.8.1",
+    "rxjs": "^5.4.2",
+    "zone.js": "^0.8.14"
   },
   "devDependencies": {
     "@angular/cli": "^1.3.0",
