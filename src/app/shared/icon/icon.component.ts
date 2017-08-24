@@ -28,7 +28,9 @@ export class IconComponent {
     clock: 'fa-clock-o',
     calendar: 'fa-calendar',
     plus: 'fa-plus',
-    delete: 'fa-trash'
+    delete: 'fa-trash',
+    unit: 'fa-calculator',
+    warning: 'fa-exclamation-triangle'
   };
 
 }

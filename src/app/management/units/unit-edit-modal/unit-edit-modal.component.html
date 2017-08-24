@@ -1,0 +1,23 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="edit"></il-icon>
+    Einheit bearbeiten
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<il-unit-form
+  *ngIf="unit"
+  [loading]="loading"
+  [initialValue]="unit"
+  buttonLabel="Speichern"
+  (formSubmitted)="updateUnit($event)"
+  (cancelled)="hideModal()">
+
+  <div class="alert alert-warning">
+    <il-icon for="warning"></il-icon>
+    Änderungen an einer Einheit wirken sich auf alle betroffenen Produkte aus!
+  </div>
+</il-unit-form>
+

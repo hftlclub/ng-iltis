@@ -7,10 +7,16 @@ import { CoreModule } from './core/core.module';
 import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { EventModule } from './event/event.module';
-import { EventService } from './event/shared/event.service';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
+import { EventService } from './event/shared/event.service';
+import { UnitsService } from './management/units/shared/units.service';
+
+
+import { EventModule } from './event/event.module';
+import { ManagementModule } from './management/management.module';
+import { UnitsModule } from './management/units/units.module';
+const lazyModules = [EventModule, ManagementModule, UnitsModule];
 
 @NgModule({
   declarations: [
@@ -24,10 +30,11 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
     FormsModule,
     HttpClientModule,
     AppRoutingModule,
-    EventModule
+    ...lazyModules // lazy loaded modules are still imported because of https://github.com/angular/angular/issues/14324
   ],
   providers: [
     EventService,
+    UnitsService,
     { provide: LOCALE_ID, useValue: 'de' }
   ],
   bootstrap: [AppComponent]

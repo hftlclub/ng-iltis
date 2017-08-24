@@ -5,6 +5,10 @@
           <h1>
             <il-icon for="fa-calculator"></il-icon>
             Einheiten
+            <button class="btn btn-success btn-lg pull-right" type="button" (click)="showCreateModal()">
+              <il-icon for="plus"></il-icon>
+              Hinzufügen
+            </button>
           </h1>
         </div>
         <div class="row">
@@ -24,11 +28,11 @@
                   <td>{{ u.full }}</td>
                   <td>{{ u.short }}</td>
                   <td>
-                    <button class="btn btn-warning btn-xs">
+                    <button class="btn btn-warning btn-xs" (click)="showEditModal(u)">
                       <il-icon for="edit"></il-icon>
                       Bearbeiten
                     </button>
-                    <button class="btn btn-danger btn-xs">
+                    <button class="btn btn-danger btn-xs" (click)="showDeleteModal(u)">
                       <il-icon for="delete"></il-icon>
                       Löschen
                     </button>
