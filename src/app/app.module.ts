@@ -17,7 +17,8 @@ import { SizesService } from './management/sizes/shared/sizes.service';
 import { EventModule } from './event/event.module';
 import { ManagementModule } from './management/management.module';
 import { SizesModule } from './management/sizes/sizes.module';
-const lazyModules = [EventModule, ManagementModule, SizesModule];
+import { ProductsModule } from './management/products/products.module';
+const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule];
 
 @NgModule({
   declarations: [

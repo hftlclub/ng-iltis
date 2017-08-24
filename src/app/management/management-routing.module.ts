@@ -6,7 +6,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 const routes: Routes = [
   { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
   { path: 'dashboard', component: DashboardComponent },
-  { path: 'sizes', loadChildren: 'app/management/sizes/sizes.module#SizesModule' }
+  { path: 'sizes', loadChildren: 'app/management/sizes/sizes.module#SizesModule' },
+  { path: 'products', loadChildren: 'app/management/products/products.module#ProductsModule' }
 ];
 
 @NgModule({
