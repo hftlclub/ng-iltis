@@ -5,6 +5,5 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000',
-  imgUrl: 'https://api.iltis.hftl.club/images/products/uploads/'
+  apiUrl: 'http://localhost:3000'
 };

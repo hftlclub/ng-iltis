@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject, ViewChild, TemplateRef } from '@angular/core';
+import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
 import { TableColumn } from '@swimlane/ngx-datatable';
@@ -22,7 +22,7 @@ export class ProductListComponent implements OnInit {
 
   columns: TableColumn[];
 
-  constructor(private ps: ProductService, @Inject('IMG_URL') private imgUrl) { }
+  constructor(private ps: ProductService) { }
 
   ngOnInit() {
     this.products$ = this.ps.getAll();

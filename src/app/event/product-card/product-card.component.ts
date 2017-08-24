@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Product } from '../../shared/models/product';
 
@@ -11,7 +11,7 @@ export class ProductCardComponent implements OnInit {
 
   @Input() product: Product;
 
-  constructor(@Inject('IMG_URL') private imgUrl) { }
+  constructor() { }
 
   ngOnInit() {
   }
