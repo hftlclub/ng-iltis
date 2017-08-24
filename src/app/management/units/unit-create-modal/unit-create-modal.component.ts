@@ -20,8 +20,13 @@ export class UnitCreateModalComponent {
     this.loading = true;
     this.us.create(unit).subscribe(() => {
       this.loading = false;
-      this.ns.success('Einheit hinzugefügt', 'Die Einheit wurde hinzugefügt.')
+      this.ns.success('Einheit hinzugefügt', 'Die Einheit wurde hinzugefügt.');
       this.us.unitListChanged.emit();
+      this.hideModal();
+    },
+    err => {
+      this.loading = false;
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
       this.hideModal();
     });
   }

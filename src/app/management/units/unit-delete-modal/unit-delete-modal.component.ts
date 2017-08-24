@@ -24,6 +24,11 @@ export class UnitDeleteModalComponent {
       this.ns.success('Einheit gelöscht', 'Die Einheit wurde gelöscht.')
       this.us.unitListChanged.emit();
       this.hideModal();
+    },
+    err => {
+      this.loading = false;
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
+      this.hideModal();
     });
   }
 

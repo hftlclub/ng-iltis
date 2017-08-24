@@ -24,6 +24,11 @@ export class UnitEditModalComponent {
       this.ns.success('Einheit bearbeitet', 'Die Einheit wurde bearbeitet.')
       this.us.unitListChanged.emit();
       this.hideModal();
+    },
+    err => {
+      this.loading = false;
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
+      this.hideModal();
     });
   }
 

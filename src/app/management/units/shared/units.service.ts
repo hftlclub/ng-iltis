@@ -31,18 +31,16 @@ export class UnitsService {
       .retry(3)
   }
 
-  delete(id: number): Observable<any> {
-    return Observable.of('...').delay(2000);
+  delete(unitId: number): Observable<any> {
+    return this.http.delete(`${this.api}/unit/${unitId}`);
   }
 
   create(unit: Unit): Observable<any> {
-    console.log('Create unit', unit);
-    return Observable.of('...').delay(2000);
+    return this.http.post(`${this.api}/unit`, unit);
   }
 
   update(unitId: number, unit: Unit): Observable<any> {
-    console.log('Update unit ID', unitId, ':', unit);
-    return Observable.of('...').delay(2000);
+    return this.http.put(`${this.api}/unit/${unitId}`, unit);
   }
 
 
