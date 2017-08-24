@@ -6,10 +6,14 @@ import { Component, Input } from '@angular/core';
 })
 export class IconComponent {
 
-  iconClass: string;
+  iconClass = '';
 
   @Input() set for(reason: string) {
-    this.iconClass = this.iconMap[reason] || reason;
+    this.iconClass += this.iconMap[reason] || reason;
+  }
+
+  @Input() set classes(classes: string) {
+    this.iconClass += ' ' + classes;
   }
 
   private iconMap: { [k: string]: string } = {
