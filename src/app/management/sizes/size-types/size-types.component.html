@@ -1,0 +1,38 @@
+
+
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Bezeichnung</th>
+      <th>Füllmenge</th>
+      <th>Aktionen</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="sizeTypes$ | async as sizeTypes; else loading">
+    <tr *ngFor="let st of sizeTypes">
+      <td>{{ st.id }}</td>
+      <td>{{ st.description }}</td>
+      <td>{{ st.amount }}</td>
+      <td>
+        <button class="btn btn-warning btn-xs" (click)="showEditModal(st)">
+          <il-icon for="edit"></il-icon>
+          Bearbeiten
+        </button>
+        <button class="btn btn-danger btn-xs" (click)="showDeleteModal(st)">
+          <il-icon for="delete"></il-icon>
+          Löschen
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <ng-template #loading>
+    <tbody>
+      <tr>
+        <td colspan="4" class="loading">
+          <il-icon for="spinner"></il-icon>
+          Laden...
+        </td>
+    </tbody>
+  </ng-template>
+</table>

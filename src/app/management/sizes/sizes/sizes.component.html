@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      <div class="page-header">
+        <h1>
+          <il-icon for="fa-cube"></il-icon>
+          Gebinde
+          <small>{{ subHeadline }}</small>
+        </h1>
+      </div>
+      <ul class="nav nav-tabs nav-justified">
+        <li role="presentation" routerLinkActive="active"><a routerLink="size-types">Gebindegrößen</a></li>
+        <li role="presentation" routerLinkActive="active"><a routerLink="crate-types">Kastengrößen</a></li>
+      </ul>
+      <div class="panel panel-default">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </div>

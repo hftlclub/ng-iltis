@@ -11,12 +11,14 @@ import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 import { EventService } from './event/shared/event.service';
 import { UnitsService } from './management/units/shared/units.service';
+import { SizesService } from './management/sizes/shared/sizes.service';
 
 
 import { EventModule } from './event/event.module';
 import { ManagementModule } from './management/management.module';
 import { UnitsModule } from './management/units/units.module';
-const lazyModules = [EventModule, ManagementModule, UnitsModule];
+import { SizesModule } from './management/sizes/sizes.module';
+const lazyModules = [EventModule, ManagementModule, UnitsModule, SizesModule];
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ const lazyModules = [EventModule, ManagementModule, UnitsModule];
   providers: [
     EventService,
     UnitsService,
+    SizesService,
     { provide: LOCALE_ID, useValue: 'de' }
   ],
   bootstrap: [AppComponent]
