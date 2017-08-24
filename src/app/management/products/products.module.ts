@@ -7,8 +7,9 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ProductSizesTableComponent } from './product-sizes-table/product-sizes-table.component';
+import { ImageUploadModalComponent } from './image-upload-modal/image-upload-modal.component';
 
-const modals = [];
+const modals = [ImageUploadModalComponent];
 
 @NgModule({
   imports: [
@@ -19,9 +20,10 @@ const modals = [];
   ],
   declarations: [
     ProductListComponent,
-    ...modals,
     ProductDetailsComponent,
-    ProductSizesTableComponent
+    ProductSizesTableComponent,
+    ...modals
+
   ],
   entryComponents: [...modals]
 })

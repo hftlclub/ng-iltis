@@ -18,10 +18,10 @@
           <div class="thumbnail">
             <img [src]="product.imgFilename" alt="...">
             <div class="caption">
-              <button class="btn btn-sm btn-block btn-default">
-                      <il-icon for="fa-upload"></il-icon>
-                      Hochladen
-                    </button>
+              <button class="btn btn-sm btn-block btn-default" (click)="showUploadModal()">
+                <il-icon for="fa-upload"></il-icon>
+                Hochladen
+              </button>
             </div>
           </div>
         </div>

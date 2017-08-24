@@ -12,6 +12,7 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { HasChangesGuard } from './has-changes.guard';
 import { ProductService } from './product.service';
 import { GlobalService } from './global.service';
+import { UploadService } from './upload.service';
 import { ProductsResolver } from './resolvers/products.resolver';
 import { ProductResolver } from './resolvers/product.resolver';
 
@@ -34,6 +35,7 @@ import { ProductResolver } from './resolvers/product.resolver';
     HasChangesGuard,
     ProductService,
     GlobalService,
+    UploadService,
     ProductResolver,
     ProductsResolver
   ]

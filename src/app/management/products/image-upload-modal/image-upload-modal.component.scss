@@ -1,0 +1,14 @@
+.image-preview {
+  margin-top: 20px;
+  overflow: hidden;
+
+  img {
+    max-height: 250px;
+  }
+}
+
+.file-input {
+  display: block;
+  width: 100%;
+  // visibility: hidden;
+}

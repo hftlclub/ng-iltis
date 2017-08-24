@@ -1,0 +1,36 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="fa-upload"></il-icon>
+    Bild für {{ product?.name }} hochladen
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <input type="file" #fileInput placeholder="Bild auswählen" class="file-input" (change)="showImage()">
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="image-preview thumbnail" *ngIf="image">
+        <img [src]="image">
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal-footer">
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
+      <il-icon for="cancel"></il-icon>
+      Abbrechen
+    </button>
+  </div>
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-success btn-block btn-lg" [disabled]="loading" (click)="upload()">
+      <il-icon for="fa-upload" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      Hochladen
+    </button>
+  </div>
+</div>
