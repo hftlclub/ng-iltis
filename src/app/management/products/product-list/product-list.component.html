@@ -5,11 +5,47 @@
           <h1>
             <il-icon for="fa-coffee"></il-icon>
             Produkte
+
+            <button class="btn btn-success pull-right">
+              <il-icon for="plus"></il-icon>
+              Hinzufügen
+            </button>
           </h1>
         </div>
 
         <div class="row">
-          {{ products | json }}
+          <ngx-datatable
+            class="material"
+            [rows]="products$ | async"
+            [columns]="columns"
+            [draggable]="false"
+            columnMode="force"
+            rowHeight="auto">
+          </ngx-datatable>
+
+          <ng-template #tplImg let-row="row">
+            <img [src]="imgUrl + row.imgFilename" width="30" height="30">
+          </ng-template>
+
+          <ng-template #tplCategory let-row="row">
+            <a href="#">{{ row.category.name }}</a>
+          </ng-template>
+
+          <ng-template #tplUnit let-row="row" let-unit="value">
+            <span *ngIf="unit.full">{{ unit.short }} ({{ unit.full }})</span>
+          </ng-template>
+
+          <ng-template #tplActions let-row="row">
+            <button class="btn btn-xs btn-primary">
+              <il-icon for="edit"></il-icon>
+              Bearbeiten
+            </button>
+            <button class="btn btn-xs btn-success">
+              Details
+              <il-icon for="fa-arrow-right"></il-icon>
+            </button>
+          </ng-template>
+
         </div>
       </div>
     </div>

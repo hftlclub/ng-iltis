@@ -19,7 +19,10 @@
       "testTsconfig": "tsconfig.spec.json",
       "prefix": "il",
       "styles": [
-        "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+        "../node_modules/@swimlane/ngx-datatable/release/index.css",
+        "../node_modules/@swimlane/ngx-datatable/release/assets/icons.css",
+        "datatable.scss",
+        "../node_modules/bootstrap/dist/css/bootstrap.css",
         "../node_modules/font-awesome/scss/font-awesome.scss",
         "styles.css"
       ],

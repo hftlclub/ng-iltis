@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { SharedModule } from '../../shared/shared.module';
 import { ProductsRoutingModule } from './products-routing.module';
@@ -11,7 +12,8 @@ const modals = [];
   imports: [
     CommonModule,
     ProductsRoutingModule,
-    SharedModule
+    SharedModule,
+    NgxDatatableModule
   ],
   declarations: [
     ProductListComponent,
