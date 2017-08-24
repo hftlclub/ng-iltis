@@ -10,15 +10,14 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 import { EventService } from './event/shared/event.service';
-import { UnitsService } from './management/units/shared/units.service';
+import { UnitsService } from './management/sizes/shared/units.service';
 import { SizesService } from './management/sizes/shared/sizes.service';
 
 
 import { EventModule } from './event/event.module';
 import { ManagementModule } from './management/management.module';
-import { UnitsModule } from './management/units/units.module';
 import { SizesModule } from './management/sizes/sizes.module';
-const lazyModules = [EventModule, ManagementModule, UnitsModule, SizesModule];
+const lazyModules = [EventModule, ManagementModule, SizesModule];
 
 @NgModule({
   declarations: [

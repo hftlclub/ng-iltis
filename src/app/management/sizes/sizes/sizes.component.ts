@@ -14,6 +14,7 @@ export class SizesComponent implements OnInit {
     switch (this.route.snapshot.children[0].url[0].path) {
       case 'size-types': return 'Gebindegrößen';
       case 'crate-types': return 'Kastengrößen';
+      case 'units': return 'Einheiten';
       default: return '';
     }
   }

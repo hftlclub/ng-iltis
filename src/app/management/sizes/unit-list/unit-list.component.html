@@ -1,0 +1,41 @@
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Einheit</th>
+      <th>Kurzform</th>
+      <th>Aktionen</th>
+    </tr>
+  </thead>
+  <tbody *ngIf="units$ | async as units; else loading">
+    <tr *ngFor="let u of units">
+      <td>{{ u.id }}</td>
+      <td>{{ u.full }}</td>
+      <td>{{ u.short }}</td>
+      <td>
+        <button class="btn btn-warning btn-xs" (click)="showEditModal(u)">
+          <il-icon for="edit"></il-icon>
+          Bearbeiten
+        </button>
+        <button class="btn btn-danger btn-xs" (click)="showDeleteModal(u)">
+          <il-icon for="delete"></il-icon>
+          Löschen
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <ng-template #loading>
+    <tbody>
+      <tr>
+        <td colspan="4" class="loading">
+          <il-icon for="spinner"></il-icon>
+          Laden...
+        </td>
+    </tbody>
+  </ng-template>
+</table>
+
+<button class="btn btn-success" type="button" (click)="showCreateModal()">
+  <il-icon for="plus"></il-icon>
+  Einheit hinzufügen
+</button>

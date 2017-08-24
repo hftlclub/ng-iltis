@@ -4,15 +4,25 @@
       <div class="page-header">
         <h1>
           <il-icon for="fa-cube"></il-icon>
-          Gebinde
+          Gebinde &amp; Einheiten
           <small>{{ subHeadline }}</small>
         </h1>
       </div>
       <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" routerLinkActive="active"><a routerLink="size-types">Gebindegrößen</a></li>
-        <li role="presentation" routerLinkActive="active"><a routerLink="crate-types">Kastengrößen</a></li>
+        <li role="presentation" routerLinkActive="active"><a routerLink="size-types">
+          <il-icon for="fa-glass"></il-icon>
+          Gebindegrößen
+        </a></li>
+        <li role="presentation" routerLinkActive="active"><a routerLink="crate-types">
+          <il-icon for="fa-archive"></il-icon>
+          Kastengrößen
+        </a></li>
+        <li role="presentation" routerLinkActive="active"><a routerLink="units">
+          <il-icon for="unit"></il-icon>
+          Einheiten
+        </a></li>
       </ul>
-      <div class="panel panel-default">
+      <div style="padding-top: 30px;">
         <router-outlet></router-outlet>
       </div>
     </div>
