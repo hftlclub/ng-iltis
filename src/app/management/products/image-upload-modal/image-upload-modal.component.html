@@ -8,12 +8,12 @@
   </button>
 </div>
 <div class="modal-body">
-  <input type="file" #fileInput placeholder="Bild auswählen" class="file-input" (change)="showImage()">
+  <il-upload-box (fileSelected)="imageSelected($event)"></il-upload-box>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <div class="image-preview thumbnail" *ngIf="image">
-        <img [src]="image">
+      <div class="image-preview thumbnail" *ngIf="imageData">
+        <img [src]="imageData">
       </div>
     </div>
   </div>

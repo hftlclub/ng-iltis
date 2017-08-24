@@ -16,23 +16,25 @@ export class ImageUploadModalComponent implements OnInit {
   product: Product;
   loading = false;
 
-  image: File;
+  imageData: any;
+  file: File;
+
   private reader: FileReader;
 
   constructor(private modal: BsModalRef, private us: UploadService) { }
 
   ngOnInit() {
     this.reader = new FileReader();
-    this.reader.onload = (e) => this.image = e.target['result'];
+    this.reader.onload = (e) => this.imageData = e.target['result'];
+  }
+
+  imageSelected(file: File) {
+    this.reader.readAsDataURL(file);
+    this.file = file;
   }
 
   upload() {
-    const file = this.us.getFileFromInput(this.fileInput.nativeElement);
-    this.us.uploadFile(file).subscribe(e => console.log(e));
-  }
-
-  showImage() {
-    this.reader.readAsDataURL(this.us.getFileFromInput(this.fileInput.nativeElement));
+    this.us.uploadFile(this.file).subscribe(e => console.log(e));
   }
 
   hideModal() {

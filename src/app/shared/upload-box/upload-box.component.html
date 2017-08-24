@@ -1,0 +1,12 @@
+<input
+  #fileInput
+  type="file"
+  id="file"
+  class="file-input"
+  (change)="onSelect()">
+<label
+  for="file"
+  class="input-label"
+  #inputLabel
+  (drop)="onDrop($event)">
+  Datei auswählen oder hier ablegen</label>

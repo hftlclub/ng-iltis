@@ -10,13 +10,15 @@ import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 import { SimpleNotificationsModule } from 'angular2-notifications';
 import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { IconComponent } from './icon/icon.component';
+import { UploadBoxComponent } from './upload-box/upload-box.component';
 
 @NgModule({
   imports: [
     CommonModule
   ],
   declarations: [
-    IconComponent
+    IconComponent,
+    UploadBoxComponent
   ],
   exports: [
     CommonModule,
@@ -28,7 +30,8 @@ import { IconComponent } from './icon/icon.component';
     DatepickerModule,
     TimepickerModule,
     Ng2PageScrollModule,
-    IconComponent
+    IconComponent,
+    UploadBoxComponent
   ]
 })
 export class SharedModule { }

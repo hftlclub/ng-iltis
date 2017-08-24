@@ -1,0 +1,25 @@
+:host {
+  border: 2px dashed #999;
+  display: block;
+}
+
+.file-input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  z-index: -1;
+}
+
+.input-label {
+  cursor: pointer;
+  font-size: 1.25em;
+  font-weight: 700;
+  background-color: #eee;
+  display: block;
+  padding: 30px 10px;
+  width: 100%;
+  text-align: center;
+  margin: 0;
+}
