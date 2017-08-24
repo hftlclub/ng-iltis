@@ -5,6 +5,8 @@ import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 import { SharedModule } from '../../shared/shared.module';
 import { ProductsRoutingModule } from './products-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
+import { ProductDetailsComponent } from './product-details/product-details.component';
+import { ProductSizesTableComponent } from './product-sizes-table/product-sizes-table.component';
 
 const modals = [];
 
@@ -17,7 +19,9 @@ const modals = [];
   ],
   declarations: [
     ProductListComponent,
-    ...modals
+    ...modals,
+    ProductDetailsComponent,
+    ProductSizesTableComponent
   ],
   entryComponents: [...modals]
 })

@@ -1,0 +1,49 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      <div class="page-header">
+        <h1>
+          <il-icon for="fa-coffee"></il-icon>
+          Produktdetails
+
+          <a class="btn btn-primary" routerLink="../../">
+            <il-icon for="fa-arrow-left"></il-icon>
+            Alle anzeigen
+          </a>
+        </h1>
+      </div>
+
+      <div class="row">
+        <div class="col-md-2 col-sm-4 col-lg-2">
+          <div class="thumbnail">
+            <img [src]="product.imgFilename" alt="...">
+            <div class="caption">
+              <button class="btn btn-sm btn-block btn-default">
+                      <il-icon for="fa-upload"></il-icon>
+                      Hochladen
+                    </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-10 product-info">
+          <h2>{{ product.name }}</h2>
+          <p>
+            {{ product.description }}
+          </p>
+          <hr>
+          <strong>Einheit:</strong> {{ product.unit.full }} ({{ product.unit.short }})<br>
+          <strong>Kategorie:</strong> <a href="#">{{ product.category.name }}</a>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-md-12">
+
+          <h3>Gebindegrößen</h3>
+          <il-product-sizes-table [sizes]="product.sizeTypes" [unit]="product.unit"></il-product-sizes-table>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

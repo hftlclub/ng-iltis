@@ -1,51 +1,46 @@
 <div class="container">
-    <div class="row">
-      <div class="col-md-12 content">
-        <div class="page-header">
-          <h1>
-            <il-icon for="fa-coffee"></il-icon>
-            Produkte
+  <div class="row">
+    <div class="col-md-12 content">
+      <div class="page-header">
+        <h1>
+          <il-icon for="fa-coffee"></il-icon>
+          Produkte
 
-            <button class="btn btn-success pull-right">
+          <button class="btn btn-success pull-right">
               <il-icon for="plus"></il-icon>
               Hinzufügen
             </button>
-          </h1>
-        </div>
+        </h1>
+      </div>
 
-        <div class="row">
-          <ngx-datatable
-            class="material"
-            [rows]="products$ | async"
-            [columns]="columns"
-            [draggable]="false"
-            columnMode="force"
-            rowHeight="auto">
-          </ngx-datatable>
+      <div class="row">
+        <ngx-datatable class="material" [rows]="products$ | async" [columns]="columns" [draggable]="false" columnMode="force" rowHeight="auto">
+        </ngx-datatable>
 
-          <ng-template #tplImg let-row="row">
-            <img [src]="row.imgFilename" width="30" height="30">
-          </ng-template>
+        <ng-template #tplImg let-row="row">
+          <img [src]="row.imgFilename" width="30" height="30">
+        </ng-template>
 
-          <ng-template #tplCategory let-row="row">
-            <a href="#">{{ row.category.name }}</a>
-          </ng-template>
+        <ng-template #tplCategory let-row="row">
+          <a href="#">{{ row.category.name }}</a>
+        </ng-template>
 
-          <ng-template #tplUnit let-row="row" let-unit="value">
-            <span *ngIf="unit.full">{{ unit.short }} ({{ unit.full }})</span>
-          </ng-template>
+        <ng-template #tplUnit let-row="row" let-unit="value">
+          <span *ngIf="unit.full">{{ unit.short }} ({{ unit.full }})</span>
+        </ng-template>
 
-          <ng-template #tplActions let-row="row">
-            <button class="btn btn-xs btn-primary">
+        <ng-template #tplActions let-row="row">
+          <button class="btn btn-xs btn-primary">
               <il-icon for="edit"></il-icon>
               Bearbeiten
             </button>
-            <button class="btn btn-xs btn-success">
+          <a class="btn btn-xs btn-success" [routerLink]="[row.id, 'details']">
               Details
               <il-icon for="fa-arrow-right"></il-icon>
-            </button>
-          </ng-template>
+            </a>
+        </ng-template>
 
-        </div>
       </div>
     </div>
+  </div>
+</div>
