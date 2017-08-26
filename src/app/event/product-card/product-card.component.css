@@ -1,5 +1,6 @@
 :host {
   cursor: pointer;
+  min-height: 200px;
 }
 
 .panel-footer {

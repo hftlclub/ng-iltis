@@ -22,6 +22,8 @@ export class EventService {
   eventUpdated = new EventEmitter<Event>();
   eventClosed = new EventEmitter<number>(); // emits eventId
 
+  productListScrollPosition = 0;
+
   constructor(@Inject('API_URL') private api, private http: HttpClient) { }
 
   private errorHandler(error: Error | any): Observable<any> {
