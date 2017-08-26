@@ -11,7 +11,7 @@
   <div class="modal-body">
     <div class="row">
       <div class="col-md-8">
-        <datepicker [(ngModel)]="date" name="date"></datepicker>
+        <datepicker [(ngModel)]="date" name="date" [startingDay]="1"></datepicker>
       </div>
       <div class="col-md-4">
         <button type="button" class="btn btn-primary btn-block" (click)="setDate('today')">
@@ -19,6 +19,12 @@
         </button>
         <button type="button" class="btn btn-primary btn-block" (click)="setDate('yesterday')">
           Gestern
+        </button>
+        <button type="button" class="btn btn-primary btn-block" (click)="setDate('lastwed')">
+          Letzter Mittwoch
+        </button>
+        <button type="button" class="btn btn-primary btn-block" (click)="setDate('nextwed')">
+          Nächster Mittwoch
         </button>
 
         <p class="text-center date-preview">
