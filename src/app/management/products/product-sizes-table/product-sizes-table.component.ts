@@ -1,3 +1,4 @@
+import { Size } from '../../../shared/models/size';
 import { Component, Input } from '@angular/core';
 
 import { Unit } from '../../../shared/models/unit';
@@ -9,7 +10,7 @@ import { Unit } from '../../../shared/models/unit';
 })
 export class ProductSizesTableComponent {
 
-  @Input() sizes: any[];
+  @Input() sizes: Size[];
   @Input() unit: Unit;
 
 }

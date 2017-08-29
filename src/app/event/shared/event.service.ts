@@ -84,14 +84,14 @@ export class EventService {
 
   createEvent(event: Event): Observable<Event> {
     return this.http
-      .post(`${this.api}/event`, TinyJson.getJSON(event))
+      .post(`${this.api}/event`, event)
       .map(raw => EventFactory.fromObj(raw))
       .catch(this.errorHandler);
   }
 
   updateEvent(eventId: number, event: Event): Observable<any> {
     return this.http
-      .put(`${this.api}/event/${eventId}`, TinyJson.getJSON(event))
+      .put(`${this.api}/event/${eventId}`, event)
       .map(res => {})
       .catch(this.errorHandler);
   }

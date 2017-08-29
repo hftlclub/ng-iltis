@@ -73,7 +73,6 @@ export class EventFormComponent implements OnInit, OnChanges {
 
 
   rebuildForm() {
-    console.log('rebuildForm');
     this.form.setValue(this.getInitialFormValues());
   }
 

@@ -1,3 +1,4 @@
+import { Size } from '../../shared/models/size';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import _ from 'lodash';
@@ -30,7 +31,7 @@ export class CountFormComponent implements OnInit {
 
     this.categories = this.categories.map(c => {
       c.sizeTypes = _.uniqBy(
-        _.flatMap(c.products, p => p.sizeTypes),
+        _.flatMap(c.products, p => p.sizes.map(s => s.sizeType)),
         t => t.id
       );
 
@@ -129,14 +130,14 @@ export class CountFormComponent implements OnInit {
         ctMap[ct.id] = numCrates;
       });
 
-    p.sizeTypes.forEach(st => {
-      const invForSt = invForProduct.find(k => k.sizeType.id === st.id);
+    p.sizes.forEach(s => {
+      const invForSt = invForProduct.find(k => k.sizeType.id === s.sizeType.id);
       let numItems = 0;
       if (invForSt) {
         numItems = invForSt.amount;
         invForSt.amount = 0;
       }
-      stMap[st.id] = numItems;
+      stMap[s.sizeType.id] = numItems;
     });
 
     return this.fb.group({
@@ -169,6 +170,10 @@ export class CountFormComponent implements OnInit {
       });
   }
 
+
+  hasSizeTypeId(sizes: Size[], id: number): boolean {
+    return !!sizes.find(s => s.sizeType.id === id);
+  }
 
   hasId(arr: any[], id: number): boolean {
     return !!arr.find(item => item.id === id);

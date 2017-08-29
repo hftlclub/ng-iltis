@@ -63,7 +63,7 @@ export class TransferFormContainerComponent implements OnInit {
     controls['sizeTypes'].value
       .map(this.sanitizeInt)
       .forEach((e, i) => {
-        const stid = this.product.sizeTypes[i].id;
+        const stid = this.product.sizes[i].sizeType.id;
         stChanges[stid] = e;
       });
 

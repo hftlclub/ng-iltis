@@ -72,8 +72,8 @@
                 <div formArrayName="sizeTypes">
                   <div
                     class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
-                    *ngFor="let st of product.sizeTypes; index as i">
-                    <h3 class="text-center">{{ st.description }} {{ st.amount | number }} {{ product.unit.short }}</h3>
+                    *ngFor="let s of product.sizes; index as i">
+                    <h3 class="text-center">{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ product.unit.short }}</h3>
                     <il-counter-control minValue="0" [formControlName]="i"></il-counter-control>
                   </div>
                 </div>

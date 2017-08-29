@@ -27,10 +27,10 @@ export class TransferFormComponent implements OnInit {
   constructor() { }
 
   ngOnInit() {
-    this.grid = this.getGrid(this.product.sizeTypes.length + this.product.crateTypes.length);
+    this.grid = this.getGrid(this.product.sizes.length + this.product.crateTypes.length);
 
     this.form = new FormGroup({
-      sizeTypes: new FormArray(this.product.sizeTypes.map(s => new FormControl(0))),
+      sizeTypes: new FormArray(this.product.sizes.map(s => new FormControl(0))),
       crateTypes: new FormArray(this.product.crateTypes.map(c => new FormControl(0)))
     }, this.atLeastOneValidator);
   }

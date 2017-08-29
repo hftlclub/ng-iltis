@@ -9,9 +9,9 @@
   </thead>
   <tbody>
     <tr *ngFor="let s of sizes">
-      <td>{{ s.description }} {{ s.amount | number }} {{ unit.full }}</td>
-      <td>{{ 0.65 | currency:'EUR' }}</td>
-      <td>250</td>
+      <td>{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ unit.full }}</td>
+      <td>{{ s.costs | currency:'EUR' }}</td>
+      <td>{{ s.minStock }}</td>
       <td>
         <button class="btn btn-warning btn-xs" (click)="showEditModal(u)">
           <il-icon for="edit"></il-icon>

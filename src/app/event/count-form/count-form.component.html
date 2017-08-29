@@ -39,7 +39,7 @@
           </td>
           <ng-container formGroupName="sizeTypes">
             <ng-container *ngFor="let st of c.sizeTypes">
-              <td class="form-cell" *ngIf="hasId(p.sizeTypes, st.id); else tdBlocked">
+              <td class="form-cell" *ngIf="hasSizeTypeId(p.sizes, st.id); else tdBlocked">
                 <input type="number" [formControlName]="st.id" (change)="setFormGroupActive(ci, pi)">
               </td>
               <ng-template #tdBlocked>
