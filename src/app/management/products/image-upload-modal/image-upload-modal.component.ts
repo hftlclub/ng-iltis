@@ -1,8 +1,8 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Product } from '../../../shared/models/product';
-import { UploadService } from '../../../core/upload.service';
+import { ProductService } from '../../../core/product.service';
 
 @Component({
   selector: 'il-image-upload-modal',
@@ -19,9 +19,11 @@ export class ImageUploadModalComponent implements OnInit {
   imageData: any;
   file: File;
 
+  updated = new EventEmitter<any>();
+
   private reader: FileReader;
 
-  constructor(private modal: BsModalRef, private us: UploadService) { }
+  constructor(private modal: BsModalRef, private ps: ProductService) { }
 
   ngOnInit() {
     this.reader = new FileReader();
@@ -34,7 +36,10 @@ export class ImageUploadModalComponent implements OnInit {
   }
 
   upload() {
-    this.us.uploadFile(this.file).subscribe(e => console.log(e));
+    this.ps.uploadProductImage(this.file, this.product.id).subscribe(e => {
+      this.updated.emit();
+      this.hideModal();
+    });
   }
 
   hideModal() {

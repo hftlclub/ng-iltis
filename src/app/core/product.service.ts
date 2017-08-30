@@ -1,3 +1,4 @@
+import { FileUploadResponse } from '../shared/models/file-upload-response.interface';
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -6,6 +7,7 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import { UploadService } from './upload.service';
 import { Product, ProductFactory } from '../shared/models/product';
 
 @Injectable()
@@ -13,6 +15,7 @@ export class ProductService {
 
   constructor(
     private http: HttpClient,
+    private us: UploadService,
     @Inject('API_URL') private api
   ) { }
 
@@ -26,6 +29,10 @@ export class ProductService {
     return this.http.get(`${this.api}/product/${id}`)
       .retry(3)
       .map(raw => ProductFactory.fromObj(raw));
+  }
+
+  uploadProductImage(file: File, productId: number): Observable<FileUploadResponse> {
+    return this.us.uploadFile(file, `${this.api}/product/${productId}/image`);
   }
 
 }

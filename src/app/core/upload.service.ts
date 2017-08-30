@@ -1,8 +1,8 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs/Observable';
 
-declare var FormData: any;
-declare var File: any;
+import { FileUploadResponse } from '../shared/models/file-upload-response.interface';
 
 @Injectable()
 export class UploadService {
@@ -15,12 +15,11 @@ export class UploadService {
     }
   }
 
-  uploadFile(file: any) { // HTMLInputElement
+  uploadFile(file: File, destUrl: string): Observable<any> {
     const formData = new FormData();
-    formData.append('file', file);
-    console.log(formData);
+    formData.set('file', file);
 
-    return this.http.post('https://cdn.hftl.club/files/upload?secret=', formData)
+    return this.http.put(destUrl, formData);
   }
 
 }
