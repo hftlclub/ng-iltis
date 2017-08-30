@@ -40,7 +40,7 @@
           <ng-container formGroupName="sizeTypes">
             <ng-container *ngFor="let st of c.sizeTypes">
               <td class="form-cell" *ngIf="hasSizeTypeId(p.sizes, st.id); else tdBlocked">
-                <input type="text" [formControlName]="st.id" (change)="setFormGroupActive(ci, pi)" ilMathEval>
+                <input type="text" [formControlName]="st.id" (change)="setFormGroupActive(ci, pi)" ilMathEval [roundToInt]="true">
               </td>
               <ng-template #tdBlocked>
                 <td>–</td>
@@ -51,7 +51,7 @@
           <ng-container formGroupName="crateTypes">
             <ng-container *ngFor="let ct of c.crateTypes">
               <td class="form-cell" *ngIf="hasId(p.crateTypes, ct.id); else tdBlocked">
-                <input type="text" [formControlName]="ct.id" (change)="setFormGroupActive(ci, pi)" ilMathEval>
+                <input type="text" [formControlName]="ct.id" (change)="setFormGroupActive(ci, pi)" ilMathEval [roundToInt]="true">
               </td>
               <ng-template #tdBlocked>
                 <td>–</td>

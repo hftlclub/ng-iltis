@@ -74,7 +74,7 @@
                     class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
                     *ngFor="let s of product.sizes; index as i">
                     <h3 class="text-center">{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ product.unit.short }}</h3>
-                    <il-counter-control minValue="0" [formControlName]="i" ilMathEval></il-counter-control>
+                    <il-counter-control minValue="0" [formControlName]="i" ilMathEval [roundToInt]="true"></il-counter-control>
                   </div>
                 </div>
 
@@ -83,7 +83,7 @@
                     class="col-md-{{ grid.col }} col-md-offset-{{ grid.offset }}"
                     *ngFor="let ct of product.crateTypes; index as i">
                     <h3 class="text-center">{{ ct.description }} {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ product.unit.short }}</h3>
-                    <il-counter-control minValue="0" [formControlName]="i" ilMathEval></il-counter-control>
+                    <il-counter-control minValue="0" [formControlName]="i" ilMathEval [roundToInt]="true"></il-counter-control>
                   </div>
                 </div>
               </div>

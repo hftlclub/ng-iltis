@@ -1,3 +1,4 @@
+import { HelperService } from '../../core/helper.service';
 import { NotificationsService } from 'angular2-notifications';
 import { EventService } from './../shared/event.service';
 import { Component, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
@@ -25,7 +26,8 @@ export class CashModalComponent implements OnInit {
     private es: EventService,
     private ns: NotificationsService,
     private modal: BsModalRef,
-    private zone: NgZone
+    private zone: NgZone,
+    private hs: HelperService
   ) { }
 
   ngOnInit() {
@@ -37,10 +39,16 @@ export class CashModalComponent implements OnInit {
   }
 
   private initForm() {
+    const values = {
+      cashBefore: this.hs.dotToComma(this.event.cashBefore),
+      cashAfter: this.hs.dotToComma(this.event.cashAfter),
+      tip: this.hs.dotToComma(this.event.tip)
+    };
+
     this.form = this.fb.group({
-      cashBefore: [this.event.cashBefore, Validators.required],
-      cashAfter: [this.event.cashAfter, Validators.required],
-      tip: [this.event.tip, Validators.required],
+      cashBefore: [values.cashBefore, Validators.required],
+      cashAfter: [values.cashAfter, Validators.required],
+      tip: [values.tip, Validators.required],
     });
   }
 
@@ -73,7 +81,7 @@ export class CashModalComponent implements OnInit {
 
   sanitizeFloat(num: any): number {
     if (!num) { num = 0; }
-    return parseFloat(num);
+    return this.hs.commaToNumber(num);
   }
 
   hideModal() {
