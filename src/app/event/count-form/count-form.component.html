@@ -51,7 +51,7 @@
           <ng-container formGroupName="crateTypes">
             <ng-container *ngFor="let ct of c.crateTypes">
               <td class="form-cell" *ngIf="hasId(p.crateTypes, ct.id); else tdBlocked">
-                <input type="text" [formControlName]="ct.id" (change)="setFormGroupActive(ci, pi)">
+                <input type="text" [formControlName]="ct.id" (change)="setFormGroupActive(ci, pi)" ilMathEval>
               </td>
               <ng-template #tdBlocked>
                 <td>–</td>
