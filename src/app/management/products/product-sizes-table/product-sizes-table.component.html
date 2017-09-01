@@ -8,16 +8,16 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let s of sizes">
-      <td>{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ unit.full }}</td>
+    <tr *ngFor="let s of product.sizes">
+      <td>{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ product.unit.full }}</td>
       <td>{{ s.costs | currency:'EUR' }}</td>
       <td>{{ s.minStock }}</td>
       <td>
-        <button class="btn btn-warning btn-xs" (click)="showEditModal(u)">
+        <button class="btn btn-warning btn-xs" (click)="showSizeEditModal(s)">
           <il-icon for="edit"></il-icon>
           Bearbeiten
         </button>
-        <button class="btn btn-danger btn-xs" (click)="showDeleteModal(u)">
+        <button class="btn btn-danger btn-xs" (click)="showSizeDeleteModal(s)">
           <il-icon for="delete"></il-icon>
           Löschen
         </button>
@@ -27,7 +27,7 @@
   <tfoot>
     <tr>
       <td colspan="4">
-        <button class="btn btn-success btn-sm">
+        <button class="btn btn-success btn-sm" (click)="showSizeCreateModal()">
           <il-icon for="plus"></il-icon>
           Größe hinzufügen
         </button>

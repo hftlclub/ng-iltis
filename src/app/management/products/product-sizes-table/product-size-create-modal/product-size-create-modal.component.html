@@ -1,0 +1,17 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="edit"></il-icon>
+    Gebindegröße zu Produkt hinzufügen
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<il-product-size-form
+  *ngIf="product"
+  [loading]="loading"
+  buttonLabel="Hinzufügen"
+  (formSubmitted)="createSize($event)"
+  (cancelled)="hideModal()">
+</il-product-size-form>
+

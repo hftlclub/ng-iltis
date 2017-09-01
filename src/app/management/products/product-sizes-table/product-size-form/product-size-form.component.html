@@ -1,0 +1,49 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+    <div class="modal-body">
+
+      <ng-content></ng-content>
+
+      <div class="form-group form-group-lg">
+        <label>Gebindegröße</label>
+        <select class="form-control" formControlName="sizeType" *ngIf="sizeTypes$ | async as sizeTypes; else sizeTypesLoading">
+          <option value="0" selected disabled>Bitte auswählen...</option>
+          <option *ngFor="let st of sizeTypes" [value]="st.id">{{ st.description }} {{ st.amount | number }} {{ unit.full }}</option>
+        </select>
+        <ng-template #sizeTypesLoading>
+          <select class="form-control" disabled>
+            <option selected>Lade Gebindegrößen...</option>
+          </select>
+        </ng-template>
+      </div>
+
+      <div class="form-group form-group-lg">
+        <label>Einkaufspreis</label>
+        <span class="small pull-right text-muted">Geschätzter Wert</span>
+        <div class="input-group input-group-lg">
+          <input type="text" class="form-control" formControlName="costs">
+          <span class="input-group-addon">EUR</span>
+        </div>
+      </div>
+
+      <div class="form-group form-group-lg">
+        <label>Mindestbestand</label>
+        <input type="text" class="form-control" formControlName="minStock">
+      </div>
+
+    </div>
+    <div class="modal-footer">
+      <div class="col-sm-6">
+        <button type="button" class="btn btn-primary btn-block btn-lg" (click)="cancel()">
+          <il-icon for="cancel"></il-icon>
+            Abbrechen
+          </button>
+      </div>
+      <div class="col-sm-6">
+        <button type="submit" class="btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">
+          <il-icon [for]="buttonIcon" *ngIf="!loading"></il-icon>
+          <il-icon for="spinner" *ngIf="loading"></il-icon>
+          {{ buttonLabel }}
+        </button>
+      </div>
+    </div>
+  </form>
