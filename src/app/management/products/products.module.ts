@@ -13,6 +13,9 @@ import { ProductSizeCreateModalComponent } from './product-sizes-table/product-s
 import { ProductSizeEditModalComponent } from './product-sizes-table/product-size-edit-modal/product-size-edit-modal.component';
 import { ProductSizeDeleteModalComponent } from './product-sizes-table/product-size-delete-modal/product-size-delete-modal.component';
 import { ProductSizeFormComponent } from './product-sizes-table/product-size-form/product-size-form.component';
+import { ProductCreateComponent } from './product-create/product-create.component';
+import { ProductEditComponent } from './product-edit/product-edit.component';
+import { ProductFormComponent } from './product-form/product-form.component';
 
 const modals = [
   ImageUploadModalComponent,
@@ -33,7 +36,10 @@ const modals = [
     ProductDetailsComponent,
     ProductSizesTableComponent,
     ProductSizeFormComponent,
-    ...modals
+    ...modals,
+    ProductCreateComponent,
+    ProductEditComponent,
+    ProductFormComponent
   ],
   entryComponents: [...modals]
 })
