@@ -13,7 +13,7 @@
       <timepicker [(ngModel)]="date" name="date" [showMeridian]="false" [minuteStep]="15"></timepicker>
     </div>
     <div class="text-center">
-      <button type="button" class="btn btn-primary" (click)="setTime()">
+      <button type="button" class="btn btn-primary" (click)="setTime(-1, -1)">
         Jetzt
       </button>
       <button type="button" class="btn btn-primary" (click)="setTime(18, 30)">

@@ -15,8 +15,8 @@ export class TimepickerModalComponent {
 
   setTime(hours: number, min: number): void {
     const newDate = new Date();
-    if (hours !== undefined) { newDate.setHours(hours); }
-    if (min !== undefined) { newDate.setMinutes(min); }
+    if (hours !== -1) { newDate.setHours(hours); }
+    if (min !== -1) { newDate.setMinutes(min); }
 
     this.date = newDate;
   }
