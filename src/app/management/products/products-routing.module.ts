@@ -28,6 +28,10 @@ const routes: Routes = [
     canDeactivate: [HasChangesGuard]
   },
   {
+    path: ':productId',
+    redirectTo: ':productId/details'
+  },
+  {
     path: ':productId/details',
     component: ProductDetailsComponent,
     resolve: {

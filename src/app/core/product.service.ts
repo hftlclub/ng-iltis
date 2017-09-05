@@ -36,8 +36,8 @@ export class ProductService {
       .map(raw => ProductFactory.fromObj(raw));
   }
 
-  create(product: Product): Observable<any> {
-    return this.http.post(`${this.api}/product`, product);
+  create(product: Product): Observable<Product> {
+    return this.http.post<Product>(`${this.api}/product`, product);
   }
 
   update(productId: number, product: Product): Observable<any> {

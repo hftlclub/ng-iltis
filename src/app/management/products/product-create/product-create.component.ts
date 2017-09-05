@@ -40,11 +40,11 @@ export class ProductCreateComponent implements OnInit {
     const product = formValue as Product;
 
     this.loading = true;
-    this.ps.create(product).subscribe(() => {
+    this.ps.create(product).subscribe(p => {
       this.loading = false;
       this.hasChanges = false;
       this.ns.success('Produkt angelegt', 'Das neue Produkt wurde angelegt.')
-      this.goToProductDetails('list'); // TODO: real id
+      this.goToProductDetails(p.id);
     },
     err => {
       this.loading = false;
