@@ -28,7 +28,6 @@ export class UnitEditModalComponent {
     err => {
       this.loading = false;
       this.ns.error('Fehler', 'Vorgang abgebrochen');
-      this.hideModal();
     });
   }
 

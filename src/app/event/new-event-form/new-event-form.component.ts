@@ -78,6 +78,10 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       this.ns.success('Ereignis', 'Das Ereignis wurde angelegt.');
 
       this.router.navigate(['../../', event.id], { relativeTo: this.route });
+    },
+    err => {
+      this.loading = false;
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
     });
   }
 

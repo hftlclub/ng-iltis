@@ -28,7 +28,7 @@ export class AppComponent implements OnInit {
   constructor(private gs: GlobalService, private hcs: HealthCheckService) { }
 
   ngOnInit() {
-    this.hcs.startHealthCheck();
+    // this.hcs.startHealthCheck();
 
     const widthThresh = 767;
     this.gs.mobileMode = Observable.fromEvent(window, 'resize')

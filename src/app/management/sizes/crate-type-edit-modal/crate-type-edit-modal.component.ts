@@ -35,7 +35,6 @@ export class CrateTypeEditModalComponent implements OnInit {
     err => {
       this.loading = false;
       this.ns.error('Fehler', 'Vorgang abgebrochen');
-      this.hideModal();
     });
   }
 

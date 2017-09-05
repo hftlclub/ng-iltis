@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
+import { NotificationsService } from 'angular2-notifications';
 
 import { Product } from '../../../shared/models/product';
 import { ProductService } from '../../../core/product.service';
@@ -21,7 +22,7 @@ export class ImageUploadModalComponent implements OnInit {
 
   private reader: FileReader;
 
-  constructor(private modal: BsModalRef, private ps: ProductService) { }
+  constructor(private modal: BsModalRef, private ps: ProductService, private ns: NotificationsService) { }
 
   ngOnInit() {
     this.reader = new FileReader();
@@ -36,7 +37,11 @@ export class ImageUploadModalComponent implements OnInit {
   upload() {
     this.ps.uploadProductImage(this.file, this.product.id).subscribe(e => {
       this.ps.productUpdated.emit();
+      this.ns.success('Bibld aktualisiert', 'Das Produktbild wurde aktualisiert.');
       this.hideModal();
+    },
+    err => {
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
     });
   }
 

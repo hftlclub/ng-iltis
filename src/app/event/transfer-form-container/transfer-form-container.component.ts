@@ -97,6 +97,10 @@ export class TransferFormContainerComponent implements OnInit {
       this.es.transfersAdded.emit(res);
       this.ns.success('Buchung', 'Die Buchung wurde erfasst.');
       this.navigateToProductsPage();
+    },
+    err => {
+      this.loading = false;
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
     });
 
   }

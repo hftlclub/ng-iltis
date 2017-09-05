@@ -49,6 +49,9 @@ export class CloseFormContainerComponent implements OnInit {
       this.es.eventClosed.emit(this.event.id);
       this.ns.success('Ereignis geschlossen', 'Das Ereignis wurde geschlossen.');
       this.navigateToEventPage();
+    },
+    err => {
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
     });
   }
 

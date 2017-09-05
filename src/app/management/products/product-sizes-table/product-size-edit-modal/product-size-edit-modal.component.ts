@@ -30,7 +30,6 @@ export class ProductSizeEditModalComponent {
     err => {
       this.loading = false;
       this.ns.error('Fehler', 'Vorgang abgebrochen');
-      this.hideModal();
     });
   }
 

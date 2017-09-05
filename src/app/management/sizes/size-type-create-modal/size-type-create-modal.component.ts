@@ -27,7 +27,6 @@ export class SizeTypeCreateModalComponent {
     err => {
       this.loading = false;
       this.ns.error('Fehler', 'Vorgang abgebrochen');
-      this.hideModal();
     });
   }
 

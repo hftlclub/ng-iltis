@@ -69,8 +69,10 @@ export class CountFormContainerComponent implements OnInit {
         this.es.countFinished.emit(res);
         this.ns.success(this.storageMode ? 'Lagerzählung' : 'Kühlschrankzählung', 'Die Zählung wurde erfasst.');
         this.navigateToEventPage();
+      },
+      err => {
+        this.ns.error('Fehler', 'Vorgang abgebrochen');
       });
-
   }
 
   cancelForm() {

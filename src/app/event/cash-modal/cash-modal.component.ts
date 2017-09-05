@@ -72,6 +72,10 @@ export class CashModalComponent implements OnInit {
 
       this.es.eventUpdated.emit(this.event);
       this.hideModal();
+    },
+    err => {
+      this.loading = false;
+      this.ns.error('Fehler', 'Vorgang abgebrochen');
     });
   }
 

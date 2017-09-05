@@ -21,8 +21,8 @@ body {
   padding-top: 60px;
 }
 
-.simple-notification {
-  z-index: 8000;
+.simple-notification-wrapper {
+  z-index: 8000 !important;
 }
 
 

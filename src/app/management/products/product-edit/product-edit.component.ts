@@ -50,7 +50,6 @@ export class ProductEditComponent implements OnInit {
     },
     err => {
       this.loading = false;
-      this.hasChanges = false;
       this.ns.error('Fehler', 'Ein Fehler ist aufgetreten.');
     });
   }
