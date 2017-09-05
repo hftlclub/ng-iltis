@@ -1,1 +1,9 @@
-<il-product-form></il-product-form>
+<il-product-form
+  btnLabel="Speichern"
+  [initialProduct]="product"
+  [units]="units$ | async"
+  [categories]="categories$ | async"
+  (valueChanged)="hasChanges = true"
+  (submitted)="updateProduct($event)"
+  (cancelled)="cancel()"
+  >Produkt bearbeiten: {{ product.name }}</il-product-form>

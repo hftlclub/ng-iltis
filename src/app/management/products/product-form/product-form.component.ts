@@ -12,7 +12,6 @@ import { Unit } from '../../../shared/models/unit';
 })
 export class ProductFormComponent implements OnInit {
 
-  @Input() edit = false;
   @Input() loading = false;
   @Input() btnLabel = 'Speichern';
 
@@ -32,7 +31,7 @@ export class ProductFormComponent implements OnInit {
     const initial = this.getInitialFormValues();
 
     this.form = this.fb.group({
-      name: [initial.eventType, Validators.required],
+      name: [initial.name, Validators.required],
       description: [initial.description],
       category: [initial.category, Validators.required],
       unit: [initial.unit, Validators.required]
