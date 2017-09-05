@@ -10,6 +10,7 @@
 <il-product-size-form
   *ngIf="product"
   [loading]="loading"
+  [unit]="product.unit"
   buttonLabel="Hinzufügen"
   (formSubmitted)="createSize($event)"
   (cancelled)="hideModal()">

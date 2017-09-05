@@ -57,8 +57,8 @@ export class ProductService {
     return this.http.post(`${this.api}/product/${productId}/size`, size);
   }
 
-  updateSizeForProduct(productId: number, size: Size): Observable<any> {
-    return this.http.put(`${this.api}/product/${productId}/size/${size.sizeType.id}`, size);
+  updateSizeForProduct(productId: number, sizeTypeId: number, size: Size): Observable<any> {
+    return this.http.put(`${this.api}/product/${productId}/size/${sizeTypeId}`, size);
   }
 
   deleteSizeForProduct(productId: number, sizeTypeId: number): Observable<any> {

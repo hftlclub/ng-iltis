@@ -25,7 +25,6 @@ import { CountFormComponent } from './count-form/count-form.component';
 import { CountFormContainerComponent } from './count-form-container/count-form-container.component';
 import { CloseFormComponent } from './close-form/close-form.component';
 import { CloseFormContainerComponent } from './close-form-container/close-form-container.component';
-import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { DatepickerModalComponent } from './datepicker-modal/datepicker-modal.component';
 import { TimepickerModalComponent } from './timepicker-modal/timepicker-modal.component';
@@ -66,7 +65,6 @@ const modals = [
     CountFormContainerComponent,
     CloseFormComponent,
     CloseFormContainerComponent,
-    CheckboxControlComponent,
     ...modals
   ],
   entryComponents: [...modals],

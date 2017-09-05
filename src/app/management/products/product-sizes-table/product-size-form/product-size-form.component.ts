@@ -1,8 +1,9 @@
-import { ProductService } from '../../../../core/product.service';
+import { HelperService } from '../../../../core/helper.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
 
+import { SizesService } from '../../../shared/sizes.service';
 import { Size, SizeFactory } from '../../../../shared/models/size';
 import { Unit } from '../../../../shared/models/unit';
 import { SizeType } from '../../../../shared/models/sizetype';
@@ -14,6 +15,7 @@ import { SizeType } from '../../../../shared/models/sizetype';
 })
 export class ProductSizeFormComponent implements OnInit {
 
+  @Input() edit = false;
   @Input() initialValue = SizeFactory.empty();
   @Input() buttonIcon = 'ok';
   @Input() buttonLabel = 'Übernehmen';
@@ -24,30 +26,36 @@ export class ProductSizeFormComponent implements OnInit {
   form: FormGroup;
 
   sizeTypes$: Observable<SizeType[]>;
-  unit: Unit;
+  @Input() unit: Unit;
 
-  constructor(private fb: FormBuilder, private ps: ProductService) { }
+  constructor(private fb: FormBuilder, private ss: SizesService, private hs: HelperService) { }
 
   ngOnInit() {
-    this.sizeTypes$ = this.ps.getAllSizeTypes();
+    this.sizeTypes$ = this.ss.getAllSizeTypes();
 
     this.form = this.fb.group({
       sizeType: [this.initialValue.sizeType.id, [Validators.required]],
-      costs: [this.initialValue.costs, [Validators.required]],
-      minStock: [this.initialValue.minStock, [Validators.required]]
+      costs: [this.hs.dotToComma(this.initialValue.costs), [Validators.required]],
+      minStock: [this.initialValue.minStock, [Validators.required]],
+      active: [this.initialValue.active]
     });
 
-    // DUMMY
-    this.unit = new Unit(1, 'l', 'Liter');
+    if (this.edit) {
+      this.form.get('sizeType').disable();
+    }
   }
 
   submitForm() {
     const value = this.form.value;
     const size = {
-      sizeType: { id: parseInt(value.sizeType, 0) },
-      minStock: value.minStock,
-      costs: value.costs
+      minStock: parseInt(value.minStock, 0),
+      costs: this.hs.commaToNumber(value.costs),
+      active: !!value.active
     } as Size;
+
+    if (value.sizeType) {
+      size.sizeType = { id: parseInt(value.sizeType, 0) } as SizeType;
+    }
 
     this.formSubmitted.emit(size);
   }

@@ -21,7 +21,7 @@ export class ProductSizeEditModalComponent {
 
   updateSize(size: Size) {
     this.loading = true;
-    this.ps.updateSizeForProduct(this.product.id, size).subscribe(() => {
+    this.ps.updateSizeForProduct(this.product.id, this.size.sizeType.id, size).subscribe(() => {
       this.loading = false;
       this.ns.success('Größe bearbeitet', 'Gebindegröße für das Produkt wurde bearbeitet.')
       this.ps.productUpdated.emit();

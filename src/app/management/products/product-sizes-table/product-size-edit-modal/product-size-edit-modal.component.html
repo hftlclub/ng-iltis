@@ -9,7 +9,9 @@
 </div>
 <il-product-size-form
   *ngIf="product && size"
+  [edit]="true"
   [loading]="loading"
+  [unit]="product.unit"
   [initialValue]="size"
   buttonLabel="Speichern"
   (formSubmitted)="updateSize($event)"

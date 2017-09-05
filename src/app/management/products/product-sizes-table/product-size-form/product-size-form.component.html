@@ -14,6 +14,7 @@
             <option selected>Lade Gebindegrößen...</option>
           </select>
         </ng-template>
+        <p *ngIf="edit" class="help-block small">Die Gebindegröße kann nicht geändert werden. Bitte lege dazu eine neue Zuordnung an.</p>
       </div>
 
       <div class="form-group form-group-lg">
@@ -28,6 +29,14 @@
       <div class="form-group form-group-lg">
         <label>Mindestbestand</label>
         <input type="text" class="form-control" formControlName="minStock">
+      </div>
+
+      <div class="form-group form-group-lg">
+        <label>Zuordnung aktivieren</label>
+        <p><il-checkbox-control formControlName="active">Zuordnung aktivieren</il-checkbox-control></p>
+      </div>
+      <div class="alert alert-warning" *ngIf="edit && this.form.get('active').value === false">
+        Achtung: Beim Deaktivieren werden alle zugeordneten Kastentypen von diesem Produkt entfernt!
       </div>
 
     </div>

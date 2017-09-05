@@ -12,6 +12,7 @@ import { DateValueAccessorModule } from 'angular-date-value-accessor';
 import { IconComponent } from './icon/icon.component';
 import { UploadBoxComponent } from './upload-box/upload-box.component';
 import { MathEvalInputDirective } from './math-eval-input/math-eval-input.directive';
+import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { MathEvalInputDirective } from './math-eval-input/math-eval-input.direct
   declarations: [
     IconComponent,
     UploadBoxComponent,
-    MathEvalInputDirective
+    MathEvalInputDirective,
+    CheckboxControlComponent
   ],
   exports: [
     CommonModule,
@@ -34,7 +36,8 @@ import { MathEvalInputDirective } from './math-eval-input/math-eval-input.direct
     Ng2PageScrollModule,
     IconComponent,
     UploadBoxComponent,
-    MathEvalInputDirective
+    MathEvalInputDirective,
+    CheckboxControlComponent
   ]
 })
 export class SharedModule { }
