@@ -9,6 +9,7 @@ import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
+import { HealthCheckService } from './health-check.service';
 import { HasChangesGuard } from './has-changes.guard';
 import { ProductService } from './product.service';
 import { GlobalService } from './global.service';
@@ -33,6 +34,7 @@ import { ProductResolver } from './resolvers/product.resolver';
     BsDropdownModule
   ],
   providers: [
+    HealthCheckService,
     HasChangesGuard,
     ProductService,
     GlobalService,

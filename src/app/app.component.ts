@@ -1,3 +1,4 @@
+import { HealthCheckService } from './core/health-check.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/fromEvent';
@@ -8,6 +9,8 @@ import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/share';
 
 import { GlobalService } from './core/global.service';
+
+declare var window: any;
 
 @Component({
   selector: 'il-root',
@@ -22,9 +25,11 @@ export class AppComponent implements OnInit {
     lastOnBottom: true
   };
 
-  constructor(private gs: GlobalService) { }
+  constructor(private gs: GlobalService, private hcs: HealthCheckService) { }
 
   ngOnInit() {
+    this.hcs.startHealthCheck();
+
     const widthThresh = 767;
     this.gs.mobileMode = Observable.fromEvent(window, 'resize')
       .debounceTime(300)

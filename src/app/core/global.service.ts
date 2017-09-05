@@ -1,4 +1,4 @@
-import { Injectable, EventEmitter } from '@angular/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 
 @Injectable()
@@ -11,5 +11,4 @@ export class GlobalService {
   getTrustChallenge() {
     return this.challenges[Math.floor(Math.random() * this.challenges.length)];
   }
-
 }

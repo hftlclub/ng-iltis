@@ -8,6 +8,7 @@ import { SharedModule } from './shared/shared.module';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
+import { ConnectionLostModalComponent } from './connection-lost-modal/connection-lost-modal.component';
 
 import { EventService } from './event/shared/event.service';
 import { UnitsService } from './management/shared/units.service';
@@ -24,6 +25,7 @@ const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule]
   declarations: [
     AppComponent,
     NavBarComponent,
+    ConnectionLostModalComponent
   ],
   imports: [
     CoreModule,
@@ -41,6 +43,7 @@ const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule]
     CategoriesService,
     { provide: LOCALE_ID, useValue: 'de' }
   ],
+  entryComponents: [ConnectionLostModalComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
