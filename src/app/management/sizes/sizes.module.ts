@@ -11,11 +11,18 @@ import { UnitFormComponent } from './unit-form/unit-form.component';
 import { UnitDeleteModalComponent } from './unit-delete-modal/unit-delete-modal.component';
 import { UnitCreateModalComponent } from './unit-create-modal/unit-create-modal.component';
 import { UnitEditModalComponent } from './unit-edit-modal/unit-edit-modal.component';
+import { SizeTypeFormComponent } from './size-type-form/size-type-form.component';
+import { SizeTypeDeleteModalComponent } from './size-type-delete-modal/size-type-delete-modal.component';
+import { SizeTypeCreateModalComponent } from './size-type-create-modal/size-type-create-modal.component';
+import { SizeTypeEditModalComponent } from './size-type-edit-modal/size-type-edit-modal.component';
 
 const modals = [
   UnitDeleteModalComponent,
   UnitCreateModalComponent,
-  UnitEditModalComponent
+  UnitEditModalComponent,
+  SizeTypeDeleteModalComponent,
+  SizeTypeCreateModalComponent,
+  SizeTypeEditModalComponent
 ];
 
 @NgModule({
@@ -30,6 +37,7 @@ const modals = [
     CrateTypesComponent,
     UnitListComponent,
     UnitFormComponent,
+    SizeTypeFormComponent,
     ...modals,
   ],
   entryComponents: [...modals]

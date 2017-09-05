@@ -22,17 +22,19 @@ export class SizesService {
   ) { }
 
   getAllSizeTypes(): Observable<SizeType[]> {
-    // return this.http.get<SizeType[]>(`${this.api}/sizeTypes`);
-    return this.http.get<SizeType>(`${this.api}/sizetype/1`)
-      .map(st => [st]);
+    return this.http.get<SizeType[]>(`${this.api}/sizetypes`);
   }
 
   createSizeType(st: SizeType): Observable<any> {
-    return this.http.post(`${this.api}/sizeType`, st);
+    return this.http.post(`${this.api}/sizetype`, st);
   }
 
   updateSizeType(stId: number, st: SizeType): Observable<any> {
-    return this.http.put(`${this.api}/sizeType/${stId}`, st);
+    return this.http.put(`${this.api}/sizetype/${stId}`, st);
+  }
+
+  deleteSizeType(stId: number): Observable<any> {
+    return this.http.delete(`${this.api}/sizetype/${stId}`);
   }
 
 }

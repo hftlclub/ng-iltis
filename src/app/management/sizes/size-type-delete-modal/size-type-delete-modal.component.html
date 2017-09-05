@@ -1,0 +1,33 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="delete"></il-icon>
+    Gebindegröße löschen
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  Soll die Gebindegröße <strong>{{ sizeType?.description }}</strong> mit der Füllmenge <strong>{{ sizeType?.amount | number }}</strong> wirklich gelöscht werden?
+
+  <div class="alert alert-warning">
+    <il-icon for="warning"></il-icon>
+    Achtung: Diese Gebindegröße könnte noch einem Produkt zugeordnet sein!
+  </div>
+</div>
+
+<div class="modal-footer">
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
+      <il-icon for="cancel"></il-icon>
+      Abbrechen
+    </button>
+  </div>
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading" (click)="deleteSizeType()">
+      <il-icon for="delete" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      Größe löschen
+    </button>
+  </div>
+</div>

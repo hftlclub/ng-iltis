@@ -13,7 +13,7 @@
     <tr *ngFor="let st of sizeTypes">
       <td>{{ st.id }}</td>
       <td>{{ st.description }}</td>
-      <td>{{ st.amount }}</td>
+      <td>{{ st.amount | number }}</td>
       <td>
         <button class="btn btn-warning btn-xs" (click)="showEditModal(st)">
           <il-icon for="edit"></il-icon>
@@ -36,3 +36,8 @@
     </tbody>
   </ng-template>
 </table>
+
+<button class="btn btn-success" type="button" (click)="showCreateModal()">
+  <il-icon for="plus"></il-icon>
+  Gebindegröße hinzufügen
+</button>

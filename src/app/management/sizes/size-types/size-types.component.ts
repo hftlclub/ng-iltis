@@ -4,6 +4,9 @@ import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { SizeType } from '../../../shared/models/sizetype';
 import { SizesService } from '../../shared/sizes.service';
+import { SizeTypeCreateModalComponent } from '../size-type-create-modal/size-type-create-modal.component';
+import { SizeTypeEditModalComponent } from '../size-type-edit-modal/size-type-edit-modal.component';
+import { SizeTypeDeleteModalComponent } from '../size-type-delete-modal/size-type-delete-modal.component';
 
 @Component({
   selector: 'il-size-types',
@@ -22,21 +25,22 @@ export class SizeTypesComponent implements OnInit {
     }
 
     refreshSizeTypes() {
-      this.sizeTypes$ = this.ss.getAllSizeTypes();
+      this.sizeTypes$ = this.ss.getAllSizeTypes()
+        .map(sts => sts.sort((a, b) => a.id - b.id));
     }
 
     showDeleteModal(st: SizeType) {
-      /*const modal = this.modalService.show(UnitDeleteModalComponent);
-      modal.content.unit = unit;*/
+      const modal = this.modalService.show(SizeTypeDeleteModalComponent);
+      modal.content.sizeType = st;
     }
 
     showEditModal(st: SizeType) {
-      /*const modal = this.modalService.show(UnitEditModalComponent);
-      modal.content.unit = unit;*/
+      const modal = this.modalService.show(SizeTypeEditModalComponent);
+      modal.content.sizeType = st;
     }
 
     showCreateModal() {
-      /*this.modalService.show(UnitCreateModalComponent);*/
+      this.modalService.show(SizeTypeCreateModalComponent);
     }
 
   }
