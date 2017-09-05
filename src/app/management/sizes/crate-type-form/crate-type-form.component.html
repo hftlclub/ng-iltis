@@ -1,0 +1,42 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="modal-body">
+
+    <ng-content></ng-content>
+
+    <div class="form-group">
+      <label for="category">Gebindegröße</label>
+      <select class="form-control" id="sizeType" formControlName="sizeType" placeholder="Bitte auswählen">
+        <option *ngFor="let st of sizeTypes" [value]="st.id">{{ st.description }} {{ st.amount | number }}</option>
+      </select>
+    </div>
+
+
+    <div class="form-group form-group-lg">
+      <label>Anzahl Slots/Gebinde</label>
+      <span class="small pull-right text-muted">Wie viele Gebinde passen hinein?</span>
+      <input type="number" class="form-control" formControlName="slots">
+    </div>
+
+    <div class="form-group form-group-lg">
+      <label>Bezeichnung</label>
+      <span class="small pull-right text-muted">Verbale Bezeichnung, z.B. <em>Kasten, Stiege, …</em></span>
+      <input type="text" class="form-control" formControlName="description">
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-primary btn-block btn-lg" (click)="cancel()">
+        <il-icon for="cancel"></il-icon>
+          Abbrechen
+        </button>
+    </div>
+    <div class="col-sm-6">
+      <button type="submit" class="btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">
+        <il-icon [for]="buttonIcon" *ngIf="!loading"></il-icon>
+        <il-icon for="spinner" *ngIf="loading"></il-icon>
+        {{ buttonLabel }}
+      </button>
+    </div>
+  </div>
+</form>

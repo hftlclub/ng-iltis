@@ -1,3 +1,43 @@
-<p>
-  crate-types works!
-</p>
+<table class="table table-hover table-striped">
+  <thead>
+    <tr>
+      <th>#</th>
+      <th>Bezeichnung</th>
+      <th>Anzahl Slots/Gebinde</th>
+      <th>Gebindegröße</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody *ngIf="crateTypes$ | async as crateTypes; else loading">
+    <tr *ngFor="let ct of crateTypes">
+      <td>{{ ct.id }}</td>
+      <td>{{ ct.description }}</td>
+      <td>{{ ct.slots }}</td>
+      <td>{{ ct.sizeType.description }} {{ ct.sizeType.amount | number }}</td>
+      <td>
+        <button class="btn btn-warning btn-xs" (click)="showEditModal(ct)">
+          <il-icon for="edit"></il-icon>
+          Bearbeiten
+        </button>
+        <button class="btn btn-danger btn-xs" (click)="showDeleteModal(ct)">
+          <il-icon for="delete"></il-icon>
+          Löschen
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <ng-template #loading>
+    <tbody>
+      <tr>
+        <td colspan="4" class="loading">
+          <il-icon for="spinner"></il-icon>
+          Laden...
+        </td>
+    </tbody>
+  </ng-template>
+</table>
+
+<button class="btn btn-success" type="button" (click)="showCreateModal()">
+  <il-icon for="plus"></il-icon>
+  Kastengröße hinzufügen
+</button>

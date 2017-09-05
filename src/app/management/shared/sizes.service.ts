@@ -1,3 +1,4 @@
+import { CrateType } from '../../shared/models/cratetype';
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -35,6 +36,23 @@ export class SizesService {
 
   deleteSizeType(stId: number): Observable<any> {
     return this.http.delete(`${this.api}/sizetype/${stId}`);
+  }
+
+
+  getAllCrateTypes(): Observable<CrateType[]> {
+    return this.http.get<CrateType[]>(`${this.api}/cratetypes`);
+  }
+
+  createCrateType(ct: CrateType): Observable<any> {
+    return this.http.post(`${this.api}/cratetype`, ct);
+  }
+
+  updateCrateType(ctId: number, ct: CrateType): Observable<any> {
+    return this.http.put(`${this.api}/cratetype/${ctId}`, ct);
+  }
+
+  deleteCrateType(ctId: number): Observable<any> {
+    return this.http.delete(`${this.api}/cratetype/${ctId}`);
   }
 
 }
