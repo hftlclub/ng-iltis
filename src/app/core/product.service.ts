@@ -44,6 +44,10 @@ export class ProductService {
     return this.http.put(`${this.api}/product/${productId}`, product);
   }
 
+  delete(productId: number): Observable<any> {
+    return this.http.delete(`${this.api}/product/${productId}`);
+  }
+
   getAllSizeTypes(): Observable<SizeType[]> {
     // TODO: this is just a stub
     return Observable.of([

@@ -1,0 +1,35 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="delete"></il-icon>
+    Produkt löschen
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <p>
+    Soll das Produkt <strong>{{ product?.name }}</strong> wirklich gelöscht werden?
+  </p>
+
+  <div class="alert alert-warning">
+    <il-icon for="warning"></il-icon>
+    Dieser Schritt ist unwiderrufbar!
+  </div>
+</div>
+
+<div class="modal-footer">
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
+      <il-icon for="cancel"></il-icon>
+      Abbrechen
+    </button>
+  </div>
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading" (click)="deleteProduct()">
+      <il-icon for="delete" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      Produkt löschen
+    </button>
+  </div>
+</div>

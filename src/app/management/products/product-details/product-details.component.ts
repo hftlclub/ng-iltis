@@ -7,6 +7,7 @@ import 'rxjs/add/operator/switchMap';
 import { ProductService } from '../../../core/product.service';
 import { Product } from '../../../shared/models/product';
 import { ImageUploadModalComponent } from '../image-upload-modal/image-upload-modal.component';
+import { ProductDeleteModalComponent } from '../product-delete-modal/product-delete-modal.component';
 
 @Component({
   selector: 'il-product-details',
@@ -29,6 +30,11 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   showUploadModal() {
     const modal = this.modalService.show(ImageUploadModalComponent);
+    modal.content.product = this.product;
+  }
+
+  showDeleteModal() {
+    const modal = this.modalService.show(ProductDeleteModalComponent);
     modal.content.product = this.product;
   }
 
