@@ -14,6 +14,8 @@
       </div>
 
       <div class="row">
+        <il-product-search-filter (changed)="searchChanged($event)"></il-product-search-filter>
+
         <ngx-datatable
           class="material"
           [rows]="products$ | async"

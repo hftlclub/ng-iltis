@@ -45,6 +45,10 @@ export class ProductListComponent implements OnInit {
       .subscribe(e => this.router.navigate(['..', e.row.id], { relativeTo: this.route }));
   }
 
+  searchChanged(e) {
+    console.log(e);
+  }
+
   categoryComparator(a: any, b: any) {
     if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
     if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }

@@ -17,6 +17,7 @@ import { ProductDeleteModalComponent } from './product-delete-modal/product-dele
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { ProductSearchFilterComponent } from './product-search-filter/product-search-filter.component';
 
 const modals = [
   ImageUploadModalComponent,
@@ -41,7 +42,8 @@ const modals = [
     ...modals,
     ProductCreateComponent,
     ProductEditComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductSearchFilterComponent
   ],
   entryComponents: [...modals]
 })

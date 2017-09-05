@@ -1,0 +1,11 @@
+<div class="input-group input-group-lg">
+  <span class="input-group-addon">
+    <il-icon for="fa-search"></il-icon>
+  </span>
+  <input type="text" class="form-control" placeholder="Filter" [formControl]="control">
+  <span class="input-group-btn">
+    <button class="btn btn-default" type="button" (click)="reset()">
+      <il-icon for="fa-close"></il-icon>
+    </button>
+  </span>
+</div>
