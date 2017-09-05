@@ -53,28 +53,16 @@ export class ProductService {
     ]).delay(2000);
   }
 
+  createSizeForProduct(productId: number, size: Size): Observable<any> {
+    return this.http.post(`${this.api}/product/${productId}/size`, size);
+  }
+
   updateSizeForProduct(productId: number, size: Size): Observable<any> {
-    // TODO: this is just a stub
-    console.log('updateSizeForProduct() called');
-    console.log('size:', size);
-    console.log('productId:', productId);
-    return Observable.of('foobar').delay(2000);
+    return this.http.put(`${this.api}/product/${productId}/size/${size.sizeType.id}`, size);
   }
 
   deleteSizeForProduct(productId: number, sizeTypeId: number): Observable<any> {
-    // TODO: this is just a stub
-    console.log('deleteSizeForProduct() called');
-    console.log('sizeTypeId:', sizeTypeId);
-    console.log('productId:', productId);
-    return Observable.of('foobar').delay(2000);
-  }
-
-  createSizeForProduct(productId: number, size: Size): Observable<any> {
-    // TODO: this is just a stub
-    console.log('createSizeForProduct() called');
-    console.log('size:', size);
-    console.log('productId:', productId);
-    return Observable.of('foobar').delay(2000);
+    return this.http.delete(`${this.api}/product/${productId}/size/${sizeTypeId}`);
   }
 
   uploadProductImage(file: File, productId: number): Observable<FileUploadResponse> {

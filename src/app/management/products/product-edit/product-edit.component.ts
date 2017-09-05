@@ -36,13 +36,10 @@ export class ProductEditComponent implements OnInit {
     this.units$ = this.us.getAll();
     this.categories$ = this.cs.getAll();
     this.product = this.route.snapshot.data.product;
-    console.log(this.product);
   }
 
   updateProduct(formValue: any) {
     const product: Product = Object.assign({}, this.product, formValue);
-    console.log(product);
-    console.log(this.product);
 
     this.loading = true;
     this.ps.update(this.product.id, product).subscribe(() => {
