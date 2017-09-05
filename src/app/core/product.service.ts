@@ -36,6 +36,10 @@ export class ProductService {
       .map(raw => ProductFactory.fromObj(raw));
   }
 
+  create(product: Product): Observable<any> {
+    return this.http.post(`${this.api}/product`, product);
+  }
+
   getAllSizeTypes(): Observable<SizeType[]> {
     // TODO: this is just a stub
     return Observable.of([

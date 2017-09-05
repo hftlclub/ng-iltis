@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { UnitsService } from '../shared/units.service';
+import { UnitsService } from '../../shared/units.service';
 import { Unit } from '../../../shared/models/unit';
 import { UnitDeleteModalComponent } from '../unit-delete-modal/unit-delete-modal.component';
 import { UnitCreateModalComponent } from '../unit-create-modal/unit-create-modal.component';

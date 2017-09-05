@@ -8,7 +8,7 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
 
-import { SizeType } from '../../../shared/models/sizetype';
+import { SizeType } from '../../shared/models/sizetype';
 
 @Injectable()
 export class SizesService {

@@ -1,3 +1,4 @@
+import { HasChangesGuard } from '../../core/has-changes.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
@@ -23,7 +24,8 @@ const routes: Routes = [
   },
   {
     path: 'create',
-    component: ProductCreateComponent
+    component: ProductCreateComponent,
+    canDeactivate: [HasChangesGuard]
   },
   {
     path: ':productId/details',
@@ -35,6 +37,7 @@ const routes: Routes = [
   {
     path: ':productId/edit',
     component: ProductEditComponent,
+    canDeactivate: [HasChangesGuard],
     resolve: {
       product: ProductResolver
     }

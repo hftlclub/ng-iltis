@@ -1,3 +1,64 @@
-<p>
-  product-form works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-md-offset-2 content">
+      <div class="panel panel-primary">
+        <div class="panel-heading">
+          <h3 class="panel-title">
+            <ng-content></ng-content>
+          </h3>
+        </div>
+        <div class="panel-body">
+          <form (ngSubmit)="submitForm()" [formGroup]="form">
+            <div class="container-fluid">
+              <div class="row">
+                <div class="col-md-12">
+
+                  <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" formControlName="name" class="form-control" id="name">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="description">Beschreibung (optional)</label>
+                    <input type="text" formControlName="description" class="form-control" id="description">
+                  </div>
+
+                  <div class="form-group">
+                    <label for="category">Kategorie</label>
+                    <select class="form-control" id="category" formControlName="category" placeholder="Bitte auswählen">
+                      <option *ngFor="let c of categories" [value]="c.id">{{ c.name }}</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <label for="unit">Einheit</label>
+                    <select class="form-control" id="unit" formControlName="unit" placeholder="Bitte auswählen">
+                      <option *ngFor="let u of units" [value]="u.id">{{ u.full }} ({{ u.short }})</option>
+                    </select>
+                  </div>
+
+                  <div class="form-group">
+                    <div class="col-md-6">
+                      <button type="button" class="btn btn-danger btn-lg btn-block" (click)="cancelForm()">
+                        <il-icon for="cancel"></il-icon>
+                        Abbrechen
+                      </button>
+                    </div>
+                    <div class="col-md-6">
+                      <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
+                        <il-icon for="ok" *ngIf="!loading"></il-icon>
+                        <il-icon for="spinner" *ngIf="loading"></il-icon>
+                        {{ btnLabel }}
+                      </button>
+                    </div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
