@@ -30,14 +30,14 @@
         </ng-template>
 
         <ng-template #tplActions let-row="row">
-          <button class="btn btn-xs btn-primary">
-              <il-icon for="edit"></il-icon>
-              Bearbeiten
-            </button>
+          <a class="btn btn-xs btn-primary" [routerLink]="['..', row.id, 'edit']">
+            <il-icon for="edit"></il-icon>
+            Bearbeiten
+          </a>
           <a class="btn btn-xs btn-success" [routerLink]="['..', row.id, 'details']">
-              Details
-              <il-icon for="fa-arrow-right"></il-icon>
-            </a>
+            Details
+            <il-icon for="fa-arrow-right"></il-icon>
+          </a>
         </ng-template>
 
       </div>
