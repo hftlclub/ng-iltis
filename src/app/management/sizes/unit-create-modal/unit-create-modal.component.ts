@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificationsService } from 'angular2-notifications';
 
-import { UnitsService } from '../shared/units.service';
+import { UnitsService } from '../../shared/units.service';
 
 @Component({
   selector: 'il-unit-create-modal',

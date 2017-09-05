@@ -1,0 +1,8 @@
+<il-product-form
+  btnLabel="Hinzufügen"
+  [units]="units$ | async"
+  [categories]="categories$ | async"
+  (valueChanged)="hasChanges = true"
+  (submitted)="createProduct($event)"
+  (cancelled)="goToProductList()"
+>Neues Produkt anlegen</il-product-form>

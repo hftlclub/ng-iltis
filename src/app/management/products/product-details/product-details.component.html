@@ -6,7 +6,7 @@
           <il-icon for="fa-coffee"></il-icon>
           Produktdetails
 
-          <a class="btn btn-primary" routerLink="../../">
+          <a class="btn btn-primary" routerLink="../../list">
             <il-icon for="fa-arrow-left"></il-icon>
             Alle anzeigen
           </a>
@@ -34,7 +34,7 @@
           <strong>Einheit:</strong> {{ product.unit.full }} ({{ product.unit.short }})<br>
           <strong>Kategorie:</strong> <a href="#">{{ product.category.name }}</a><br>
           <br>
-          <a class="btn btn-primary btn-sm">
+          <a class="btn btn-primary btn-sm" routerLink="../edit">
             <il-icon for="edit"></il-icon>
             Bearbeiten
           </a>

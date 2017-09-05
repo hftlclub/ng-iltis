@@ -8,7 +8,7 @@ import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
 
-import { Unit } from '../../../shared/models/unit';
+import { Unit } from '../../shared/models/unit';
 
 @Injectable()
 export class UnitsService {

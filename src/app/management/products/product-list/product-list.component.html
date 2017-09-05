@@ -6,10 +6,10 @@
           <il-icon for="fa-coffee"></il-icon>
           Produkte
 
-          <button class="btn btn-success pull-right">
-              <il-icon for="plus"></il-icon>
-              Hinzufügen
-            </button>
+          <a class="btn btn-success pull-right" routerLink="../create">
+            <il-icon for="plus"></il-icon>
+            Hinzufügen
+          </a>
         </h1>
       </div>
 
@@ -34,7 +34,7 @@
               <il-icon for="edit"></il-icon>
               Bearbeiten
             </button>
-          <a class="btn btn-xs btn-success" [routerLink]="[row.id, 'details']">
+          <a class="btn btn-xs btn-success" [routerLink]="['..', row.id, 'details']">
               Details
               <il-icon for="fa-arrow-right"></il-icon>
             </a>

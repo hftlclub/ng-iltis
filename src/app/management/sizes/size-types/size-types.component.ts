@@ -3,7 +3,7 @@ import { Observable } from 'rxjs/Observable';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { SizeType } from '../../../shared/models/sizetype';
-import { SizesService } from '../shared/sizes.service';
+import { SizesService } from '../../shared/sizes.service';
 
 @Component({
   selector: 'il-size-types',

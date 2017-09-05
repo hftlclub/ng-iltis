@@ -10,9 +10,9 @@ import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 
 import { EventService } from './event/shared/event.service';
-import { UnitsService } from './management/sizes/shared/units.service';
-import { SizesService } from './management/sizes/shared/sizes.service';
-
+import { UnitsService } from './management/shared/units.service';
+import { SizesService } from './management/shared/sizes.service';
+import { CategoriesService } from './management/shared/categories.service';
 
 import { EventModule } from './event/event.module';
 import { ManagementModule } from './management/management.module';
@@ -38,6 +38,7 @@ const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule]
     EventService,
     UnitsService,
     SizesService,
+    CategoriesService,
     { provide: LOCALE_ID, useValue: 'de' }
   ],
   bootstrap: [AppComponent]
