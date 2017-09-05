@@ -10,7 +10,8 @@ export class ProductResolver implements Resolve<Product> {
   constructor(private ps: ProductService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.ps.getSingle(route.params['productId']);
+    const inactSizes = !!route.data.showInactiveSizes;
+    return this.ps.getSingle(route.params['productId'], inactSizes);
   }
 
 }

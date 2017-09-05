@@ -18,8 +18,10 @@ const routes: Routes = [
   {
     path: 'list',
     component: ProductListComponent,
-    resolve: {
-      products: ProductsResolver
+    resolve: { products: ProductsResolver },
+    data: {
+      showInactiveSizes: true,
+      showInactiveProducts: true
     }
   },
   {
@@ -34,9 +36,8 @@ const routes: Routes = [
   {
     path: ':productId/details',
     component: ProductDetailsComponent,
-    resolve: {
-      product: ProductResolver
-    }
+    resolve: { product: ProductResolver },
+    data: { showInactiveSizes: true }
   },
   {
     path: ':productId/edit',

@@ -1,6 +1,7 @@
 <table class="table table-striped">
   <thead>
     <tr>
+      <th></th>
       <th>Bezeichnung</th>
       <th>Einkaufspreis</th>
       <th>Mindestbestand</th>
@@ -9,6 +10,10 @@
   </thead>
   <tbody>
     <tr *ngFor="let s of product.sizes">
+      <td>
+        <il-icon for="fa-check-circle" class="text-success" title="aktiv" *ngIf="s.active"></il-icon>
+        <il-icon for="fa-times-circle" class="text-danger" title="inaktiv" *ngIf="!s.active"></il-icon>
+      </td>
       <td>{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ product.unit.full }}</td>
       <td>{{ s.costs | currency:'EUR' }}</td>
       <td>{{ s.minStock }}</td>
@@ -26,7 +31,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="4">
+      <td colspan="5">
         <button class="btn btn-success btn-sm" (click)="showSizeCreateModal()">
           <il-icon for="plus"></il-icon>
           Größe hinzufügen

@@ -24,14 +24,14 @@ export class ProductService {
     @Inject('API_URL') private api
   ) { }
 
-  getAll(): Observable<Product[]> {
-    return this.http.get<any[]>(`${this.api}/products`)
+  getAll(showInactiveProducts = false, showInactiveSizes = false): Observable<Product[]> {
+    return this.http.get<any[]>(`${this.api}/products?showInactiveProducts=${showInactiveProducts}&showInactiveSizes=${showInactiveSizes}`)
       .retry(3)
       .map(raw => raw.map(p => ProductFactory.fromObj(p)));
   }
 
-  getSingle(id: number): Observable<Product> {
-    return this.http.get(`${this.api}/product/${id}`)
+  getSingle(id: number, showInactiveSizes = false): Observable<Product> {
+    return this.http.get(`${this.api}/product/${id}?showInactiveSizes=${showInactiveSizes}`)
       .retry(3)
       .map(raw => ProductFactory.fromObj(raw));
   }

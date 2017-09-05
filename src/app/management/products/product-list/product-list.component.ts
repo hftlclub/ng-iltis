@@ -14,6 +14,7 @@ import { ProductService } from '../../../core/product.service';
 export class ProductListComponent implements OnInit {
 
   @ViewChild('tplImg') tplImg: TemplateRef<any>;
+  @ViewChild('tplActive') tplActive: TemplateRef<any>;
   @ViewChild('tplCategory') tplCategory: TemplateRef<any>;
   @ViewChild('tplUnit') tplUnit: TemplateRef<any>;
   @ViewChild('tplActions') tplActions: TemplateRef<any>;
@@ -25,11 +26,12 @@ export class ProductListComponent implements OnInit {
   constructor(private ps: ProductService) { }
 
   ngOnInit() {
-    this.products$ = this.ps.getAll();
+    this.products$ = this.ps.getAll(true, true);
 
     this.columns = [
       { name: '#', cellTemplate: this.tplImg, width: 40, sortable: false },
       { name: 'Name', prop: 'name' },
+      { name: 'aktiv', cellTemplate: this.tplActive, width: 40, sortable: false },
       { name: 'Kategorie', cellTemplate: this.tplCategory, prop: 'category', comparator: this.categoryComparator },
       { name: 'Beschreibung', prop: 'description' },
       { name: 'Einheit', prop: 'unit.full' },

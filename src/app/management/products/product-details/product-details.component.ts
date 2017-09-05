@@ -24,7 +24,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.product = this.route.snapshot.data.product;
     this.subscription = this.ps.productUpdated
-      .switchMap(() => this.ps.getSingle(this.product.id))
+      .switchMap(() => this.ps.getSingle(this.product.id, this.route.snapshot.data.showInactiveSizes))
       .subscribe(p => this.product = p);
   }
 

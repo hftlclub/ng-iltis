@@ -17,6 +17,11 @@
         <ngx-datatable class="material" [rows]="products$ | async" [columns]="columns" [draggable]="false" columnMode="force" rowHeight="auto">
         </ngx-datatable>
 
+        <ng-template #tplActive let-row="row">
+          <il-icon for="fa-check-circle" class="text-success" title="aktiv" *ngIf="row.active"></il-icon>
+          <il-icon for="fa-times-circle" class="text-danger" title="inaktiv" *ngIf="!row.active"></il-icon>
+        </ng-template>
+
         <ng-template #tplImg let-row="row">
           <img [src]="row.imgFilename" width="30" height="30">
         </ng-template>
@@ -38,6 +43,8 @@
             Details
             <il-icon for="fa-arrow-right"></il-icon>
           </a>
+
+          <span *ngIf="!row.active">inaktiv</span>
         </ng-template>
 
       </div>
