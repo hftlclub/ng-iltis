@@ -6,6 +6,7 @@
 <il-count-form
   [products]="products"
   [inventory]="inventory"
+  [transfers]="transfers"
   (submitted)="processNewValues($event)"
   (cancelled)="cancelForm()"
   (valueChanged)="hasChanges = true">

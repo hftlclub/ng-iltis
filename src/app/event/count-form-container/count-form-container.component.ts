@@ -4,6 +4,7 @@ import { NotificationsService } from 'angular2-notifications';
 
 import { Inventory } from '../../shared/models/inventory';
 import { Product } from '../../shared/models/product';
+import { Transfer } from '../../shared/models/transfer';
 import { EventService } from '../shared/event.service';
 
 @Component({
@@ -15,6 +16,7 @@ export class CountFormContainerComponent implements OnInit {
 
   products: Product[];
   inventory: Inventory[];
+  transfers: Transfer[];
   eventId: number;
   mode: string;
   hasChanges = false;
@@ -30,6 +32,7 @@ export class CountFormContainerComponent implements OnInit {
     this.mode = this.route.snapshot.params['mode'];
     this.eventId = this.route.parent.snapshot.params['eventId'];
     this.products = this.route.snapshot.data['products'];
+    this.transfers = this.route.snapshot.data['transfers'];
 
     // in counter count mode, remove crate types so that only size types can be counted
     if (this.mode === 'counter') {

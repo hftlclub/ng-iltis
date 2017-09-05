@@ -90,7 +90,8 @@ const routes: Routes = [
         canDeactivate: [HasChangesGuard],
         resolve: {
           products: ProductsResolver,
-          inventory: InventoryResolver
+          inventory: InventoryResolver,
+          transfers: TransfersResolver
         },
       },
       {

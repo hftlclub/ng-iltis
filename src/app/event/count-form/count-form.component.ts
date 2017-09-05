@@ -1,8 +1,9 @@
-import { Size } from '../../shared/models/size';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import _ from 'lodash';
 
+import { Transfer } from '../../shared/models/transfer';
+import { Size } from '../../shared/models/size';
 import { Inventory } from '../../shared/models/inventory';
 import { Category } from '../../shared/models/category';
 import { Product } from '../../shared/models/product';
@@ -16,9 +17,12 @@ export class CountFormComponent implements OnInit {
 
   @Input() products: Product[];
   @Input() inventory: any[];
+  @Input() transfers: Transfer[];
   @Output() submitted = new EventEmitter<any>();
   @Output() cancelled = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
+
+  transferredProducts: number[] = [];
 
   categories: any = {};
   maxTypeColsNum: number;
@@ -47,7 +51,8 @@ export class CountFormComponent implements OnInit {
 
     this.maxTypeColsNum = _.max(this.categories.map(c => c.typeColsNum));
 
-
+    // IDs of products that we already have tranasfers for
+    this.transferredProducts = _.uniq(this.transfers.map(t => t.product.id));
 
     this.form = this.fb.group({
       categories: this.fb.array(
@@ -141,7 +146,7 @@ export class CountFormComponent implements OnInit {
     });
 
     return this.fb.group({
-      active: false,
+      active: this.transferredProducts.includes(p.id),
       sizeTypes: this.fb.group(stMap),
       crateTypes: this.fb.group(ctMap)
     });
