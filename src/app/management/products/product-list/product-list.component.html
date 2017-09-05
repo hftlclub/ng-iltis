@@ -14,12 +14,18 @@
       </div>
 
       <div class="row">
-        <ngx-datatable class="material" [rows]="products$ | async" [columns]="columns" [draggable]="false" columnMode="force" rowHeight="auto">
+        <ngx-datatable
+          class="material"
+          [rows]="products$ | async"
+          [columns]="columns"
+          [draggable]="false"
+          columnMode="force"
+          rowHeight="auto">
         </ngx-datatable>
 
         <ng-template #tplActive let-row="row">
-          <il-icon for="fa-check-circle" class="text-success" title="aktiv" *ngIf="row.active"></il-icon>
-          <il-icon for="fa-times-circle" class="text-danger" title="inaktiv" *ngIf="!row.active"></il-icon>
+          <il-icon for="fa-check-circle fa-lg" class="text-success" title="aktiv" *ngIf="row.active"></il-icon>
+          <il-icon for="fa-times-circle fa-lg" class="text-danger" title="inaktiv" *ngIf="!row.active"></il-icon>
         </ng-template>
 
         <ng-template #tplImg let-row="row">

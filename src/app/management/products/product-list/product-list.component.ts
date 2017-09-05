@@ -1,7 +1,7 @@
-import { Component, OnInit, ViewChild, TemplateRef } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, ComponentRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
-import { TableColumn } from '@swimlane/ngx-datatable';
+import { TableColumn, DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { Product } from '../../../shared/models/product';
 import { ProductService } from '../../../core/product.service';
@@ -13,6 +13,7 @@ import { ProductService } from '../../../core/product.service';
 })
 export class ProductListComponent implements OnInit {
 
+  @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('tplImg') tplImg: TemplateRef<any>;
   @ViewChild('tplActive') tplActive: TemplateRef<any>;
   @ViewChild('tplCategory') tplCategory: TemplateRef<any>;
@@ -23,7 +24,7 @@ export class ProductListComponent implements OnInit {
 
   columns: TableColumn[];
 
-  constructor(private ps: ProductService) { }
+  constructor(private ps: ProductService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.products$ = this.ps.getAll(true, true);
@@ -37,6 +38,11 @@ export class ProductListComponent implements OnInit {
       { name: 'Einheit', prop: 'unit.full' },
       { name: 'Aktionen', cellTemplate: this.tplActions, sortable: false, width: 200 },
     ];
+
+    // navigate to detail page on row doubleclick
+    this.datatable.activate
+      .filter(e => e.type === 'dblclick')
+      .subscribe(e => this.router.navigate(['..', e.row.id], { relativeTo: this.route }));
   }
 
   categoryComparator(a: any, b: any) {
