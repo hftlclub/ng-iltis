@@ -1,3 +1,4 @@
+import { CrateType } from '../shared/models/cratetype';
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -48,15 +49,6 @@ export class ProductService {
     return this.http.delete(`${this.api}/product/${productId}`);
   }
 
-  getAllSizeTypes(): Observable<SizeType[]> {
-    // TODO: this is just a stub
-    return Observable.of([
-      new SizeType(1, 0.5, 'Flasche', false),
-      new SizeType(2, 0.2, 'Flasche', false),
-      new SizeType(3, 0.33, 'Becher', false)
-    ]).delay(2000);
-  }
-
   createSizeForProduct(productId: number, size: Size): Observable<any> {
     return this.http.post(`${this.api}/product/${productId}/size`, size);
   }
@@ -68,6 +60,20 @@ export class ProductService {
   deleteSizeForProduct(productId: number, sizeTypeId: number): Observable<any> {
     return this.http.delete(`${this.api}/product/${productId}/size/${sizeTypeId}`);
   }
+
+
+  getPossibleCrateTypesForProduct(productId: number): Observable<CrateType[]> {
+    return this.http.get<CrateType[]>(`${this.api}/product/${productId}/possible/cratetypes`);
+  }
+
+  createCrateTypeForProduct(productId: number, crateType: CrateType): Observable<any> {
+    return this.http.post(`${this.api}/product/${productId}/cratetype`, crateType);
+  }
+
+  deleteCrateTypeForProduct(productId: number, crateTypeId: number): Observable<any> {
+    return this.http.delete(`${this.api}/product/${productId}/cratetype/${crateTypeId}`);
+  }
+
 
   uploadProductImage(file: File, productId: number): Observable<FileUploadResponse> {
     return this.us.uploadFile(file, `${this.api}/product/${productId}/image`);

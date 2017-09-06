@@ -18,14 +18,16 @@
       <td>{{ s.costs | currency:'EUR' }}</td>
       <td>{{ s.minStock }}</td>
       <td>
-        <button class="btn btn-warning btn-xs" (click)="showSizeEditModal(s)">
-          <il-icon for="edit"></il-icon>
-          Bearbeiten
-        </button>
-        <button class="btn btn-danger btn-xs" (click)="showSizeDeleteModal(s)">
-          <il-icon for="delete"></il-icon>
-          Löschen
-        </button>
+        <span class="pull-right">
+          <button class="btn btn-warning btn-xs" (click)="showSizeEditModal(s)">
+            <il-icon for="edit"></il-icon>
+            Bearbeiten
+          </button>
+          <button class="btn btn-danger btn-xs" (click)="showSizeDeleteModal(s)">
+            <il-icon for="delete"></il-icon>
+            Löschen
+          </button>
+        </span>
       </td>
     </tr>
   </tbody>

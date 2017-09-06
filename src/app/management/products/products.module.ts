@@ -17,13 +17,17 @@ import { ProductDeleteModalComponent } from './product-delete-modal/product-dele
 import { ProductCreateComponent } from './product-create/product-create.component';
 import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductFormComponent } from './product-form/product-form.component';
+import { ProductCratesTableComponent } from './product-crates-table/product-crates-table.component';
+import { ProductCrateDeleteModalComponent } from './product-crates-table/product-crate-delete-modal/product-crate-delete-modal.component';
+import { ProductCrateCreateComponent } from './product-crates-table/product-crate-create/product-crate-create.component';
 
 const modals = [
   ImageUploadModalComponent,
   ProductSizeCreateModalComponent,
   ProductSizeEditModalComponent,
   ProductSizeDeleteModalComponent,
-  ProductDeleteModalComponent
+  ProductDeleteModalComponent,
+  ProductCrateDeleteModalComponent
 ];
 
 @NgModule({
@@ -38,10 +42,12 @@ const modals = [
     ProductDetailsComponent,
     ProductSizesTableComponent,
     ProductSizeFormComponent,
-    ...modals,
     ProductCreateComponent,
     ProductEditComponent,
-    ProductFormComponent
+    ProductFormComponent,
+    ProductCratesTableComponent,
+    ...modals,
+    ProductCrateCreateComponent
   ],
   entryComponents: [...modals]
 })
