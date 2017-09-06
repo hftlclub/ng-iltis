@@ -5,8 +5,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { SizesService } from '../../../shared/sizes.service';
 import { Size, SizeFactory } from '../../../../shared/models/size';
+import { SizeType, SizeTypeFactory } from '../../../../shared/models/sizetype';
 import { Unit } from '../../../../shared/models/unit';
-import { SizeType } from '../../../../shared/models/sizetype';
 
 @Component({
   selector: 'il-product-size-form',
@@ -16,7 +16,7 @@ import { SizeType } from '../../../../shared/models/sizetype';
 export class ProductSizeFormComponent implements OnInit {
 
   @Input() edit = false;
-  @Input() initialValue = SizeFactory.empty();
+  @Input() initialValue = new Size(SizeTypeFactory.empty(), 0, 0, true);
   @Input() buttonIcon = 'ok';
   @Input() buttonLabel = 'Übernehmen';
   @Input() loading = false;
