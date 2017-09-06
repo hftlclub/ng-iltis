@@ -4,6 +4,8 @@ import { BehaviorSubject, Subscription } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/interval';
 import 'rxjs/add/operator/distinctUntilChanged';
+import 'rxjs/add/operator/timeout';
+import 'rxjs/add/operator/retry';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificationsService } from 'angular2-notifications';
@@ -12,6 +14,12 @@ import { ConnectionLostModalComponent } from '../connection-lost-modal/connectio
 
 @Injectable()
 export class HealthCheckService {
+
+  times = {
+    defaultTimer: 5000,
+    criticalTimer: 1000,
+    timeout: 3000
+  }
 
   connectionHealthy: BehaviorSubject<any> = new BehaviorSubject(true);
   private timerSubscription: Subscription;
@@ -28,34 +36,28 @@ export class HealthCheckService {
     this.timerSubscription = Observable.interval(time).subscribe(() => this.handleInterval());
   }
 
-  private setCriticalTimer() {
-    this.setTimer(1000);
-  }
-
-  private setDefaultTimer() {
-    this.setTimer(5000);
-  }
-
   private handleInterval() {
-    return this.http.get(`${this.api}/info`).subscribe(
-      () => this.connectionHealthy.next(true),
-      () => this.connectionHealthy.next(false)
-    )
+    return this.http.get(`${this.api}/healthcheck`)
+      .timeout(3000)
+      .retry(2)
+      .subscribe(
+        () => this.connectionHealthy.next(true),
+        () => this.connectionHealthy.next(false)
+      )
   }
 
   startHealthCheck() {
-    this.setDefaultTimer();
+    this.setTimer(this.times.defaultTimer);
 
     this.connectionHealthy
       .distinctUntilChanged()
       .subscribe(healthy => {
         if (!healthy) {
           this.modal = this.modalService.show(ConnectionLostModalComponent, { ignoreBackdropClick: true });
-          this.setCriticalTimer();
+          this.setTimer(this.times.criticalTimer);
         } else if (this.modal) {
           this.modal.hide();
-          this.setDefaultTimer();
-
+          this.setTimer(this.times.defaultTimer);
           setTimeout(() => this.ns.info('Serververbindung', 'Verbindung wiederhergestellt'), 700);
         }
       });
