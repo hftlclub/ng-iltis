@@ -120,7 +120,7 @@ export class EventFormComponent implements OnInit, OnChanges {
         purchase: 'Infos zum Einkauf',
         private: 'Infos zur Spontanentnahme'
       },
-      btnLabel: {
+      buttonLabel: {
         event: 'Veranstaltung anlegen',
         purchase: 'Einkauf anlegen',
         private: 'Spontanentnahme starten'
