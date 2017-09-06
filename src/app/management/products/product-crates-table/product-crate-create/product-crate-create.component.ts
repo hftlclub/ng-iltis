@@ -3,6 +3,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { Observable } from 'rxjs/Rx';
 import { NotificationsService } from 'angular2-notifications';
 
+import { IlValidators } from '../../../../core/il-validators';
 import { Product } from '../../../../shared/models/product';
 import { CrateType } from '../../../../shared/models/cratetype';
 import { ProductService } from '../../../../core/product.service';
@@ -26,7 +27,7 @@ export class ProductCrateCreateComponent implements OnInit {
     this.crateTypes$ = this.ps.getPossibleCrateTypesForProduct(this.product.id);
 
     this.form = new FormGroup({
-      crateType: new FormControl(0)
+      crateType: new FormControl(0, IlValidators.notZero)
     });
   }
 

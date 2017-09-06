@@ -1,3 +1,4 @@
+import { IlValidators } from '../../../../core/il-validators';
 import { HelperService } from '../../../../core/helper.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -34,7 +35,7 @@ export class ProductSizeFormComponent implements OnInit {
     this.sizeTypes$ = this.ss.getAllSizeTypes();
 
     this.form = this.fb.group({
-      sizeType: [this.initialValue.sizeType.id, [Validators.required]],
+      sizeType: [this.initialValue.sizeType.id, [Validators.required, IlValidators.notZero]],
       costs: [this.hs.dotToComma(this.initialValue.costs), [Validators.required]],
       minStock: [this.initialValue.minStock, [Validators.required]],
       active: [this.initialValue.active]
