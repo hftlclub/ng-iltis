@@ -9,7 +9,7 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let s of product.sizes" [class.text-muted]="!s.active">
+    <tr *ngFor="let s of sizesSorted" [class.text-muted]="!s.active">
       <td>
         <il-icon for="fa-check-circle" class="text-success" title="aktiv" *ngIf="s.active"></il-icon>
         <il-icon for="fa-times-circle" class="text-danger" title="inaktiv" *ngIf="!s.active"></il-icon>

@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnChanges } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { Size } from '../../../shared/models/size';
@@ -13,11 +13,16 @@ import { ProductSizeDeleteModalComponent } from './product-size-delete-modal/pro
   templateUrl: './product-sizes-table.component.html',
   styleUrls: ['./product-sizes-table.component.css']
 })
-export class ProductSizesTableComponent {
+export class ProductSizesTableComponent implements OnChanges {
 
   @Input() product: Product;
+  sizesSorted: Size[] = [];
 
   constructor(private modalService: BsModalService) { }
+
+  ngOnChanges() {
+    this.sizesSorted = this.product.sizes.sort((a, b) => a.active ? -1 : 1);
+  }
 
   showSizeCreateModal() {
     const modal = this.modalService.show(ProductSizeCreateModalComponent);
