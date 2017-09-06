@@ -11,13 +11,27 @@ import { Size } from '../../../../shared/models/size';
   templateUrl: './product-size-delete-modal.component.html',
   styleUrls: ['./product-size-delete-modal.component.css']
 })
-export class ProductSizeDeleteModalComponent {
+export class ProductSizeDeleteModalComponent implements OnInit {
 
   size: Size;
   product: Product;
   loading = false;
+  checkLoading = true;
+  deletable = false;
 
   constructor(private modal: BsModalRef, private ps: ProductService, private ns: NotificationsService) { }
+
+  ngOnInit() {
+    setTimeout(() => this.startCheck(), 0); // hack, necessary because product and size are only available asynchronously
+  }
+
+  startCheck() {
+    this.checkLoading = true;
+    this.ps.checkProductSizeDeletable(this.product.id, this.size.sizeType.id).subscribe(
+      () => { this.deletable = true; this.checkLoading = false; }, // success
+      () => { this.deletable = false; this.checkLoading = false; } // error
+    )
+  }
 
   deleteSize() {
     this.loading = true;

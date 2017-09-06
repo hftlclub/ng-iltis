@@ -49,6 +49,8 @@ export class ProductService {
     return this.http.delete(`${this.api}/product/${productId}`);
   }
 
+
+  /* product sizes */
   createSizeForProduct(productId: number, size: Size): Observable<any> {
     return this.http.post(`${this.api}/product/${productId}/size`, size);
   }
@@ -57,11 +59,16 @@ export class ProductService {
     return this.http.put(`${this.api}/product/${productId}/size/${sizeTypeId}`, size);
   }
 
+  checkProductSizeDeletable(productId: number, sizeTypeId: number): Observable<any> {
+    return this.http.get(`${this.api}/product/${productId}/size/${sizeTypeId}/deletable`);
+  }
+
   deleteSizeForProduct(productId: number, sizeTypeId: number): Observable<any> {
     return this.http.delete(`${this.api}/product/${productId}/size/${sizeTypeId}`);
   }
 
 
+  /* crate types for product */
   getPossibleCrateTypesForProduct(productId: number): Observable<CrateType[]> {
     return this.http.get<CrateType[]>(`${this.api}/product/${productId}/possible/cratetypes`);
   }
@@ -75,6 +82,7 @@ export class ProductService {
   }
 
 
+  /* product image */
   uploadProductImage(file: File, productId: number): Observable<FileUploadResponse> {
     return this.us.uploadFile(file, `${this.api}/product/${productId}/image`);
   }
