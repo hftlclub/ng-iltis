@@ -10,25 +10,32 @@ export class ProductListFilterService {
   products$ = new BehaviorSubject<Product[]>([]);
   productsFiltered$ = new BehaviorSubject<Product[]>([]);
 
-  tableSort$ = new BehaviorSubject<TableSort[]>([{dir: 'asc', prop: 'name'}]);
+  tableSort$: BehaviorSubject<TableSort[]>;
 
-  searchFilter$ = new BehaviorSubject<string>('');
-  categoriesFilter$ = new BehaviorSubject<number[]>(null);
-  groupFilter$ = new BehaviorSubject<GroupFilters>({
-    active: true,
-    inactive: true
-  })
+  searchFilter$: BehaviorSubject<string>;
+  categoriesFilter$: BehaviorSubject<number[]>;
+  groupFilter$: BehaviorSubject<GroupFilters>;
 
-  filters$ = new BehaviorSubject<Filters>({
-    categories: [],
+  filters$: BehaviorSubject<Filters>;
+
+  defaultFilters: Filters = {
+    categories: null,
     search: '',
-    groupFilters: {
-      active: true,
-      inactive: true
-    }
-  })
+    groupFilters: { active: true, inactive: true },
+  }
+
+  defaultTableSort: TableSort[] = [{dir: 'asc', prop: 'name'}];
 
   constructor(private ps: ProductService, private hs: HelperService) {
+    this.filters$ = new BehaviorSubject(this.defaultFilters);
+    this.searchFilter$ = new BehaviorSubject(this.defaultFilters.search);
+    this.categoriesFilter$ = new BehaviorSubject(this.defaultFilters.categories);
+    this.groupFilter$ = new BehaviorSubject(this.defaultFilters.groupFilters)
+
+    this.tableSort$ = new BehaviorSubject(this.defaultTableSort);
+
+
+
     Observable.combineLatest(
       this.searchFilter$,
       this.groupFilter$,
@@ -38,6 +45,7 @@ export class ProductListFilterService {
         groupFilters: group,
         categories: categories
       }))
+      .debounceTime(200)
       .subscribe(v => this.filters$.next(v));
 
     this.filters$.subscribe(f => {
@@ -50,8 +58,19 @@ export class ProductListFilterService {
     });
   }
 
+
   refreshProducts() {
     this.ps.getAll(true, true).subscribe(p => this.products$.next(p));
+  }
+
+  resetFilters() {
+    this.searchFilter$.next(this.defaultFilters.search);
+    this.categoriesFilter$.next(this.defaultFilters.categories);
+    this.groupFilter$.next(this.defaultFilters.groupFilters);
+  }
+
+  resetTableSort() {
+    this.tableSort$.next(this.defaultTableSort);
   }
 
 
