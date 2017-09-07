@@ -82,7 +82,7 @@ export class CountFormComponent implements OnInit {
     );
 
     const output = _.flatMap(products, p => {
-      const sizeTypesAmounts = _.clone(p.sizeTypes);
+      const sizeTypesAmounts = _.mapValues(p.sizeTypes, v => parseInt(v, 0));
 
       _.forIn(p.crateTypes, (numCrates, ctId) => {
         const ct = crateTypesMap[ctId];

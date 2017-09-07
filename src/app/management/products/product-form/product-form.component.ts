@@ -13,7 +13,7 @@ import { Unit } from '../../../shared/models/unit';
 export class ProductFormComponent implements OnInit {
 
   @Input() loading = false;
-  @Input() btnLabel = 'Speichern';
+  @Input() buttonLabel = 'Speichern';
 
   @Input() initialProduct: Product;
   @Input() categories: Category[];

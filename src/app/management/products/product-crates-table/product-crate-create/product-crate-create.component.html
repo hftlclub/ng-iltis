@@ -1,0 +1,23 @@
+<form class="form-inline" [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="form-group">
+    <select class="form-control" formControlName="crateType" *ngIf="crateTypes$ | async as crateTypes; else crateTypesLoading">
+      <option value="0" selected disabled>
+        <ng-template [ngIf]="crateTypes.length">Bitte auswählen...</ng-template>
+        <ng-template [ngIf]="!crateTypes.length">Keine Kastengrößen verfügbar</ng-template>
+      </option>
+      <option *ngFor="let ct of crateTypes" [value]="ct.id">
+        {{ ct.description }} {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ product.unit.full }} ({{ ct.sizeType.description }})
+      </option>
+    </select>
+    <ng-template #crateTypesLoading>
+      <select class="form-control" disabled>
+        <option selected>Lade Kastengrößen...</option>
+      </select>
+    </ng-template>
+  </div>
+  <button type="submit" class="btn btn-default" [disabled]="loading || form.invalid">
+    <il-icon for="plus" *ngIf="!loading"></il-icon>
+    <il-icon for="spinner" *ngIf="loading"></il-icon>
+    Hinzufügen
+  </button>
+</form>

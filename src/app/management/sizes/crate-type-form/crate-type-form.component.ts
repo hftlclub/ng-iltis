@@ -1,3 +1,4 @@
+import { IlValidators } from '../../../core/il-validators';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -27,7 +28,7 @@ export class CrateTypeFormComponent implements OnInit {
 
   ngOnInit() {
     this.form = this.fb.group({
-      sizeType: [this.initialValue.sizeType.id, [Validators.required]],
+      sizeType: [this.initialValue.sizeType.id, [Validators.required, IlValidators.notZero]],
       slots: [this.initialValue.slots, [Validators.required]],
       description: [this.initialValue.description, [Validators.required]],
     });

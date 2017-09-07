@@ -20,13 +20,17 @@ import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductSearchFilterComponent } from './product-search-filter/product-search-filter.component';
 
 import { ProductListFilterService } from './shared/product-list-filter.service';
+import { ProductCratesTableComponent } from './product-crates-table/product-crates-table.component';
+import { ProductCrateDeleteModalComponent } from './product-crates-table/product-crate-delete-modal/product-crate-delete-modal.component';
+import { ProductCrateCreateComponent } from './product-crates-table/product-crate-create/product-crate-create.component';
 
 const modals = [
   ImageUploadModalComponent,
   ProductSizeCreateModalComponent,
   ProductSizeEditModalComponent,
   ProductSizeDeleteModalComponent,
-  ProductDeleteModalComponent
+  ProductDeleteModalComponent,
+  ProductCrateDeleteModalComponent
 ];
 
 @NgModule({
@@ -41,17 +45,13 @@ const modals = [
     ProductDetailsComponent,
     ProductSizesTableComponent,
     ProductSizeFormComponent,
-    ...modals,
     ProductCreateComponent,
     ProductEditComponent,
     ProductFormComponent,
-<<<<<<< Updated upstream
-    ProductSearchFilterComponent
-=======
+    ProductSearchFilterComponent,
     ProductCratesTableComponent,
-    ProductCrateCreateComponent
-    ...modals,
->>>>>>> Stashed changes
+    ProductCrateCreateComponent,
+    ...modals
   ],
   entryComponents: [...modals],
   providers: [ProductListFilterService]

@@ -1,0 +1,32 @@
+<form [formGroup]="form" (ngSubmit)="submitForm()">
+  <div class="modal-body">
+
+    <ng-content></ng-content>
+
+    <div class="form-group form-group-lg">
+      <label>Name</label>
+      <input type="text" class="form-control" formControlName="name">
+    </div>
+
+    <div class="form-group form-group-lg">
+      <label>Beschreibung (optional)</label>
+      <input type="text" class="form-control" formControlName="description">
+    </div>
+
+  </div>
+  <div class="modal-footer">
+    <div class="col-sm-6">
+      <button type="button" class="btn btn-primary btn-block btn-lg" (click)="cancel()">
+        <il-icon for="cancel"></il-icon>
+          Abbrechen
+        </button>
+    </div>
+    <div class="col-sm-6">
+      <button type="submit" class="btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">
+        <il-icon [for]="buttonIcon" *ngIf="!loading"></il-icon>
+        <il-icon for="spinner" *ngIf="loading"></il-icon>
+        {{ buttonLabel }}
+      </button>
+    </div>
+  </div>
+</form>

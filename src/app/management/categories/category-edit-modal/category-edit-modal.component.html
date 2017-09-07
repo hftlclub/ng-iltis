@@ -1,0 +1,19 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">
+    <il-icon for="edit"></il-icon>
+    Kategorie bearbeiten
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<il-category-form
+  *ngIf="category"
+  [edit]="true"
+  [loading]="loading"
+  [initialValue]="category"
+  buttonLabel="Speichern"
+  (formSubmitted)="updateCategory($event)"
+  (cancelled)="hideModal()">
+</il-category-form>
+

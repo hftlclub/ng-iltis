@@ -1,3 +1,4 @@
+import { IlValidators } from '../../../../core/il-validators';
 import { HelperService } from '../../../../core/helper.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
@@ -5,8 +6,8 @@ import { Observable } from 'rxjs/Observable';
 
 import { SizesService } from '../../../shared/sizes.service';
 import { Size, SizeFactory } from '../../../../shared/models/size';
+import { SizeType, SizeTypeFactory } from '../../../../shared/models/sizetype';
 import { Unit } from '../../../../shared/models/unit';
-import { SizeType } from '../../../../shared/models/sizetype';
 
 @Component({
   selector: 'il-product-size-form',
@@ -16,7 +17,7 @@ import { SizeType } from '../../../../shared/models/sizetype';
 export class ProductSizeFormComponent implements OnInit {
 
   @Input() edit = false;
-  @Input() initialValue = SizeFactory.empty();
+  @Input() initialValue = new Size(SizeTypeFactory.empty(), 0, 0, true);
   @Input() buttonIcon = 'ok';
   @Input() buttonLabel = 'Übernehmen';
   @Input() loading = false;
@@ -34,7 +35,7 @@ export class ProductSizeFormComponent implements OnInit {
     this.sizeTypes$ = this.ss.getAllSizeTypes();
 
     this.form = this.fb.group({
-      sizeType: [this.initialValue.sizeType.id, [Validators.required]],
+      sizeType: [this.initialValue.sizeType.id, [Validators.required, IlValidators.notZero]],
       costs: [this.hs.dotToComma(this.initialValue.costs), [Validators.required]],
       minStock: [this.initialValue.minStock, [Validators.required]],
       active: [this.initialValue.active]

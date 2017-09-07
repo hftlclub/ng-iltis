@@ -37,7 +37,7 @@ export class ImageUploadModalComponent implements OnInit {
   upload() {
     this.ps.uploadProductImage(this.file, this.product.id).subscribe(e => {
       this.ps.productUpdated.emit();
-      this.ns.success('Bibld aktualisiert', 'Das Produktbild wurde aktualisiert.');
+      this.ns.success('Bild aktualisiert', 'Das Produktbild wurde aktualisiert.');
       this.hideModal();
     },
     err => {

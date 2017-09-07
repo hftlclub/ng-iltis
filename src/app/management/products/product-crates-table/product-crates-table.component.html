@@ -1,0 +1,34 @@
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Bezeichnung</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let c of product.crateTypes">
+      <td>{{ c.description }} {{ c.slots }} &times; {{ c.sizeType.amount | number }} {{ product.unit.full }} ({{ c.sizeType.description }})</td>
+      <td>
+        <button class="btn btn-danger btn-xs pull-right" (click)="showCrateDeleteModal(c)">
+          <il-icon for="delete"></il-icon>
+          Löschen
+        </button>
+      </td>
+    </tr>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5">
+        <button class="btn btn-success btn-sm" *ngIf="!createFormVisible" (click)="createFormVisible = true">
+          <il-icon for="plus"></il-icon>
+          Kastengröße hinzufügen
+        </button>
+
+        <il-product-crate-create
+          *ngIf="createFormVisible"
+          [product]="product"
+          (crateTypeAdded)="createFormVisible = false"></il-product-crate-create>
+      </td>
+    </tr>
+  </tfoot>
+</table>

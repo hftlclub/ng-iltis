@@ -34,6 +34,10 @@
           <img [src]="row.imgFilename" width="30" height="30">
         </ng-template>
 
+        <ng-template #tplName let-row="row">
+          <strong>{{ row.name }}</strong>
+        </ng-template>
+
         <ng-template #tplCategory let-row="row">
           <a href="#">{{ row.category.name }}</a>
         </ng-template>

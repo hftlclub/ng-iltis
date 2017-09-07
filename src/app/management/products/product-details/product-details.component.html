@@ -13,6 +13,18 @@
         </h1>
       </div>
 
+      <div class="row" *ngIf="product.active && !hasActiveSizes">
+        <div class="alert alert-warning">
+          <il-icon for="warning"></il-icon>
+          Für dieses Produkt sind keine aktiven Gebindegrößen hinterlegt.
+          <strong>Du solltest das Produkt deaktivieren.</strong>
+          <button class="btn btn-xs btn-default pull-right">
+            <il-icon for="fa-eye-slash"></il-icon>
+            Produkt deaktivieren
+          </button>
+        </div>
+      </div>
+
       <div class="row">
         <div class="col-md-2 col-sm-4 col-lg-2">
           <div class="thumbnail">
@@ -50,6 +62,9 @@
 
           <h3>Gebindegrößen</h3>
           <il-product-sizes-table [product]="product"></il-product-sizes-table>
+
+          <h3>Kastengrößen</h3>
+          <il-product-crates-table [product]="product"></il-product-crates-table>
 
         </div>
       </div>
