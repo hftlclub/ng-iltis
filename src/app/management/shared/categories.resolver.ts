@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 
 import { Category } from '../../shared/models/category';
 import { CategoriesService } from './categories.service';
@@ -9,8 +9,9 @@ export class CategoriesResolver implements Resolve<Category[]> {
 
   constructor(private cs: CategoriesService) {}
 
-  resolve() {
-    return this.cs.getAll();
+  resolve(route: ActivatedRouteSnapshot) {
+    const productCount = !!route.data.productCount;
+    return this.cs.getAll(productCount);
   }
 
 }

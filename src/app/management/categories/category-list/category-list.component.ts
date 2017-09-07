@@ -25,7 +25,7 @@ export class CategoryListComponent implements OnInit {
   }
 
   refreshCategories() {
-    this.categories$ = this.cs.getAll()
+    this.categories$ = this.cs.getAll(true)
       .map(cc => cc.sort((a, b) => b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1));
   }
 

@@ -17,13 +17,8 @@ export class CategoriesService {
     @Inject('API_URL') private api
   ) { }
 
-  getAll(): Observable<Category[]> {
-    return this.http.get<Category[]>(`${this.api}/categories`)
-      .retry(3)
-  }
-
-  getSingle(id: number): Observable<Category> {
-    return this.http.get<Category>(`${this.api}/category/${id}`)
+  getAll(productCount: boolean = false): Observable<Category[]> {
+    return this.http.get<Category[]>(`${this.api}/categories?productCount=${productCount}`)
       .retry(3)
   }
 
