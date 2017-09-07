@@ -4,7 +4,7 @@
       <th>#</th>
       <th>Einheit</th>
       <th>Kurzform</th>
-      <th>Aktionen</th>
+      <th></th>
     </tr>
   </thead>
   <tbody *ngIf="units$ | async as units; else loading">
@@ -13,14 +13,16 @@
       <td>{{ u.full }}</td>
       <td>{{ u.short }}</td>
       <td>
-        <button class="btn btn-warning btn-xs" (click)="showEditModal(u)">
-          <il-icon for="edit"></il-icon>
-          Bearbeiten
-        </button>
-        <button class="btn btn-danger btn-xs" (click)="showDeleteModal(u)">
-          <il-icon for="delete"></il-icon>
-          Löschen
-        </button>
+        <span class="pull-right">
+          <button class="btn btn-warning btn-xs" (click)="showEditModal(u)">
+            <il-icon for="edit"></il-icon>
+            Bearbeiten
+          </button>
+          <button class="btn btn-danger btn-xs" (click)="showDeleteModal(u)">
+            <il-icon for="delete"></il-icon>
+            Löschen
+          </button>
+        </span>
       </td>
     </tr>
   </tbody>

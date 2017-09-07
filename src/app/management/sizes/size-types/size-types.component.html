@@ -4,7 +4,7 @@
       <th>#</th>
       <th>Bezeichnung</th>
       <th>Füllmenge</th>
-      <th>Aktionen</th>
+      <th></th>
     </tr>
   </thead>
   <tbody *ngIf="sizeTypes$ | async as sizeTypes; else loading">
@@ -13,14 +13,16 @@
       <td>{{ st.description }}</td>
       <td>{{ st.amount | number }}</td>
       <td>
-        <button class="btn btn-warning btn-xs" (click)="showEditModal(st)">
-          <il-icon for="edit"></il-icon>
-          Bearbeiten
-        </button>
-        <button class="btn btn-danger btn-xs" (click)="showDeleteModal(st)">
-          <il-icon for="delete"></il-icon>
-          Löschen
-        </button>
+        <span class="pull-right">
+          <button class="btn btn-warning btn-xs" (click)="showEditModal(st)">
+            <il-icon for="edit"></il-icon>
+            Bearbeiten
+          </button>
+          <button class="btn btn-danger btn-xs" (click)="showDeleteModal(st)">
+            <il-icon for="delete"></il-icon>
+            Löschen
+          </button>
+        </span>
       </td>
     </tr>
   </tbody>

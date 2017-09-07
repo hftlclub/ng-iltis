@@ -15,14 +15,16 @@
       <td>{{ ct.slots }}</td>
       <td>{{ ct.sizeType.description }} {{ ct.sizeType.amount | number }}</td>
       <td>
-        <button class="btn btn-warning btn-xs" (click)="showEditModal(ct)">
-          <il-icon for="edit"></il-icon>
-          Bearbeiten
-        </button>
-        <button class="btn btn-danger btn-xs" (click)="showDeleteModal(ct)">
-          <il-icon for="delete"></il-icon>
-          Löschen
-        </button>
+        <span class="pull-right">
+          <button class="btn btn-warning btn-xs" (click)="showEditModal(ct)">
+            <il-icon for="edit"></il-icon>
+            Bearbeiten
+          </button>
+          <button class="btn btn-danger btn-xs" (click)="showDeleteModal(ct)">
+            <il-icon for="delete"></il-icon>
+            Löschen
+          </button>
+        </span>
       </td>
     </tr>
   </tbody>
