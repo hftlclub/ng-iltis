@@ -1,3 +1,4 @@
+import { ProductListFilterService } from '../shared/product-list-filter.service';
 import { Component, ComponentRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Observable';
@@ -25,10 +26,11 @@ export class ProductListComponent implements OnInit {
 
   columns: TableColumn[];
 
-  constructor(private ps: ProductService, private router: Router, private route: ActivatedRoute) { }
+  constructor(private pfs: ProductListFilterService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    this.products$ = this.ps.getAll(true, true);
+    this.pfs.refreshProducts();
+    this.products$ = this.pfs.productsFiltered$;
 
     this.columns = [
       { name: '#', cellTemplate: this.tplImg, width: 40, sortable: false },

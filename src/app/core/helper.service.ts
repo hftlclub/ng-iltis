@@ -17,4 +17,9 @@ export class HelperService {
     return val.toString().replace(/\./g, ',');
   }
 
+  containsFuzzyAll(haystacks: string[], needles: string[]): boolean {
+    const haystack = haystacks.join(' ').toLowerCase();
+    return needles.every(t => haystack.indexOf(t) !== -1 ? true : false);
+  }
+
 }
