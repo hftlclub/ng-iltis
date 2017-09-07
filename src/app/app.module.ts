@@ -19,7 +19,8 @@ import { EventModule } from './event/event.module';
 import { ManagementModule } from './management/management.module';
 import { SizesModule } from './management/sizes/sizes.module';
 import { ProductsModule } from './management/products/products.module';
-const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule];
+import { CategoriesModule } from './management/categories/categories.module';
+const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule, CategoriesModule];
 
 @NgModule({
   declarations: [
