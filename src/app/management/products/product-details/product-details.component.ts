@@ -28,6 +28,10 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
       .subscribe(p => this.product = p);
   }
 
+  get hasActiveSizes(): boolean {
+    return this.product.sizes.some(s => s.active);
+  }
+
   showUploadModal() {
     const modal = this.modalService.show(ImageUploadModalComponent);
     modal.content.product = this.product;
