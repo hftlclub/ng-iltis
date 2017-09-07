@@ -19,6 +19,8 @@ import { ProductEditComponent } from './product-edit/product-edit.component';
 import { ProductFormComponent } from './product-form/product-form.component';
 import { ProductSearchFilterComponent } from './product-search-filter/product-search-filter.component';
 
+import { ProductListFilterService } from './shared/product-list-filter.service';
+
 const modals = [
   ImageUploadModalComponent,
   ProductSizeCreateModalComponent,
@@ -43,8 +45,15 @@ const modals = [
     ProductCreateComponent,
     ProductEditComponent,
     ProductFormComponent,
+<<<<<<< Updated upstream
     ProductSearchFilterComponent
+=======
+    ProductCratesTableComponent,
+    ProductCrateCreateComponent
+    ...modals,
+>>>>>>> Stashed changes
   ],
-  entryComponents: [...modals]
+  entryComponents: [...modals],
+  providers: [ProductListFilterService]
 })
 export class ProductsModule { }
