@@ -1,3 +1,4 @@
+import { CategoriesResolver } from '../shared/categories.resolver';
 import { HasChangesGuard } from '../../core/has-changes.guard';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
@@ -18,7 +19,7 @@ const routes: Routes = [
   {
     path: 'list',
     component: ProductListComponent,
-    resolve: { products: ProductsResolver },
+    resolve: { categories: CategoriesResolver },
     data: {
       showInactiveSizes: true,
       showInactiveProducts: true
@@ -51,6 +52,7 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
+  providers: [CategoriesResolver]
 })
 export class ProductsRoutingModule { }

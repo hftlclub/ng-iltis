@@ -24,6 +24,7 @@ import { ProductCratesTableComponent } from './product-crates-table/product-crat
 import { ProductCrateDeleteModalComponent } from './product-crates-table/product-crate-delete-modal/product-crate-delete-modal.component';
 import { ProductCrateCreateComponent } from './product-crates-table/product-crate-create/product-crate-create.component';
 import { ProductGroupFilterComponent } from './product-group-filter/product-group-filter.component';
+import { ProductCategoryFilterComponent } from './product-category-filter/product-category-filter.component';
 
 const modals = [
   ImageUploadModalComponent,
@@ -53,7 +54,8 @@ const modals = [
     ProductCratesTableComponent,
     ProductCrateCreateComponent,
     ...modals,
-    ProductGroupFilterComponent
+    ProductGroupFilterComponent,
+    ProductCategoryFilterComponent
   ],
   entryComponents: [...modals],
   providers: [ProductListFilterService]

@@ -1,3 +1,4 @@
+import { CategoriesResolver } from './shared/categories.resolver';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 

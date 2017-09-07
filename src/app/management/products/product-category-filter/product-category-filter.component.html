@@ -1,0 +1,5 @@
+<form [formGroup]="form">
+  <div formArrayName="categories">
+    <div *ngFor="let c of categories; index as i"><input type="checkbox" [formControlName]="i" (change)="valuesChanged()"> {{ c.name }}</div>
+  </div>
+</form>

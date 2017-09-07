@@ -11,6 +11,7 @@ export class ProductListFilterService {
   productsFiltered$ = new BehaviorSubject<Product[]>([]);
 
   searchFilter$ = new BehaviorSubject<string>('');
+  categoriesFilter$ = new BehaviorSubject<number[]>(null);
   groupFilter$ = new BehaviorSubject<GroupFilters>({
     active: true,
     inactive: true
@@ -29,14 +30,16 @@ export class ProductListFilterService {
     Observable.combineLatest(
       this.searchFilter$,
       this.groupFilter$,
-      (search, group) => ({
+      this.categoriesFilter$,
+      (search, group, categories) => ({
         search: search,
         groupFilters: group,
-        categories: []
+        categories: categories
       }))
       .subscribe(v => this.filters$.next(v));
 
     this.filters$.subscribe(f => {
+      console.log(f);
       this.productsFiltered$.next(this.filterProducts(this.products$.getValue(), f));
     });
 
@@ -60,6 +63,10 @@ export class ProductListFilterService {
         const searchParts = [p.name, p.description, p.category.name, p.unit.full];
         return this.hs.containsFuzzyAll(searchParts, searchTerms);
       })
+    }
+
+    if (filters.categories) {
+      filtered = filtered.filter(p => filters.categories.includes(p.category.id))
     }
 
     return filtered;
