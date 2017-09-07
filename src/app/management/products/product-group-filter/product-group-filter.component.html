@@ -1,6 +1,6 @@
 <div>
   <form [formGroup]="form">
-    <input type="checkbox" formControlName="active"> aktive<br>
-    <input type="checkbox" formControlName="inactive"> inaktive
+    <input type="checkbox" formControlName="active" (change)="valueChanged()"> aktive<br>
+    <input type="checkbox" formControlName="inactive" (change)="valueChanged()"> inaktive
   </form>
 </div>

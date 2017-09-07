@@ -20,10 +20,10 @@ export class ProductGroupFilterComponent implements OnInit {
     });
 
     this.pfs.groupFilter$.subscribe(v => this.form.setValue(v));
+  }
 
-    this.form.valueChanges
-      .debounceTime(100)
-      .subscribe(v => this.pfs.groupFilter$.next(v));
+  valueChanged() {
+    this.pfs.groupFilter$.next(this.form.value);
   }
 
 }
