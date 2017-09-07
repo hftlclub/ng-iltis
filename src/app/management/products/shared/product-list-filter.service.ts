@@ -10,6 +10,8 @@ export class ProductListFilterService {
   products$ = new BehaviorSubject<Product[]>([]);
   productsFiltered$ = new BehaviorSubject<Product[]>([]);
 
+  tableSort$ = new BehaviorSubject<TableSort[]>([{dir: 'asc', prop: 'name'}]);
+
   searchFilter$ = new BehaviorSubject<string>('');
   categoriesFilter$ = new BehaviorSubject<number[]>(null);
   groupFilter$ = new BehaviorSubject<GroupFilters>({
@@ -84,4 +86,9 @@ interface Filters {
 interface GroupFilters {
   active: boolean;
   inactive: boolean;
+}
+
+interface TableSort {
+  dir: string;
+  prop: string;
 }

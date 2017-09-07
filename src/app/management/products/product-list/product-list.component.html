@@ -23,9 +23,12 @@
           class="material"
           [rows]="products$ | async"
           [columns]="columns"
-          [draggable]="false"
+          [reorderable]="false"
           columnMode="force"
-          rowHeight="auto">
+          rowHeight="auto"
+          [messages]="{ emptyMessage: 'Keine Produkte entsprechen den Suchkriterien.' }"
+          sortType="multi"
+          [sorts]="pfs.tableSort$ | async">
         </ngx-datatable>
 
         <ng-template #tplActive let-row="row">
