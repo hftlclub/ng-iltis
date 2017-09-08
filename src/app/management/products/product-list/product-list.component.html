@@ -46,7 +46,7 @@
         </ng-template>
 
         <ng-template #tplCategory let-row="row">
-          <a href="#">{{ row.category.name }}</a>
+          <a [routerLink] [queryParams]="{ c: row.category.id }">{{ row.category.name }}</a>
         </ng-template>
 
         <ng-template #tplUnit let-row="row" let-unit="value">

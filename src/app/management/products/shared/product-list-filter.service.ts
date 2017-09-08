@@ -1,8 +1,11 @@
+import { isArray } from 'rxjs/util/isArray';
+import { ActivatedRoute, Router } from '@angular/router';
 import { HelperService } from '../../../core/helper.service';
 import { ProductService } from '../../../core/product.service';
 import { Product } from '../../../shared/models/product';
 import { BehaviorSubject, Observable, Subject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
+import 'rxjs/add/operator/do';
 
 @Injectable()
 export class ProductListFilterService {
@@ -34,8 +37,6 @@ export class ProductListFilterService {
 
     this.tableSort$ = new BehaviorSubject(this.defaultTableSort);
 
-
-
     Observable.combineLatest(
       this.searchFilter$,
       this.groupFilter$,
@@ -45,11 +46,10 @@ export class ProductListFilterService {
         groupFilters: group,
         categories: categories
       }))
-      .debounceTime(200)
+      //.debounceTime(200)
       .subscribe(v => this.filters$.next(v));
 
     this.filters$.subscribe(f => {
-      console.log(f);
       this.productsFiltered$.next(this.filterProducts(this.products$.getValue(), f));
     });
 
@@ -89,6 +89,8 @@ export class ProductListFilterService {
     if (filters.categories) {
       filtered = filtered.filter(p => filters.categories.includes(p.category.id))
     }
+
+    console.log('filtered!', new Date());
 
     return filtered;
   }

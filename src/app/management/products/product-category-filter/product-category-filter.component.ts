@@ -1,6 +1,6 @@
 import { ProductListFilterService } from '../shared/product-list-filter.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
 
 import { Category } from '../../../shared/models/category';
@@ -15,7 +15,7 @@ export class ProductCategoryFilterComponent implements OnInit {
   categories: Category[];
   form: FormGroup;
 
-  constructor(private route: ActivatedRoute, private pfs: ProductListFilterService) {}
+  constructor(private router: Router, private route: ActivatedRoute, private pfs: ProductListFilterService) {}
 
   ngOnInit() {
     this.categories = this.route.snapshot.data['categories'];
@@ -25,16 +25,32 @@ export class ProductCategoryFilterComponent implements OnInit {
     });
 
     this.pfs.categoriesFilter$
-    .subscribe(list => {
-      let mask: boolean[];
-      if (!list) {
-        mask = this.categories.map(() => true);
-      } else {
-        mask = this.listToMask(this.categories, list);
-      }
-      console.log(list);
-      this.form.get('categories').setValue(mask);
-    });
+      .subscribe(list => {
+        let mask: boolean[];
+        if (list) {
+          mask = this.listToMask(this.categories, list);
+        } else {
+          mask = this.categories.map(() => true);
+        }
+        this.form.get('categories').setValue(mask);
+      });
+
+    // when category filter changes, update URL
+    this.pfs.categoriesFilter$
+      .filter(e => !!e)
+      .map(cs => cs.join(','))
+      .subscribe(c => {
+        this.router.navigate([], { queryParams: { c: c }, relativeTo: this.route })
+      });
+
+    // when query params change, update category filter in filter service
+    this.route.queryParams
+      .map(p => p.c)
+      .filter(e => !!e)
+      .distinctUntilChanged()
+      .subscribe(c => this.pfs.categoriesFilter$.next(
+        c.split(',').map(e => parseInt(e, 0))
+      ));
   }
 
   valuesChanged() {

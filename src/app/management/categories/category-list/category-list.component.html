@@ -30,7 +30,7 @@
             <td>{{ c.description }}</td>
             <td>
               {{ c.productCount }}
-              <a class="btn btn-default btn-xs show-btn">
+              <a class="btn btn-default btn-xs show-btn" routerLink="../../products" [queryParams]="{ c: c.id }">
                 Anzeigen
                 <il-icon for="fa-arrow-right"></il-icon>
               </a>
