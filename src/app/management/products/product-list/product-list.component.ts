@@ -26,7 +26,7 @@ export class ProductListComponent implements OnInit {
 
   columns: TableColumn[];
 
-  constructor(private pfs: ProductListFilterService, private router: Router, private route: ActivatedRoute) { }
+  constructor(public pfs: ProductListFilterService, private router: Router, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.pfs.refreshProducts();
