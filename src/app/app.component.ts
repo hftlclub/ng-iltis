@@ -8,6 +8,7 @@ import 'rxjs/add/operator/filter';
 import 'rxjs/add/operator/startWith';
 import 'rxjs/add/operator/share';
 
+import { commitId } from '../commit-id';
 import { GlobalService } from './core/global.service';
 
 declare var window: any;
@@ -29,6 +30,8 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.hcs.startHealthCheck();
+
+    console.log(commitId);
 
     const widthThresh = 767;
     this.gs.mobileMode = Observable.fromEvent(window, 'resize')

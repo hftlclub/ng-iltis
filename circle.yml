@@ -22,7 +22,7 @@ test:
 
 compile:
   override:
-    - git rev-parse HEAD > src/assets/commit-id
+    - echo "export const commitId = '`git rev-parse HEAD`';" > src/commit-id.ts
     - npm run build:prod
 
 deployment:

@@ -20,7 +20,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
-    "build:prod": "ng build --prod --aot",
+    "build:prod": "ng build --prod --aot --progress=false",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e"
