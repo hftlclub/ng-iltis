@@ -1,0 +1,32 @@
+# required environment variable:
+# $GH_TOKEN = github secret
+
+machine:
+  node:
+    version: 8.4
+  environment:
+    GITHUB_ORG: https://GH_TOKEN@github.com/hftlclub
+    GITHUB_NAME: HfTL-Club System
+    GITHUB_EMAIL: system@hftl.club
+    NAME: ng-iltis-build
+
+dependencies:
+  override:
+    - npm i --silent -g angular-cli-ghpages@0.5.1
+    - npm i --silent
+
+# stops CircleCI from executing `npm test`
+test:
+  override:
+    - echo "no tests :-)"
+
+compile:
+  override:
+    - git rev-parse HEAD > src/assets/commit-id
+    - npm run build:prod
+
+deployment:
+  production:
+    branch: release
+    commands:
+- ngh --repo "$GITHUB_ORG/$NAME.git" --name "$GITHUB_NAME" --email "$GITHUB_EMAIL" --branch master
