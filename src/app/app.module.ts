@@ -1,3 +1,4 @@
+import { InfoService } from './info.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, LOCALE_ID } from '@angular/core';
 import { FormsModule } from '@angular/forms';
@@ -20,13 +21,15 @@ import { ManagementModule } from './management/management.module';
 import { SizesModule } from './management/sizes/sizes.module';
 import { ProductsModule } from './management/products/products.module';
 import { CategoriesModule } from './management/categories/categories.module';
+import { InfoComponent } from './info/info.component';
 const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule, CategoriesModule];
 
 @NgModule({
   declarations: [
     AppComponent,
     NavBarComponent,
-    ConnectionLostModalComponent
+    ConnectionLostModalComponent,
+    InfoComponent
   ],
   imports: [
     CoreModule,
@@ -42,6 +45,7 @@ const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule,
     UnitsService,
     SizesService,
     CategoriesService,
+    InfoService,
     { provide: LOCALE_ID, useValue: 'de' }
   ],
   entryComponents: [ConnectionLostModalComponent],

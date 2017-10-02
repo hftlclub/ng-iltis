@@ -1,1 +1,1 @@
-export const commitId = '';
+export const commitId = 'master';

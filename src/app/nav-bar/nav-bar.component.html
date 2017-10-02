@@ -41,6 +41,10 @@
           </ul>
         </li>
 
+
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
         <li [routerLinkActive]="aclass">
           <a routerLink="/management">
             <il-icon for="fa-cogs"></il-icon>
@@ -48,9 +52,19 @@
           </a>
         </li>
 
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
+        <li [routerLinkActive]="aclass">
+          <a routerLink="/info">
+            <il-icon for="fa-info-circle"></il-icon>
+            Info
+          </a>
+        </li>
 
+        <li [routerLinkActive]="aclass">
+          <a href="#">
+            <il-icon for="fa-user"></il-icon>
+            Max Mustermann
+          </a>
+        </li>
       </ul>
     </div>
   </div>
