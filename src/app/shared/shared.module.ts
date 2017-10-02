@@ -13,6 +13,7 @@ import { IconComponent } from './icon/icon.component';
 import { UploadBoxComponent } from './upload-box/upload-box.component';
 import { MathEvalInputDirective } from './math-eval-input/math-eval-input.directive';
 import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
+import { TimeSecondsPipe } from './time-seconds.pipe';
 
 @NgModule({
   imports: [
@@ -22,7 +23,8 @@ import { CheckboxControlComponent } from './checkbox-control/checkbox-control.co
     IconComponent,
     UploadBoxComponent,
     MathEvalInputDirective,
-    CheckboxControlComponent
+    CheckboxControlComponent,
+    TimeSecondsPipe
   ],
   exports: [
     CommonModule,
@@ -37,7 +39,8 @@ import { CheckboxControlComponent } from './checkbox-control/checkbox-control.co
     IconComponent,
     UploadBoxComponent,
     MathEvalInputDirective,
-    CheckboxControlComponent
+    CheckboxControlComponent,
+    TimeSecondsPipe
   ]
 })
 export class SharedModule { }
