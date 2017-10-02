@@ -1,11 +1,14 @@
-import { isArray } from 'rxjs/util/isArray';
-import { ActivatedRoute, Router } from '@angular/router';
-import { HelperService } from '../../../core/helper.service';
-import { ProductService } from '../../../core/product.service';
-import { Product } from '../../../shared/models/product';
-import { BehaviorSubject, Observable, Subject } from 'rxjs/Rx';
 import { Injectable } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { BehaviorSubject, Observable, Subject } from 'rxjs/Rx';
 import 'rxjs/add/operator/do';
+
+import { Product } from '../../../shared/models/product';
+import { ProductService } from '../../../core/product.service';
+import { HelperService } from '../../../core/helper.service';
+import { Filters } from './filters';
+import { GroupFilters } from './group-filters';
+import { TableSort } from './tablesort';
 
 @Injectable()
 export class ProductListFilterService {
@@ -46,8 +49,7 @@ export class ProductListFilterService {
         groupFilters: group,
         categories: categories
       }))
-      //.debounceTime(200)
-      .subscribe(v => this.filters$.next(v));
+      .subscribe(this.filters$);
 
     this.filters$.subscribe(f => {
       this.productsFiltered$.next(this.filterProducts(this.products$.getValue(), f));
@@ -60,7 +62,7 @@ export class ProductListFilterService {
 
 
   refreshProducts() {
-    this.ps.getAll(true, true).subscribe(p => this.products$.next(p));
+    this.ps.getAll(true, true).subscribe(this.products$);
   }
 
   resetFilters() {
@@ -90,26 +92,7 @@ export class ProductListFilterService {
       filtered = filtered.filter(p => filters.categories.includes(p.category.id))
     }
 
-    console.log('filtered!', new Date());
-
     return filtered;
   }
 
-}
-
-
-interface Filters {
-  categories: number[];
-  search: string;
-  groupFilters: GroupFilters;
-}
-
-interface GroupFilters {
-  active: boolean;
-  inactive: boolean;
-}
-
-interface TableSort {
-  dir: string;
-  prop: string;
 }

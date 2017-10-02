@@ -23,7 +23,7 @@ export class ProductSearchFilterComponent implements OnInit {
     this.control.valueChanges
       .debounceTime(300)
       .distinctUntilChanged()
-      .subscribe(v => this.pfs.searchFilter$.next(v));
+      .subscribe(this.pfs.searchFilter$);
   }
 
   reset() {

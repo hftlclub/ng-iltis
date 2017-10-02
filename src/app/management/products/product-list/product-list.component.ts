@@ -47,9 +47,9 @@ export class ProductListComponent implements OnInit {
       .filter(e => e.type === 'dblclick')
       .subscribe(e => this.router.navigate(['..', e.row.id], { relativeTo: this.route }));
 
-      this.datatable.sort
-        .map(e => e.sorts)
-        .subscribe(s => this.pfs.tableSort$.next(s));
+    this.datatable.sort
+      .map(e => e.sorts)
+      .subscribe(this.pfs.tableSort$);
   }
 
   categoryComparator(a: any, b: any) {
