@@ -37,7 +37,7 @@ export class HealthCheckService {
   }
 
   private handleInterval() {
-    return this.http.get(`${this.api}/healthcheck`)
+    return this.http.get(`${this.api}/healthcheck`, { responseType: 'text' })
       .timeout(3000)
       .retry(2)
       .subscribe(
