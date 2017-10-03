@@ -1,3 +1,4 @@
+import { ProductActivationModalComponent } from '../product-activation-modal/product-activation-modal.component';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -40,6 +41,12 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   showDeleteModal() {
     const modal = this.modalService.show(ProductDeleteModalComponent);
     modal.content.product = this.product;
+  }
+
+  showActivationModal(activation: boolean = true) {
+    const modal = this.modalService.show(ProductActivationModalComponent);
+    modal.content.product = this.product;
+    modal.content.activation = activation;
   }
 
   ngOnDestroy() {

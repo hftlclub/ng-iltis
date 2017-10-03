@@ -1,4 +1,3 @@
-import { CrateType } from '../shared/models/cratetype';
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -12,6 +11,7 @@ import { FileUploadResponse } from '../shared/models/file-upload-response.interf
 import { UploadService } from './upload.service';
 import { Product, ProductFactory } from '../shared/models/product';
 import { SizeType, SizeTypeFactory } from '../shared/models/sizetype';
+import { CrateType } from '../shared/models/cratetype';
 import { Size, SizeFactory } from '../shared/models/size';
 
 @Injectable()
@@ -42,29 +42,41 @@ export class ProductService {
   }
 
   update(productId: number, product: Product): Observable<any> {
-    return this.http.put(`${this.api}/product/${productId}`, product);
+    return this.http.put(`${this.api}/product/${productId}`, product, { responseType: 'text' });
+  }
+
+  checkDeletable(productId: number): Observable<any> {
+    return this.http.get(`${this.api}/product/${productId}/deletable`, { responseType: 'text' });
   }
 
   delete(productId: number): Observable<any> {
-    return this.http.delete(`${this.api}/product/${productId}`);
+    return this.http.delete(`${this.api}/product/${productId}`, { responseType: 'text' });
+  }
+
+  checkUnused(productId: number): Observable<any> {
+    return this.http.get(`${this.api}/product/${productId}/unused`, { responseType: 'text' });
+  }
+
+  setActive(productId: number, activation: boolean = true): Observable<any> {
+    return this.http.put(`${this.api}/product/${productId}`, { active: activation }, { responseType: 'text' });
   }
 
 
   /* product sizes */
   createSizeForProduct(productId: number, size: Size): Observable<any> {
-    return this.http.post(`${this.api}/product/${productId}/size`, size);
+    return this.http.post(`${this.api}/product/${productId}/size`, size, { responseType: 'text' });
   }
 
   updateSizeForProduct(productId: number, sizeTypeId: number, size: Size): Observable<any> {
-    return this.http.put(`${this.api}/product/${productId}/size/${sizeTypeId}`, size);
+    return this.http.put(`${this.api}/product/${productId}/size/${sizeTypeId}`, size, { responseType: 'text' });
   }
 
   checkProductSizeDeletable(productId: number, sizeTypeId: number): Observable<any> {
-    return this.http.get(`${this.api}/product/${productId}/size/${sizeTypeId}/deletable`);
+    return this.http.get(`${this.api}/product/${productId}/size/${sizeTypeId}/deletable`, { responseType: 'text' });
   }
 
   deleteSizeForProduct(productId: number, sizeTypeId: number): Observable<any> {
-    return this.http.delete(`${this.api}/product/${productId}/size/${sizeTypeId}`);
+    return this.http.delete(`${this.api}/product/${productId}/size/${sizeTypeId}`, { responseType: 'text' });
   }
 
 
@@ -74,11 +86,11 @@ export class ProductService {
   }
 
   createCrateTypeForProduct(productId: number, crateType: CrateType): Observable<any> {
-    return this.http.post(`${this.api}/product/${productId}/cratetype`, crateType);
+    return this.http.post(`${this.api}/product/${productId}/cratetype`, crateType, { responseType: 'text' });
   }
 
   deleteCrateTypeForProduct(productId: number, crateTypeId: number): Observable<any> {
-    return this.http.delete(`${this.api}/product/${productId}/cratetype/${crateTypeId}`);
+    return this.http.delete(`${this.api}/product/${productId}/cratetype/${crateTypeId}`, { responseType: 'text' });
   }
 
 

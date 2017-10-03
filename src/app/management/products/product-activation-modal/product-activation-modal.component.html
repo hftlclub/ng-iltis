@@ -1,0 +1,79 @@
+<div class="modal-header">
+  <h4 *ngIf="activation" class="modal-title pull-left">
+    <il-icon for="activate"></il-icon>
+    Produkt aktivieren
+  </h4>
+  <h4 *ngIf="!activation" class="modal-title pull-left">
+    <il-icon for="deactivate"></il-icon>
+    Produkt deaktivieren
+  </h4>
+  <button type="button" class="close pull-right" (click)="hideModal()" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <!-- ACTIVATION -->
+  <ng-template [ngIf]="activation">
+    <p>
+      Wenn das Produkt aktiviert wird, ist es wieder für Entnahmen und Zählungen sichtbar.
+      Du solltest das Produkt nur dann aktivieren, wenn es sich tatsächlich im Lager befindet.
+    </p>
+    <p>
+      <strong>Soll das Produkt "{{ product?.name }}" aktiviert werden?</strong>
+    </p>
+  </ng-template>
+
+  <!-- DEACTIVATION -->
+  <ng-template [ngIf]="!activation">
+    <ng-template [ngIf]="checkLoading">
+      <div class="text-center">
+        <il-icon for="spinner" classes="fa-2x"></il-icon>
+        <h4>Laden...</h4>
+      </div>
+    </ng-template>
+
+    <ng-template [ngIf]="!unused && !checkLoading">
+        <p>
+          <strong>Dieses Produkt kann nicht deaktiviert werden.</strong>
+        </p>
+        Das kann folgende Ursachen haben:
+        <ul>
+          <li>Der Lagerbestand ist nicht null, das Produkt ist also noch im Lager vorhanden.</li>
+          <li>Es gibt noch offene Ereignisse, in denen das Produkt gebucht wurde.</li>
+        </ul>
+    </ng-template>
+
+    <ng-template [ngIf]="unused">
+      <p>
+        Wenn das Produkt deaktiviert wird, ist es nicht mehr für Entnahmen und Zählungen sichtbar.
+        Du kannst das Produkt jederzeit wieder aktivieren.
+      </p>
+      <p>
+        <strong>Soll das Produkt "{{ product?.name }}" deaktiviert werden?</strong>
+      </p>
+    </ng-template>
+  </ng-template>
+
+</div>
+
+<div class="modal-footer">
+  <div class="col-sm-6">
+    <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
+      <il-icon for="cancel"></il-icon>
+      <span *ngIf="!activation && !unused && !checkLoading; else cancelLabel">Schließen</span>
+      <ng-template #cancelLabel>Abbrechen</ng-template>
+    </button>
+  </div>
+  <div class="col-sm-6">
+    <button *ngIf="activation" type="button" class="btn btn-success btn-block btn-lg" [disabled]="loading" (click)="setProductActive(true)">
+      <il-icon for="activate" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      Produkt aktivieren
+    </button>
+    <button *ngIf="!activation" type="button" class="btn btn-warning btn-block btn-lg" [disabled]="loading || !unused" (click)="setProductActive(false)">
+      <il-icon for="deactivate" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      Produkt deaktivieren
+    </button>
+  </div>
+</div>

@@ -18,9 +18,20 @@
           <il-icon for="warning"></il-icon>
           Für dieses Produkt sind keine aktiven Gebindegrößen hinterlegt.
           <strong>Du solltest das Produkt deaktivieren.</strong>
-          <button class="btn btn-xs btn-default pull-right">
-            <il-icon for="fa-eye-slash"></il-icon>
+          <button class="btn btn-xs btn-default pull-right" (click)="showActivationModal(false)">
+            <il-icon for="deactivate"></il-icon>
             Produkt deaktivieren
+          </button>
+        </div>
+      </div>
+
+      <div class="row" *ngIf="!product.active">
+        <div class="alert alert-info">
+          <il-icon for="fa-info-circle"></il-icon>
+          Dieses Produkt ist inaktiv. Es wird nicht bei Entnahmen und Zählungen angezeigt.
+          <button class="btn btn-xs btn-default pull-right" (click)="showActivationModal(true)">
+            <il-icon for="activate"></il-icon>
+            Produkt aktivieren
           </button>
         </div>
       </div>
@@ -53,6 +64,14 @@
           <a class="btn btn-danger btn-sm" (click)="showDeleteModal()">
             <il-icon for="delete"></il-icon>
             Löschen
+          </a>
+          <a *ngIf="product.active" class="btn btn-warning btn-sm" (click)="showActivationModal(false)">
+            <il-icon for="deactivate"></il-icon>
+            Deaktivieren
+          </a>
+          <a *ngIf="!product.active" class="btn btn-success btn-sm" (click)="showActivationModal(true)">
+            <il-icon for="activate"></il-icon>
+            Aktivieren
           </a>
         </div>
       </div>

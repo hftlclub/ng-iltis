@@ -8,25 +8,43 @@
   </button>
 </div>
 <div class="modal-body">
-  <p>
-    Soll das Produkt <strong>{{ product?.name }}</strong> wirklich gelöscht werden?
-  </p>
+  <ng-template [ngIf]="checkLoading">
+    <div class="text-center">
+      <il-icon for="spinner" classes="fa-2x"></il-icon>
+      <h4>Laden...</h4>
+    </div>
+  </ng-template>
 
-  <div class="alert alert-warning">
-    <il-icon for="warning"></il-icon>
-    Dieser Schritt ist unwiderrufbar!
-  </div>
+  <ng-template [ngIf]="!deletable && !checkLoading">
+    <p><strong>Dieses Produkt kann nicht entfernt werden, weil es bereits verwendet wurde.</strong></p>
+    <p>Tipp: Du kannst das Produkt deaktivieren, damit es nicht mehr bei Entnahmen zu sehen ist.</p>
+  </ng-template>
+
+  <ng-template [ngIf]="deletable">
+    <p>
+      Soll das Produkt <strong>{{ product?.name }}</strong> wirklich gelöscht werden?
+    </p>
+
+    <div class="alert alert-warning">
+      <il-icon for="warning"></il-icon>
+      Dieser Schritt ist unwiderrufbar!
+    </div>
+  </ng-template>
+
+
+
 </div>
 
 <div class="modal-footer">
   <div class="col-sm-6">
     <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
       <il-icon for="cancel"></il-icon>
-      Abbrechen
+      <span *ngIf="!deletable && !checkLoading; else cancelLabel">Schließen</span>
+      <ng-template #cancelLabel>Abbrechen</ng-template>
     </button>
   </div>
   <div class="col-sm-6">
-    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading" (click)="deleteProduct()">
+    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading || !deletable" (click)="deleteProduct()">
       <il-icon for="delete" *ngIf="!loading"></il-icon>
       <il-icon for="spinner" *ngIf="loading"></il-icon>
       Produkt löschen

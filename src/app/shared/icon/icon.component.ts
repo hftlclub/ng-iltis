@@ -34,7 +34,9 @@ export class IconComponent {
     plus: 'fa-plus',
     delete: 'fa-trash',
     unit: 'fa-calculator',
-    warning: 'fa-exclamation-triangle'
+    warning: 'fa-exclamation-triangle',
+    activate: 'fa-eye',
+    deactivate: 'fa-eye-slash'
   };
 
 }

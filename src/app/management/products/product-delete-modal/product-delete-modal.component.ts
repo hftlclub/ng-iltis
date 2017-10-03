@@ -11,10 +11,12 @@ import { Product } from '../../../shared/models/product';
   templateUrl: './product-delete-modal.component.html',
   styleUrls: ['./product-delete-modal.component.css']
 })
-export class ProductDeleteModalComponent {
+export class ProductDeleteModalComponent implements OnInit {
 
   product: Product;
   loading = false;
+  checkLoading = true;
+  deletable = false;
 
   constructor(
     private modal: BsModalRef,
@@ -23,6 +25,17 @@ export class ProductDeleteModalComponent {
     private router: Router,
     private route: ActivatedRoute) { }
 
+  ngOnInit() {
+    setTimeout(() => this.startCheck(), 0); // hack, necessary because product is only available asynchronously
+  }
+
+  startCheck() {
+    this.checkLoading = true;
+    this.ps.checkDeletable(this.product.id).subscribe(
+      () => { this.deletable = true; this.checkLoading = false; }, // success
+      () => { this.deletable = false; this.checkLoading = false; } // error
+    )
+  }
 
   deleteProduct() {
     this.loading = true;

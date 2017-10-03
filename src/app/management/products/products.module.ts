@@ -7,6 +7,7 @@ import { ProductsRoutingModule } from './products-routing.module';
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
 import { ImageUploadModalComponent } from './image-upload-modal/image-upload-modal.component';
+import { ProductActivationModalComponent } from './product-activation-modal/product-activation-modal.component';
 
 import { ProductSizesTableComponent } from './product-sizes-table/product-sizes-table.component';
 import { ProductSizeCreateModalComponent } from './product-sizes-table/product-size-create-modal/product-size-create-modal.component';
@@ -32,7 +33,8 @@ const modals = [
   ProductSizeEditModalComponent,
   ProductSizeDeleteModalComponent,
   ProductDeleteModalComponent,
-  ProductCrateDeleteModalComponent
+  ProductCrateDeleteModalComponent,
+  ProductActivationModalComponent
 ];
 
 @NgModule({
@@ -53,9 +55,9 @@ const modals = [
     ProductSearchFilterComponent,
     ProductCratesTableComponent,
     ProductCrateCreateComponent,
-    ...modals,
     ProductGroupFilterComponent,
-    ProductCategoryFilterComponent
+    ProductCategoryFilterComponent,
+    ...modals
   ],
   entryComponents: [...modals],
   providers: [ProductListFilterService]
