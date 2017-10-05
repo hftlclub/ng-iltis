@@ -1,0 +1,8 @@
+<div class="form-group form-group-lg has-feedback" [ngClass]="control.valid ? 'has-success' : 'has-error'">
+  <label>
+    Zur Bestätigung tippe bitte folgendes ein:
+    <code>{{ challenge }}</code>
+  </label>
+  <input type="text" class="form-control" [formControl]="control" [placeholder]="challenge">
+  <il-icon [for]="control.valid ? 'ok' : 'cancel'" class="form-control-feedback"></il-icon>
+</div>

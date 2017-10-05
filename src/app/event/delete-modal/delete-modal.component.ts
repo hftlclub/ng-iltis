@@ -6,7 +6,6 @@ import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
-import { GlobalService } from '../../core/global.service';
 
 @Component({
   selector: 'il-delete-modal',
@@ -27,14 +26,11 @@ export class DeleteModalComponent implements OnInit {
     private router: Router,
     private es: EventService,
     private ns: NotificationsService,
-    private gs: GlobalService,
     private modal: BsModalRef
   ) { }
 
   ngOnInit() {
-    this.challenge = this.gs.getTrustChallenge();
     this.form = new FormGroup({
-      challenge: new FormControl('', this.exactValueValidator(this.challenge)),
       confirm: new FormControl(false, this.exactValueValidator(true))
     });
   }

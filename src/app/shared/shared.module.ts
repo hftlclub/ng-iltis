@@ -14,17 +14,20 @@ import { UploadBoxComponent } from './upload-box/upload-box.component';
 import { MathEvalInputDirective } from './math-eval-input/math-eval-input.directive';
 import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
 import { TimeSecondsPipe } from './time-seconds.pipe';
+import { TrustChallengeComponent } from './trust-challenge/trust-challenge.component';
 
 @NgModule({
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   declarations: [
     IconComponent,
     UploadBoxComponent,
     MathEvalInputDirective,
     CheckboxControlComponent,
-    TimeSecondsPipe
+    TimeSecondsPipe,
+    TrustChallengeComponent
   ],
   exports: [
     CommonModule,
@@ -40,7 +43,8 @@ import { TimeSecondsPipe } from './time-seconds.pipe';
     UploadBoxComponent,
     MathEvalInputDirective,
     CheckboxControlComponent,
-    TimeSecondsPipe
+    TimeSecondsPipe,
+    TrustChallengeComponent
   ]
 })
 export class SharedModule { }
