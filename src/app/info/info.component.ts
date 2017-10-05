@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
 import { InfoService } from '../info.service';
-import { FrontendInfo } from '../shared/frontend-info';
-import { ServerInfo } from '../shared/server-info';
+import { FrontendInfo } from '../shared/interfaces/frontend-info';
+import { ServerInfo } from '../shared/interfaces/server-info';
 
 @Component({
   selector: 'il-info',

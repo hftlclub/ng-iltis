@@ -6,6 +6,8 @@ import 'rxjs/add/operator/retry';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 
+import { Permission } from '../../shared/interfaces/permission';
+import { Costs } from '../../shared/interfaces/costs';
 import { Event, EventFactory } from '../../shared/models/event';
 import { Transfer, TransferFactory } from '../../shared/models/transfer';
 import { Transaction, TransactionFactory } from '../../shared/models/transaction';
@@ -59,8 +61,8 @@ export class EventService {
       .map(raw => CalculationFactory.fromObj(raw));
   }
 
-  getCostsForEvent(id: number): Observable<any> {
-    return this.http.get(`${this.api}/event/${id}/costs`)
+  getCostsForEvent(id: number): Observable<Costs> {
+    return this.http.get<Costs>(`${this.api}/event/${id}/costs`)
       .retry(3);
   }
 
@@ -129,8 +131,8 @@ export class EventService {
       .catch(this.errorHandler);
   }
 
-  checkPermission(): Observable<any> {
-    return this.http.get(`${this.api}/event/checkpermission`)
+  checkPermission(): Observable<Permission> {
+    return this.http.get<Permission>(`${this.api}/event/checkpermission`)
       .retry(3);
   }
 

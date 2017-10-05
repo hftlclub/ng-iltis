@@ -1,10 +1,10 @@
-import { FrontendInfo } from './shared/frontend-info';
 import { Observable } from 'rxjs/Rx';
 import { Injectable, Inject, VERSION } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/timer';
 
-import { ServerInfo } from './shared/server-info';
+import { FrontendInfo } from './shared/interfaces/frontend-info';
+import { ServerInfo } from './shared/interfaces/server-info';
 import { commitId } from '../commit-id';
 
 @Injectable()

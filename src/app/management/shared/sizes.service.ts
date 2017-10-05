@@ -1,4 +1,3 @@
-import { CrateType } from '../../shared/models/cratetype';
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
@@ -10,6 +9,7 @@ import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
 
 import { SizeType } from '../../shared/models/sizetype';
+import { CrateType } from '../../shared/models/cratetype';
 
 @Injectable()
 export class SizesService {
