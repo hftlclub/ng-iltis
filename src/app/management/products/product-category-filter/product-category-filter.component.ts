@@ -43,6 +43,12 @@ export class ProductCategoryFilterComponent implements OnInit {
         this.router.navigate([], { queryParams: { c: c }, relativeTo: this.route })
       });
 
+      this.pfs.categoriesFilter$
+      .filter(e => !e)
+      .subscribe(c => {
+        this.router.navigate([], { relativeTo: this.route })
+      });
+
     // when query params change, update category filter in filter service
     this.route.queryParams
       .map(p => p.c)
