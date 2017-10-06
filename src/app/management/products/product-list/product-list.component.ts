@@ -35,7 +35,7 @@ export class ProductListComponent implements OnInit {
     this.columns = [
       { name: '#', cellTemplate: this.tplImg, width: 40, sortable: false },
       { name: 'Name', prop: 'name', cellTemplate: this.tplName },
-      { name: 'aktiv', cellTemplate: this.tplActive, width: 40 },
+      { name: 'aktiv', cellTemplate: this.tplActive, width: 40, prop: 'active' },
       { name: 'Kategorie', cellTemplate: this.tplCategory, prop: 'category', comparator: this.categoryComparator },
       { name: 'Beschreibung', prop: 'description' },
       { name: 'Einheit', prop: 'unit.full' },
@@ -55,6 +55,13 @@ export class ProductListComponent implements OnInit {
   categoryComparator(a: any, b: any) {
     if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
     if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+  }
+
+  activeComparator(a: any, b: any) {
+    console.log('a', a);
+    console.log('b', b);
+    if (a && !b) { return -1; }
+    if (!a && b) { return 1; }
   }
 
   getRowClass(row) {

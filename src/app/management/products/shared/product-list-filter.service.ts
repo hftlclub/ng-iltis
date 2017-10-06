@@ -30,7 +30,7 @@ export class ProductListFilterService {
     groupFilters: { active: true, inactive: true },
   }
 
-  defaultTableSort: TableSort[] = [{dir: 'asc', prop: 'name'}];
+  defaultTableSort: TableSort[] = [{dir: 'desc', prop: 'active'}, {dir: 'asc', prop: 'name'}];
 
   constructor(private ps: ProductService, private hs: HelperService) {
     this.filters$ = new BehaviorSubject(this.defaultFilters);
