@@ -20,7 +20,7 @@
     <p>Tipp: Du kannst das Produkt deaktivieren, damit es nicht mehr bei Entnahmen zu sehen ist.</p>
   </ng-template>
 
-  <ng-template [ngIf]="deletable">
+  <ng-container *ngIf="deletable">
     <p>
       Soll das Produkt <strong>{{ product?.name }}</strong> wirklich gelöscht werden?
     </p>
@@ -29,9 +29,9 @@
       <il-icon for="warning"></il-icon>
       Dieser Schritt ist unwiderrufbar!
     </div>
-  </ng-template>
+  </ng-container>
 
-
+  <il-trust-challenge [hidden]="!deletable" #chlg="chlg"></il-trust-challenge>
 
 </div>
 
@@ -44,7 +44,7 @@
     </button>
   </div>
   <div class="col-sm-6">
-    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading || !deletable" (click)="deleteProduct()">
+    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading || !deletable || chlg.invalid" (click)="deleteProduct()">
       <il-icon for="delete" *ngIf="!loading"></il-icon>
       <il-icon for="spinner" *ngIf="loading"></il-icon>
       Produkt löschen
