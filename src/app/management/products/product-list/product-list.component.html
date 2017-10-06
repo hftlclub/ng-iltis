@@ -27,6 +27,7 @@
           [reorderable]="false"
           columnMode="force"
           rowHeight="auto"
+          [rowClass]="getRowClass"
           [messages]="{ emptyMessage: 'Keine Produkte entsprechen den Suchkriterien.' }"
           sortType="multi"
           [sorts]="pfs.tableSort$ | async">

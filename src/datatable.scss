@@ -45,7 +45,7 @@
 			&:focus,
 			&:focus .datatable-row-group {
 				background-color: #ddd;
-			}
+      }
     }
   }
 
@@ -190,7 +190,12 @@
 	      text-align: left;
         padding: 15px;
         border-top: 1px solid #ddd;
-	    }
+      }
+
+      &.inactive {
+        background-color: #EEE;
+        color: #666;
+      }
 	  }
 
 		.progress-linear {

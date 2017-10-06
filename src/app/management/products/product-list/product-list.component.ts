@@ -57,5 +57,10 @@ export class ProductListComponent implements OnInit {
     if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
   }
 
+  getRowClass(row) {
+    return {
+      'inactive': !row.active
+    }
+  }
 
 }
