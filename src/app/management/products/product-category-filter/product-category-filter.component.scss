@@ -1,0 +1,25 @@
+.checkbox-container {
+  .badge {
+    margin-right: 8px;
+    margin-bottom: 8px;
+    padding: 6px 10px;
+    font-size: 12px !important;
+    cursor: pointer;
+
+    input[type=checkbox] {
+      margin-right: 5px;
+    }
+
+    &.active {
+      background-color: rgb(134, 134, 134);
+    }
+
+    &.inactive {
+      background-color: rgb(190, 190, 190);
+    }
+  }
+
+}
+
+
+

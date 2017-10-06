@@ -1,5 +1,13 @@
 <form [formGroup]="form">
-  <div formArrayName="categories">
-    <div *ngFor="let c of categories; index as i"><input type="checkbox" [formControlName]="i" (change)="valuesChanged()"> {{ c.name }}</div>
+  <h4>Kategorien</h4>
+  <div formArrayName="categories" class="checkbox-container">
+    <div
+      class="badge"
+      [ngClass]="form.get('categories').value[i] ? 'active' : 'inactive'"
+      *ngFor="let c of categories; index as i"
+      (click)="toggleCheckbox(i)">
+      <input type="checkbox" [formControlName]="i" (change)="valuesChanged()"> {{ c.name }}
+    </div>
+
   </div>
 </form>

@@ -8,7 +8,7 @@ import { Category } from '../../../shared/models/category';
 @Component({
   selector: 'il-product-category-filter',
   templateUrl: './product-category-filter.component.html',
-  styleUrls: ['./product-category-filter.component.css']
+  styleUrls: ['./product-category-filter.component.scss']
 })
 export class ProductCategoryFilterComponent implements OnInit {
 
@@ -56,6 +56,12 @@ export class ProductCategoryFilterComponent implements OnInit {
   valuesChanged() {
     const list = this.maskToList(this.categories, this.form.get('categories').value);
     this.pfs.categoriesFilter$.next(list)
+  }
+
+  toggleCheckbox(i: number) {
+    const box = this.form.get(['categories', i]);
+    box.setValue(!box.value);
+    this.valuesChanged();
   }
 
   private maskToList(categories: Category[], mask: boolean[]): number[] {
