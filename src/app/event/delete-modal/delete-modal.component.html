@@ -34,7 +34,7 @@
       </button>
     </div>
     <div class="col-sm-6">
-      <button type="submit" class="btn btn-warning btn-block btn-lg" [disabled]="loading || form.invalid || !chlg.valid">
+      <button type="submit" class="btn btn-warning btn-block btn-lg" [disabled]="loading || form.invalid || chlg.invalid">
         <il-icon for="delete" *ngIf="!loading"></il-icon>
         <il-icon for="spinner" *ngIf="loading"></il-icon>
         Ereignis löschen

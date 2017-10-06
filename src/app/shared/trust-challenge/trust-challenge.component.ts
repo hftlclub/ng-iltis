@@ -28,6 +28,10 @@ export class TrustChallengeComponent implements OnInit {
     'Stecker'
   ];
 
+  get invalid(): boolean {
+    return !this.valid;
+  }
+
   ngOnInit() {
     this.challenge = this.randomChallenge();
     this.control = new FormControl('', this.exactValueValidator(this.challenge));
