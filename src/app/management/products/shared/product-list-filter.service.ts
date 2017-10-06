@@ -67,8 +67,12 @@ export class ProductListFilterService {
 
   resetFilters() {
     this.searchFilter$.next(this.defaultFilters.search);
-    this.categoriesFilter$.next(this.defaultFilters.categories);
     this.groupFilter$.next(this.defaultFilters.groupFilters);
+    this.resetCategoriesFilter();
+  }
+
+  resetCategoriesFilter() {
+    this.categoriesFilter$.next(this.defaultFilters.categories);
   }
 
   resetTableSort() {

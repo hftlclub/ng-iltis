@@ -1,5 +1,8 @@
 <form [formGroup]="form">
-  <h4>Kategorien</h4>
+  <h4>
+    Kategorien
+    <button class="btn btn-primary btn-xs" (click)="resetCategories()">alle aktivieren</button>
+  </h4>
   <div formArrayName="categories" class="checkbox-container">
     <div
       class="badge"

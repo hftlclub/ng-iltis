@@ -64,6 +64,10 @@ export class ProductCategoryFilterComponent implements OnInit {
     this.valuesChanged();
   }
 
+  resetCategories() {
+    this.pfs.resetCategoriesFilter();
+  }
+
   private maskToList(categories: Category[], mask: boolean[]): number[] {
     return categories.map(c => c.id).filter((c, i) => mask[i]);
   }
