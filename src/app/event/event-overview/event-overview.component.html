@@ -19,7 +19,7 @@
 
 
 
-  <il-event-overview-card title="Kasse" icon="cash">
+  <il-event-overview-card title="Kasse" icon="cash" *ngIf="!isPurchase">
     <span class="title-right">
       <a title="Bearbeiten" (click)="showCashModal()">
         <il-icon for="edit"></il-icon>

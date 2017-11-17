@@ -64,6 +64,10 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
     return this.event.cashAfter < this.event.cashBefore;
   }
 
+  get isPurchase(): boolean {
+    return this.event.eventType.uiMode === 'purchase';
+  }
+
   ngOnDestroy() {
     this.eventUpdatedSub.unsubscribe();
   }
