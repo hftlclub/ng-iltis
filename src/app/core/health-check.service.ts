@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Inject, Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Subscription } from 'rxjs/Rx';
 import { Observable } from 'rxjs/Observable';
@@ -29,11 +29,14 @@ export class HealthCheckService {
     private http: HttpClient,
     @Inject('API_URL') private api,
     private modalService: BsModalService,
-    private ns: NotificationsService) { }
+    private ns: NotificationsService,
+    private ngZone: NgZone) { }
 
   private setTimer(time: number) {
-    if (this.timerSubscription) { this.timerSubscription.unsubscribe() };
-    this.timerSubscription = Observable.interval(time).subscribe(() => this.handleInterval());
+    this.ngZone.runOutsideAngular(() => {
+      if (this.timerSubscription) { this.timerSubscription.unsubscribe(); };
+      this.timerSubscription = Observable.interval(time).subscribe(() => this.handleInterval());
+    });
   }
 
   private handleInterval() {
