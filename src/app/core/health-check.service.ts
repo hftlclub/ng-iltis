@@ -7,7 +7,7 @@ import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/operator/timeout';
 import 'rxjs/add/operator/retry';
 import { BsModalService } from 'ngx-bootstrap/modal';
-import { BsModalRef } from 'ngx-bootstrap/modal';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { NotificationsService } from 'angular2-notifications';
 
 import { ConnectionLostModalComponent } from '../connection-lost-modal/connection-lost-modal.component';
@@ -19,7 +19,7 @@ export class HealthCheckService {
     defaultTimer: 5000,
     criticalTimer: 1000,
     timeout: 3000
-  }
+  };
 
   connectionHealthy: BehaviorSubject<any> = new BehaviorSubject(true);
   private timerSubscription: Subscription;
@@ -43,7 +43,7 @@ export class HealthCheckService {
       .subscribe(
         () => this.connectionHealthy.next(true),
         () => this.connectionHealthy.next(false)
-      )
+      );
   }
 
   startHealthCheck() {

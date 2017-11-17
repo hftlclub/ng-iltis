@@ -3,7 +3,7 @@ import { NotificationsService } from 'angular2-notifications';
 import { EventService } from './../shared/event.service';
 import { Component, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal/modal-options.class';
+import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { Subscription } from 'rxjs/Subscription';
 
 import { Event, EventFactory } from '../../shared/models/event';

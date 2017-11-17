@@ -28,16 +28,16 @@
 
     <p>
       <strong>vorher:</strong>
-      {{ event.cashBefore | currency:'EUR':true }}
+      {{ event.cashBefore | currency:'EUR' }}
     </p>
     <p [ngClass]="{ 'text-warning': cashAfterIsLess }">
       <strong>nachher:</strong>
-      {{ event.cashAfter | currency:'EUR':true }}
+      {{ event.cashAfter | currency:'EUR' }}
       <i *ngIf="cashAfterIsLess" class="fa fa-exclamation-triangle" aria-hidden="true"></i>
     </p>
     <p *ngIf="event.tip">
       <strong>Trinkgeld:</strong>
-      {{ event.tip | currency:'EUR':true }}
+      {{ event.tip | currency:'EUR' }}
     </p>
 
     <a class="btn btn-default btn-block btn-sm"
@@ -58,15 +58,15 @@
     <div *ngIf="calc">
       <p>
         <strong>Umsatz:</strong>
-        {{ calc?.sales | currency:'EUR':true }}
+        {{ calc?.sales | currency:'EUR' }}
       </p>
       <p>
         <strong>Kosten:</strong>
-        {{ calc?.costs | currency:'EUR':true }}
+        {{ calc?.costs | currency:'EUR' }}
       </p>
       <p>
         <strong>Gewinn:</strong>
-        {{ calc?.profit | currency:'EUR':true }}
+        {{ calc?.profit | currency:'EUR' }}
       </p>
       <small class="pull-right text-muted">(geschätzte Werte)</small>
     </div>

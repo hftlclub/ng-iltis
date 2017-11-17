@@ -1,14 +1,14 @@
-import { IltisPage } from './app.po';
+import { AppPage } from './app.po';
 
 describe('iltis App', () => {
-  let page: IltisPage;
+  let page: AppPage;
 
   beforeEach(() => {
-    page = new IltisPage();
+    page = new AppPage();
   });
 
-  it('should display message saying app works', () => {
+  it('should display welcome message', () => {
     page.navigateTo();
-    expect(page.getParagraphText()).toEqual('il works!');
+    expect(page.getParagraphText()).toEqual('Welcome to il!');
   });
 });

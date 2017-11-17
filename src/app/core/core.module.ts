@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { SimpleNotificationsModule } from 'angular2-notifications';
-import { PageScrollConfig, Ng2PageScrollModule } from 'ng2-page-scroll';
+import { PageScrollConfig, NgxPageScrollModule } from 'ngx-page-scroll';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { BsDropdownModule } from 'ngx-bootstrap/dropdown';
@@ -23,7 +23,7 @@ import { ProductResolver } from './resolvers/product.resolver';
     CommonModule,
     BrowserAnimationsModule,
     SimpleNotificationsModule.forRoot(),
-    Ng2PageScrollModule.forRoot(),
+    NgxPageScrollModule,
     ModalModule.forRoot(),
     DatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),

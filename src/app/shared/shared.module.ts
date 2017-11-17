@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
-import { Ng2PageScrollModule } from 'ng2-page-scroll';
+import { NgxPageScrollModule } from 'ngx-page-scroll';
 import { DatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { TimepickerModule } from 'ngx-bootstrap/timepicker';
@@ -38,7 +38,7 @@ import { TrustChallengeComponent } from './trust-challenge/trust-challenge.compo
     ModalModule,
     DatepickerModule,
     TimepickerModule,
-    Ng2PageScrollModule,
+    NgxPageScrollModule,
     IconComponent,
     UploadBoxComponent,
     MathEvalInputDirective,
