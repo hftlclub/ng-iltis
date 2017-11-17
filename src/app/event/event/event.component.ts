@@ -50,9 +50,9 @@ export class EventComponent implements OnInit, OnDestroy {
   sidebarVisible = true;
 
   event: Event;
-  eventUpdated$: Subscription;
-  eventClosed$: Subscription;
-  mobileMode$: Subscription;
+  eventUpdatedSub: Subscription;
+  eventClosedSub: Subscription;
+  mobileModeSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -63,20 +63,20 @@ export class EventComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.event = this.route.snapshot.data['event'];
 
-    this.eventUpdated$ = this.es.eventUpdated.subscribe(event => this.event = event);
+    this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => this.event = event);
 
-    this.eventClosed$ = this.es.eventClosed.pipe(
+    this.eventClosedSub = this.es.eventClosed.pipe(
       switchMap(eventId => this.es.getEvent(eventId))
     )
     .subscribe(event => this.event = event);
 
-    this.mobileMode$ = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
+    this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
   }
 
   ngOnDestroy() {
-    this.eventUpdated$.unsubscribe();
-    this.eventClosed$.unsubscribe();
-    this.mobileMode$.unsubscribe();
+    this.eventUpdatedSub.unsubscribe();
+    this.eventClosedSub.unsubscribe();
+    this.mobileModeSub.unsubscribe();
   }
 
   toggleSidebar(): void {

@@ -21,7 +21,7 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
   calc: Calculation;
   calcLoading: boolean;
 
-  eventUpdated$: Subscription;
+  eventUpdatedSub: Subscription;
 
   constructor(private route: ActivatedRoute, private es: EventService, private modalService: BsModalService) { }
 
@@ -29,7 +29,7 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
     this.event = this.route.snapshot.data['event'];
     this.loadCalculation();
 
-    this.eventUpdated$ = this.es.eventUpdated.subscribe(event => {
+    this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => {
       this.event = event;
       this.loadCalculation();
     });
@@ -65,7 +65,7 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.eventUpdated$.unsubscribe();
+    this.eventUpdatedSub.unsubscribe();
   }
 
 }

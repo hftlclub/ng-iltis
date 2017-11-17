@@ -20,9 +20,9 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
   event: Event;
   itemsCountMapping: {[k: string]: string} = {'=0': 'Keine Buchungen', '=1': 'Eine Buchung', 'other': '# Buchungen'};
 
-  transfersAdded$: Subscription;
-  countFinished$: Subscription;
-  eventClosed$: Subscription;
+  transfersAddedSub: Subscription;
+  countFinishedSub: Subscription;
+  eventClosedSub: Subscription;
 
   constructor(private route: ActivatedRoute, private es: EventService) { }
 
@@ -31,13 +31,13 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
     this.transfers = this.route.snapshot.data['transfers'];
     this.transactions = this.route.snapshot.data['transactions'];
 
-    this.transfersAdded$ = this.es.transfersAdded
+    this.transfersAddedSub = this.es.transfersAdded
       .subscribe(t => this.transfers = this.transfers.concat(t));
 
-    this.countFinished$ = this.es.countFinished
+    this.countFinishedSub = this.es.countFinished
       .subscribe(t => this.transfers = t);
 
-    this.eventClosed$ = this.es.eventClosed.pipe(
+    this.eventClosedSub = this.es.eventClosed.pipe(
       switchMap(eventId => this.es.getTransactionsByEvent(eventId))
     )
     .subscribe(transactions => {
@@ -49,9 +49,9 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
 
 
   ngOnDestroy() {
-    this.transfersAdded$.unsubscribe();
-    this.countFinished$.unsubscribe();
-    this.eventClosed$.unsubscribe();
+    this.transfersAddedSub.unsubscribe();
+    this.countFinishedSub.unsubscribe();
+    this.eventClosedSub.unsubscribe();
   }
 
   get childUrlSegment(): string {

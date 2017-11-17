@@ -21,7 +21,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   loading = false;
   hasChanges = false;
 
-  params$: Subscription;
+  paramsSub: Subscription;
 
   constructor(
     private route: ActivatedRoute,
@@ -36,7 +36,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
     this.createCountAllowed = this.route.snapshot.data['permission'].createEventCountAllowed;
 
     this.eventTypes = this.updateUiMode(this.route.snapshot.params['uiMode']);
-    this.params$ = this.route.params.subscribe(p => this.eventTypes = this.updateUiMode(p['uiMode']));
+    this.paramsSub = this.route.params.subscribe(p => this.eventTypes = this.updateUiMode(p['uiMode']));
   }
 
 
@@ -58,7 +58,7 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.params$.unsubscribe();
+    this.paramsSub.unsubscribe();
   }
 
 
