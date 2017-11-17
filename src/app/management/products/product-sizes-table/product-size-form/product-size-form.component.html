@@ -21,14 +21,14 @@
         <label>Einkaufspreis</label>
         <span class="small pull-right text-muted">Geschätzter Wert</span>
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" formControlName="costs">
+          <input type="text" class="form-control" formControlName="costs" maxLength="15" ilMathEval>
           <span class="input-group-addon">EUR</span>
         </div>
       </div>
 
       <div class="form-group form-group-lg">
         <label>Mindestbestand</label>
-        <input type="text" class="form-control" formControlName="minStock">
+        <input type="text" class="form-control" formControlName="minStock" ilMathEval [roundToInt]="true" maxLength="15">
       </div>
 
       <div class="form-group form-group-lg">

@@ -3,6 +3,6 @@
     Zur Bestätigung tippe bitte folgendes ein:
     <code>{{ challenge }}</code>
   </label>
-  <input type="text" class="form-control" [formControl]="control" [placeholder]="challenge">
+  <input type="text" class="form-control" [formControl]="control" [placeholder]="challenge" maxLength="255">
   <il-icon [for]="control.valid ? 'ok' : 'cancel'" class="form-control-feedback"></il-icon>
 </div>

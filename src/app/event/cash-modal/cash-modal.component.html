@@ -14,7 +14,7 @@
       <div class="form-group form-group-lg">
         <label>vorher</label>
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" formControlName="cashBefore" ilMathEval>
+          <input type="text" class="form-control" formControlName="cashBefore" ilMathEval maxlength="15">
           <span class="input-group-addon">EUR</span>
         </div>
       </div>
@@ -22,7 +22,7 @@
       <div class="form-group form-group-lg">
         <label>nachher</label>
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" formControlName="cashAfter" ilMathEval>
+          <input type="text" class="form-control" formControlName="cashAfter" ilMathEval maxlength="15">
           <span class="input-group-addon">EUR</span>
         </div>
       </div>
@@ -30,7 +30,7 @@
       <div class="form-group form-group-lg" *ngIf="event.eventType.uiMode === 'event'">
         <label>Trinkgeld</label>
         <div class="input-group input-group-lg">
-          <input type="text" class="form-control" formControlName="tip" ilMathEval>
+          <input type="text" class="form-control" formControlName="tip" ilMathEval maxlength="15">
           <span class="input-group-addon">EUR</span>
         </div>
       </div>
