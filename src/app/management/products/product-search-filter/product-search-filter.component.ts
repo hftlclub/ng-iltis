@@ -1,7 +1,6 @@
 import { FormControl } from '@angular/forms';
 import { Component, OnInit, EventEmitter, ViewChild, Output } from '@angular/core';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/debounceTime';
+import { distinctUntilChanged, debounceTime } from 'rxjs/operators';
 
 import { ProductListFilterService } from '../shared/product-list-filter.service';
 
@@ -20,10 +19,11 @@ export class ProductSearchFilterComponent implements OnInit {
     this.control = new FormControl();
     this.pfs.searchFilter$.subscribe(v => this.control.setValue(v));
 
-    this.control.valueChanges
-      .debounceTime(300)
-      .distinctUntilChanged()
-      .subscribe(this.pfs.searchFilter$);
+    this.control.valueChanges.pipe(
+      debounceTime(300),
+      distinctUntilChanged()
+    )
+    .subscribe(this.pfs.searchFilter$);
   }
 
   reset() {

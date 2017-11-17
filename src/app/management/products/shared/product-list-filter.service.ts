@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject, Observable, Subject } from 'rxjs/Rx';
-import 'rxjs/add/operator/do';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
+import { Subject } from 'rxjs/Subject';
+import 'rxjs/add/observable/combineLatest';
 
 import { Product } from '../../../shared/models/product';
 import { ProductService } from '../../../core/product.service';
@@ -28,7 +30,7 @@ export class ProductListFilterService {
     categories: null,
     search: '',
     groupFilters: { active: true, inactive: true },
-  }
+  };
 
   defaultTableSort: TableSort[] = [{dir: 'desc', prop: 'active'}, {dir: 'asc', prop: 'name'}];
 
@@ -36,7 +38,7 @@ export class ProductListFilterService {
     this.filters$ = new BehaviorSubject(this.defaultFilters);
     this.searchFilter$ = new BehaviorSubject(this.defaultFilters.search);
     this.categoriesFilter$ = new BehaviorSubject(this.defaultFilters.categories);
-    this.groupFilter$ = new BehaviorSubject(this.defaultFilters.groupFilters)
+    this.groupFilter$ = new BehaviorSubject(this.defaultFilters.groupFilters);
 
     this.tableSort$ = new BehaviorSubject(this.defaultTableSort);
 
@@ -89,7 +91,7 @@ export class ProductListFilterService {
       filtered = filtered.filter(p => {
         const searchParts = [p.name, p.description, p.category.name, p.unit.full];
         return this.hs.containsFuzzyAll(searchParts, searchTerms);
-      })
+      });
     }
 
     if (filters.categories) {

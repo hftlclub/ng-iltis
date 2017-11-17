@@ -1,7 +1,8 @@
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { Injectable, Inject, VERSION } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import 'rxjs/add/observable/timer';
+import { mergeMap, tap, startWith, mapTo } from 'rxjs/operators';
 
 import { FrontendInfo } from './shared/interfaces/frontend-info';
 import { ServerInfo } from './shared/interfaces/server-info';
@@ -14,7 +15,13 @@ export class InfoService {
 
   getServerInfo(): Observable<ServerInfo> {
     return this.http.get<ServerInfo>(`${this.api}/info`)
-      .mergeMap(si => Observable.interval(1000).startWith(0).do(() => si.time++).mapTo(si));
+      .pipe(
+        mergeMap(si => Observable.interval(1000).pipe(
+          startWith(0),
+          tap(() => si.time++),
+          mapTo(si)
+        ))
+      );
   }
 
   getFrontendInfo(): Observable<FrontendInfo> {

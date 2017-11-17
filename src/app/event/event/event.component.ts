@@ -2,11 +2,11 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
 
 import { GlobalService } from './../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
+import { switchMap } from "rxjs/operators";
 
 @Component({
   selector: 'il-event',
@@ -65,9 +65,10 @@ export class EventComponent implements OnInit, OnDestroy {
 
     this.eventUpdated$ = this.es.eventUpdated.subscribe(event => this.event = event);
 
-    this.eventClosed$ = this.es.eventClosed
-      .switchMap(eventId => this.es.getEvent(eventId))
-      .subscribe(event => this.event = event);
+    this.eventClosed$ = this.es.eventClosed.pipe(
+      switchMap(eventId => this.es.getEvent(eventId))
+    )
+    .subscribe(event => this.event = event);
 
     this.mobileMode$ = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
   }

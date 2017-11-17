@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 
 import { InfoService } from '../info.service';
 import { FrontendInfo } from '../shared/interfaces/frontend-info';

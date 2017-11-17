@@ -1,10 +1,7 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/retry';
-import 'rxjs/add/operator/delay';
-import 'rxjs/add/operator/catch';
+import { retry, map } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 
 import { FileUploadResponse } from '../shared/models/file-upload-response.interface';
@@ -27,14 +24,18 @@ export class ProductService {
 
   getAll(showInactiveProducts = false, showInactiveSizes = false): Observable<Product[]> {
     return this.http.get<any[]>(`${this.api}/products?showInactiveProducts=${showInactiveProducts}&showInactiveSizes=${showInactiveSizes}`)
-      .retry(3)
-      .map(raw => raw.map(p => ProductFactory.fromObj(p)));
+      .pipe(
+        retry(3),
+        map(raw => raw.map(p => ProductFactory.fromObj(p)))
+      );
   }
 
   getSingle(id: number, showInactiveSizes = false): Observable<Product> {
     return this.http.get(`${this.api}/product/${id}?showInactiveSizes=${showInactiveSizes}`)
-      .retry(3)
-      .map(raw => ProductFactory.fromObj(raw));
+      .pipe(
+        retry(3),
+        map(raw => ProductFactory.fromObj(raw))
+      );
   }
 
   create(product: Product): Observable<Product> {

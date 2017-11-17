@@ -1,9 +1,9 @@
+import { switchMap } from 'rxjs/operators';
 import { ProductActivationModalComponent } from '../product-activation-modal/product-activation-modal.component';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
 
 import { ProductService } from '../../../core/product.service';
 import { Product } from '../../../shared/models/product';
@@ -24,9 +24,9 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.product = this.route.snapshot.data.product;
-    this.subscription = this.ps.productUpdated
-      .switchMap(() => this.ps.getSingle(this.product.id, this.route.snapshot.data.showInactiveSizes))
-      .subscribe(p => this.product = p);
+    this.subscription = this.ps.productUpdated.pipe(
+      switchMap(() => this.ps.getSingle(this.product.id, this.route.snapshot.data.showInactiveSizes))
+    ).subscribe(p => this.product = p);
   }
 
   get hasActiveSizes(): boolean {

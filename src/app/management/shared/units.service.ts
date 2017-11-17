@@ -1,14 +1,11 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/retry';
-import 'rxjs/add/operator/catch';
-import 'rxjs/add/operator/delay';
 import 'rxjs/add/observable/throw';
 import 'rxjs/add/observable/of';
 
 import { Unit } from '../../shared/models/unit';
+import { map, retry } from 'rxjs/operators';
 
 @Injectable()
 export class UnitsService {
@@ -22,13 +19,15 @@ export class UnitsService {
 
   getAll(): Observable<Unit[]> {
     return this.http.get<Unit[]>(`${this.api}/units`)
-      .retry(3)
-      .map(units => units.filter(u => u.full))
+      .pipe(
+        retry(3),
+        map(units => units.filter(u => u.full))
+      );
   }
 
   getSingle(id: number): Observable<Unit> {
     return this.http.get<Unit>(`${this.api}/unit/${id}`)
-      .retry(3)
+      .pipe(retry(3));
   }
 
   delete(unitId: number): Observable<any> {

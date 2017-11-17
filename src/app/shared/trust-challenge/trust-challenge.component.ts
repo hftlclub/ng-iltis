@@ -1,5 +1,6 @@
 import { Component, EventEmitter, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { map, startWith, distinctUntilChanged } from 'rxjs/operators';
 
 @Component({
   selector: 'il-trust-challenge',
@@ -36,14 +37,15 @@ export class TrustChallengeComponent implements OnInit {
     this.challenge = this.randomChallenge();
     this.control = new FormControl('', this.exactValueValidator(this.challenge));
 
-    this.control.statusChanges
-      .map(s => s === 'VALID' ? true : false)
-      .startWith(false)
-      .distinctUntilChanged()
-      .subscribe(valid => {
-        this.valid = valid;
-        this.statusChange.emit(valid);
-      });
+    this.control.statusChanges.pipe(
+      map(s => s === 'VALID' ? true : false),
+      startWith(false),
+      distinctUntilChanged()
+    )
+    .subscribe(valid => {
+      this.valid = valid;
+      this.statusChange.emit(valid);
+    });
   }
 
   private randomChallenge() {

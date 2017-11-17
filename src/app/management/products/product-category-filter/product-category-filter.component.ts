@@ -2,6 +2,7 @@ import { ProductListFilterService } from '../shared/product-list-filter.service'
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { FormArray, FormControl, FormGroup } from '@angular/forms';
+import { distinctUntilChanged, filter, map } from 'rxjs/operators';
 
 import { Category } from '../../../shared/models/category';
 
@@ -36,32 +37,34 @@ export class ProductCategoryFilterComponent implements OnInit {
       });
 
     // when category filter changes, update URL
-    this.pfs.categoriesFilter$
-      .filter(e => !!e)
-      .map(cs => cs.join(','))
-      .subscribe(c => {
-        this.router.navigate([], { queryParams: { c: c }, relativeTo: this.route })
-      });
+    this.pfs.categoriesFilter$.pipe(
+      filter(e => !!e),
+      map(cs => cs.join(','))
+    )
+    .subscribe(c => {
+      this.router.navigate([], { queryParams: { c: c }, relativeTo: this.route })
+    });
 
     this.pfs.categoriesFilter$
-      .filter(e => !e)
+      .pipe(filter(e => !e))
       .subscribe(c => {
         this.router.navigate([], { relativeTo: this.route })
       });
 
     // when query params change, update category filter in filter service
-    this.route.queryParams
-      .map(p => p.c)
-      .filter(e => !!e)
-      .distinctUntilChanged()
-      .subscribe(c => this.pfs.categoriesFilter$.next(
-        c.split(',').map(e => parseInt(e, 0))
-      ));
+    this.route.queryParams.pipe(
+      map(p => p.c),
+      filter(e => !!e),
+      distinctUntilChanged()
+    )
+    .subscribe(c => this.pfs.categoriesFilter$.next(
+      c.split(',').map(e => parseInt(e, 0))
+    ));
   }
 
   valuesChanged() {
     const list = this.maskToList(this.categories, this.form.get('categories').value);
-    this.pfs.categoriesFilter$.next(list)
+    this.pfs.categoriesFilter$.next(list);
   }
 
   toggleCheckbox(i: number) {

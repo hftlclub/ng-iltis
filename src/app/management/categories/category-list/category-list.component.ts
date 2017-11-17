@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Rx';
+import { Observable } from 'rxjs/Observable';
 import { BsModalService } from 'ngx-bootstrap';
 
 import { Category } from '../../../shared/models/category';

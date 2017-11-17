@@ -1,11 +1,10 @@
 import { Inject, Injectable, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Subscription } from 'rxjs/Rx';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
+import { timeout, retry, distinctUntilChanged } from 'rxjs/operators';
 import 'rxjs/add/observable/interval';
-import 'rxjs/add/operator/distinctUntilChanged';
-import 'rxjs/add/operator/timeout';
-import 'rxjs/add/operator/retry';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { NotificationsService } from 'angular2-notifications';
@@ -40,20 +39,21 @@ export class HealthCheckService {
   }
 
   private handleInterval() {
-    return this.http.get(`${this.api}/healthcheck`, { responseType: 'text' })
-      .timeout(3000)
-      .retry(2)
-      .subscribe(
-        () => this.connectionHealthy.next(true),
-        () => this.connectionHealthy.next(false)
-      );
+    return this.http.get(`${this.api}/healthcheck`, { responseType: 'text' }).pipe(
+      timeout(3000),
+      retry(2)
+    )
+    .subscribe(
+      () => this.connectionHealthy.next(true),
+      () => this.connectionHealthy.next(false)
+    );
   }
 
   startHealthCheck() {
     this.setTimer(this.times.defaultTimer);
 
     this.connectionHealthy
-      .distinctUntilChanged()
+      .pipe(distinctUntilChanged())
       .subscribe(healthy => {
         if (!healthy) {
           this.modal = this.modalService.show(ConnectionLostModalComponent, { ignoreBackdropClick: true });

@@ -1,9 +1,7 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/operator/map';
-import 'rxjs/add/operator/retry';
-import 'rxjs/add/operator/delay';
+import { retry } from 'rxjs/operators';
 
 import { Category } from '../../shared/models/category';
 
@@ -19,7 +17,7 @@ export class CategoriesService {
 
   getAll(productCount: boolean = false): Observable<Category[]> {
     return this.http.get<Category[]>(`${this.api}/categories?productCount=${productCount}`)
-      .retry(3)
+      .pipe(retry(3))
   }
 
   delete(categoryId: number): Observable<any> {

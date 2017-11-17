@@ -1,7 +1,7 @@
+import { switchMap } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
-import 'rxjs/add/operator/switchMap';
 
 import { Transfer } from '../../shared/models/transfer';
 import { Transaction } from '../../shared/models/transaction';
@@ -37,12 +37,13 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
     this.countFinished$ = this.es.countFinished
       .subscribe(t => this.transfers = t);
 
-    this.eventClosed$ = this.es.eventClosed
-      .switchMap(eventId => this.es.getTransactionsByEvent(eventId))
-      .subscribe(transactions => {
-        this.transfers = [];
-        this.transactions = transactions;
-      });
+    this.eventClosed$ = this.es.eventClosed.pipe(
+      switchMap(eventId => this.es.getTransactionsByEvent(eventId))
+    )
+    .subscribe(transactions => {
+      this.transfers = [];
+      this.transactions = transactions;
+    });
 
   }
 
