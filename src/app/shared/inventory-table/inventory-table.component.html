@@ -1,3 +1,35 @@
-<pre>
-{{ inventory | json }}
-</pre>
+<table class="table table-bordered table-striped table-hover" *ngIf="productGroups">
+  <thead>
+    <tr class="category-header">
+      <th></th>
+      <th>Produkt</th>
+      <th>Gebinde</th>
+      <th>Lager</th>
+      <th>Bar</th>
+      <th>Gesamt</th>
+      <th>Volumen</th>
+      <th>Volumen gesamt</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <ng-container *ngFor="let g of productGroups">
+      <tr *ngFor="let inv of g.inventory; first as firstOfGroup">
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">
+            <img [src]="g.product.imgFilename" width="30" height="30" alt="">
+        </td>
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">
+          <strong>{{ g.product.name }}</strong>
+        </td>
+        <td>{{ inv.sizeType.description }} {{ inv.sizeType.amount | number }} {{ g.product.unit.full }}</td>
+        <td>{{ inv.storage }}</td>
+        <td>{{ inv.counter }}</td>
+        <td>
+          <strong>{{ inv.total }}</strong>
+        </td>
+        <td>{{ inv.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">{{ g.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
+      </tr>
+    </ng-container>
+  </tbody>
+</table>
