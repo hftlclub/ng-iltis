@@ -6,6 +6,7 @@ import { TableColumn, DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { Product } from '../../../shared/models/product';
 import { ProductService } from '../../../core/product.service';
+import { filter, map } from 'rxjs/operators';
 
 @Component({
   selector: 'il-product-list',
@@ -44,11 +45,11 @@ export class ProductListComponent implements OnInit {
 
     // navigate to detail page on row doubleclick
     this.datatable.activate
-      .filter(e => e.type === 'dblclick')
+      .pipe(filter(e => e.type === 'dblclick'))
       .subscribe(e => this.router.navigate(['..', e.row.id], { relativeTo: this.route }));
 
     this.datatable.sort
-      .map(e => e.sorts)
+      .pipe(map(e => e.sorts))
       .subscribe(this.pfs.tableSort$);
   }
 
@@ -67,7 +68,7 @@ export class ProductListComponent implements OnInit {
   getRowClass(row) {
     return {
       'inactive': !row.active
-    }
+    };
   }
 
 }
