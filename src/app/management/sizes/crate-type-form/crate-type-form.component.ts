@@ -29,7 +29,7 @@ export class CrateTypeFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       sizeType: [this.initialValue.sizeType.id, [Validators.required, IlValidators.notZero]],
-      slots: [this.initialValue.slots, [Validators.required]],
+      slots: [this.initialValue.slots, [Validators.required, Validators.min(1), Validators.max(100)]],
       description: [this.initialValue.description, [Validators.required]],
     });
   }

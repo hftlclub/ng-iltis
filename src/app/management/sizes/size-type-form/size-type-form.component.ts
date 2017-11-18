@@ -1,3 +1,4 @@
+import { IlValidators } from './../../../core/il-validators';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -26,7 +27,7 @@ export class SizeTypeFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       description: [this.initialValue.description, [Validators.required]],
-      amount: [this.hs.dotToComma(this.initialValue.amount), [Validators.required]]
+      amount: [this.hs.dotToComma(this.initialValue.amount), [Validators.required, IlValidators.min(0.01), Validators.max(500)]]
     });
 
     if (this.edit) {
