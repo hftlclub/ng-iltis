@@ -1,1 +1,15 @@
-<il-inventory-table [inventory]="inventory$ | async"></il-inventory-table>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 content">
+      <div class="page-header">
+        <h1>
+          <il-icon for="stock"></il-icon>
+          Lagerbestand
+        </h1>
+      </div>
+      <div class="row">
+        <il-inventory-table [inventory]="inventory$ | async"></il-inventory-table>
+      </div>
+    </div>
+  </div>
+</div>
