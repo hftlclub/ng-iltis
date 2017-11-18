@@ -37,7 +37,8 @@ export class IconComponent {
     warning: 'fa-exclamation-triangle',
     activate: 'fa-eye',
     deactivate: 'fa-eye-slash',
-    dashboard: 'fa-tachometer'
+    dashboard: 'fa-tachometer',
+    stock: 'fa-database'
   };
 
 }
