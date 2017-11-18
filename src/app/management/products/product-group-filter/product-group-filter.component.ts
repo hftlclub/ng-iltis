@@ -5,11 +5,21 @@ import { Component, OnInit } from '@angular/core';
 @Component({
   selector: 'il-product-group-filter',
   templateUrl: './product-group-filter.component.html',
-  styleUrls: ['./product-group-filter.component.css']
+  styleUrls: ['./product-group-filter.component.scss']
 })
 export class ProductGroupFilterComponent implements OnInit {
 
   form: FormGroup;
+  groups = [
+    {
+      name: 'active',
+      label: 'aktive'
+    },
+    {
+      name: 'inactive',
+      label: 'inaktive'
+    }
+  ];
 
   constructor(private pfs: ProductListFilterService) { }
 
@@ -24,6 +34,12 @@ export class ProductGroupFilterComponent implements OnInit {
 
   valueChanged() {
     this.pfs.groupFilter$.next(this.form.value);
+  }
+
+  toggleCheckbox(name: string) {
+    const box = this.form.get(name);
+    box.setValue(!box.value);
+    this.valueChanged();
   }
 
 }

@@ -4,13 +4,13 @@
     <button class="btn btn-primary btn-xs" (click)="resetCategories()">alle aktivieren</button>
   </h4>
   <div formArrayName="categories" class="checkbox-container">
-    <div
-      class="badge"
+    <button
+      class="btn btn-default btn-sm"
       [ngClass]="form.get('categories').value[i] ? 'active' : 'inactive'"
       *ngFor="let c of categories; index as i"
       (click)="toggleCheckbox(i)">
       <input type="checkbox" [formControlName]="i" (change)="valuesChanged()"> {{ c.name }}
-    </div>
+    </button>
 
   </div>
 </form>

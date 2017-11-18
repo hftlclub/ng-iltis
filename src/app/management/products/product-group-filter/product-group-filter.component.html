@@ -1,6 +1,9 @@
-<div>
-  <form [formGroup]="form">
-    <input type="checkbox" formControlName="active" (change)="valueChanged()"> aktive<br>
-    <input type="checkbox" formControlName="inactive" (change)="valueChanged()"> inaktive
-  </form>
-</div>
+<form [formGroup]="form" class="checkbox-container">
+  <button
+    class="btn btn-default btn-lg"
+    *ngFor="let g of groups"
+    [ngClass]="form.get(g.name).value ? 'active' : 'inactive'"
+    (click)="toggleCheckbox(g.name)">
+    <input type="checkbox" [formControlName]="g.name" (change)="valueChanged()"> {{ g.label }}
+  </button>
+</form>

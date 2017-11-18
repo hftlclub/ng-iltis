@@ -6,20 +6,38 @@
           <il-icon for="fa-coffee"></il-icon>
           Produkte
 
-          <a class="btn btn-success pull-right" routerLink="../create">
-            <il-icon for="plus"></il-icon>
-            Hinzufügen
-          </a>
+          <span class="pull-right">
+            <button class="btn btn-primary" (click)="pfs.resetFilters()">
+              <il-icon for="fa fa-times"></il-icon>
+              Filter zurücksetzen
+            </button>
+
+            <a class="btn btn-success" routerLink="../create">
+              <il-icon for="plus"></il-icon>
+              Hinzufügen
+            </a>
+          </span>
         </h1>
       </div>
 
       <div class="row">
-        <button class="btn btn-primary" (click)="pfs.resetFilters()">Filter zurücksetzen</button>
-        <il-product-search-filter></il-product-search-filter>
-        <il-product-group-filter></il-product-group-filter>
-        <hr>
-        <il-product-category-filter></il-product-category-filter>
 
+        <div class="col-md-8">
+          <il-product-search-filter></il-product-search-filter>
+        </div>
+        <div class="col-md-4">
+          <il-product-group-filter class="pull-right"></il-product-group-filter>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 20px">
+        <div class="col-md-12">
+          <il-product-category-filter></il-product-category-filter>
+          <hr>
+        </div>
+      </div>
+
+      <div class="row" style="margin-top: 20px">
         <ngx-datatable
           class="material"
           [rows]="products$ | async"
