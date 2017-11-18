@@ -15,6 +15,7 @@ import { MathEvalInputDirective } from './math-eval-input/math-eval-input.direct
 import { CheckboxControlComponent } from './checkbox-control/checkbox-control.component';
 import { TimeSecondsPipe } from './time-seconds.pipe';
 import { TrustChallengeComponent } from './trust-challenge/trust-challenge.component';
+import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 
 @NgModule({
   imports: [
@@ -27,7 +28,8 @@ import { TrustChallengeComponent } from './trust-challenge/trust-challenge.compo
     MathEvalInputDirective,
     CheckboxControlComponent,
     TimeSecondsPipe,
-    TrustChallengeComponent
+    TrustChallengeComponent,
+    InventoryTableComponent
   ],
   exports: [
     CommonModule,
@@ -44,7 +46,8 @@ import { TrustChallengeComponent } from './trust-challenge/trust-challenge.compo
     MathEvalInputDirective,
     CheckboxControlComponent,
     TimeSecondsPipe,
-    TrustChallengeComponent
+    TrustChallengeComponent,
+    InventoryTableComponent
   ]
 })
 export class SharedModule { }

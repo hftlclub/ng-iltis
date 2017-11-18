@@ -7,6 +7,7 @@ const routes: Routes = [
   { path: '', redirectTo: 'event', pathMatch: 'full' },
   { path: 'event', loadChildren: './event/event.module#EventModule' },
   { path: 'management', loadChildren: './management/management.module#ManagementModule' },
+  { path: 'inventory', loadChildren: './inventory/inventory.module#InventoryModule' },
   { path: 'info', component: InfoComponent }
 ];
 

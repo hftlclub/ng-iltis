@@ -13,6 +13,12 @@
       <ul class="nav navbar-nav">
 
         <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/inventory">
+            <il-icon for="fa fa-database"></il-icon>
+            Lagerbestand
+          </a>
+        </li>
+        <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
           <a routerLink="/event">
             <il-icon for="calendar"></il-icon>
             Ereignisse
