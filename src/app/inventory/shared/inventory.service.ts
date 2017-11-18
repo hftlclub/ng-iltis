@@ -15,11 +15,11 @@ export class InventoryService {
     @Inject('API_URL') private api
   ) { }
 
-  getCurrentInventory(): Observable<Inventory> {
+  getCurrentInventory(): Observable<Inventory[]> {
     return this.http.get<any[]>(`${this.api}/inventory`)
       .pipe(
         retry(3),
-        map(raw => InventoryFactory.fromObj(raw))
+        map(raw => raw.map(inv => InventoryFactory.fromObj(inv)))
       );
   }
 

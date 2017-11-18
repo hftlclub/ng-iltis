@@ -8,7 +8,7 @@ import { Inventory } from '../models/inventory';
 })
 export class InventoryTableComponent implements OnInit {
 
-  @Input() inventory: Inventory;
+  @Input() inventory: Inventory[];
 
   constructor() { }
 

@@ -10,7 +10,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventoryComponent implements OnInit {
 
-  inventory$: Observable<Inventory>;
+  inventory$: Observable<Inventory[]>;
 
   constructor(private is: InventoryService) { }
 
