@@ -44,7 +44,8 @@ export class InventoryTableComponent implements OnInit, OnChanges {
       .map(g => ({
         ...g,
         totalVolume: g.inventory.reduce((acc, inv) => acc + inv.totalVolume, 0),
-      }));
+      }))
+      .sort((a, b) => a.product.name.localeCompare(b.product.name));
 
     return productGroups;
   }
