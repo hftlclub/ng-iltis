@@ -9,12 +9,13 @@ import _ from 'lodash';
 @Component({
   selector: 'il-inventory-table',
   templateUrl: './inventory-table.component.html',
-  styleUrls: ['./inventory-table.component.css']
+  styleUrls: ['./inventory-table.component.scss']
 })
 export class InventoryTableComponent implements OnInit, OnChanges {
 
   @Input() inventory: Inventory[];
   productGroups: ProductGroup[];
+  d = new Date();
 
   constructor() { }
 
@@ -28,14 +29,12 @@ export class InventoryTableComponent implements OnInit, OnChanges {
 
 
   transformToTableData(inventory: Inventory[]): ProductGroup[] {
-    // MOCK unit!!
-    inventory.forEach(inv => inv.product.unit = new Unit(1, 'l', 'Liter', false));
-
     const productGroups = Object.values(_.groupBy(inventory, inv => inv.product.id))
       .map(g => ({
         product: g[0].product,
         inventory: g.map(inv => ({
           sizeType: inv.sizeType,
+          minStock: inv.minStock,
           storage: inv.storage,
           counter: inv.counter,
           total: inv.storage + inv.counter,
@@ -49,17 +48,28 @@ export class InventoryTableComponent implements OnInit, OnChanges {
 
     return productGroups;
   }
+
+  isNearlyBelowMin(inv: ProductGroupInv): boolean {
+    return inv.minStock && inv.total < (inv.minStock + 20) && inv.total > inv.minStock;
+  }
+
+  isBelowMin(inv: ProductGroupInv): boolean {
+    return inv.total <= inv.minStock;
+  }
 }
 
 
-export interface ProductGroup {
+interface ProductGroup {
   product: Product;
-  inventory: {
-    sizeType: SizeType;
-    storage: number,
-    counter: number;
-    total: number;
-    totalVolume: number
-  }[];
+  inventory: ProductGroupInv[];
   totalVolume: number;
+}
+
+interface ProductGroupInv {
+  sizeType: SizeType;
+  storage: number;
+  counter: number;
+  total: number;
+  totalVolume: number;
+  minStock: number;
 }

@@ -1,12 +1,12 @@
-<table class="table table-bordered table-striped table-hover" *ngIf="productGroups">
+<table class="table table-bordered table-hover" *ngIf="productGroups">
   <thead>
     <tr class="category-header">
-      <th></th>
       <th>Produkt</th>
       <th>Gebinde</th>
       <th>Lager</th>
       <th>Bar</th>
       <th>Gesamt</th>
+      <th>Mindestbestand</th>
       <th>Volumen</th>
       <th>Volumen gesamt</th>
     </tr>
@@ -14,22 +14,29 @@
 
   <tbody>
     <ng-container *ngFor="let g of productGroups">
-      <tr *ngFor="let inv of g.inventory; first as firstOfGroup">
+      <tr *ngFor="let inv of g.inventory; first as firstOfGroup"
+        [class.warning]="isNearlyBelowMin(inv)"
+        [class.danger]="isBelowMin(inv)">
         <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">
-            <img [src]="g.product.imgFilename" width="30" height="30" alt="">
-        </td>
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">
+          <img [src]="g.product.imgFilename" width="30" height="30" alt="" class="hidden-print">
           <strong>{{ g.product.name }}</strong>
         </td>
         <td>{{ inv.sizeType.description }} {{ inv.sizeType.amount | number }} {{ g.product.unit.full }}</td>
         <td>{{ inv.storage }}</td>
         <td>{{ inv.counter }}</td>
-        <td>
+        <td [class.text-warning]="isNearlyBelowMin(inv)" [class.text-danger]="isBelowMin(inv)">
           <strong>{{ inv.total }}</strong>
+          <il-icon for="fa fa-exclamation-circle" *ngIf="isNearlyBelowMin(inv)" title="Mindestbestand bald unterschritten"></il-icon>
+          <il-icon for="fa fa-exclamation-triangle" *ngIf="isBelowMin(inv)" title="Mindestbestand unterschritten"></il-icon>
         </td>
+        <td>{{ inv.minStock }}</td>
         <td>{{ inv.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
         <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">{{ g.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
       </tr>
     </ng-container>
   </tbody>
 </table>
+
+<div class="visible-print">
+  <strong>Stand:</strong> {{ d | date:'medium' }} Uhr
+</div>
