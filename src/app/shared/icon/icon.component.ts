@@ -36,7 +36,8 @@ export class IconComponent {
     unit: 'fa-calculator',
     warning: 'fa-exclamation-triangle',
     activate: 'fa-eye',
-    deactivate: 'fa-eye-slash'
+    deactivate: 'fa-eye-slash',
+    dashboard: 'fa-tachometer'
   };
 
 }

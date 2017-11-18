@@ -13,6 +13,12 @@
       <ul class="nav navbar-nav">
 
         <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
+          <a routerLink="/dashboard">
+            <il-icon for="dashboard"></il-icon>
+            Dashboard
+          </a>
+        </li>
+        <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
           <a routerLink="/inventory">
             <il-icon for="fa fa-database"></il-icon>
             Lagerbestand
