@@ -157,6 +157,14 @@ export class EventService {
       .pipe(retry(3));
   }
 
+  getInventory(eventId: number): Observable<Inventory[]> {
+    return this.http.get<any[]>(`${this.api}/inventory/${eventId}`)
+      .pipe(
+        retry(3),
+        map(raw => raw.map(inv => InventoryFactory.fromObj(inv)))
+      );
+  }
+
 
 
 

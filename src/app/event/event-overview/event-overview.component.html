@@ -105,6 +105,13 @@
       Abschließen
     </a>
   </il-event-overview-card>
+
+  <div *ngIf="!this.event.active">
+    <a routerLink="../inventory" class="btn btn-primary btn-lg">
+      <il-icon for="stock"></il-icon>
+      Lagerbestand anzeigen
+    </a>
+  </div>
 </div>
 
 

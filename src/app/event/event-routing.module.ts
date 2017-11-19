@@ -1,3 +1,4 @@
+import { EventInventoryComponent } from './event-inventory/event-inventory.component';
 import { CloseFormContainerComponent } from './close-form-container/close-form-container.component';
 import { InventoryResolver } from './shared/resolvers/inventory.resolver';
 import { NgModule } from '@angular/core';
@@ -84,6 +85,10 @@ const routes: Routes = [
           event: EventResolver,
           transfers: TransfersResolver
         },
+      },
+      {
+        path: 'inventory',
+        component: EventInventoryComponent
       },
       {
         path: 'count/:mode',
