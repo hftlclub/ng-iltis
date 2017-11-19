@@ -38,7 +38,10 @@ export class IconComponent {
     activate: 'fa-eye',
     deactivate: 'fa-eye-slash',
     dashboard: 'fa-tachometer',
-    stock: 'fa-database'
+    stock: 'fa-database',
+    evEvent: 'fa-glass',
+    evPrivate: 'fa-hand-paper-o',
+    evPurchase: 'fa-shopping-cart',
   };
 
 }
