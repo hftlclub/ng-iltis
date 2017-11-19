@@ -6,7 +6,7 @@ import { Subscription } from 'rxjs/Subscription';
 import { GlobalService } from './../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
-import { switchMap } from "rxjs/operators";
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'il-event',

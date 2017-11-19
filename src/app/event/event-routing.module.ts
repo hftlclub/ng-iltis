@@ -11,6 +11,7 @@ import { NewEventFormComponent } from './new-event-form/new-event-form.component
 import { EventListComponent } from './event-list/event-list.component';
 import { EditEventComponent } from './edit-event/edit-event.component';
 import { CountFormContainerComponent } from './count-form-container/count-form-container.component';
+import { NewEventSelectionComponent } from './new-event-selection/new-event-selection.component';
 
 import { ProductsResolver } from '../core/resolvers/products.resolver';
 import { ProductResolver } from '../core/resolvers/product.resolver';
@@ -24,7 +25,7 @@ import { PermissionResolver } from './shared/resolvers/permission.resolver';
 import { HasChangesGuard } from '../core/has-changes.guard';
 
 const routes: Routes = [
-  { path: 'new', redirectTo: 'new/event', pathMatch: 'full' },
+  { path: 'new', component: NewEventSelectionComponent },
   {
     path: 'new/:uiMode',
     component: NewEventFormComponent,

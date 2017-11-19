@@ -28,6 +28,7 @@ import { CloseFormContainerComponent } from './close-form-container/close-form-c
 import { DeleteModalComponent } from './delete-modal/delete-modal.component';
 import { DatepickerModalComponent } from './datepicker-modal/datepicker-modal.component';
 import { TimepickerModalComponent } from './timepicker-modal/timepicker-modal.component';
+import { NewEventSelectionComponent } from './new-event-selection/new-event-selection.component';
 
 
 const modals = [
@@ -65,7 +66,8 @@ const modals = [
     CountFormContainerComponent,
     CloseFormComponent,
     CloseFormContainerComponent,
-    ...modals
+    ...modals,
+    NewEventSelectionComponent
   ],
   entryComponents: [...modals],
   providers: []
