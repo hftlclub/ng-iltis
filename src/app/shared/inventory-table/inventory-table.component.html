@@ -1,4 +1,4 @@
-<table class="table table-bordered table-hover" *ngIf="productGroups">
+<table class="table table-bordered" *ngIf="productGroups">
   <thead>
     <tr class="category-header">
       <th>Produkt</th>
@@ -15,23 +15,25 @@
   <tbody>
     <ng-container *ngFor="let g of productGroups">
       <tr *ngFor="let inv of g.inventory; first as firstOfGroup"
-        [class.warning]="isNearlyBelowMin(inv)"
-        [class.danger]="isBelowMin(inv)">
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">
+        [class.warning]="inv.isCloseToMin"
+        [class.danger]="inv.isBelowMin">
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.warning]="g.someCloseToMin" [class.danger]="g.someBelowMin">
           <img [src]="g.product.imgFilename" width="30" height="30" alt="" class="hidden-print">
           <strong>{{ g.product.name }}</strong>
         </td>
         <td>{{ inv.sizeType.description }} {{ inv.sizeType.amount | number }} {{ g.product.unit.full }}</td>
         <td>{{ inv.storage }}</td>
         <td>{{ inv.counter }}</td>
-        <td [class.text-warning]="isNearlyBelowMin(inv)" [class.text-danger]="isBelowMin(inv)">
+        <td [class.text-warning]="inv.isCloseToMin" [class.text-danger]="inv.isBelowMin">
           <strong>{{ inv.total }}</strong>
-          <il-icon for="fa fa-exclamation-circle" *ngIf="isNearlyBelowMin(inv)" title="Mindestbestand bald unterschritten"></il-icon>
-          <il-icon for="fa fa-exclamation-triangle" *ngIf="isBelowMin(inv)" title="Mindestbestand unterschritten"></il-icon>
+          <il-icon for="fa fa-exclamation-circle" *ngIf="inv.isCloseToMin" title="Mindestbestand bald unterschritten"></il-icon>
+          <il-icon for="fa fa-exclamation-triangle" *ngIf="inv.isBelowMin" title="Mindestbestand unterschritten"></il-icon>
         </td>
         <td>{{ inv.minStock }}</td>
         <td>{{ inv.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length">{{ g.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.warning]="g.someCloseToMin" [class.danger]="g.someBelowMin">
+          {{ g.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}
+        </td>
       </tr>
     </ng-container>
   </tbody>
