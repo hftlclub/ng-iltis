@@ -38,7 +38,7 @@ export class CrateTypeFormComponent implements OnInit {
     const formValue = this.form.value;
     const crateType = {
       sizeType: { id: formValue.sizeType },
-      slots: formValue.slots,
+      slots: parseInt(formValue.slots, 10),
       description: formValue.description
     } as CrateType;
 
