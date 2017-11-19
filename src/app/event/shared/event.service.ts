@@ -1,6 +1,7 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs/Observable';
+import { map, retry, catchError } from 'rxjs/operators';
 import 'rxjs/add/observable/throw';
 
 import { Permission } from '../../shared/interfaces/permission';
@@ -12,7 +13,6 @@ import { Calculation, CalculationFactory } from '../../shared/models/calculation
 import { EventType, EventTypeFactory } from '../../shared/models/eventtype';
 import { Inventory, InventoryFactory } from '../../shared/models/inventory';
 import { TinyJson } from '../../shared/tinyjson';
-import { map, retry, catchError } from "rxjs/operators";
 
 @Injectable()
 export class EventService {
