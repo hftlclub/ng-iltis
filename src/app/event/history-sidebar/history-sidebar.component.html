@@ -25,6 +25,11 @@
           <div>Keine Buchungen vorhanden.</div>
         </div>
       </div>
+
+      <a class="btn btn-lg btn-block" routerLink="products" *ngIf="event.active">
+        <il-icon for="plus"></il-icon>
+        Neue Buchung
+      </a>
   </div>
 
   <div class="bottom">

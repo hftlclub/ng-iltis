@@ -8,7 +8,7 @@
   <div class="row">
     <div class="col-md-12 content">
       <div class="page-header">
-        <h1>
+        <h2>
           <i class="fa"
             [ngClass]="event.eventType.icon"
             aria-hidden="true"></i>
@@ -16,18 +16,19 @@
             {{ event.eventType.description }}
             {{ event.datetime | date:'dd.MM.yyyy' }}
           </span>
-          <small>
+
+          <span [ngClass]="event.active ? 'text-success' : 'text-danger'" [title]="event.active ? 'aktiv' : 'geschlossen'">
+            <il-icon [for]="event.active ? 'evActive' : 'evInactive'"></il-icon>
+          </span>
+        </h2>
+
+
+        <div style="font-size: 14pt;">
             {{ event.description }}
             <a routerLink="edit" title="Bearbeiten" style="margin-left: 10px">
               <il-icon for="edit"></il-icon>
             </a>
-          </small>
-
-          <span class="label pull-right" [ngClass]="event.active ? 'label-success' : 'label-danger'">
-            <il-icon [for]="event.active ? 'evActive' : 'evInactive'"></il-icon>
-            {{ event.active ? 'Aktiv' : 'Geschlossen' }}
-          </span>
-        </h1>
+          </div>
       </div>
 
       <router-outlet></router-outlet>
