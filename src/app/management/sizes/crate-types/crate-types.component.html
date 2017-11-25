@@ -13,7 +13,7 @@
       <td>{{ ct.id }}</td>
       <td>{{ ct.description }}</td>
       <td>{{ ct.slots }}</td>
-      <td>{{ ct.sizeType.description }} {{ ct.sizeType.amount | number }}</td>
+      <td>{{ ct.sizeType.description }} {{ ct.sizeType.amount | number }} {{ ct.sizeType.unit.short }}</td>
       <td>
         <span class="pull-right">
           <button class="btn btn-warning btn-xs" (click)="showEditModal(ct)">

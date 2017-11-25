@@ -1,9 +1,10 @@
-import { IlValidators } from './../../../core/il-validators';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SizeType, SizeTypeFactory } from '../../../shared/models/sizetype';
+import { Unit } from '../../../shared/models/unit';
 import { HelperService } from '../../../core/helper.service';
+import { IlValidators } from '../../../core/il-validators';
 
 @Component({
   selector: 'il-size-type-form',
@@ -20,6 +21,8 @@ export class SizeTypeFormComponent implements OnInit {
   @Output() formSubmitted = new EventEmitter<SizeType>();
   @Output() cancelled = new EventEmitter<any>();
 
+  @Input() units: Unit[];
+
   form: FormGroup;
 
   constructor(private fb: FormBuilder, private hs: HelperService) { }
@@ -27,10 +30,12 @@ export class SizeTypeFormComponent implements OnInit {
   ngOnInit() {
     this.form = this.fb.group({
       description: [this.initialValue.description, [Validators.required]],
+      unit: [this.initialValue.unit.id, [Validators.required, IlValidators.notZero]],
       amount: [this.hs.dotToComma(this.initialValue.amount), [Validators.required, IlValidators.min(0.01), Validators.max(500)]]
     });
 
     if (this.edit) {
+      this.form.get('unit').disable();
       this.form.get('amount').disable();
     }
   }
@@ -39,7 +44,8 @@ export class SizeTypeFormComponent implements OnInit {
     const formValue = this.form.value;
     const sizeType = {
       description: formValue.description,
-      amount: formValue.amount ? this.hs.commaToNumber(this.form.value.amount) : null
+      unit: { id: formValue.unit || this.initialValue.unit.id },
+      amount: formValue.amount ? this.hs.commaToNumber(this.form.value.amount) : this.initialValue.amount
     } as SizeType;
 
     this.formSubmitted.emit(sizeType);
@@ -47,6 +53,11 @@ export class SizeTypeFormComponent implements OnInit {
 
   cancel() {
     this.cancelled.emit();
+  }
+
+  getUnitById(id: number) {
+    if (!this.units) { return; }
+    return this.units.find(u => u.id == id);
   }
 
 }

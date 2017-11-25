@@ -11,7 +11,7 @@
     <tr *ngFor="let st of sizeTypes">
       <td>{{ st.id }}</td>
       <td>{{ st.description }}</td>
-      <td>{{ st.amount | number }}</td>
+      <td>{{ st.amount | number }} {{ st.unit.short }}</td>
       <td>
         <span class="pull-right">
           <button class="btn btn-warning btn-xs" (click)="showEditModal(st)">

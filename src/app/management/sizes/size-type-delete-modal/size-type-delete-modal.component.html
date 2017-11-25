@@ -9,7 +9,7 @@
 </div>
 <div class="modal-body">
   <p>
-    Soll die Gebindegröße <strong>{{ sizeType?.description }}</strong> mit der Füllmenge <strong>{{ sizeType?.amount | number }}</strong> wirklich gelöscht werden?
+    Soll die Gebindegröße <strong>{{ sizeType?.description }} {{ sizeType?.amount | number }} {{ sizeType?.unit.full }}</strong> wirklich gelöscht werden?
   </p>
 
   <div class="alert alert-warning">

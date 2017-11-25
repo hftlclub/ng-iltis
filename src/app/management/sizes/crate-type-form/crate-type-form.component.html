@@ -6,7 +6,7 @@
     <div class="form-group">
       <label for="category">Gebindegröße</label>
       <select class="form-control" id="sizeType" formControlName="sizeType" placeholder="Bitte auswählen">
-        <option *ngFor="let st of sizeTypes" [value]="st.id">{{ st.description }} {{ st.amount | number }}</option>
+        <option *ngFor="let st of sizeTypes" [value]="st.id">{{ st.description }} {{ st.amount | number }} {{ st.unit.short }}</option>
       </select>
     </div>
 
