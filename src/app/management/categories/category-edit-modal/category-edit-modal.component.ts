@@ -22,7 +22,7 @@ export class CategoryEditModalComponent {
     this.loading = true;
     this.cs.update(this.category.id, category).subscribe(() => {
       this.loading = false;
-      this.ns.success('Kategorie bearbeitet', 'Die Kategorie wurde bearbeitet.')
+      this.ns.success('Kategorie bearbeitet', 'Die Kategorie wurde bearbeitet.');
       this.cs.categoryListChanged.emit();
       this.hideModal();
     },
