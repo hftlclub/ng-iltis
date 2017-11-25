@@ -6,7 +6,7 @@
         <ng-template [ngIf]="!crateTypes.length">Keine Kastengrößen verfügbar</ng-template>
       </option>
       <option *ngFor="let ct of crateTypes" [value]="ct.id">
-        {{ ct.description }} {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ product.unit.full }} ({{ ct.sizeType.description }})
+        {{ ct.description }} {{ ct.slots }} &times; {{ ct.sizeType.amount | number }} {{ ct.sizeType.unit.full }} ({{ ct.sizeType.description }})
       </option>
     </select>
     <ng-template #crateTypesLoading>

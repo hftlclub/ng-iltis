@@ -1,13 +1,14 @@
-import { IlValidators } from '../../../../core/il-validators';
-import { HelperService } from '../../../../core/helper.service';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 
 import { SizesService } from '../../../shared/sizes.service';
 import { Size, SizeFactory } from '../../../../shared/models/size';
 import { SizeType, SizeTypeFactory } from '../../../../shared/models/sizetype';
 import { Unit } from '../../../../shared/models/unit';
+import { IlValidators } from '../../../../core/il-validators';
+import { HelperService } from '../../../../core/helper.service';
 
 @Component({
   selector: 'il-product-size-form',
@@ -32,7 +33,9 @@ export class ProductSizeFormComponent implements OnInit {
   constructor(private fb: FormBuilder, private ss: SizesService, private hs: HelperService) { }
 
   ngOnInit() {
-    this.sizeTypes$ = this.ss.getAllSizeTypes();
+    this.sizeTypes$ = this.ss.getAllSizeTypes().pipe(
+      map(sts => sts.filter(st => st.unit.id === this.unit.id))
+    );
 
     this.form = this.fb.group({
       sizeType: [this.initialValue.sizeType.id, [Validators.required, IlValidators.notZero]],

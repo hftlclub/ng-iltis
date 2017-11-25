@@ -7,7 +7,7 @@
         <label>Gebindegröße</label>
         <select class="form-control" formControlName="sizeType" *ngIf="sizeTypes$ | async as sizeTypes; else sizeTypesLoading">
           <option value="0" selected disabled>Bitte auswählen...</option>
-          <option *ngFor="let st of sizeTypes" [value]="st.id">{{ st.description }} {{ st.amount | number }} {{ unit.full }}</option>
+          <option *ngFor="let st of sizeTypes" [value]="st.id">{{ st.description }} {{ st.amount | number }} {{ st.unit.full }}</option>
         </select>
         <ng-template #sizeTypesLoading>
           <select class="form-control" disabled>
