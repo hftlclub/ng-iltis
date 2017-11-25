@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { SizeType } from '../../../shared/models/sizetype';
@@ -15,18 +16,19 @@ import { SizeTypeDeleteModalComponent } from '../size-type-delete-modal/size-typ
 })
 export class SizeTypesComponent implements OnInit {
 
-    sizeTypes$: Observable<SizeType[]>
+    sizeTypes$: Observable<SizeType[]>;
 
     constructor(private ss: SizesService, private modalService: BsModalService) { }
 
     ngOnInit() {
       this.refreshSizeTypes();
-      this.ss.sizeTypeListChanged.subscribe(() => this.refreshSizeTypes())
+      this.ss.sizeTypeListChanged.subscribe(() => this.refreshSizeTypes());
     }
 
     refreshSizeTypes() {
-      this.sizeTypes$ = this.ss.getAllSizeTypes()
-        .map(sts => sts.sort((a, b) => a.id - b.id));
+      this.sizeTypes$ = this.ss.getAllSizeTypes().pipe(
+        map(sts => sts.sort((a, b) => a.id - b.id))
+      );
     }
 
     showDeleteModal(st: SizeType) {
