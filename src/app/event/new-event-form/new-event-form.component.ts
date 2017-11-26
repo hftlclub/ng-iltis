@@ -46,12 +46,8 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
 
     let eventTypes = this.eventTypesAll.filter(e => e.uiMode === this.uiMode);
 
-
     if (!this.createCountAllowed) {
       eventTypes = eventTypes.filter(e => !e.countAllowed);
-    }
-    if (!eventTypes.length) {
-      this.router.navigate(['/']);
     }
 
     return eventTypes;

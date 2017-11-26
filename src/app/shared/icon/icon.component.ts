@@ -42,6 +42,7 @@ export class IconComponent {
     evEvent: 'fa-glass',
     evPrivate: 'fa-hand-paper-o',
     evPurchase: 'fa-shopping-cart',
+    evStocktake: 'fa-database',
   };
 
 }

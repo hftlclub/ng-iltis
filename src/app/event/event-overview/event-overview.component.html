@@ -19,7 +19,7 @@
 
 
 
-  <il-event-overview-card title="Kasse" icon="cash" *ngIf="!isPurchase">
+  <il-event-overview-card title="Kasse" icon="cash" *ngIf="!isPurchase && !isStocktake">
     <span class="title-right">
       <a title="Bearbeiten" (click)="showCashModal()">
         <il-icon for="edit"></il-icon>
@@ -50,7 +50,7 @@
 
 
 
-  <il-event-overview-card title="Finanzen" icon="fa-bar-chart" *ngIf="!event.active">
+  <il-event-overview-card title="Finanzen" icon="fa-bar-chart" *ngIf="!event.active && !isStocktake">
     <span class="title-right" *ngIf="calcLoading">
       <il-icon for="spinner"></il-icon>
     </span>
