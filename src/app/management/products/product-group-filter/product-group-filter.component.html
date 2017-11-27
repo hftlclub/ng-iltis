@@ -1,6 +1,6 @@
 <form [formGroup]="form" class="checkbox-container">
   <button
-    class="btn btn-outline-secondary"
+    class="btn btn-secondary"
     *ngFor="let g of groups"
     [ngClass]="form.get(g.name).value ? 'active' : 'inactive'"
     (click)="toggleCheckbox(g.name)">

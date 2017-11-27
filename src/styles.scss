@@ -1,8 +1,6 @@
-@import '~bootstrap/scss/bootstrap';
-// @import '~bootswatch/dist/materia/bootstrap.css';
-
+// @import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/yeti/bootstrap.css';
 @import '~font-awesome/css/font-awesome.css';
-
 
 body {
   overflow-y: scroll;
@@ -24,7 +22,11 @@ body {
 }
 
 .content {
-  padding-top: 70px;
+  padding-top: 100px;
+}
+
+td {
+  vertical-align: middle !important;
 }
 
 .simple-notification-wrapper {
