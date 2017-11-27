@@ -1,20 +1,28 @@
-import { Component } from '@angular/core';
+import { UnitsService } from '../../shared/units.service';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
 import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
 import { NotificationsService } from 'angular2-notifications';
 
 import { SizeType } from '../../../shared/models/sizetype';
 import { SizesService } from '../../shared/sizes.service';
+import { Unit } from '../../../shared/models/unit';
 
 @Component({
   selector: 'il-size-type-create-modal',
   templateUrl: './size-type-create-modal.component.html',
   styleUrls: ['./size-type-create-modal.component.css']
 })
-export class SizeTypeCreateModalComponent {
+export class SizeTypeCreateModalComponent implements OnInit {
 
   loading = false;
+  units$: Observable<Unit[]>;
 
-  constructor(private modal: BsModalRef, private ss: SizesService, private ns: NotificationsService) { }
+  constructor(private modal: BsModalRef, private ss: SizesService, private ns: NotificationsService, private us: UnitsService) { }
+
+  ngOnInit() {
+    this.units$ = this.us.getAll();
+  }
 
   createSizeType(sizeType: SizeType) {
     this.loading = true;

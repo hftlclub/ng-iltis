@@ -15,7 +15,7 @@ import { SizesService } from '../../shared/sizes.service';
 export class CrateTypeCreateModalComponent implements OnInit {
 
   loading = false;
-  sizeTypes$: Observable<SizeType[]>
+  sizeTypes$: Observable<SizeType[]>;
 
   constructor(private modal: BsModalRef, private ss: SizesService, private ns: NotificationsService) { }
 

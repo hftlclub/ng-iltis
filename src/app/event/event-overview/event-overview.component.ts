@@ -68,6 +68,10 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
     return this.event.eventType.uiMode === 'purchase';
   }
 
+  get isStocktake(): boolean {
+    return this.event.eventType.uiMode === 'stocktake';
+  }
+
   ngOnDestroy() {
     this.eventUpdatedSub.unsubscribe();
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap';
 
 import { Category } from '../../../shared/models/category';
@@ -15,18 +16,19 @@ import { CategoryDeleteModalComponent } from '../category-delete-modal/category-
 })
 export class CategoryListComponent implements OnInit {
 
-  categories$: Observable<Category[]>
+  categories$: Observable<Category[]>;
 
   constructor(private cs: CategoriesService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.refreshCategories();
-    this.cs.categoryListChanged.subscribe(() => this.refreshCategories())
+    this.cs.categoryListChanged.subscribe(() => this.refreshCategories());
   }
 
   refreshCategories() {
-    this.categories$ = this.cs.getAll(true)
-      .map(cc => cc.sort((a, b) => b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1));
+    this.categories$ = this.cs.getAll(true).pipe(
+      map(cc => cc.sort((a, b) => b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1))
+    );
   }
 
   showDeleteModal(c: Category) {

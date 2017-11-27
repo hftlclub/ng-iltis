@@ -59,8 +59,6 @@ export class ProductListComponent implements OnInit {
   }
 
   activeComparator(a: any, b: any) {
-    console.log('a', a);
-    console.log('b', b);
     if (a && !b) { return -1; }
     if (!a && b) { return 1; }
   }

@@ -1,6 +1,7 @@
 import { ValueChecker } from '../../valuechecker';
 import { Event } from './event';
 import { EventTypeFactory } from '../eventtype';
+import { EventNoteFactory } from '../eventnote';
 
 export class EventFactory {
 
@@ -61,23 +62,25 @@ export class EventFactory {
         if (obj.countedStorage) event.countedStorage = obj.countedStorage;
         else event.countedStorage = !!ValueChecker.validBooleanNumber(obj.eventCountedStorage);
 
+        if (obj.note) event.note = EventNoteFactory.fromObj(obj.note);
+        else if (ValueChecker.validNumber(obj.eventNoteId)) {
+            event.note = EventNoteFactory.fromObj(obj);
+        }
+
+        if (obj.noteCount) event.noteHistoryCount = obj.noteCount;
+
         return event;
     }
 
     static toDbObject(obj: Event): any {
 
-        let  dbEntry: any = {};
+        let dbEntry: any = {};
 
         if (obj.eventType) dbEntry.refEventType = obj.eventType.id;
-
         if (obj.description) dbEntry.eventDesc = obj.description;
-
-        if (ValueChecker.validNumber(obj.cashBefore)) dbEntry.eventCashBefore = obj.cashBefore;
-
-        if (ValueChecker.validNumber(obj.cashAfter)) dbEntry.eventCashAfter = obj.cashAfter;
-
-        if (ValueChecker.validNumber(obj.tip)) dbEntry.eventTip = obj.tip;
-
+        if (ValueChecker.validNumber(obj.cashBefore)) dbEntry.eventCashBefore = obj.cashBefore < 0 ? 0 : obj.cashBefore;
+        if (ValueChecker.validNumber(obj.cashAfter)) dbEntry.eventCashAfter = obj.cashAfter < 0 ? 0 : obj.cashAfter;
+        if (ValueChecker.validNumber(obj.tip)) dbEntry.eventTip = obj.tip < 0 ? 0 : obj.tip;
         if (obj.datetime) dbEntry.eventDT = obj.datetime;
 
         if (obj.active) dbEntry.eventActive = obj.active;

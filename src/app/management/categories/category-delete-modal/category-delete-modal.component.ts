@@ -21,7 +21,7 @@ export class CategoryDeleteModalComponent {
     this.loading = true;
     this.cs.delete(this.category.id).subscribe(() => {
       this.loading = false;
-      this.ns.success('Kategorie gelöscht', 'Die Kategorie wurde gelöscht.')
+      this.ns.success('Kategorie gelöscht', 'Die Kategorie wurde gelöscht.');
       this.cs.categoryListChanged.emit();
       this.hideModal();
     },

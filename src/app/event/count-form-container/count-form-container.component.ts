@@ -55,13 +55,11 @@ export class CountFormContainerComponent implements OnInit {
 
 
   processNewValues(items: any[]) {
-    const transfers = items.map(it => {
-      return {
-        product: { id: it.productId },
-        sizeType: { id: it.sizeTypeId },
-        change: it.amount
-      };
-    });
+    const transfers = items.map(it => ({
+      product: { id: it.productId },
+      sizeType: { id: it.sizeTypeId },
+      change: it.amount
+    }));
 
     this.es.transmitCount(this.mode, this.eventId, transfers)
       .subscribe(res => {

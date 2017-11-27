@@ -7,5 +7,10 @@
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
-<il-size-type-form [loading]="loading" buttonLabel="Hinzufügen" (formSubmitted)="createSizeType($event)" (cancelled)="hideModal()"></il-size-type-form>
+<il-size-type-form
+  [loading]="loading"
+  buttonLabel="Hinzufügen"
+  [units]="units$ | async"
+  (formSubmitted)="createSizeType($event)"
+  (cancelled)="hideModal()"></il-size-type-form>
 
