@@ -1,87 +1,81 @@
-<nav class="navbar navbar-default navbar-fixed-top">
-  <div class="container-fluid">
-    <button type="button" class="navbar-toggle" [class.collapsed]="collapsed" [attr.aria-expanded]="!collapsed" (click)="collapsed = !collapsed">
-      <span class="sr-only">Toggle navigation</span>
-      <i class="fa" aria-hidden="true" [ngClass]="collapsed ? 'fa-bars' : 'fa-times'"></i>
-    </button>
-    <div class="navbar-header">
-       <a class="navbar-brand" routerLink="/">
-        <img alt="Brand" src="assets/iltis.svg" style="height: 20px">
-       </a>
-    </div>
-    <div class="collapse navbar-collapse" [class.in]="!collapsed">
-      <ul class="nav navbar-nav">
+<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+  <a class="navbar-brand" routerLink="/">
+   <img alt="ILTIS" src="assets/iltis.svg" height="25">
+  </a>
 
-        <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
-          <a routerLink="/dashboard">
-            <il-icon for="dashboard"></il-icon>
-            Dashboard
+  <div class="collapse navbar-collapse">
+    <ul class="navbar-nav mr-auto">
+
+      <li class="nav-item" [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="/dashboard">
+          <il-icon for="dashboard"></il-icon>
+          Dashboard
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="/inventory">
+          <il-icon for="stock"></il-icon>
+          Lagerbestand
+        </a>
+      </li>
+      <li class="nav-item" [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
+        <a class="nav-link" routerLink="/event">
+          <il-icon for="calendar"></il-icon>
+          Ereignisse
+        </a>
+      </li>
+
+      <li class="nav-item dropdown d-lg-none d-xl-block" dropdown [routerLinkActive]="aclass">
+        <a class="nav-link dropdown-toggle" dropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
+          <il-icon for="plus"></il-icon>
+          Neues Ereignis <span class="caret"></span>
           </a>
-        </li>
-        <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
-          <a routerLink="/inventory">
-            <il-icon for="stock"></il-icon>
-            Lagerbestand
+        <div class="dropdown-menu" *dropdownMenu>
+          <a class="dropdown-item" routerLink="/event/new/event">
+            <il-icon for="evEvent"></il-icon>
+            Veranstaltung
           </a>
-        </li>
-        <li [routerLinkActive]="aclass" [routerLinkActiveOptions]="{exact: true}">
-          <a routerLink="/event">
-            <il-icon for="calendar"></il-icon>
-            Ereignisse
+          <a class="dropdown-item" routerLink="/event/new/private">
+            <il-icon for="evPrivate"></il-icon>
+            Spontanentnahme
           </a>
-        </li>
-
-        <li class="dropdown" dropdown [routerLinkActive]="aclass">
-          <a class="dropdown-toggle" dropdownToggle role="button" aria-haspopup="true" aria-expanded="false">
-            <il-icon for="plus"></il-icon>
-            Neues Ereignis <span class="caret"></span>
-            </a>
-          <ul class="dropdown-menu" *dropdownMenu>
-            <li><a routerLink="/event/new/event">
-              <il-icon for="evEvent"></il-icon>
-              Veranstaltung
-            </a></li>
-            <li><a routerLink="/event/new/private">
-              <il-icon for="evPrivate"></il-icon>
-              Spontanentnahme
-            </a></li>
-            <li role="separator" class="divider"></li>
-            <li><a routerLink="/event/new/purchase">
-              <il-icon for="evPurchase"></il-icon>
-              Einkauf
-            </a></li>
-            <li><a routerLink="/event/new/stocktake">
-              <il-icon for="evStocktake"></il-icon>
-              Inventur
-            </a></li>
-          </ul>
-        </li>
-
-
-
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li [routerLinkActive]="aclass">
-          <a routerLink="/management">
-            <il-icon for="fa-cogs"></il-icon>
-            Verwaltung
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" routerLink="/event/new/purchase">
+            <il-icon for="evPurchase"></il-icon>
+            Einkauf
           </a>
-        </li>
-
-        <li [routerLinkActive]="aclass">
-          <a routerLink="/info">
-            <il-icon for="fa-info-circle"></il-icon>
-            Info
+          <a class="dropdown-item" routerLink="/event/new/stocktake">
+            <il-icon for="evStocktake"></il-icon>
+            Inventur
           </a>
-        </li>
+        </div>
+      </li>
 
-        <li [routerLinkActive]="aclass">
-          <a href="#">
-            <il-icon for="fa-user"></il-icon>
-            Max Mustermann
-          </a>
-        </li>
-      </ul>
-    </div>
+
+
+    </ul>
+    <ul class="nav navbar-nav navbar-right">
+      <li class="nav-item" [routerLinkActive]="aclass">
+        <a class="nav-link" routerLink="/management">
+          <il-icon for="fa-cogs"></il-icon>
+          Verwaltung
+        </a>
+      </li>
+
+      <li class="nav-item" [routerLinkActive]="aclass">
+        <a class="nav-link" routerLink="/info">
+          <il-icon for="fa-info-circle"></il-icon>
+          Info
+        </a>
+      </li>
+
+      <li class="nav-item" [routerLinkActive]="aclass">
+        <a class="nav-link" href="#">
+          <il-icon for="fa-user"></il-icon>
+          <span>Max</span>
+          <span class="d-lg-none d-xl-inline">Mustermann</span>
+        </a>
+      </li>
+    </ul>
   </div>
 </nav>

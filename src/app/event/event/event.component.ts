@@ -3,7 +3,7 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { GlobalService } from './../../core/global.service';
+import { GlobalService } from '../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
 import { switchMap } from 'rxjs/operators';
@@ -18,7 +18,7 @@ import { switchMap } from 'rxjs/operators';
         transform: 'translateX(0)'
       })),
       state('out', style({
-        transform: 'translateX(100%)'
+        transform: 'translateX(220px)'
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
@@ -28,17 +28,17 @@ import { switchMap } from 'rxjs/operators';
         right: '250px',
       })),
       state('out', style({
-        right: '0',
+        right: '30px',
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
     ]),
     trigger('containerInOut', [
       state('in', style({
-        marginRight: '250px'
+        marginRight: '250px !important'
       })),
       state('out', style({
-        marginRight: '0'
+        marginRight: '30px !important '
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
@@ -53,6 +53,8 @@ export class EventComponent implements OnInit, OnDestroy {
   eventUpdatedSub: Subscription;
   eventClosedSub: Subscription;
   mobileModeSub: Subscription;
+
+  tabs: Tab[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -71,6 +73,9 @@ export class EventComponent implements OnInit, OnDestroy {
     .subscribe(event => this.event = event);
 
     this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
+
+
+    this.tabs = this.tabsData().filter(t => t.show);
   }
 
   ngOnDestroy() {
@@ -87,4 +92,59 @@ export class EventComponent implements OnInit, OnDestroy {
     return (this.sidebarVisible) ? 'in' : 'out';
   }
 
+  tabsData(): Tab[] {
+    return [
+      {
+        label: 'Übersicht',
+        link: './overview',
+        icon: 'fa-newspaper-o',
+        show: true
+      },
+      {
+        label: 'Neue Buchung',
+        link: './products',
+        icon: 'fa-plus',
+        show: this.event.active
+      },
+      {
+        label: 'Zählung',
+        link: './count',
+        icon: 'fa-list-ol',
+        show: this.event.active
+      },
+      {
+        label: 'Lagerbestand',
+        link: './inventory',
+        icon: 'stock',
+        show: !this.event.active
+      },
+      {
+        label: 'Notizen',
+        link: './notes',
+        icon: 'fa-file-text-o',
+        show: true
+      },
+      {
+        label: 'Infos bearbeiten',
+        link: './edit',
+        icon: 'edit',
+        show: true
+      },
+      {
+        label: 'Ereignis schließen',
+        link: './close',
+        icon: 'fa-calendar-check-o',
+        show: this.event.active
+      },
+    ];
+  }
+
+}
+
+
+interface Tab {
+  link: string | string[];
+  label: string;
+  icon: string;
+  show: boolean;
 }

@@ -120,10 +120,10 @@ export class EventFormComponent implements OnInit, OnChanges {
   getString(name: string): string {
     const strings = {
       boxHeadline: {
-        event: 'Infos zur Veranstaltung',
-        purchase: 'Infos zum Einkauf',
-        private: 'Infos zur Spontanentnahme',
-        stocktake: 'Infos zur Inventur'
+        event: 'Veranstaltung anlegen',
+        purchase: 'Einkauf erfassen',
+        private: 'Spontanentnahme erfassen',
+        stocktake: 'Inventur durchführen'
       },
       buttonLabel: {
         event: 'Veranstaltung anlegen',
@@ -148,6 +148,12 @@ export class EventFormComponent implements OnInit, OnChanges {
         purchase: 'Ereignistyp',
         private: 'Ereignistyp',
         stocktake: 'Ereignistyp'
+      },
+      icon: {
+        event: 'evEvent',
+        purchase: 'evPurchase',
+        private: 'evPrivate',
+        stocktake: 'evStocktake'
       }
     };
 
