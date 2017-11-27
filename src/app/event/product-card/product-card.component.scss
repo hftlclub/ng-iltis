@@ -1,0 +1,21 @@
+:host {
+  cursor: pointer;
+
+  .card {
+    padding: .2rem;
+
+    &:hover {
+      background-color: #DDD !important;
+    }
+
+    .card-body {
+      padding: .5rem !important;
+
+      p.caption {
+        font-weight: bold;
+      }
+    }
+  }
+}
+
+

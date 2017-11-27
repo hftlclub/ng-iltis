@@ -5,7 +5,7 @@ import { Transaction } from '../../shared/models/transaction';
 @Component({
   selector: 'il-history-transaction-item',
   templateUrl: './history-transaction-item.component.html',
-  styleUrls: ['./history-transaction-item.component.css']
+  styleUrls: ['./history-transaction-item.component.scss']
 })
 export class HistoryTransactionItemComponent {
 

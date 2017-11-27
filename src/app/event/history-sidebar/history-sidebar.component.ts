@@ -1,5 +1,5 @@
 import { switchMap } from 'rxjs/operators';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
@@ -11,9 +11,12 @@ import { EventService } from './../shared/event.service';
 @Component({
   selector: 'il-history-sidebar',
   templateUrl: './history-sidebar.component.html',
-  styleUrls: ['./history-sidebar.component.css']
+  styleUrls: ['./history-sidebar.component.scss']
 })
 export class HistorySidebarComponent implements OnInit, OnDestroy {
+
+  @Input() visible;
+  @Output() overlayClick = new EventEmitter();
 
   transfers: Transfer[] = [];
   transactions: Transaction[] = [];
@@ -64,6 +67,10 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
 
   get itemCount(): number {
     return (this.event.active) ? this.transfers.length : this.transactions.length;
+  }
+
+  handleOverlayClick() {
+    this.overlayClick.emit();
   }
 
 }

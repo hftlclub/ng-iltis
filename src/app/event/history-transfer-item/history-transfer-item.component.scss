@@ -1,0 +1,23 @@
+:host > div {
+
+  padding: 8px;
+  border-bottom: 1px solid #BBB;
+  background: white;
+
+  .badge {
+    margin-top: 8px;
+  }
+
+  p, h6 {
+    margin: 0;
+  }
+
+  &.item-in {
+    border-left: 7px solid #5cb85c;
+  }
+
+  &.item-out {
+    border-left: 7px solid #d9534f;
+  }
+
+}

@@ -17,8 +17,6 @@
     </p>
   </il-event-overview-card>
 
-
-
   <il-event-overview-card title="Kasse" icon="cash" *ngIf="!isPurchase && !isStocktake">
     <span class="title-right">
       <a title="Bearbeiten" (click)="showCashModal()">
@@ -40,7 +38,7 @@
       {{ event.tip | currency:'EUR' }}
     </p>
 
-    <a class="btn btn-default btn-block btn-sm"
+    <a class="btn btn-secondary btn-block btn-sm"
       style="margin-top: 13px"
       *ngIf="cashEmpty"
       (click)="showCashModal()">

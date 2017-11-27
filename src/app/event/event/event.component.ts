@@ -3,15 +3,16 @@ import { trigger, state, style, transition, animate } from '@angular/animations'
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 
-import { GlobalService } from './../../core/global.service';
+import { GlobalService } from '../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, filter } from 'rxjs/operators';
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'il-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css'],
+  styleUrls: ['./event.component.scss'],
   animations: [
     trigger('slideInOut', [
       state('in', style({
@@ -54,6 +55,8 @@ export class EventComponent implements OnInit, OnDestroy {
   eventClosedSub: Subscription;
   mobileModeSub: Subscription;
 
+  tabs: Tab[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private es: EventService,
@@ -71,6 +74,12 @@ export class EventComponent implements OnInit, OnDestroy {
     .subscribe(event => this.event = event);
 
     this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
+
+    this.tabs = this.tabsData().filter(t => t.show);
+
+    Observable.fromEvent(window, 'keypress').pipe(
+      filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
+    ).subscribe(e => this.toggleSidebar());
   }
 
   ngOnDestroy() {
@@ -87,4 +96,59 @@ export class EventComponent implements OnInit, OnDestroy {
     return (this.sidebarVisible) ? 'in' : 'out';
   }
 
+  tabsData(): Tab[] {
+    return [
+      {
+        label: 'Übersicht',
+        link: './overview',
+        icon: 'fa-newspaper-o',
+        show: true
+      },
+      {
+        label: 'Neue Buchung',
+        link: './products',
+        icon: 'fa-plus',
+        show: this.event.active
+      },
+      {
+        label: 'Zählung',
+        link: './count',
+        icon: 'fa-list-ol',
+        show: this.event.active
+      },
+      {
+        label: 'Lagerbestand',
+        link: './inventory',
+        icon: 'stock',
+        show: !this.event.active
+      },
+      {
+        label: 'Notizen',
+        link: './notes',
+        icon: 'fa-file-text-o',
+        show: true
+      },
+      {
+        label: 'Infos bearbeiten',
+        link: './edit',
+        icon: 'edit',
+        show: true
+      },
+      {
+        label: 'Ereignis schließen',
+        link: './close',
+        icon: 'fa-calendar-check-o',
+        show: this.event.active
+      },
+    ];
+  }
+
+}
+
+
+interface Tab {
+  link: string | string[];
+  label: string;
+  icon: string;
+  show: boolean;
 }

@@ -1,10 +1,10 @@
-<div class="input-group input-group-lg">
+<div class="input-group">
   <span class="input-group-addon" (click)="searchInput.focus()">
     <il-icon for="fa-search"></il-icon>
   </span>
   <input type="text" class="form-control" placeholder="Filter" [formControl]="control" maxLength="255" #searchInput>
   <span class="input-group-btn">
-    <button class="btn btn-default" type="button" (click)="reset()">
+    <button class="btn btn-secondary" type="button" (click)="reset()">
       <il-icon for="fa-close"></il-icon>
     </button>
   </span>

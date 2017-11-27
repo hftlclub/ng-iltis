@@ -1,9 +1,10 @@
 <form [formGroup]="form" class="checkbox-container">
   <button
-    class="btn btn-default btn-lg"
+    class="btn btn-secondary"
     *ngFor="let g of groups"
     [ngClass]="form.get(g.name).value ? 'active' : 'inactive'"
     (click)="toggleCheckbox(g.name)">
-    <input type="checkbox" [formControlName]="g.name" (change)="valueChanged()"> {{ g.label }}
+    <input type="checkbox" hidden [formControlName]="g.name" (change)="valueChanged()">
+    {{ g.label }}
   </button>
 </form>

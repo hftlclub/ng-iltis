@@ -1,0 +1,59 @@
+$sbWidth: 250px;
+
+:host {
+  min-width: $sbWidth;
+  max-width: $sbWidth;
+  position:fixed;
+  top: 50px;
+  right:0;
+  height:100%;
+  padding:0;
+  padding-top: 15px;
+  background-color:#EEE;
+  border-left: 1px solid #BBB;
+  z-index: 995;
+}
+
+.sidebar-container {
+  display: block;
+  position: relative;
+  width: $sbWidth;
+  height: 100%;
+  padding: 0;
+}
+
+.top {
+  position: absolute;
+  padding-left: 15px;
+
+  h4 {
+    margin-bottom: 0;
+  }
+}
+
+
+.scroll-area{
+  width: $sbWidth;
+  height: calc(100% - 110px);
+  margin-top: 60px;
+  border-top: 1px solid #BBB;
+  float: left;
+  overflow-y: auto;
+
+  .box-message {
+    margin-top: 50px;
+    font-weight: bold;
+  }
+}
+
+.bottom {
+  bottom: 50px;
+  width: $sbWidth;
+  height: 60px;
+  position: absolute;
+
+  div {
+    padding: 3px 10px;
+  }
+}
+
