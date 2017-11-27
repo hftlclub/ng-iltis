@@ -1,9 +1,8 @@
-<div class="sidebar-container">
+<div class="col-2 sidebar-container">
   <div class="top">
-      <h3>
-        <i class="fa fa-history" aria-hidden="true"></i>
-        Historie
-      </h3>
+      <h4>
+        Buchungshistorie
+      </h4>
       <small>
         {{ itemCount | i18nPlural:itemsCountMapping }}
       </small>
@@ -22,17 +21,18 @@
           <div>
             <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
           </div>
-          <div>Keine Buchungen vorhanden.</div>
+          <div>Keine Buchungen</div>
+
+          <a class="btn btn-success mt-4" routerLink="products" *ngIf="event.active">
+            <il-icon for="plus"></il-icon>
+            Neue Buchung
+          </a>
         </div>
       </div>
 
-      <a class="btn btn-lg btn-block" routerLink="products" *ngIf="event.active">
-        <il-icon for="plus"></il-icon>
-        Neue Buchung
-      </a>
   </div>
 
-  <div class="bottom">
+  <!--<div class="bottom">
       <div class="text-center">
         <a class="btn btn-primary btn-lg btn-block" routerLink="overview" *ngIf="childUrlSegment !== 'overview'">
           <il-icon for="fa-list"></il-icon>
@@ -43,5 +43,6 @@
           Neue Buchung
         </a>
       </div>
-  </div>
+  </div>-->
+
 </div>

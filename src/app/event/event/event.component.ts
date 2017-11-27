@@ -6,19 +6,20 @@ import { Subscription } from 'rxjs/Subscription';
 import { GlobalService } from '../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
-import { switchMap } from 'rxjs/operators';
+import { switchMap, filter } from 'rxjs/operators';
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'il-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css'],
+  styleUrls: ['./event.component.scss'],
   animations: [
     trigger('slideInOut', [
       state('in', style({
         transform: 'translateX(0)'
       })),
       state('out', style({
-        transform: 'translateX(220px)'
+        transform: 'translateX(100%)'
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
@@ -28,17 +29,17 @@ import { switchMap } from 'rxjs/operators';
         right: '250px',
       })),
       state('out', style({
-        right: '30px',
+        right: '0',
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
     ]),
     trigger('containerInOut', [
       state('in', style({
-        marginRight: '250px !important'
+        marginRight: '250px'
       })),
       state('out', style({
-        marginRight: '30px !important '
+        marginRight: '0'
       })),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
@@ -74,8 +75,11 @@ export class EventComponent implements OnInit, OnDestroy {
 
     this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
 
-
     this.tabs = this.tabsData().filter(t => t.show);
+
+    Observable.fromEvent(window, 'keypress').pipe(
+      filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
+    ).subscribe(e => this.toggleSidebar());
   }
 
   ngOnDestroy() {
