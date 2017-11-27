@@ -1,89 +1,79 @@
-<div class="container">
+<div class="container content">
   <div class="row">
-    <div class="col-md-12 content">
-      <div class="page-header">
-        <h1>
-          <il-icon for="fa-coffee"></il-icon>
-          Produkte
+    <div class="col">
+      <h1>
+        <il-icon for="fa-coffee"></il-icon>
+        Produkte
 
-          <span class="pull-right">
-            <button class="btn btn-primary" (click)="pfs.resetFilters()">
-              <il-icon for="fa fa-times"></il-icon>
-              Filter zurücksetzen
-            </button>
+        <span class="pull-right">
+          <button class="btn btn-primary" (click)="pfs.resetFilters()">
+            <il-icon for="fa fa-times"></il-icon>
+            Filter zurücksetzen
+          </button>
 
-            <a class="btn btn-success" routerLink="../create">
-              <il-icon for="plus"></il-icon>
-              Hinzufügen
-            </a>
-          </span>
-        </h1>
-      </div>
-
-      <div class="row">
-
-        <div class="col-md-8">
-          <il-product-search-filter></il-product-search-filter>
-        </div>
-        <div class="col-md-4">
-          <il-product-group-filter class="pull-right"></il-product-group-filter>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 20px">
-        <div class="col-md-12">
-          <il-product-category-filter></il-product-category-filter>
-          <hr>
-        </div>
-      </div>
-
-      <div class="row" style="margin-top: 20px">
-        <ngx-datatable
-          class="material"
-          [rows]="products$ | async"
-          [columns]="columns"
-          [reorderable]="false"
-          columnMode="force"
-          rowHeight="auto"
-          [rowClass]="getRowClass"
-          [messages]="{ emptyMessage: 'Keine Produkte entsprechen den Suchkriterien.' }"
-          sortType="multi"
-          [sorts]="pfs.tableSort$ | async">
-        </ngx-datatable>
-
-        <ng-template #tplActive let-row="row">
-          <il-icon for="fa-check-circle fa-lg" class="text-success" title="aktiv" *ngIf="row.active"></il-icon>
-          <il-icon for="fa-times-circle fa-lg" class="text-danger" title="inaktiv" *ngIf="!row.active"></il-icon>
-        </ng-template>
-
-        <ng-template #tplImg let-row="row">
-          <img [src]="row.imgFilename" width="30" height="30">
-        </ng-template>
-
-        <ng-template #tplName let-row="row">
-          <strong>{{ row.name }}</strong>
-        </ng-template>
-
-        <ng-template #tplCategory let-row="row">
-          <a [routerLink] [queryParams]="{ c: row.category.id }">{{ row.category.name }}</a>
-        </ng-template>
-
-        <ng-template #tplUnit let-row="row" let-unit="value">
-          <span *ngIf="unit.full">{{ unit.short }} ({{ unit.full }})</span>
-        </ng-template>
-
-        <ng-template #tplActions let-row="row">
-          <a class="btn btn-xs btn-primary" [routerLink]="['..', row.id, 'edit']">
-            <il-icon for="edit"></il-icon>
-            Bearbeiten
+          <a class="btn btn-success" routerLink="../create">
+            <il-icon for="plus"></il-icon>
+            Hinzufügen
           </a>
-          <a class="btn btn-xs btn-success" [routerLink]="['..', row.id, 'details']">
-            Details
-            <il-icon for="fa-arrow-right"></il-icon>
-          </a>
-        </ng-template>
-
-      </div>
+        </span>
+      </h1>
     </div>
   </div>
+
+  <div class="row mt-4">
+    <div class="col-md-8">
+      <il-product-search-filter></il-product-search-filter>
+    </div>
+    <div class="col-md-4 mt-4 mt-md-0">
+      <il-product-group-filter class="pull-right"></il-product-group-filter>
+    </div>
+  </div>
+
+  <div class="row mt-4 mb-4">
+    <div class="col-md-12">
+      <il-product-category-filter></il-product-category-filter>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col">
+    <ngx-datatable class="material" [rows]="products$ | async" [columns]="columns" [reorderable]="false" columnMode="force" rowHeight="auto"
+      [rowClass]="getRowClass" [messages]="{ emptyMessage: 'Keine Produkte entsprechen den Suchkriterien.' }" sortType="multi"
+      [sorts]="pfs.tableSort$ | async">
+    </ngx-datatable>
+
+    <ng-template #tplActive let-row="row">
+      <il-icon for="fa-check-circle fa-lg" class="text-success" title="aktiv" *ngIf="row.active"></il-icon>
+      <il-icon for="fa-times-circle fa-lg" class="text-danger" title="inaktiv" *ngIf="!row.active"></il-icon>
+    </ng-template>
+
+    <ng-template #tplImg let-row="row">
+      <img [src]="row.imgFilename" width="30" height="30">
+    </ng-template>
+
+    <ng-template #tplName let-row="row">
+      <strong>{{ row.name }}</strong>
+    </ng-template>
+
+    <ng-template #tplCategory let-row="row">
+      <a [routerLink] [queryParams]="{ c: row.category.id }">{{ row.category.name }}</a>
+    </ng-template>
+
+    <ng-template #tplUnit let-row="row" let-unit="value">
+      <span *ngIf="unit.full">{{ unit.short }} ({{ unit.full }})</span>
+    </ng-template>
+
+    <ng-template #tplActions let-row="row">
+      <a class="btn btn-sm btn-primary" [routerLink]="['..', row.id, 'edit']">
+        <il-icon for="edit"></il-icon>
+        Bearbeiten
+      </a>
+      <a class="btn btn-sm btn-success" [routerLink]="['..', row.id, 'details']">
+        Details
+        <il-icon for="fa-arrow-right"></il-icon>
+      </a>
+    </ng-template>
+  </div>
+  </div>
+
 </div>

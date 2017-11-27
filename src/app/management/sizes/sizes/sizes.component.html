@@ -1,29 +1,34 @@
 <div class="container">
   <div class="row">
     <div class="col-md-12 content">
-      <div class="page-header">
-        <h1>
-          <il-icon for="fa-cube"></il-icon>
-          Gebinde &amp; Einheiten
-          <small>{{ subHeadline }}</small>
-        </h1>
-      </div>
-      <ul class="nav nav-tabs nav-justified">
-        <li role="presentation" routerLinkActive="active"><a routerLink="size-types">
-          <il-icon for="fa-glass"></il-icon>
-          Gebindegrößen
-        </a></li>
-        <li role="presentation" routerLinkActive="active"><a routerLink="crate-types">
-          <il-icon for="fa-archive"></il-icon>
-          Kastengrößen
-        </a></li>
-        <li role="presentation" routerLinkActive="active"><a routerLink="units">
-          <il-icon for="unit"></il-icon>
-          Einheiten
-        </a></li>
+      <h1>
+        <il-icon for="fa-cube"></il-icon>
+        Gebinde &amp; Einheiten
+        <small>{{ subHeadline }}</small>
+      </h1>
+
+      <ul class="nav nav-fill nav-tabs mt-4 mb-4">
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="size-types">
+            <il-icon for="fa-glass"></il-icon>
+            Gebindegrößen
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="crate-types">
+            <il-icon for="fa-archive"></il-icon>
+            Kastengrößen
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="units">
+            <il-icon for="unit"></il-icon>
+            Einheiten
+          </a>
+        </li>
       </ul>
-      <div style="padding-top: 30px;">
-        <router-outlet></router-outlet>
-      </div>
+
+      <router-outlet></router-outlet>
+
     </div>
   </div>

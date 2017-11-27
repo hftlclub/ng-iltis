@@ -46,7 +46,7 @@
         <div class="input-group">
           <input type="text" class="form-control" [value]="form.value.date | date:'fullDate'" (focus)="showDatepickerModal()">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button" (click)="showDatepickerModal()">
+            <button class="btn btn-secondary" type="button" (click)="showDatepickerModal()">
               <il-icon for="calendar"></il-icon>
             </button>
           </span>
@@ -60,7 +60,7 @@
         <div class="input-group">
           <input type="text" class="form-control" [value]="form.value.time | date:'HH:mm a'" (focus)="showTimepickerModal()">
           <span class="input-group-btn">
-            <button class="btn btn-default" type="button" (click)="showTimepickerModal()">
+            <button class="btn btn-secondary" type="button" (click)="showTimepickerModal()">
               <il-icon for="clock"></il-icon>
             </button>
           </span>

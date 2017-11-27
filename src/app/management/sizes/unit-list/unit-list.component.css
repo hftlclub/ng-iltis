@@ -3,3 +3,7 @@ td.loading {
   text-align: center;
   font-weight: bold;
 }
+
+td {
+  vertical-align: middle;
+}

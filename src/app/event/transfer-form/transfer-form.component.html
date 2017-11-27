@@ -17,7 +17,7 @@
                   <div class="col-md-4 col-md-offset-1">
                     <button type="button" class="btn btn-block"
                       [disabled]="loading"
-                      [ngClass]="outgoingTransfer ? 'btn-info' : 'btn-default'"
+                      [ngClass]="outgoingTransfer ? 'btn-info' : 'btn-secondary'"
                       (click)="outgoingTransfer = true">
                       <il-icon for="transferOut"></il-icon>
                       Entnahme
@@ -29,7 +29,7 @@
                   <div class="col-md-4">
                     <button type="button" class="btn btn-block"
                       [disabled]="loading"
-                      [ngClass]="outgoingTransfer ? 'btn-default' : 'btn-info'"
+                      [ngClass]="outgoingTransfer ? 'btn-secondary' : 'btn-info'"
                       (click)="outgoingTransfer = false">
                       <il-icon for="transferIn"></il-icon>
                       Rückgabe
@@ -45,7 +45,7 @@
                   <div class="col-md-4 col-md-offset-1">
                     <button type="button" class="btn btn-block"
                       [disabled]="loading"
-                      [ngClass]="storageTransfer ? 'btn-warning' : 'btn-default'"
+                      [ngClass]="storageTransfer ? 'btn-warning' : 'btn-secondary'"
                       (click)="storageTransfer = true">
                       <il-icon for="storage"></il-icon>
                       Lager
@@ -57,7 +57,7 @@
                   <div class="col-md-4">
                     <button type="button" class="btn btn-block"
                       [disabled]="loading || !outgoingTransfer || noCounterRemoval"
-                      [ngClass]="storageTransfer ? 'btn-default' : 'btn-primary'"
+                      [ngClass]="storageTransfer ? 'btn-secondary' : 'btn-primary'"
                       (click)="storageTransfer = false">
                       <il-icon for="counter"></il-icon>
                       Kühlschrank

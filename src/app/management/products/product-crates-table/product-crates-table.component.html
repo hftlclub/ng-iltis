@@ -9,7 +9,7 @@
     <tr *ngFor="let c of product.crateTypes">
       <td>{{ c.description }} {{ c.slots }} &times; {{ c.sizeType.amount | number }} {{ c.sizeType.unit.full }} ({{ c.sizeType.description }})</td>
       <td>
-        <button class="btn btn-danger btn-xs pull-right" (click)="showCrateDeleteModal(c)">
+        <button class="btn btn-danger btn-sm pull-right" (click)="showCrateDeleteModal(c)">
           <il-icon for="delete"></il-icon>
           Löschen
         </button>

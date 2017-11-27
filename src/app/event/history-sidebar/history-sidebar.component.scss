@@ -39,11 +39,11 @@ $sbWidth: 250px;
   border-top: 1px solid #BBB;
   float: left;
   overflow-y: auto;
-}
 
-.scroll-area .box-message {
-  margin-top: 50px;
-  font-weight: bold;
+  .box-message {
+    margin-top: 50px;
+    font-weight: bold;
+  }
 }
 
 .bottom {
@@ -51,8 +51,9 @@ $sbWidth: 250px;
   width: $sbWidth;
   height: 60px;
   position: absolute;
+
+  div {
+    padding: 3px 10px;
+  }
 }
 
-.bottom div {
-  padding: 3px 10px;
-}
