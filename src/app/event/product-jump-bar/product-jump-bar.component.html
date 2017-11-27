@@ -1,8 +1,13 @@
-<nav class="navbar navbar-default navbar-fixed-bottom">
-  <div class="navbar-header">
-       <span class="navbar-brand"><i class="fa fa-bookmark" aria-hidden="true"></i></span>
-    </div>
-  <ul class="nav navbar-nav">
-    <li *ngFor="let c of categories"><a pageScroll href="#{{c.id}}">{{ c.name }}</a></li>
+<nav class="navbar navbar-expand navbar-light bg-light fixed-bottom">
+  <span class="navbar-brand">
+    <i class="fa fa-tag" aria-hidden="true"></i>
+  </span>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+  <ul class="navbar-nav">
+    <li class="nav-item" *ngFor="let c of categories">
+      <a pageScroll class="nav-link" href="#{{ c.id }}">{{ c.name }}</a>
+    </li>
   </ul>
+</div>
 </nav>
