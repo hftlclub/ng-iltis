@@ -4,7 +4,9 @@
       <i class="fa fa-minus" aria-hidden="true"></i>
     </button>
   </span>
-  <input type="text" class="form-control input-lg" style="text-align: center" [(ngModel)]="counterValue" [disabled]="disabled" maxlength="15">
+
+  <input type="text" class="form-control input-lg" style="text-align: center; width: 100px;" [(ngModel)]="counterValue" [disabled]="disabled" maxlength="15">
+
   <span class="input-group-btn">
     <button class="btn btn-secondary btn-lg" type="button" (click)="increase()" [disabled]="counterValue >= maxValue  || disabled">
       <i class="fa fa-plus" aria-hidden="true"></i>
