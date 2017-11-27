@@ -1,0 +1,69 @@
+.table {
+
+    @function tableColor($baseColor) {
+      @return lighten($baseColor, 40%);
+    }
+
+    @function tableColorHover($baseColor) {
+      @return darken(tableColor($baseColor), 5%);
+    }
+
+    &-success,
+    &-info,
+    &-warning,
+    &-danger {
+      color: $black;
+    }
+
+    &-success {
+      &, > th, > td {
+        background-color: tableColor($success);
+      }
+    }
+
+    &-info {
+      &, > th, > td {
+        background-color: tableColor($info);
+      }
+    }
+
+    &-danger {
+      &, > th, > td {
+        background-color: tableColor($danger);
+      }
+    }
+
+    &-warning {
+      &, > th, > td {
+        background-color: tableColor($warning);
+      }
+    }
+
+    &-hover {
+
+      .table-success:hover {
+        &, > th, > td {
+          background-color: tableColorHover($success);
+        }
+      }
+
+      .table-info:hover {
+        &, > th, > td {
+          background-color: tableColorHover($info);
+        }
+      }
+
+      .table-danger:hover {
+        &, > th, > td {
+          background-color: tableColorHover($danger);
+        }
+      }
+
+      .table-warning:hover {
+        &, > th, > td {
+          background-color: tableColorHover($warning);
+        }
+      }
+
+    }
+  }
