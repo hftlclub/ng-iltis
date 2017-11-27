@@ -30,7 +30,7 @@
         <tr
           *ngFor="let p of c.products; index as pi"
           [formGroupName]="pi"
-          [class.success]="form.value.categories[ci][pi].active">
+          [class.table-success]="form.value.categories[ci][pi].active">
           <td (click)="setFormGroupActive(ci, pi, !form.value.categories[ci][pi].active)">
             <input type="checkbox" formControlName="active">
           </td>

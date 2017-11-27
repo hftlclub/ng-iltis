@@ -15,9 +15,9 @@
   <tbody>
     <ng-container *ngFor="let g of productGroups">
       <tr *ngFor="let inv of g.inventory; first as firstOfGroup"
-        [class.warning]="inv.isCloseToMin"
-        [class.danger]="inv.isBelowMin">
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.warning]="g.someCloseToMin" [class.danger]="g.someBelowMin">
+        [class.table-warning]="inv.isCloseToMin"
+        [class.table-danger]="inv.isBelowMin">
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.table-warning]="g.someCloseToMin" [class.table-danger]="g.someBelowMin">
           <img [src]="g.product.imgFilename" width="30" height="30" alt="" class="hidden-print">
           <strong>{{ g.product.name }}</strong>
         </td>
@@ -31,7 +31,7 @@
         </td>
         <td>{{ inv.minStock }}</td>
         <td>{{ inv.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.warning]="g.someCloseToMin" [class.danger]="g.someBelowMin">
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.table-warning]="g.someCloseToMin" [class.table-danger]="g.someBelowMin">
           {{ g.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}
         </td>
       </tr>
