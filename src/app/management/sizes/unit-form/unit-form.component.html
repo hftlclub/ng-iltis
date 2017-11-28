@@ -3,32 +3,33 @@
 
     <ng-content></ng-content>
 
-    <div class="form-group form-group-lg">
+    <div class="form-group">
       <label>Langform</label>
-      <span class="small pull-right text-muted">Ausgeschriebene Form, z.B. <em>Kilogramm</em></span>
-      <input type="text" class="form-control" formControlName="full" maxLength="255">
+      <span class="small pull-right text-muted">Ausgeschriebene Form, z.B.
+        <em>Kilogramm</em>
+      </span>
+      <input type="text" class="form-control form-control-lg" formControlName="full" maxLength="255">
     </div>
 
-    <div class="form-group form-group-lg">
+    <div class="form-group">
       <label>Kurzform</label>
-      <span class="small pull-right text-muted">Abgekürzte Form, z.B. <em>kg</em></span>
-      <input type="text" class="form-control" formControlName="short" maxLength="20">
+      <span class="small pull-right text-muted">Abgekürzte Form, z.B.
+        <em>kg</em>
+      </span>
+      <input type="text" class="form-control form-control-lg" formControlName="short" maxLength="20">
     </div>
 
   </div>
-  <div class="modal-footer">
-    <div class="col-sm-6">
-      <button type="button" class="btn btn-primary btn-block btn-lg" (click)="cancel()">
-        <il-icon for="cancel"></il-icon>
-          Abbrechen
-        </button>
-    </div>
-    <div class="col-sm-6">
-      <button type="submit" class="btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">
-        <il-icon [for]="buttonIcon" *ngIf="!loading"></il-icon>
-        <il-icon for="spinner" *ngIf="loading"></il-icon>
-        {{ buttonLabel }}
-      </button>
-    </div>
-  </div>
+
+  <il-modal-button-footer>
+    <button type="button" class="left btn btn-primary btn-block btn-lg" (click)="cancel()">
+      <il-icon for="cancel"></il-icon>
+      Abbrechen
+    </button>
+    <button type="submit" class="right btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">
+      <il-icon [for]="buttonIcon" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      {{ buttonLabel }}
+    </button>
+  </il-modal-button-footer>
 </form>

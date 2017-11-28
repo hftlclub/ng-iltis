@@ -15,8 +15,8 @@
   <!-- ACTIVATION -->
   <ng-template [ngIf]="activation">
     <p>
-      Wenn das Produkt aktiviert wird, ist es wieder für Entnahmen und Zählungen sichtbar.
-      Du solltest das Produkt nur dann aktivieren, wenn es sich tatsächlich im Lager befindet.
+      Wenn das Produkt aktiviert wird, ist es wieder für Entnahmen und Zählungen sichtbar. Du solltest das Produkt nur dann aktivieren,
+      wenn es sich tatsächlich im Lager befindet.
     </p>
     <p>
       <strong>Soll das Produkt "{{ product?.name }}" aktiviert werden?</strong>
@@ -33,20 +33,20 @@
     </ng-template>
 
     <ng-template [ngIf]="!unused && !checkLoading">
-        <p>
-          <strong>Dieses Produkt kann nicht deaktiviert werden.</strong>
-        </p>
-        Das kann folgende Ursachen haben:
-        <ul>
-          <li>Der Lagerbestand ist nicht null, das Produkt ist also noch im Lager vorhanden.</li>
-          <li>Es gibt noch offene Ereignisse, in denen das Produkt gebucht wurde.</li>
-        </ul>
+      <p>
+        <strong>Dieses Produkt kann nicht deaktiviert werden.</strong>
+      </p>
+      Das kann folgende Ursachen haben:
+      <ul>
+        <li>Der Lagerbestand ist nicht null, das Produkt ist also noch im Lager vorhanden.</li>
+        <li>Es gibt noch offene Ereignisse, in denen das Produkt gebucht wurde.</li>
+      </ul>
     </ng-template>
 
     <ng-template [ngIf]="unused">
       <p>
-        Wenn das Produkt deaktiviert wird, ist es nicht mehr für Entnahmen und Zählungen sichtbar.
-        Du kannst das Produkt jederzeit wieder aktivieren.
+        Wenn das Produkt deaktiviert wird, ist es nicht mehr für Entnahmen und Zählungen sichtbar. Du kannst das Produkt jederzeit
+        wieder aktivieren.
       </p>
       <p>
         <strong>Soll das Produkt "{{ product?.name }}" deaktiviert werden?</strong>
@@ -56,15 +56,14 @@
 
 </div>
 
-<div class="modal-footer">
-  <div class="col-sm-6">
-    <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
-      <il-icon for="cancel"></il-icon>
-      <span *ngIf="!activation && !unused && !checkLoading; else cancelLabel">Schließen</span>
-      <ng-template #cancelLabel>Abbrechen</ng-template>
-    </button>
-  </div>
-  <div class="col-sm-6">
+<il-modal-button-footer breakpoint="lg">
+  <button type="button" class="left btn btn-primary btn-block btn-lg" (click)="hideModal()">
+    <il-icon for="cancel"></il-icon>
+    <span *ngIf="!activation && !unused && !checkLoading; else cancelLabel">Schließen</span>
+    <ng-template #cancelLabel>Abbrechen</ng-template>
+  </button>
+
+  <ng-container class="right">
     <button *ngIf="activation" type="button" class="btn btn-success btn-block btn-lg" [disabled]="loading" (click)="setProductActive(true)">
       <il-icon for="activate" *ngIf="!loading"></il-icon>
       <il-icon for="spinner" *ngIf="loading"></il-icon>
@@ -75,5 +74,5 @@
       <il-icon for="spinner" *ngIf="loading"></il-icon>
       Produkt deaktivieren
     </button>
-  </div>
-</div>
+  </ng-container>
+</il-modal-button-footer>

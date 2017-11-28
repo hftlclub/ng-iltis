@@ -90,7 +90,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   }
 
   showDatepickerModal() {
-    const modal = this.modalService.show(DatepickerModalComponent);
+    const modal = this.modalService.show(DatepickerModalComponent, { class: 'modal-lg' });
     modal.content.date = this.form.get('date').value;
     modal.content.updated.subscribe(date => this.form.patchValue({ date: date }));
   }

@@ -8,23 +8,32 @@
   </button>
 </div>
 <form (ngSubmit)="submitForm()">
-  <div class="modal-body">
-    <div stye="width: 150px; margin: auto">
-      <timepicker [(ngModel)]="date" name="date" [showMeridian]="false" [minuteStep]="15"></timepicker>
-    </div>
-    <div class="text-center">
-      <button type="button" class="btn btn-primary" (click)="setTime(-1, -1)">
-        Jetzt
-      </button>
-      <button type="button" class="btn btn-primary" (click)="setTime(18, 30)">
-        18:30
-      </button>
-      <button type="button" class="btn btn-primary" (click)="setTime(19, 0)">
-        19:00
-      </button>
-      <button type="button" class="btn btn-primary" (click)="setTime(21, 0)">
-        21:00
-      </button>
+  <div class="modal-body mx-auto">
+
+    <timepicker [(ngModel)]="date" name="date" [showMeridian]="false" [minuteStep]="15" class="d-block mr-5 ml-5"></timepicker>
+
+    <div class="row mt-2">
+      <div class="col-3">
+        <button type="button" class="btn btn-primary btn-sm" (click)="setTime(-1, -1)">
+          Jetzt
+        </button>
+      </div>
+      <div class="col-3">
+
+        <button type="button" class="btn btn-primary btn-sm" (click)="setTime(18, 30)">
+          18:30
+        </button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-primary btn-sm" (click)="setTime(19, 0)">
+          19:00
+        </button>
+      </div>
+      <div class="col-3">
+        <button type="button" class="btn btn-primary btn-sm" (click)="setTime(21, 0)">
+          21:00
+        </button>
+      </div>
     </div>
   </div>
   <div class="modal-footer">

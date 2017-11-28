@@ -1,10 +1,10 @@
-import { IlValidators } from '../../../core/il-validators';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { CrateType, CrateTypeFactory } from '../../../shared/models/cratetype';
 import { SizeType } from '../../../shared/models/sizetype';
 import { HelperService } from '../../../core/helper.service';
+import { IlValidators } from '../../../core/il-validators';
 
 @Component({
   selector: 'il-crate-type-form',

@@ -3,22 +3,26 @@
 
     <ng-content></ng-content>
 
-    <div class="form-group form-group-lg">
+    <div class="form-group">
       <label>Bezeichnung</label>
-      <span class="small pull-right text-muted">Verbale Bezeichnung, z.B. <em>Flasche, Beutel, …</em></span>
-      <input type="text" class="form-control" formControlName="description" maxLength="255">
+      <span class="small pull-right text-muted">Verbale Bezeichnung, z.B.
+        <em>Flasche, Beutel, …</em>
+      </span>
+      <input type="text" class="form-control form-control-lg" formControlName="description" maxLength="255">
     </div>
 
     <div class="form-group" *ngIf="!edit">
       <label for="unit">Einheit</label>
-      <select class="form-control" id="unit" formControlName="unit" placeholder="Bitte auswählen">
+      <select class="form-control form-control-lg" id="unit" formControlName="unit" placeholder="Bitte auswählen">
         <option *ngFor="let u of units" [value]="u.id">{{ u.full }} ({{ u.short }})</option>
       </select>
     </div>
 
-    <div class="form-group form-group-lg">
+    <div class="form-group">
       <label>Füllmenge</label>
-      <span class="small pull-right text-muted">Numerische Angabe, z.B. <em>0,33</em></span>
+      <span class="small pull-right text-muted">Numerische Angabe, z.B.
+        <em>0,33</em>
+      </span>
 
       <div class="input-group input-group-lg">
         <input type="text" class="form-control" formControlName="amount" ilMathEval maxLength="15">
@@ -27,24 +31,19 @@
           <span *ngIf="!edit">{{ getUnitById(form.get('unit').value)?.full || 'Einheit' }}</span>
         </span>
       </div>
-      <p *ngIf="edit" class="help-block small">Die Füllmenge kann nicht bearbeitet werden. Bitte lege dazu eine neue Gebindegröße an.</p>
-    </div>
-
-
-  </div>
-  <div class="modal-footer">
-    <div class="col-sm-6">
-      <button type="button" class="btn btn-primary btn-block btn-lg" (click)="cancel()">
-        <il-icon for="cancel"></il-icon>
-          Abbrechen
-        </button>
-    </div>
-    <div class="col-sm-6">
-      <button type="submit" class="btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">
-        <il-icon [for]="buttonIcon" *ngIf="!loading"></il-icon>
-        <il-icon for="spinner" *ngIf="loading"></il-icon>
-        {{ buttonLabel }}
-      </button>
+      <small *ngIf="edit" class="form-text">Die Füllmenge kann nicht bearbeitet werden. Bitte lege dazu eine neue Gebindegröße an.</small>
     </div>
   </div>
+
+  <il-modal-button-footer>
+    <button type="button" class="left btn btn-primary btn-block btn-lg" (click)="cancel()">
+      <il-icon for="cancel"></il-icon>
+      Abbrechen
+    </button>
+    <button type="submit" class="right btn btn-success btn-block btn-lg" [disabled]="loading || form.invalid">
+      <il-icon [for]="buttonIcon" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      {{ buttonLabel }}
+    </button>
+  </il-modal-button-footer>
 </form>

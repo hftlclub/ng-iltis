@@ -8,21 +8,19 @@
   </button>
 </div>
 <div class="modal-body">
-  Soll die Kastengröße <strong>{{ crateType?.slots }} &times; {{ crateType?.sizeType.description }} {{ crateType?.sizeType.amount | number }}</strong> wirklich gelöscht werden?
+  Soll die Kastengröße
+  <strong>{{ crateType?.slots }} &times; {{ crateType?.sizeType.description }} {{ crateType?.sizeType.amount | number }} {{ crateType?.sizeType.unit.short }}</strong>
+  wirklich gelöscht werden?
 </div>
 
-<div class="modal-footer">
-  <div class="col-sm-6">
-    <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
-      <il-icon for="cancel"></il-icon>
-      Abbrechen
-    </button>
-  </div>
-  <div class="col-sm-6">
-    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading" (click)="deleteSizeType()">
-      <il-icon for="delete" *ngIf="!loading"></il-icon>
-      <il-icon for="spinner" *ngIf="loading"></il-icon>
-      Größe löschen
-    </button>
-  </div>
-</div>
+<il-modal-button-footer>
+  <button type="button" class="left btn btn-primary btn-block btn-lg" (click)="hideModal()">
+    <il-icon for="cancel"></il-icon>
+    Abbrechen
+  </button>
+  <button type="button" class="right btn btn-danger btn-block btn-lg" [disabled]="loading" (click)="deleteSizeType()">
+    <il-icon for="delete" *ngIf="!loading"></il-icon>
+    <il-icon for="spinner" *ngIf="loading"></il-icon>
+    Größe löschen
+  </button>
+</il-modal-button-footer>
