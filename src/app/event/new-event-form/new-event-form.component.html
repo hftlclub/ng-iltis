@@ -1,9 +1,10 @@
 <div class="container content">
-  <div class="row" *ngIf="!createCountAllowed">
-    <div class="col-md-8">
+  <div class="row justify-content-center mb-4" *ngIf="!createCountAllowed">
+    <div class="col-lg-8">
       <div class="alert alert-warning" role="alert">
-        <strong>Achtung!</strong> Es gibt ein aktives Ereignis, für das eine Lager- oder Kühlschrankzählung durchgeführt werden kann.<br>
-        Du kannst deshalb nur Ereignisse anlegen, für die <strong>keine Zählung</strong> durchgeführt wird.
+        <il-icon for="warning"></il-icon>
+        <strong>Achtung!</strong> Es gibt ein aktives Ereignis, für das eine Lager- oder Kühlschrankzählung durchgeführt werden kann.
+        Du kannst deshalb nur Ereignisse anlegen, für die <strong>keine Zählung</strong> möglich ist.
       </div>
     </div>
   </div>
