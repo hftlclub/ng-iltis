@@ -1,9 +1,14 @@
 <div class="row justify-content-md-center">
   <div class="col-lg-8">
 
-    <h3>
+    <h3 *ngIf="!edit">
       <il-icon [for]="getString('icon')"></il-icon>
       {{ getString('boxHeadline') }}
+    </h3>
+
+    <h3 *ngIf="edit">
+      <il-icon for="edit"></il-icon>
+      Infos bearbeiten
     </h3>
 
 
@@ -17,7 +22,6 @@
         </div>
 
         <div class="alert alert-warning" role="alert" *ngIf="!form.value.eventType.countAllowed">
-          <!--  -->
           <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
           <strong>Achtung!</strong> Für dieses Ereignis ist keine absolute Zählung möglich!
         </div>
