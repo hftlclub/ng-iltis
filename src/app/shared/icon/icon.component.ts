@@ -44,7 +44,8 @@ export class IconComponent {
     dashboard: 'fa-tachometer',
     sizeType: 'fa-glass',
     crateType: 'fa-archive',
-    unit: 'fa-calculator'
+    unit: 'fa-calculator',
+    print: 'fa-print'
   };
 
 }

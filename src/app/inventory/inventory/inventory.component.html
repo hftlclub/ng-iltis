@@ -1,15 +1,23 @@
-<div class="container">
+<div class="container content">
   <div class="row">
-    <div class="col-md-12 content">
+    <div class="col">
       <div class="page-header">
         <h1>
           <il-icon for="stock"></il-icon>
           Lagerbestand
+
+          <button class="btn btn-success btn-sm pull-right d-print-none" onClick="javascript:window.print()">
+            <il-icon for="print"></il-icon>
+            Drucken
+          </button>
         </h1>
       </div>
-      <div class="row">
-        <il-inventory-table [inventory]="inventory$ | async"></il-inventory-table>
-      </div>
+    </div>
+  </div>
+
+  <div class="row mt-4">
+    <div class="col">
+      <il-inventory-table [inventory]="inventory$ | async"></il-inventory-table>
     </div>
   </div>
 </div>
