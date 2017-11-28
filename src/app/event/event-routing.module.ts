@@ -1,3 +1,4 @@
+import { CountLandingComponent } from './count-landing/count-landing.component';
 import { EventInventoryComponent } from './event-inventory/event-inventory.component';
 import { CloseFormContainerComponent } from './close-form-container/close-form-container.component';
 import { InventoryResolver } from './shared/resolvers/inventory.resolver';
@@ -89,6 +90,13 @@ const routes: Routes = [
       {
         path: 'inventory',
         component: EventInventoryComponent
+      },
+      {
+        path: 'count',
+        component: CountLandingComponent,
+        resolve: {
+          event: EventResolver
+        }
       },
       {
         path: 'count/:mode',

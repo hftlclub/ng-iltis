@@ -1,0 +1,31 @@
+<div class="row justify-content-center" *ngIf="!countAllowed || !isActive">
+  <div class="col-12 col-lg-8">
+    <div class="alert alert-warning">
+      <il-icon for="warning"></il-icon>
+      <ng-template [ngIf]="!countAllowed && isActive">Zählungen sind für diesen Eventtyp nicht erlaubt.</ng-template>
+      <ng-template [ngIf]="!isActive">Dieses Ereignis wurde geschlossen. Es kann keine Zählung mehr durchgeführt werden.</ng-template>
+    </div>
+  </div>
+</div>
+
+<div class="row justify-content-center">
+  <div class="col-sm-6 col-lg-4">
+    <a class="btn btn-primary btn-card btn-block" routerLink="./counter" [class.disabled]="!countAllowed || !isActive">
+      <il-icon [for]="event.countedCounter ? 'ok' : 'counter'" classes="fa-3x"></il-icon>
+      Kühlschrank
+      <p class="subtitle" *ngIf="event.countedCounter">
+        Zählung durchgeführt
+      </p>
+    </a>
+  </div>
+
+  <div class="col-sm-6 col-lg-4">
+    <a class="btn btn-warning btn-card btn-block" routerLink="./storage" [class.disabled]="!countAllowed || !isActive">
+      <il-icon [for]="event.countedStorage ? 'ok' : 'storage'" classes="fa-3x"></il-icon>
+      Lager
+      <p class="subtitle" *ngIf="event.countedStorage">
+        Zählung durchgeführt
+      </p>
+    </a>
+  </div>
+</div>

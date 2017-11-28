@@ -61,3 +61,23 @@ td {
   }
 }
 
+
+
+.btn-card {
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  il-icon {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  p.subtitle {
+    font-size: .8rem;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+  }
+}

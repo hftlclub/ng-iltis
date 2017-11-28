@@ -30,6 +30,7 @@ import { DatepickerModalComponent } from './datepicker-modal/datepicker-modal.co
 import { TimepickerModalComponent } from './timepicker-modal/timepicker-modal.component';
 import { NewEventSelectionComponent } from './new-event-selection/new-event-selection.component';
 import { EventInventoryComponent } from './event-inventory/event-inventory.component';
+import { CountLandingComponent } from './count-landing/count-landing.component';
 
 
 const modals = [
@@ -69,7 +70,8 @@ const modals = [
     CloseFormContainerComponent,
     ...modals,
     NewEventSelectionComponent,
-    EventInventoryComponent
+    EventInventoryComponent,
+    CountLandingComponent
   ],
   entryComponents: [...modals],
   providers: []
