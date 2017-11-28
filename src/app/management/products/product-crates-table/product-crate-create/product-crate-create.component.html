@@ -15,7 +15,7 @@
       </select>
     </ng-template>
   </div>
-  <button type="submit" class="btn btn-secondary ml-2" [disabled]="loading || form.invalid">
+  <button type="submit" class="btn btn-outline-success ml-2" [disabled]="loading || form.invalid">
     <il-icon for="plus" *ngIf="!loading"></il-icon>
     <il-icon for="spinner" *ngIf="loading"></il-icon>
     Hinzufügen

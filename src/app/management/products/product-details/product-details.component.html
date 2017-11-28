@@ -77,11 +77,21 @@
       </div>
 
       <div class="row mt-5">
-        <div class="col-12">
-          <h3>Gebindegrößen</h3>
+        <div class="col">
+          <h3>
+            <il-icon for="sizeType"></il-icon>
+            Gebindegrößen
+          </h3>
           <il-product-sizes-table [product]="product"></il-product-sizes-table>
+        </div>
+      </div>
 
-          <h3>Kastengrößen</h3>
+      <div class="row mt-5">
+        <div class="col">
+          <h3>
+            <il-icon for="crateType"></il-icon>
+            Kastengrößen
+          </h3>
           <il-product-crates-table [product]="product"></il-product-crates-table>
         </div>
       </div>
