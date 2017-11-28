@@ -75,7 +75,7 @@ export class EventComponent implements OnInit, OnDestroy {
 
     this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
 
-    this.tabs = this.tabsData().filter(t => t.show);
+    this.tabs = this.tabsData().filter(t => !t.hide);
 
     Observable.fromEvent(window, 'keypress').pipe(
       filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
@@ -101,44 +101,42 @@ export class EventComponent implements OnInit, OnDestroy {
       {
         label: 'Übersicht',
         link: './overview',
-        icon: 'fa-newspaper-o',
-        show: true
+        icon: 'fa-newspaper-o'
       },
       {
         label: 'Neue Buchung',
         link: './products',
         icon: 'fa-plus',
-        show: this.event.active
+        hide: !this.event.active
       },
       {
         label: 'Zählung',
         link: './count',
         icon: 'fa-list-ol',
-        show: this.event.active
+        hide: !this.event.active,
+        disabled: !this.event.eventType.countAllowed
       },
       {
         label: 'Lagerbestand',
         link: './inventory',
         icon: 'stock',
-        show: !this.event.active
+        hide: this.event.active
       },
       {
         label: 'Notizen',
         link: './notes',
         icon: 'fa-file-text-o',
-        show: true
       },
       {
         label: 'Infos bearbeiten',
         link: './edit',
         icon: 'edit',
-        show: true
       },
       {
         label: 'Ereignis schließen',
         link: './close',
         icon: 'fa-calendar-check-o',
-        show: this.event.active
+        hide: !this.event.active
       },
     ];
   }
@@ -150,5 +148,6 @@ interface Tab {
   link: string | string[];
   label: string;
   icon: string;
-  show: boolean;
+  hide?: boolean;
+  disabled?: boolean;
 }

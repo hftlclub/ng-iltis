@@ -31,7 +31,7 @@
 
       <ul class="nav nav-fill nav-tabs mb-4 mt-4">
         <li class="nav-item" *ngFor="let tab of tabs">
-          <a class="nav-link" [routerLink]="tab.link" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="tab.link" routerLinkActive="active" [class.disabled]="tab.disabled">
             <il-icon [for]="tab.icon"></il-icon>
             {{ tab.label }}
           </a>
