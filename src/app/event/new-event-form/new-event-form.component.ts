@@ -73,7 +73,14 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       this.hasChanges = false;
       this.ns.success('Ereignis', 'Das Ereignis wurde angelegt.');
 
-      this.router.navigate(['../../', event.id], { relativeTo: this.route });
+      let redirectUri;
+      switch (this.uiMode) {
+        case 'private':
+          redirectUri = ['../../', event.id, 'products']; break;
+        default:
+          redirectUri = ['../../', event.id]; break;
+      }
+      this.router.navigate(redirectUri, { relativeTo: this.route });
     },
     err => {
       this.loading = false;
