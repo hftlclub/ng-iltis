@@ -35,8 +35,8 @@
         <ng-template [ngIf]="!hideStorageCounterSwitcher">
           <div class="row justify-content-center">
             <div class="col-md-4">
-              <button type="button" class="btn btn-block" [disabled]="loading" [ngClass]="storageTransfer ? 'btn-warning' : 'btn-secondary'"
-                (click)="storageTransfer = true">
+              <button type="button" class="btn btn-block" [disabled]="loading" [ngClass]="(storageTransfer && storageCounterSelectionDone) ? 'btn-warning' : 'btn-secondary'"
+                (click)="setStorageTransfer(true)">
                 <il-icon for="storage"></il-icon>
                 Lager
               </button>
@@ -45,8 +45,8 @@
               <p class="text-center ortext">ODER</p>
             </div>
             <div class="col-md-4">
-              <button type="button" class="btn btn-block" [disabled]="loading || !outgoingTransfer || noCounterRemoval" [ngClass]="storageTransfer ? 'btn-secondary' : 'btn-primary'"
-                (click)="storageTransfer = false">
+              <button type="button" class="btn btn-block" [disabled]="loading || !outgoingTransfer || noCounterRemoval" [ngClass]="(!storageTransfer && storageCounterSelectionDone) ? 'btn-primary' : 'btn-secondary'"
+                (click)="setStorageTransfer(false)">
                 <il-icon for="counter"></il-icon>
                 Kühlschrank
               </button>
@@ -54,7 +54,7 @@
           </div>
         </ng-template>
 
-        <div class="row justify-content-around mt-4">
+        <div class="row justify-content-around mt-4" *ngIf="!isPrivateRemoval || (isPrivateRemoval && storageCounterSelectionDone)">
           <ng-container formArrayName="sizeTypes">
             <div class="col-auto mb-4" *ngFor="let s of product.sizes; index as i">
               <h5 class="text-center">{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ product.unit.short }}</h5>
