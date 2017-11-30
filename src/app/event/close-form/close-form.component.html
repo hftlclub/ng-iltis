@@ -134,7 +134,7 @@
               </div>
               <span class="help-block">
                 Mindestbetrag für Deine Entnahme:
-                <strong *ngIf="costs; else costsLoading">{{ costs | currency:'EUR':true }}</strong>
+                <strong *ngIf="costs; else costsLoading">{{ costs | currency:'EUR' }}</strong>
                 <ng-template #costsLoading>
                   <il-icon for="spinner"></il-icon>
                   Wird geladen…
