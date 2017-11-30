@@ -57,7 +57,7 @@
 
           <div ngPreserveWhitespaces>
             <strong>Kategorie:</strong>
-            <a href="#">{{ product.category.name }}</a>
+            <a routerLink="../../" [queryParams]="{ c: product.category.id }">{{ product.category.name }}</a>
           </div>
 
           <div class="mt-4">
