@@ -54,7 +54,7 @@
           </div>
         </ng-template>
 
-        <div class="row justify-content-around mt-4" *ngIf="!isPrivateRemoval || (isPrivateRemoval && storageCounterSelectionDone)">
+        <div class="row justify-content-around mt-4" *ngIf="!isPrivateRemoval || storageCounterSelectionDone">
           <ng-container formArrayName="sizeTypes">
             <div class="col-auto mb-4" *ngFor="let s of product.sizes; index as i">
               <h5 class="text-center">{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ product.unit.short }}</h5>
