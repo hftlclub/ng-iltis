@@ -10,4 +10,4 @@ if (environment.production) {
 
 platformBrowserDynamic([
   { provide: 'API_URL', useValue: environment.apiUrl },
-]).bootstrapModule(AppModule);
+]).bootstrapModule(AppModule, { preserveWhitespaces: false });

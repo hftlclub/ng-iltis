@@ -51,28 +51,33 @@
             {{ product.description }}
           </p>
           <hr>
-          <strong>Einheit:</strong> {{ product.unit.full }} ({{ product.unit.short }})
-          <br>
-          <strong>Kategorie:</strong>
-          <a href="#">{{ product.category.name }}</a>
-          <br>
-          <br>
-          <a class="btn btn-primary btn-sm" routerLink="../edit">
-            <il-icon for="edit"></il-icon>
-            Bearbeiten
-          </a>
-          <a class="btn btn-danger btn-sm" (click)="showDeleteModal()">
-            <il-icon for="delete"></il-icon>
-            Löschen
-          </a>
-          <a *ngIf="product.active" class="btn btn-warning btn-sm" (click)="showActivationModal(false)">
-            <il-icon for="deactivate"></il-icon>
-            Deaktivieren
-          </a>
-          <a *ngIf="!product.active" class="btn btn-success btn-sm" (click)="showActivationModal(true)">
-            <il-icon for="activate"></il-icon>
-            Aktivieren
-          </a>
+          <div>
+            <strong>Einheit:</strong> {{ product.unit.full }} ({{ product.unit.short }})
+          </div>
+
+          <div ngPreserveWhitespaces>
+            <strong>Kategorie:</strong>
+            <a href="#">{{ product.category.name }}</a>
+          </div>
+
+          <div class="mt-4">
+            <a class="btn btn-primary btn-sm mr-1" routerLink="../edit">
+              <il-icon for="edit"></il-icon>
+              Bearbeiten
+            </a>
+            <a class="btn btn-danger btn-sm mr-1" (click)="showDeleteModal()">
+              <il-icon for="delete"></il-icon>
+              Löschen
+            </a>
+            <a *ngIf="product.active" class="btn btn-warning btn-sm" (click)="showActivationModal(false)">
+              <il-icon for="deactivate"></il-icon>
+              Deaktivieren
+            </a>
+            <a *ngIf="!product.active" class="btn btn-success btn-sm" (click)="showActivationModal(true)">
+              <il-icon for="activate"></il-icon>
+              Aktivieren
+            </a>
+          </div>
         </div>
       </div>
 

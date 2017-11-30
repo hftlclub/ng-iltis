@@ -6,7 +6,7 @@
         Produkte
 
         <span class="pull-right">
-          <button class="btn btn-primary" (click)="pfs.resetFilters()">
+          <button class="btn btn-primary mr-2" (click)="pfs.resetFilters()">
             <il-icon for="fa fa-times"></il-icon>
             Filter zurücksetzen
           </button>
@@ -64,7 +64,7 @@
     </ng-template>
 
     <ng-template #tplActions let-row="row">
-      <a class="btn btn-sm btn-primary" [routerLink]="['..', row.id, 'edit']">
+      <a class="btn btn-sm btn-primary mr-1" [routerLink]="['..', row.id, 'edit']">
         <il-icon for="edit"></il-icon>
         Bearbeiten
       </a>
