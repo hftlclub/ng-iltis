@@ -24,8 +24,8 @@
         <em>0,33</em>
       </span>
 
-      <div class="input-group input-group-lg">
-        <input type="text" class="form-control" formControlName="amount" ilMathEval maxLength="15">
+      <div class="input-group">
+        <input type="text" class="form-control form-control-lg" formControlName="amount" ilMathEval maxLength="15">
         <span class="input-group-addon">
           <span *ngIf="edit">{{ initialValue.unit.full }}</span>
           <span *ngIf="!edit">{{ getUnitById(form.get('unit').value)?.full || 'Einheit' }}</span>
