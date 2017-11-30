@@ -28,7 +28,7 @@
         <input type="text" class="form-control form-control-lg" formControlName="amount" ilMathEval maxLength="15">
         <span class="input-group-addon">
           <span *ngIf="edit">{{ initialValue.unit.full }}</span>
-          <span *ngIf="!edit">{{ getUnitById(form.get('unit').value)?.full || 'Einheit' }}</span>
+          <span *ngIf="!edit">{{ getUnitById(form.get('unit').value)?.full }}</span>
         </span>
       </div>
       <small *ngIf="edit" class="form-text">Die Füllmenge kann nicht bearbeitet werden. Bitte lege dazu eine neue Gebindegröße an.</small>
