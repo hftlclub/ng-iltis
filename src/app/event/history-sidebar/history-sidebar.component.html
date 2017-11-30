@@ -8,7 +8,7 @@
     </small>
   </div>
 
-  <div class="scroll-area">
+  <div class="scroll-area" #scrollArea>
     <div>
       <ng-template [ngIf]="transfers.length">
         <il-history-transfer-item *ngFor="let t of transfers" [transfer]="t"></il-history-transfer-item>
@@ -17,7 +17,7 @@
         <il-history-transaction-item *ngFor="let t of transactions" [transaction]="t"></il-history-transaction-item>
       </ng-template>
 
-      <a class="btn btn-block btn-success mt-2" routerLink="products" *ngIf="event.active && hasItems">
+      <a class="btn btn-block btn-success mt-2 mb-2" id="newTransferBtn" routerLink="products" *ngIf="event.active && hasItems">
         <il-icon for="plus"></il-icon>
         Neue Buchung
       </a>
