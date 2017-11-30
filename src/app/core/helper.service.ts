@@ -9,8 +9,12 @@ export class HelperService {
     return val.replace(/\,/g, '.');
   }
 
-  commaToNumber(val: string): number {
-    return parseFloat(val.replace(/\,/g, '.'));
+  commaToNumber(val: string | number): number {
+    if (typeof val === 'number') {
+      return val;
+    } else {
+      return parseFloat(val.replace(/\,/g, '.'));
+    }
   }
 
   dotToComma(val: number | string): string {
