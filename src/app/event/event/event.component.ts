@@ -106,7 +106,7 @@ export class EventComponent implements OnInit, OnDestroy {
       {
         label: 'Neue Buchung',
         link: './products',
-        icon: 'fa-plus',
+        icon: 'plus',
         hide: !this.event.active
       },
       {
@@ -135,7 +135,7 @@ export class EventComponent implements OnInit, OnDestroy {
       {
         label: 'Ereignis schließen',
         link: './close',
-        icon: 'fa-calendar-check-o',
+        icon: 'evClose',
         hide: !this.event.active
       },
     ];
