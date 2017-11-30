@@ -18,11 +18,11 @@ import { EventService } from './../shared/event.service';
 export class HistorySidebarComponent implements OnInit, OnDestroy {
 
   @Input() visible;
+  @Input() event: Event;
   @Output() overlayClick = new EventEmitter();
 
   transfers: Transfer[] = [];
   transactions: Transaction[] = [];
-  event: Event;
   itemsCountMapping: {[k: string]: string} = {'=0': 'Keine Buchungen', '=1': 'Eine Buchung', 'other': '# Buchungen'};
 
   transfersAddedSub: Subscription;
@@ -41,7 +41,6 @@ export class HistorySidebarComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.event = this.route.snapshot.data['event'];
     this.transfers = this.route.snapshot.data['transfers'];
     this.transactions = this.route.snapshot.data['transactions'];
 

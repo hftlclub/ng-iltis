@@ -42,7 +42,7 @@
       <router-outlet></router-outlet>
     </div>
 
-    <il-history-sidebar [@slideInOut]="sidebarState" [visible]="sidebarVisible" (overlayClick)="toggleSidebar()"></il-history-sidebar>
+    <il-history-sidebar [@slideInOut]="sidebarState" [visible]="sidebarVisible" (overlayClick)="toggleSidebar()" [event]="event"></il-history-sidebar>
 
   </div>
 
