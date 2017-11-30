@@ -125,11 +125,11 @@
             </div>
 
 
-            <div class="form-group form-group-lg" *ngIf="isPrivateRemoval">
+            <div class="form-group" *ngIf="isPrivateRemoval">
               <hr>
               <h4>Wie viel Geld hast Du bezahlt?</h4>
               <div class="input-group input-group-lg">
-                <input type="text" class="form-control" formControlName="cashAfter" ilMathEval maxlength="15">
+                <input type="text" class="form-control form-control-lg" formControlName="cashAfter" ilMathEval maxlength="15">
                 <span class="input-group-addon">EUR</span>
               </div>
               <span class="help-block">

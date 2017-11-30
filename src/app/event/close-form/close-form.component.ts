@@ -1,6 +1,8 @@
+import { HelperService } from '../../core/helper.service';
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 
+import { EventCloseData } from '../shared/event-close-data';
 import { Event } from '../../shared/models/event/event';
 
 @Component({
@@ -13,12 +15,12 @@ export class CloseFormComponent implements OnInit {
   @Input() event: Event;
   @Input() hasTransfers: boolean;
   @Input() costs: number;
-  @Output() submitted = new EventEmitter<any>();
+  @Output() submitted = new EventEmitter<EventCloseData>();
   @Output() cancelled = new EventEmitter<any>();
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, private hs: HelperService) { }
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -58,7 +60,11 @@ export class CloseFormComponent implements OnInit {
   }
 
   submitForm() {
-    this.submitted.emit(this.form.value);
+    const value: EventCloseData = {
+      ...this.form.value,
+      cashAfter: this.hs.commaToNumber(this.form.value.cashAfter)
+    };
+    this.submitted.emit(value);
   }
 
   cancelForm() {

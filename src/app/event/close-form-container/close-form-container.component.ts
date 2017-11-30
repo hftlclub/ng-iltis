@@ -4,6 +4,7 @@ import { NotificationsService } from 'angular2-notifications';
 
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
+import { EventCloseData } from '../shared/event-close-data';
 
 @Component({
   selector: 'il-close-form-container',
@@ -32,7 +33,7 @@ export class CloseFormContainerComponent implements OnInit {
     }
   }
 
-  processClosing(data: any) {
+  processClosing(data: EventCloseData) {
     // if cashAfter has changed, change event before closing it. else, just close it
     if (data.cashAfter !== this.event.cashAfter) {
       const newEvent = Object.assign({}, this.event, { cashAfter: data.cashAfter });
