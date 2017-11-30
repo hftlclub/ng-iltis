@@ -2,12 +2,12 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { switchMap, filter } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
-import { switchMap, filter } from 'rxjs/operators';
-import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: 'il-event',
@@ -64,23 +64,27 @@ export class EventComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.event = this.route.snapshot.data['event'];
+    this.initEvent(this.route.snapshot.data['event']);
 
-    this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => this.event = event);
+    this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => this.initEvent(event));
 
     this.eventClosedSub = this.es.eventClosed.pipe(
       switchMap(eventId => this.es.getEvent(eventId))
     )
-    .subscribe(event => this.event = event);
+    .subscribe(event => this.initEvent(event));
 
     this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
-
-    this.tabs = this.tabsData().filter(t => !t.hide);
 
     Observable.fromEvent(window, 'keypress').pipe(
       filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
     ).subscribe(e => this.toggleSidebar());
   }
+
+  initEvent(event: Event) {
+    this.event = event;
+    this.tabs = this.tabsData().filter(t => !t.hide);
+  }
+
 
   ngOnDestroy() {
     this.eventUpdatedSub.unsubscribe();
