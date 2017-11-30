@@ -86,17 +86,6 @@
     </ng-template>
   </il-event-overview-card>
 
-  <il-event-overview-card title="Ereignis bearbeiten" icon="edit" *ngIf="event.active">
-    <a class="btn btn-primary btn-block" style="margin-bottom: 10px" routerLink="../edit">
-      <il-icon for="edit"></il-icon>
-      Bearbeiten
-    </a>
-    <a class="btn btn-danger btn-block" (click)="showDeleteModal()">
-      <il-icon for="delete"></il-icon>
-      Ereignis löschen
-    </a>
-  </il-event-overview-card>
-
   <il-event-overview-card title="Ereignis abschließen" icon="fa-calendar-check-o" *ngIf="event.active">
     <a class="btn btn-success btn-block btn-lg" style="margin-top: 28px" routerLink="../close">
       <il-icon for="evClose"></il-icon>

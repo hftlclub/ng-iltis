@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
+import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { EventType, EventTypeFactory } from '../../shared/models/eventtype';
 import { Event, EventFactory } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
+import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 
 @Component({
   selector: 'il-edit-event',
@@ -23,7 +25,8 @@ export class EditEventComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private es: EventService,
-    private ns: NotificationsService
+    private ns: NotificationsService,
+    private modalService: BsModalService
   ) { }
 
 
@@ -31,6 +34,11 @@ export class EditEventComponent implements OnInit {
     this.event = this.route.snapshot.data['event'];
     this.eventTypes = this.route.snapshot.data['eventTypes']
       .filter(e => e.uiMode === this.event.eventType.uiMode);
+  }
+
+  showDeleteModal() {
+    const modal = this.modalService.show(DeleteModalComponent);
+    modal.content.event = this.event;
   }
 
 

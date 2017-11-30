@@ -7,8 +7,6 @@ import { EventService } from '../shared/event.service';
 import { Event } from '../../shared/models/event';
 import { Calculation } from '../../shared/models/calculation';
 import { CashModalComponent } from '../cash-modal/cash-modal.component';
-import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
-
 
 @Component({
   selector: 'il-event-overview',
@@ -38,11 +36,6 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
 
   showCashModal() {
     const modal = this.modalService.show(CashModalComponent);
-    modal.content.event = this.event;
-  }
-
-  showDeleteModal() {
-    const modal = this.modalService.show(DeleteModalComponent);
     modal.content.event = this.event;
   }
 
