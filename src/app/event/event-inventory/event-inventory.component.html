@@ -1,5 +1,9 @@
 <div class="row">
-  <div class="col-md-12">
-    <il-inventory-table [inventory]="inventory$ | async"></il-inventory-table>
+  <div class="col" *ngIf="data$ | async as data">
+    <il-inventory-table
+      [inventory]="data.inventory"
+      [transactions]="data.transactions"
+      [withTransactions]="true"
+      [showDate]="false"></il-inventory-table>
   </div>
 </div>

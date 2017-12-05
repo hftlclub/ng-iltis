@@ -6,6 +6,7 @@
       <th>Lager</th>
       <th>Bar</th>
       <th>Gesamt</th>
+      <th *ngIf="withTransactions">gebucht</th>
       <th>Mindestbestand</th>
       <th>Volumen</th>
       <th>Volumen gesamt</th>
@@ -29,6 +30,10 @@
           <il-icon for="fa fa-exclamation-circle" *ngIf="inv.isCloseToMin" title="Mindestbestand bald unterschritten"></il-icon>
           <il-icon for="fa fa-exclamation-triangle" *ngIf="inv.isBelowMin" title="Mindestbestand unterschritten"></il-icon>
         </td>
+        <td *ngIf="withTransactions">
+          <span class="badge" [ngClass]="inv.changeTotal < 0 ? 'badge-danger' : 'badge-success'" *ngIf="inv.changeTotal">
+            {{ inv.changeTotal < 0 ? '–' : '+' }} {{ inv.changeTotal | abs }} </span>
+        </td>
         <td>{{ inv.minStock }}</td>
         <td>{{ inv.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
         <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.table-warning]="g.someCloseToMin" [class.table-danger]="g.someBelowMin">
@@ -39,6 +44,6 @@
   </tbody>
 </table>
 
-<div>
-  <strong>Stand:</strong> {{ d | date:'medium' }} Uhr
+<div *ngIf="showDate">
+  <strong>Stand:</strong> {{ date | date:'medium' }} Uhr
 </div>
