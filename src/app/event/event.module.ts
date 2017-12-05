@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../shared/shared.module';
 import { EventRoutingModule } from './event-routing.module';
-import { AbsPipe } from './shared/abs.pipe';
 import { CounterControlComponent } from './counter-control/counter-control.component';
 import { EventComponent } from './event/event.component';
 import { HistorySidebarComponent } from './history-sidebar/history-sidebar.component';
@@ -54,7 +53,6 @@ const modals = [
     ProductGroupComponent,
     ProductJumpBarComponent,
     NewEventFormComponent,
-    AbsPipe,
     CounterControlComponent,
     EventOverviewComponent,
     EventListComponent,

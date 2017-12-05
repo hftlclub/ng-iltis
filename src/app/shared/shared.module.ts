@@ -17,6 +17,7 @@ import { TimeSecondsPipe } from './time-seconds.pipe';
 import { TrustChallengeComponent } from './trust-challenge/trust-challenge.component';
 import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 import { ModalButtonFooterComponent } from './modal-button-footer/modal-button-footer.component';
+import { AbsPipe } from "./abs.pipe";
 
 @NgModule({
   imports: [
@@ -31,7 +32,8 @@ import { ModalButtonFooterComponent } from './modal-button-footer/modal-button-f
     TimeSecondsPipe,
     TrustChallengeComponent,
     InventoryTableComponent,
-    ModalButtonFooterComponent
+    ModalButtonFooterComponent,
+    AbsPipe
   ],
   exports: [
     CommonModule,
@@ -50,7 +52,8 @@ import { ModalButtonFooterComponent } from './modal-button-footer/modal-button-f
     TimeSecondsPipe,
     TrustChallengeComponent,
     InventoryTableComponent,
-    ModalButtonFooterComponent
+    ModalButtonFooterComponent,
+    AbsPipe
   ]
 })
 export class SharedModule { }
