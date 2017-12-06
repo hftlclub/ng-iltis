@@ -1,6 +1,7 @@
+import { BarcodeScannerService } from '../../core/barcode-scanner.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
 import { Observable } from 'rxjs/Observable';
 import { switchMap, filter } from 'rxjs/operators';
@@ -60,7 +61,9 @@ export class EventComponent implements OnInit, OnDestroy {
   constructor(
     private route: ActivatedRoute,
     private es: EventService,
-    private gs: GlobalService
+    private gs: GlobalService,
+    private bss: BarcodeScannerService,
+    private router: Router
   ) { }
 
   ngOnInit() {
@@ -78,6 +81,8 @@ export class EventComponent implements OnInit, OnDestroy {
     Observable.fromEvent(window, 'keypress').pipe(
       filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
     ).subscribe(e => this.toggleSidebar());
+
+    this.bss.scannedProducts$.subscribe(p => this.router.navigate(['newtransfer', p], { relativeTo: this.route }));
   }
 
   initEvent(event: Event) {

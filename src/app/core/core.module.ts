@@ -17,6 +17,7 @@ import { HelperService } from './helper.service';
 import { UploadService } from './upload.service';
 import { ProductsResolver } from './resolvers/products.resolver';
 import { ProductResolver } from './resolvers/product.resolver';
+import { BarcodeScannerService } from './barcode-scanner.service';
 
 @NgModule({
   imports: [
@@ -41,7 +42,8 @@ import { ProductResolver } from './resolvers/product.resolver';
     HelperService,
     UploadService,
     ProductResolver,
-    ProductsResolver
+    ProductsResolver,
+    BarcodeScannerService
   ]
 })
 export class CoreModule {

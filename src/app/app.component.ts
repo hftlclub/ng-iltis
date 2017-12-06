@@ -1,3 +1,4 @@
+import { BarcodeScannerService } from './core/barcode-scanner.service';
 import { HealthCheckService } from './core/health-check.service';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
@@ -21,7 +22,7 @@ export class AppComponent implements OnInit {
     lastOnBottom: true
   };
 
-  constructor(private gs: GlobalService, private hcs: HealthCheckService) { }
+  constructor(private gs: GlobalService, private hcs: HealthCheckService, private bss: BarcodeScannerService) { }
 
   ngOnInit() {
     this.hcs.startHealthCheck();
