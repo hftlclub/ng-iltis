@@ -1,3 +1,4 @@
+import { AuthModule } from '../auth/auth.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -27,7 +28,8 @@ import { ProductResolver } from './resolvers/product.resolver';
     ModalModule.forRoot(),
     DatepickerModule.forRoot(),
     BsDropdownModule.forRoot(),
-    TimepickerModule.forRoot()
+    TimepickerModule.forRoot(),
+    AuthModule
   ],
   exports: [
     SimpleNotificationsModule,
