@@ -1,15 +1,15 @@
-<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-  <div class="panel panel-default overview-card">
-    <div class="panel-heading">
-      <h3 class="panel-title">
+<div class="col">
+  <div class="card">
+    <div class="card-header">
+      <h6 class="card-title">
         <il-icon [for]="icon" *ngIf="icon"></il-icon>
         {{ title }}
         <span class="pull-right">
           <ng-content select=".title-right"></ng-content>
         </span>
-      </h3>
+      </h6>
     </div>
-    <div class="panel-body">
+    <div class="card-body">
       <ng-content></ng-content>
     </div>
   </div>

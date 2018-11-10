@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped table-sm">
   <thead>
     <tr>
       <th>#</th>
@@ -16,11 +16,11 @@
       <td>{{ ct.sizeType.description }} {{ ct.sizeType.amount | number }} {{ ct.sizeType.unit.short }}</td>
       <td>
         <span class="pull-right">
-          <button class="btn btn-warning btn-xs" (click)="showEditModal(ct)">
+          <button class="btn btn-warning btn-sm mr-1" (click)="showEditModal(ct)">
             <il-icon for="edit"></il-icon>
             Bearbeiten
           </button>
-          <button class="btn btn-danger btn-xs" (click)="showDeleteModal(ct)">
+          <button class="btn btn-danger btn-sm" (click)="showDeleteModal(ct)">
             <il-icon for="delete"></il-icon>
             Löschen
           </button>

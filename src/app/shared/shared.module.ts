@@ -16,6 +16,8 @@ import { CheckboxControlComponent } from './checkbox-control/checkbox-control.co
 import { TimeSecondsPipe } from './time-seconds.pipe';
 import { TrustChallengeComponent } from './trust-challenge/trust-challenge.component';
 import { InventoryTableComponent } from './inventory-table/inventory-table.component';
+import { ModalButtonFooterComponent } from './modal-button-footer/modal-button-footer.component';
+import { AbsPipe } from "./abs.pipe";
 
 @NgModule({
   imports: [
@@ -29,7 +31,9 @@ import { InventoryTableComponent } from './inventory-table/inventory-table.compo
     CheckboxControlComponent,
     TimeSecondsPipe,
     TrustChallengeComponent,
-    InventoryTableComponent
+    InventoryTableComponent,
+    ModalButtonFooterComponent,
+    AbsPipe
   ],
   exports: [
     CommonModule,
@@ -47,7 +51,9 @@ import { InventoryTableComponent } from './inventory-table/inventory-table.compo
     CheckboxControlComponent,
     TimeSecondsPipe,
     TrustChallengeComponent,
-    InventoryTableComponent
+    InventoryTableComponent,
+    ModalButtonFooterComponent,
+    AbsPipe
   ]
 })
 export class SharedModule { }

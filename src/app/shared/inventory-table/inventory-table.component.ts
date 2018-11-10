@@ -1,3 +1,4 @@
+import { Transaction } from '../models/transaction';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
 import _ from 'lodash';
 
@@ -14,20 +15,32 @@ import { Inventory } from '../models/inventory';
 export class InventoryTableComponent implements OnInit, OnChanges {
 
   @Input() inventory: Inventory[];
+  @Input() transactions: Transaction[];
+  @Input() withTransactions: boolean;
+  @Input() date = new Date();
+  @Input() showDate = true;
   productGroups: ProductGroup[];
-  d = new Date();
 
   ngOnInit() { }
 
   ngOnChanges(c: SimpleChanges) {
-    if (c.inventory && c.inventory.currentValue) {
+    if (this.withTransactions && (c.inventory || c.transactions)) {
+      this.productGroups = this.transformToTableData(this.inventory, this.transactions);
+
+    } else if (!this.withTransactions && this.inventory && c.inventory) {
       this.productGroups = this.transformToTableData(this.inventory);
     }
   }
 
-  private transformToTableData(inventory: Inventory[]): ProductGroup[] {
+  private transformToTableData(inventory: Inventory[], transactions: Transaction[] = []): ProductGroup[] {
+    const findTransactionChange = (pid: number, stid: number) => {
+      const tr = transactions.find(t => t.product.id === pid && t.sizeType.id === stid);
+      return tr ? tr.changeTotal : 0;
+    };
+
     const buildInventory = inv => ({
       sizeType: inv.sizeType,
+      product: inv.product,
       minStock: inv.minStock,
       storage: inv.storage,
       counter: inv.counter,
@@ -38,7 +51,8 @@ export class InventoryTableComponent implements OnInit, OnChanges {
       ...inv,
       totalVolume: inv.total * inv.sizeType.amount,
       isBelowMin: inv.total <= inv.minStock,
-      isCloseToMin: inv.minStock && inv.total < (inv.minStock + 20) && inv.total > inv.minStock
+      isCloseToMin: inv.minStock && inv.total < (inv.minStock + 20) && inv.total > inv.minStock,
+      changeTotal: transactions.length ? findTransactionChange(inv.product.id, inv.sizeType.id) : null
     });
 
     const buildGroup = g => ({
@@ -77,4 +91,5 @@ interface ProductGroupInv {
   minStock: number;
   isBelowMin: boolean;
   isCloseToMin: boolean;
+  changeTotal?: number;
 }

@@ -17,9 +17,7 @@
     </p>
   </il-event-overview-card>
 
-
-
-  <il-event-overview-card title="Kasse" icon="cash" *ngIf="!isPurchase">
+  <il-event-overview-card title="Kasse" icon="cash" *ngIf="!isPurchase && !isStocktake">
     <span class="title-right">
       <a title="Bearbeiten" (click)="showCashModal()">
         <il-icon for="edit"></il-icon>
@@ -40,7 +38,7 @@
       {{ event.tip | currency:'EUR' }}
     </p>
 
-    <a class="btn btn-default btn-block btn-sm"
+    <a class="btn btn-secondary btn-block btn-sm"
       style="margin-top: 13px"
       *ngIf="cashEmpty"
       (click)="showCashModal()">
@@ -50,7 +48,7 @@
 
 
 
-  <il-event-overview-card title="Finanzen" icon="fa-bar-chart" *ngIf="!event.active">
+  <il-event-overview-card title="Finanzen" icon="fa-bar-chart" *ngIf="!event.active && !isStocktake">
     <span class="title-right" *ngIf="calcLoading">
       <il-icon for="spinner"></il-icon>
     </span>
@@ -86,17 +84,6 @@
     <ng-template #noCountAllowedTpl>
       Für auswärtige Events darf keine Zählung durchgeführt werden.
     </ng-template>
-  </il-event-overview-card>
-
-  <il-event-overview-card title="Ereignis bearbeiten" icon="edit" *ngIf="event.active">
-    <a class="btn btn-primary btn-block" style="margin-bottom: 10px" routerLink="../edit">
-      <il-icon for="edit"></il-icon>
-      Bearbeiten
-    </a>
-    <a class="btn btn-danger btn-block" (click)="showDeleteModal()">
-      <il-icon for="delete"></il-icon>
-      Ereignis löschen
-    </a>
   </il-event-overview-card>
 
   <il-event-overview-card title="Ereignis abschließen" icon="fa-calendar-check-o" *ngIf="event.active">

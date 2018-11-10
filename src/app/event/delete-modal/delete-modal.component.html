@@ -11,12 +11,12 @@
 <form [formGroup]="form" (ngSubmit)="deleteEvent()">
   <div class="modal-body">
     <div>
-      <strong>Das Ereignis wird <span class="text-danger">unwiderruflich</span> gelöscht.
-      Alle Buchungen gehen verloren.</strong>
+      <strong>Das Ereignis wird
+        <span class="text-danger">unwiderruflich</span> gelöscht. Alle Buchungen gehen verloren.</strong>
     </div>
 
     <div class="alert alert-warning" style="margin-top: 20px">
-      <il-icon for="fa-exclamation-triangle"></il-icon>
+      <il-icon for="warning"></il-icon>
       Lösche das Ereignis nur, wenn Du genau weißt, was Du tust!
     </div>
 
@@ -26,19 +26,16 @@
 
     <il-trust-challenge #chlg="chlg"></il-trust-challenge>
   </div>
-  <div class="modal-footer">
-    <div class="col-sm-6">
-      <button type="button" class="btn btn-danger btn-block btn-lg" (click)="hideModal()">
-        <il-icon for="cancel"></il-icon>
-        Abbrechen
-      </button>
-    </div>
-    <div class="col-sm-6">
-      <button type="submit" class="btn btn-warning btn-block btn-lg" [disabled]="loading || form.invalid || chlg.invalid">
-        <il-icon for="delete" *ngIf="!loading"></il-icon>
-        <il-icon for="spinner" *ngIf="loading"></il-icon>
-        Ereignis löschen
-      </button>
-    </div>
-  </div>
+
+  <il-modal-button-footer>
+    <button type="button" class="left btn btn-danger btn-block btn-lg" (click)="hideModal()">
+      <il-icon for="cancel"></il-icon>
+      Abbrechen
+    </button>
+    <button type="submit" class="right btn btn-warning btn-block btn-lg" [disabled]="loading || form.invalid || chlg.invalid">
+      <il-icon for="delete" *ngIf="!loading"></il-icon>
+      <il-icon for="spinner" *ngIf="loading"></il-icon>
+      Ereignis löschen
+    </button>
+  </il-modal-button-footer>
 </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { SizeType, SizeTypeFactory } from '../../../shared/models/sizetype';
@@ -11,7 +11,7 @@ import { IlValidators } from '../../../core/il-validators';
   templateUrl: './size-type-form.component.html',
   styleUrls: ['./size-type-form.component.css']
 })
-export class SizeTypeFormComponent implements OnInit {
+export class SizeTypeFormComponent implements OnInit, OnChanges {
 
   @Input() edit = false;
   @Input() initialValue = SizeTypeFactory.empty();
@@ -37,6 +37,14 @@ export class SizeTypeFormComponent implements OnInit {
     if (this.edit) {
       this.form.get('unit').disable();
       this.form.get('amount').disable();
+    }
+  }
+
+  ngOnChanges(c: SimpleChanges) {
+    if (c.units && c.units.currentValue) {
+      if (!this.edit) {
+        this.form.get('unit').setValue(this.units[0].id);
+      }
     }
   }
 

@@ -1,8 +1,12 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
+import { map } from 'rxjs/operators';
+import 'rxjs/add/observable/forkJoin';
 
 import { EventService } from '../shared/event.service';
+import { Event } from '../../shared/models/event';
+import { Transaction } from '../../shared/models/transaction';
 import { Inventory } from '../../shared/models/inventory';
 
 @Component({
@@ -12,13 +16,24 @@ import { Inventory } from '../../shared/models/inventory';
 })
 export class EventInventoryComponent implements OnInit {
 
-  inventory$: Observable<Inventory[]>;
+  event: Event;
+  data$: Observable<InventoryAndTransactions>;
 
   constructor(private es: EventService, private route: ActivatedRoute) { }
 
   ngOnInit() {
-    const eventId = this.route.parent.snapshot.params.eventId;
-    this.inventory$ = this.es.getInventory(eventId);
-  }
+    this.event = this.route.parent.snapshot.data.event;
 
+    this.data$ = Observable.forkJoin(
+      this.es.getInventory(this.event.id),
+      this.es.getTransactionsByEvent(this.event.id)
+    ).pipe(
+      map(arr => ({ inventory: arr[0], transactions: arr[1] }))
+    );
+  }
+}
+
+interface InventoryAndTransactions {
+  inventory: Inventory[];
+  transactions: Transaction[];
 }

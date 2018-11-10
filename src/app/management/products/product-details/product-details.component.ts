@@ -44,7 +44,7 @@ export class ProductDetailsComponent implements OnInit, OnDestroy {
   }
 
   showActivationModal(activation: boolean = true) {
-    const modal = this.modalService.show(ProductActivationModalComponent);
+    const modal = this.modalService.show(ProductActivationModalComponent, { class: 'modal-lg' });
     modal.content.product = this.product;
     modal.content.activation = activation;
   }

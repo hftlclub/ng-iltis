@@ -22,6 +22,7 @@ export class TransferFormComponent implements OnInit {
 
   form: FormGroup;
   storageTransfer = true;
+  storageCounterSelectionDone = false; // true when user has selected storage/counter for private removals
   grid: any;
 
   constructor() { }
@@ -45,6 +46,15 @@ export class TransferFormComponent implements OnInit {
 
   cancelForm() {
     this.cancelled.emit();
+  }
+
+  setStorageTransfer(value: boolean) {
+    this.storageTransfer = value;
+    this.storageCounterSelectionDone = true;
+  }
+
+  get isPrivateRemoval() {
+    return this.uiMode === 'private';
   }
 
 

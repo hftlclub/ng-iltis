@@ -61,7 +61,7 @@ export class EventFormComponent implements OnInit, OnChanges {
 
     } else {
       initial = {
-        eventType: this.eventTypes[0],
+        eventType: this.eventTypes[0] || '',
         description: '',
         date: new Date(),
         time: this.newDateHHMM15()
@@ -90,7 +90,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   }
 
   showDatepickerModal() {
-    const modal = this.modalService.show(DatepickerModalComponent);
+    const modal = this.modalService.show(DatepickerModalComponent, { class: 'modal-lg' });
     modal.content.date = this.form.get('date').value;
     modal.content.updated.subscribe(date => this.form.patchValue({ date: date }));
   }
@@ -113,32 +113,47 @@ export class EventFormComponent implements OnInit, OnChanges {
     return this.uiMode === 'event';
   }
 
+  get isStocktakeMode(): boolean {
+    return this.uiMode === 'stocktake';
+  }
+
   getString(name: string): string {
     const strings = {
       boxHeadline: {
-        event: 'Infos zur Veranstaltung',
-        purchase: 'Infos zum Einkauf',
-        private: 'Infos zur Spontanentnahme'
+        event: 'Veranstaltung anlegen',
+        purchase: 'Einkauf erfassen',
+        private: 'Spontanentnahme erfassen',
+        stocktake: 'Inventur durchführen'
       },
       buttonLabel: {
         event: 'Veranstaltung anlegen',
         purchase: 'Einkauf anlegen',
-        private: 'Spontanentnahme starten'
+        private: 'Spontanentnahme starten',
+        stocktake: 'Inventur starten'
       },
       descriptionPlaceholder: {
         event: 'Veranstaltungsinfo, Gastgeber, ...',
         purchase: 'Zusätzliche Infos zum Einkauf',
-        private: 'Zweck, ...'
+        private: 'Zweck, ...',
+        stocktake: 'Zusätzliche Infos zur Inventur'
       },
       headline: {
         event: 'Neue Veranstaltung',
         purchase: 'Neuer Einkauf',
-        private: 'Neue Spontanentnahme'
+        private: 'Neue Spontanentnahme',
+        stocktake: 'Neue Inventur'
       },
       eventType: {
         event: 'Veranstaltungstyp',
         purchase: 'Ereignistyp',
-        private: 'Ereignistyp'
+        private: 'Ereignistyp',
+        stocktake: 'Ereignistyp'
+      },
+      icon: {
+        event: 'evEvent',
+        purchase: 'evPurchase',
+        private: 'evPrivate',
+        stocktake: 'evStocktake'
       }
     };
 

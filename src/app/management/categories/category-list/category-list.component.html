@@ -30,18 +30,18 @@
             <td>{{ c.description }}</td>
             <td>
               {{ c.productCount }}
-              <a *ngIf="c.productCount > 0" class="btn btn-default btn-xs show-btn" routerLink="../../products" [queryParams]="{ c: c.id }">
+              <a *ngIf="c.productCount > 0" class="btn btn-secondary btn-sm show-btn" routerLink="../../products" [queryParams]="{ c: c.id }">
                 Anzeigen
                 <il-icon for="fa-arrow-right"></il-icon>
               </a>
             </td>
             <td>
               <span class="pull-right">
-                <button class="btn btn-warning btn-xs" (click)="showEditModal(c)">
+                <button class="btn btn-warning btn-sm mr-1" (click)="showEditModal(c)">
                   <il-icon for="edit"></il-icon>
                   Bearbeiten
                 </button>
-                <button class="btn btn-danger btn-xs" (click)="showDeleteModal(c)" [disabled]="c.productCount > 0">
+                <button class="btn btn-danger btn-sm" (click)="showDeleteModal(c)" [disabled]="c.productCount > 0">
                   <il-icon for="delete"></il-icon>
                   Löschen
                 </button>

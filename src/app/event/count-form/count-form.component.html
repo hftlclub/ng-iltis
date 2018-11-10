@@ -1,5 +1,5 @@
-<div class="pull-right" style="margin-bottom: 30px">
-  <button type="button" class="btn btn-danger btn-lg" (click)="cancelForm()">
+<div class="pull-right mb-4">
+  <button type="button" class="btn btn-danger btn-lg mr-2" (click)="cancelForm()">
     <il-icon for="cancel"></il-icon>
     Abbrechen
   </button>
@@ -30,7 +30,7 @@
         <tr
           *ngFor="let p of c.products; index as pi"
           [formGroupName]="pi"
-          [class.success]="form.value.categories[ci][pi].active">
+          [class.table-success]="form.value.categories[ci][pi].active">
           <td (click)="setFormGroupActive(ci, pi, !form.value.categories[ci][pi].active)">
             <input type="checkbox" formControlName="active">
           </td>

@@ -1,11 +1,12 @@
 <table class="table table-bordered" *ngIf="productGroups">
   <thead>
-    <tr class="category-header">
+    <tr>
       <th>Produkt</th>
       <th>Gebinde</th>
       <th>Lager</th>
       <th>Bar</th>
       <th>Gesamt</th>
+      <th *ngIf="withTransactions">gebucht</th>
       <th>Mindestbestand</th>
       <th>Volumen</th>
       <th>Volumen gesamt</th>
@@ -15,9 +16,9 @@
   <tbody>
     <ng-container *ngFor="let g of productGroups">
       <tr *ngFor="let inv of g.inventory; first as firstOfGroup"
-        [class.warning]="inv.isCloseToMin"
-        [class.danger]="inv.isBelowMin">
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.warning]="g.someCloseToMin" [class.danger]="g.someBelowMin">
+        [class.table-warning]="inv.isCloseToMin"
+        [class.table-danger]="inv.isBelowMin">
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.table-warning]="g.someCloseToMin" [class.table-danger]="g.someBelowMin">
           <img [src]="g.product.imgFilename" width="30" height="30" alt="" class="hidden-print">
           <strong>{{ g.product.name }}</strong>
         </td>
@@ -29,9 +30,13 @@
           <il-icon for="fa fa-exclamation-circle" *ngIf="inv.isCloseToMin" title="Mindestbestand bald unterschritten"></il-icon>
           <il-icon for="fa fa-exclamation-triangle" *ngIf="inv.isBelowMin" title="Mindestbestand unterschritten"></il-icon>
         </td>
+        <td *ngIf="withTransactions">
+          <span class="badge" [ngClass]="inv.changeTotal < 0 ? 'badge-danger' : 'badge-success'" *ngIf="inv.changeTotal">
+            {{ inv.changeTotal < 0 ? '–' : '+' }} {{ inv.changeTotal | abs }} </span>
+        </td>
         <td>{{ inv.minStock }}</td>
         <td>{{ inv.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.warning]="g.someCloseToMin" [class.danger]="g.someBelowMin">
+        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.table-warning]="g.someCloseToMin" [class.table-danger]="g.someBelowMin">
           {{ g.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}
         </td>
       </tr>
@@ -39,6 +44,6 @@
   </tbody>
 </table>
 
-<div class="visible-print">
-  <strong>Stand:</strong> {{ d | date:'medium' }} Uhr
+<div *ngIf="showDate">
+  <strong>Stand:</strong> {{ date | date:'medium' }} Uhr
 </div>

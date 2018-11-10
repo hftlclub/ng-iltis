@@ -1,92 +1,108 @@
-<div class="row">
-  <div class="col-md-8 col-md-offset-2">
-    <div class="panel panel-primary">
-      <div class="panel-heading">
-        <h3 class="panel-title">
-          {{ getString('boxHeadline') }}
-        </h3>
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="container-fluid">
+
+      <div class="row">
+        <div class="col">
+          <h3 *ngIf="!edit">
+            <il-icon [for]="getString('icon')"></il-icon>
+            {{ getString('boxHeadline') }}
+          </h3>
+
+          <h3 *ngIf="edit">
+            <il-icon for="edit"></il-icon>
+            Infos bearbeiten
+          </h3>
+        </div>
       </div>
-      <div class="panel-body">
-        <form [formGroup]="form" (ngSubmit)="submitForm()">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-md-12">
 
-                <div class="form-group">
-                  <label for="eventType">{{ getString('eventType') }}</label>
-                  <select class="form-control" id="eventType" formControlName="eventType" placeholder="Bitte auswählen" [compareWith]="compareEventTypes">
-                    <option *ngFor="let et of eventTypes" [ngValue]="et">{{ et.description }}</option>
-                  </select>
-                </div>
+      <form [formGroup]="form" (ngSubmit)="submitForm()">
+        <div class="row">
+          <div class="col">
+            <ng-container *ngIf="eventTypes.length; else noEventTypes">
+              <div class="form-group">
+                <label for="eventType">{{ getString('eventType') }}</label>
+                <select class="form-control" id="eventType" formControlName="eventType" placeholder="Bitte auswählen" [compareWith]="compareEventTypes">
+                  <option *ngFor="let et of eventTypes" [ngValue]="et">{{ et.description }}</option>
+                </select>
+              </div>
 
-                <div class="alert alert-warning" role="alert" *ngIf="!form.value.eventType.countAllowed">
-                  <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
-                  <strong>Achtung!</strong> Für dieses Ereignis ist keine absolute Zählung möglich!
-                </div>
+              <div class="alert alert-warning" role="alert" *ngIf="!form.value.eventType.countAllowed">
+                <i class="fa fa-exclamation-triangle" aria-hidden="true"></i>
+                <strong>Achtung!</strong> Für dieses Ereignis ist keine absolute Zählung möglich!
+              </div>
+            </ng-container>
 
-                <!-- FORM Date picker -->
-                <div class="form-group">
-                  <label for="description">Beschreibung</label>
-                  <input type="text" formControlName="description" class="form-control" id="description" [placeholder]="getString('descriptionPlaceholder')">
-                </div>
-                <div class="form-group" *ngIf="isEventMode">
-                  <label for="date">Datum</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" [value]="form.value.date | date:'fullDate'" (focus)="showDatepickerModal()">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" (click)="showDatepickerModal()">
-                        <il-icon for="calendar"></il-icon>
-                      </button>
-                    </span>
+            <ng-template #noEventTypes>
+              <div class="alert alert-warning mt-4" role="alert">
+                <il-icon for="warning"></il-icon>
+                Es wurden keine Ereignistypen gefunden.
+              </div>
+              <input formControlName="eventType" hidden>
+            </ng-template>
 
-                  </div>
-                </div>
+            <div class="form-group">
+              <label for="description">Beschreibung</label>
+              <input type="text" formControlName="description" class="form-control" id="description" [placeholder]="getString('descriptionPlaceholder')">
+            </div>
 
-
-                <!-- FORM Time picker -->
-                <div class="form-group" *ngIf="isEventMode">
-                  <label for="time">Uhrzeit</label>
-                  <div class="input-group">
-                    <input type="text" class="form-control" [value]="form.value.time | date:'HH:mm a'" (focus)="showTimepickerModal()">
-                    <span class="input-group-btn">
-                      <button class="btn btn-default" type="button" (click)="showTimepickerModal()">
-                        <il-icon for="clock"></il-icon>
-                      </button>
-                    </span>
-
-                  </div>
-                </div>
-
-
-                <div class="form-group" *ngIf="!edit">
-                  <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
-                    <il-icon for="ok" *ngIf="!loading"></il-icon>
-                    <il-icon for="spinner" *ngIf="loading"></il-icon>
-                    {{ getString('buttonLabel') }}
+            <!-- FORM Date picker -->
+            <div class="form-group" *ngIf="isEventMode || edit">
+              <label for="date">Datum</label>
+              <div class="input-group">
+                <input type="text" class="form-control" [value]="form.value.date | date:'fullDate'" (focus)="showDatepickerModal()">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button" (click)="showDatepickerModal()">
+                    <il-icon for="calendar"></il-icon>
                   </button>
-                </div>
-
-                <div class="form-group" *ngIf="edit">
-                  <div class="col-md-6">
-                    <button type="button" class="btn btn-danger btn-lg btn-block" (click)="cancelForm()">
-                      <il-icon for="cancel"></il-icon>
-                      Abbrechen
-                    </button>
-                  </div>
-                  <div class="col-md-6">
-                    <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
-                      <il-icon for="ok" *ngIf="!loading"></il-icon>
-                      <il-icon for="spinner" *ngIf="loading"></il-icon>
-                      Speichern
-                    </button>
-                  </div>
-                </div>
+                </span>
 
               </div>
             </div>
+
+            <!-- FORM Time picker -->
+            <div class="form-group" *ngIf="isEventMode || edit">
+              <label for="time">Uhrzeit</label>
+              <div class="input-group">
+                <input type="text" class="form-control" [value]="form.value.time | date:'HH:mm a'" (focus)="showTimepickerModal()">
+                <span class="input-group-btn">
+                  <button class="btn btn-secondary" type="button" (click)="showTimepickerModal()">
+                    <il-icon for="clock"></il-icon>
+                  </button>
+                </span>
+
+              </div>
+            </div>
+
           </div>
-        </form>
-      </div>
+        </div>
+
+        <div class="row" *ngIf="!edit">
+          <div class="col">
+            <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
+              <il-icon for="ok" *ngIf="!loading"></il-icon>
+              <il-icon for="spinner" *ngIf="loading"></il-icon>
+              {{ getString('buttonLabel') }}
+            </button>
+          </div>
+        </div>
+
+        <div class="row" *ngIf="edit">
+          <div class="col-md-6 mb-2 mb-md-0">
+            <button type="button" class="btn btn-danger btn-lg btn-block" (click)="cancelForm()">
+              <il-icon for="cancel"></il-icon>
+              Abbrechen
+            </button>
+          </div>
+          <div class="col-md-6">
+            <button type="submit" class="btn btn-success btn-lg btn-block" [disabled]="loading || form.invalid">
+              <il-icon for="ok" *ngIf="!loading"></il-icon>
+              <il-icon for="spinner" *ngIf="loading"></il-icon>
+              Speichern
+            </button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
 </div>

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 
 import { SharedModule } from './../shared/shared.module';
 import { EventRoutingModule } from './event-routing.module';
-import { AbsPipe } from './shared/abs.pipe';
 import { CounterControlComponent } from './counter-control/counter-control.component';
 import { EventComponent } from './event/event.component';
 import { HistorySidebarComponent } from './history-sidebar/history-sidebar.component';
@@ -30,6 +29,7 @@ import { DatepickerModalComponent } from './datepicker-modal/datepicker-modal.co
 import { TimepickerModalComponent } from './timepicker-modal/timepicker-modal.component';
 import { NewEventSelectionComponent } from './new-event-selection/new-event-selection.component';
 import { EventInventoryComponent } from './event-inventory/event-inventory.component';
+import { CountLandingComponent } from './count-landing/count-landing.component';
 
 
 const modals = [
@@ -53,7 +53,6 @@ const modals = [
     ProductGroupComponent,
     ProductJumpBarComponent,
     NewEventFormComponent,
-    AbsPipe,
     CounterControlComponent,
     EventOverviewComponent,
     EventListComponent,
@@ -69,7 +68,8 @@ const modals = [
     CloseFormContainerComponent,
     ...modals,
     NewEventSelectionComponent,
-    EventInventoryComponent
+    EventInventoryComponent,
+    CountLandingComponent
   ],
   entryComponents: [...modals],
   providers: []

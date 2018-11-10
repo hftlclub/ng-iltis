@@ -11,19 +11,19 @@
   <tbody>
     <tr *ngFor="let s of sizesSorted" [class.text-muted]="!s.active">
       <td>
-        <il-icon for="fa-check-circle" class="text-success" title="aktiv" *ngIf="s.active"></il-icon>
-        <il-icon for="fa-times-circle" class="text-danger" title="inaktiv" *ngIf="!s.active"></il-icon>
+        <il-icon for="fa-check-circle fa-lg" class="text-success" title="aktiv" *ngIf="s.active"></il-icon>
+        <il-icon for="fa-times-circle fa-lg" class="text-danger" title="inaktiv" *ngIf="!s.active"></il-icon>
       </td>
       <td>{{ s.sizeType.description }} {{ s.sizeType.amount | number }} {{ s.sizeType.unit.full }}</td>
       <td>{{ s.costs | currency:'EUR' }}</td>
       <td>{{ s.minStock }}</td>
       <td>
         <span class="pull-right">
-          <button class="btn btn-warning btn-xs" (click)="showSizeEditModal(s)">
+          <button class="btn btn-warning btn-sm mr-1" (click)="showSizeEditModal(s)">
             <il-icon for="edit"></il-icon>
             Bearbeiten
           </button>
-          <button class="btn btn-danger btn-xs" (click)="showSizeDeleteModal(s)">
+          <button class="btn btn-danger btn-sm" (click)="showSizeDeleteModal(s)">
             <il-icon for="delete"></il-icon>
             Löschen
           </button>

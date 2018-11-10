@@ -1,0 +1,83 @@
+// @import '~bootstrap/scss/bootstrap';
+@import '~font-awesome/css/font-awesome.css';
+
+
+@import '~bootswatch/dist/yeti/_variables';
+@import '~bootstrap/scss/bootstrap';
+@import '~bootswatch/dist/yeti/_bootswatch';
+
+@import './bootstrap-custom';
+
+body {
+  overflow-y: scroll;
+}
+
+.loader {
+  margin: auto;
+  position: absolute;
+  top: 0; left: 0; bottom: 0; right: 0;
+  height: 200px;
+  font-size: 24pt;
+}
+
+.loaderzoom {
+  visibility: visible !important;
+  width: 30%;
+  transition: all 20s ease-out;
+  transform: scale(1.5);
+}
+
+.content {
+  padding-top: 100px;
+}
+
+td {
+  vertical-align: middle !important;
+}
+
+.simple-notification-wrapper {
+  z-index: 8000 !important;
+}
+
+
+.nav__overlay {
+  @include media-breakpoint-down(md) {
+    visibility: hidden;
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 998;
+    background: rgba(0, 0, 0, 0.4);
+    transition: all .25s ease-in-out;
+
+    &.visible {
+      visibility: visible;
+      opacity: 1;
+      transition: all .25s ease-in-out;
+    }
+  }
+}
+
+
+
+.btn-card {
+  font-weight: bold;
+  font-size: 1.4em;
+  padding: 20px;
+  margin-bottom: 20px;
+
+  il-icon {
+    display: block;
+    margin-bottom: 15px;
+  }
+
+  p.subtitle {
+    font-size: .8rem;
+    font-weight: 400;
+    padding: 0;
+    margin: 0;
+  }
+}

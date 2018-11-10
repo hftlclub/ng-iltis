@@ -9,7 +9,8 @@
 </div>
 <div class="modal-body">
   <p>
-    Soll die Einheit <strong>{{ unit?.full }}</strong> wirklich gelöscht werden?
+    Soll die Einheit
+    <strong>{{ unit?.full }}</strong> wirklich gelöscht werden?
   </p>
 
   <div class="alert alert-warning">
@@ -18,18 +19,14 @@
   </div>
 </div>
 
-<div class="modal-footer">
-  <div class="col-sm-6">
-    <button type="button" class="btn btn-primary btn-block btn-lg" (click)="hideModal()">
-      <il-icon for="cancel"></il-icon>
-      Abbrechen
-    </button>
-  </div>
-  <div class="col-sm-6">
-    <button type="button" class="btn btn-danger btn-block btn-lg" [disabled]="loading" (click)="deleteUnit()">
-      <il-icon for="delete" *ngIf="!loading"></il-icon>
-      <il-icon for="spinner" *ngIf="loading"></il-icon>
-      Einheit löschen
-    </button>
-  </div>
-</div>
+<il-modal-button-footer>
+  <button type="button" class="left btn btn-primary btn-block btn-lg" (click)="hideModal()">
+    <il-icon for="cancel"></il-icon>
+    Abbrechen
+  </button>
+  <button type="button" class="right btn btn-danger btn-block btn-lg" [disabled]="loading" (click)="deleteUnit()">
+    <il-icon for="delete" *ngIf="!loading"></il-icon>
+    <il-icon for="spinner" *ngIf="loading"></il-icon>
+    Einheit löschen
+  </button>
+</il-modal-button-footer>

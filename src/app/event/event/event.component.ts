@@ -2,16 +2,17 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs/Subscription';
+import { Observable } from 'rxjs/Observable';
+import { switchMap, filter } from 'rxjs/operators';
 
-import { GlobalService } from './../../core/global.service';
+import { GlobalService } from '../../core/global.service';
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
-import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'il-event',
   templateUrl: './event.component.html',
-  styleUrls: ['./event.component.css'],
+  styleUrls: ['./event.component.scss'],
   animations: [
     trigger('slideInOut', [
       state('in', style({
@@ -54,6 +55,8 @@ export class EventComponent implements OnInit, OnDestroy {
   eventClosedSub: Subscription;
   mobileModeSub: Subscription;
 
+  tabs: Tab[] = [];
+
   constructor(
     private route: ActivatedRoute,
     private es: EventService,
@@ -61,17 +64,27 @@ export class EventComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.event = this.route.snapshot.data['event'];
+    this.initEvent(this.route.snapshot.data['event']);
 
-    this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => this.event = event);
+    this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => this.initEvent(event));
 
     this.eventClosedSub = this.es.eventClosed.pipe(
       switchMap(eventId => this.es.getEvent(eventId))
     )
-    .subscribe(event => this.event = event);
+    .subscribe(event => this.initEvent(event));
 
     this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
+
+    Observable.fromEvent(window, 'keypress').pipe(
+      filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
+    ).subscribe(e => this.toggleSidebar());
   }
+
+  initEvent(event: Event) {
+    this.event = event;
+    this.tabs = this.tabsData().filter(t => !t.hide);
+  }
+
 
   ngOnDestroy() {
     this.eventUpdatedSub.unsubscribe();
@@ -87,4 +100,58 @@ export class EventComponent implements OnInit, OnDestroy {
     return (this.sidebarVisible) ? 'in' : 'out';
   }
 
+  tabsData(): Tab[] {
+    return [
+      {
+        label: 'Übersicht',
+        link: './overview',
+        icon: 'fa-newspaper-o'
+      },
+      {
+        label: 'Neue Buchung',
+        link: './products',
+        icon: 'plus',
+        hide: !this.event.active
+      },
+      {
+        label: 'Zählung',
+        link: './count',
+        icon: 'fa-list-ol',
+        hide: !this.event.active,
+        disabled: !this.event.eventType.countAllowed
+      },
+      {
+        label: 'Lagerbestand',
+        link: './inventory',
+        icon: 'stock',
+        hide: this.event.active
+      },
+      {
+        label: 'Notizen',
+        link: './notes',
+        icon: 'fa-file-text-o',
+      },
+      {
+        label: 'Infos bearbeiten',
+        link: './edit',
+        icon: 'edit',
+      },
+      {
+        label: 'Ereignis schließen',
+        link: './close',
+        icon: 'evClose',
+        hide: !this.event.active
+      },
+    ];
+  }
+
+}
+
+
+interface Tab {
+  link: string | string[];
+  label: string;
+  icon: string;
+  hide?: boolean;
+  disabled?: boolean;
 }

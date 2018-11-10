@@ -1,4 +1,4 @@
-<table class="table table-hover table-striped">
+<table class="table table-hover table-striped table-sm">
   <thead>
     <tr>
       <th>#</th>
@@ -14,11 +14,11 @@
       <td>{{ u.short }}</td>
       <td>
         <span class="pull-right">
-          <button class="btn btn-warning btn-xs" (click)="showEditModal(u)">
+          <button class="btn btn-warning btn-sm mr-1" (click)="showEditModal(u)">
             <il-icon for="edit"></il-icon>
             Bearbeiten
           </button>
-          <button class="btn btn-danger btn-xs" (click)="showDeleteModal(u)">
+          <button class="btn btn-danger btn-sm" (click)="showDeleteModal(u)">
             <il-icon for="delete"></il-icon>
             Löschen
           </button>

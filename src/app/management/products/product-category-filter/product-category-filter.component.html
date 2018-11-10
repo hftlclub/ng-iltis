@@ -1,15 +1,16 @@
 <form [formGroup]="form">
   <h4>
     Kategorien
-    <button class="btn btn-primary btn-xs" (click)="resetCategories()">alle aktivieren</button>
+    <button class="btn btn-outline-primary btn-sm" (click)="resetCategories()">alle aktivieren</button>
   </h4>
-  <div formArrayName="categories" class="checkbox-container">
+  <div formArrayName="categories" class="checkbox-container mt-2">
     <button
-      class="btn btn-default btn-sm"
+      class="btn btn-outline-success btn-sm"
       [ngClass]="form.get('categories').value[i] ? 'active' : 'inactive'"
       *ngFor="let c of categories; index as i"
       (click)="toggleCheckbox(i)">
-      <input type="checkbox" [formControlName]="i" (change)="valuesChanged()"> {{ c.name }}
+      <input type="checkbox" hidden [formControlName]="i" (change)="valuesChanged()">
+      {{ c.name }}
     </button>
 
   </div>

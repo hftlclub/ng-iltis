@@ -1,42 +1,39 @@
-<div class="sidebar-container">
+<div class="col-2 sidebar-container">
   <div class="top">
-      <h3>
-        <i class="fa fa-history" aria-hidden="true"></i>
-        Historie
-      </h3>
-      <small>
-        {{ itemCount | i18nPlural:itemsCountMapping }}
-      </small>
+    <h4>
+      Buchungshistorie
+    </h4>
+    <small>
+      {{ itemCount | i18nPlural:itemsCountMapping }}
+    </small>
   </div>
 
-  <div class="scroll-area">
-      <div>
-        <ng-template [ngIf]="transfers.length">
-          <il-history-transfer-item *ngFor="let t of transfers" [transfer]="t"></il-history-transfer-item>
-        </ng-template>
-        <ng-template [ngIf]="transactions.length">
-          <il-history-transaction-item *ngFor="let t of transactions" [transaction]="t"></il-history-transaction-item>
-        </ng-template>
+  <div class="scroll-area" #scrollArea>
+    <div>
+      <ng-template [ngIf]="transfers.length">
+        <il-history-transfer-item *ngFor="let t of transfers" [transfer]="t"></il-history-transfer-item>
+      </ng-template>
+      <ng-template [ngIf]="transactions.length">
+        <il-history-transaction-item *ngFor="let t of transactions" [transaction]="t"></il-history-transaction-item>
+      </ng-template>
 
-        <div class="text-center box-message" *ngIf="!hasItems">
-          <div>
-            <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
-          </div>
-          <div>Keine Buchungen vorhanden.</div>
+      <a class="btn btn-block btn-success mt-2 mb-2" id="newTransferBtn" routerLink="products" *ngIf="event.active && hasItems">
+        <il-icon for="plus"></il-icon>
+        Neue Buchung
+      </a>
+
+      <div class="text-center box-message" *ngIf="!hasItems">
+        <div>
+          <i class="fa fa-frown-o fa-3x" aria-hidden="true"></i>
         </div>
-      </div>
-  </div>
+        <div>Keine Buchungen</div>
 
-  <div class="bottom">
-      <div class="text-center">
-        <a class="btn btn-primary btn-lg btn-block" routerLink="overview" *ngIf="childUrlSegment !== 'overview'">
-          <il-icon for="fa-list"></il-icon>
-          Übersicht
-        </a>
-        <a class="btn btn-success btn-lg btn-block" routerLink="products" *ngIf="childUrlSegment === 'overview' && event.active">
+        <a class="btn btn-success mt-4" routerLink="products" *ngIf="event.active">
           <il-icon for="plus"></il-icon>
           Neue Buchung
         </a>
       </div>
+    </div>
+
   </div>
 </div>

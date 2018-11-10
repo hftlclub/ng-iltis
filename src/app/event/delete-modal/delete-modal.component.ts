@@ -54,6 +54,6 @@ export class DeleteModalComponent implements OnInit {
   }
 
   hideModal() {
-    this.modal.hide()
+    this.modal.hide();
   }
 }
