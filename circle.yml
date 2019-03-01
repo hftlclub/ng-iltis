@@ -3,7 +3,7 @@
 
 machine:
   node:
-    version: 8.4
+    version: 10.15.2
   environment:
     GITHUB_ORG: https://GH_TOKEN@github.com/hftlclub
     GITHUB_NAME: HfTL-Club System
