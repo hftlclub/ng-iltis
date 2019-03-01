@@ -7,48 +7,55 @@
   </div>
 
   <h4>
-  ILTIS: Internes Lagertransaktions- und Informationssystem
+    ILTIS: Internes Lagertransaktions- und Informationssystem
   </h4>
 
-  <strong>HfTL Studentenverein e.V.</strong><br>
-  entwickelt von <a href="https://www.ferdinand-malcher.de" target="_blank">Ferdinand Malcher</a> und <a href="https://robert-weisse.de" target="_blank">Robert Weiße</a>
+  <strong>HfTL Studentenverein e.V.</strong><br />
+  entwickelt von <a href="https://www.ferdinand-malcher.de" target="_blank">Ferdinand Malcher</a> und
+  <a href="https://robert-weisse.de" target="_blank">Robert Weiße</a>
 
-  <hr>
+  <hr />
 
-  <div *ngIf="serverInfo$ | async as info">
+  <div *ngIf="(serverInfo$ | async) as info">
     <h3>
       <i class="fa fa-database fa-fw"></i>
       Server
     </h3>
 
     <p>
-      <i class="fa fa-github"></i>
+      <i class="fa fa-github mr-1"></i>
       <strong><a href="https://github.com/hftlclub/node-iltis" target="_blank">node-iltis</a></strong>
     </p>
 
-    <strong>Version:</strong> {{ info.version }} / <a href="https://github.com/hftlclub/node-iltis/tree/{{ info.commit }}">{{ info.commit | slice:0:7 }}</a><br>
+    <strong>Version:</strong> {{ info.version }} /
+    <a href="https://github.com/hftlclub/node-iltis/tree/{{ info.commit }}">{{ info.commit | slice: 0:7 }}</a
+    ><br />
     <strong>Uptime:</strong> {{ info.time | timeSeconds }}
 
-    <hr>
+    <hr />
   </div>
 
-  <div *ngIf="frontendInfo$ | async as info">
+  <div *ngIf="(frontendInfo$ | async) as info">
     <h3>
       <i class="fa fa-laptop fa-fw"></i>
       Frontend
     </h3>
 
     <p>
-      <i class="fa fa-github"></i>
+      <i class="fa fa-github mr-1"></i>
       <strong><a href="https://github.com/hftlclub/ng-iltis" target="_blank">ng-iltis</a></strong>
     </p>
 
     <ng-container *ngIf="info.commit">
-      <strong>Version:</strong> <a href="https://github.com/hftlclub/ng-iltis/tree/{{ info.commit }}" target="_blank">{{ info.commit | slice:0:7 }}</a><br>
+      <strong>Version:</strong>
+      <a href="https://github.com/hftlclub/ng-iltis/tree/{{ info.commit }}" target="_blank">
+        {{ info.commit | slice: 0:7 }}
+      </a>
+      <br />
     </ng-container>
-    <strong>Angular:</strong> <a href="https://github.com/angular/angular/tree/{{ info.ngVersion }}" target="_blank">{{ info.ngVersion }}</a>
+    <strong>Angular:</strong>
+    <a href="https://github.com/angular/angular/tree/{{ info.ngVersion }}" target="_blank">{{ info.ngVersion }}</a>
 
-    <br>
+    <br />
   </div>
-
 </div>

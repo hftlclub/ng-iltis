@@ -1,10 +1,10 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { SizesService } from '../../../shared/sizes.service';
-import { Size, SizeFactory } from '../../../../shared/models/size';
+import { Size } from '../../../../shared/models/size';
 import { SizeType, SizeTypeFactory } from '../../../../shared/models/sizetype';
 import { Unit } from '../../../../shared/models/unit';
 import { IlValidators } from '../../../../core/il-validators';
@@ -16,7 +16,6 @@ import { HelperService } from '../../../../core/helper.service';
   styleUrls: ['./product-size-form.component.css']
 })
 export class ProductSizeFormComponent implements OnInit {
-
   @Input() edit = false;
   @Input() initialValue = new Size(SizeTypeFactory.empty(), 0, 0, true);
   @Input() buttonIcon = 'ok';
@@ -30,12 +29,10 @@ export class ProductSizeFormComponent implements OnInit {
   sizeTypes$: Observable<SizeType[]>;
   @Input() unit: Unit;
 
-  constructor(private fb: FormBuilder, private ss: SizesService, private hs: HelperService) { }
+  constructor(private fb: FormBuilder, private ss: SizesService, private hs: HelperService) {}
 
   ngOnInit() {
-    this.sizeTypes$ = this.ss.getAllSizeTypes().pipe(
-      map(sts => sts.filter(st => st.unit.id === this.unit.id))
-    );
+    this.sizeTypes$ = this.ss.getAllSizeTypes().pipe(map(sts => sts.filter(st => st.unit.id === this.unit.id)));
 
     this.form = this.fb.group({
       sizeType: [this.initialValue.sizeType.id, [Validators.required, IlValidators.notZero]],
@@ -67,5 +64,4 @@ export class ProductSizeFormComponent implements OnInit {
   cancel() {
     this.cancelled.emit();
   }
-
 }

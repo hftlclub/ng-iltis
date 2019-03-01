@@ -1,29 +1,25 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { retry, map } from 'rxjs/operators';
-import 'rxjs/add/observable/throw';
 
 import { FileUploadResponse } from '../shared/models/file-upload-response.interface';
 import { UploadService } from './upload.service';
 import { Product, ProductFactory } from '../shared/models/product';
-import { SizeType, SizeTypeFactory } from '../shared/models/sizetype';
 import { CrateType } from '../shared/models/cratetype';
-import { Size, SizeFactory } from '../shared/models/size';
+import { Size } from '../shared/models/size';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProductService {
-
   productUpdated = new EventEmitter<any>();
 
-  constructor(
-    private http: HttpClient,
-    private us: UploadService,
-    @Inject('API_URL') private api
-  ) { }
+  constructor(private http: HttpClient, private us: UploadService, @Inject('API_URL') private api) {}
 
   getAll(showInactiveProducts = false, showInactiveSizes = false): Observable<Product[]> {
-    return this.http.get<any[]>(`${this.api}/products?showInactiveProducts=${showInactiveProducts}&showInactiveSizes=${showInactiveSizes}`)
+    return this.http
+      .get<any[]>(
+        `${this.api}/products?showInactiveProducts=${showInactiveProducts}&showInactiveSizes=${showInactiveSizes}`
+      )
       .pipe(
         retry(3),
         map(raw => raw.map(p => ProductFactory.fromObj(p)))
@@ -31,11 +27,10 @@ export class ProductService {
   }
 
   getSingle(id: number, showInactiveSizes = false): Observable<Product> {
-    return this.http.get(`${this.api}/product/${id}?showInactiveSizes=${showInactiveSizes}`)
-      .pipe(
-        retry(3),
-        map(raw => ProductFactory.fromObj(raw))
-      );
+    return this.http.get(`${this.api}/product/${id}?showInactiveSizes=${showInactiveSizes}`).pipe(
+      retry(3),
+      map(raw => ProductFactory.fromObj(raw))
+    );
   }
 
   create(product: Product): Observable<Product> {
@@ -62,7 +57,6 @@ export class ProductService {
     return this.http.put(`${this.api}/product/${productId}`, { active: activation }, { responseType: 'text' });
   }
 
-
   /* product sizes */
   createSizeForProduct(productId: number, size: Size): Observable<any> {
     return this.http.post(`${this.api}/product/${productId}/size`, size, { responseType: 'text' });
@@ -80,7 +74,6 @@ export class ProductService {
     return this.http.delete(`${this.api}/product/${productId}/size/${sizeTypeId}`, { responseType: 'text' });
   }
 
-
   /* crate types for product */
   getPossibleCrateTypesForProduct(productId: number): Observable<CrateType[]> {
     return this.http.get<CrateType[]>(`${this.api}/product/${productId}/possible/cratetypes`);
@@ -94,10 +87,8 @@ export class ProductService {
     return this.http.delete(`${this.api}/product/${productId}/cratetype/${crateTypeId}`, { responseType: 'text' });
   }
 
-
   /* product image */
   uploadProductImage(file: File, productId: number): Observable<FileUploadResponse> {
     return this.us.uploadFile(file, `${this.api}/product/${productId}/image`);
   }
-
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificationsService } from 'angular2-notifications';
 
 import { SizesService } from '../../shared/sizes.service';
@@ -21,7 +21,7 @@ export class CrateTypeDeleteModalComponent {
     this.loading = true;
     this.ss.deleteCrateType(this.crateType.id).subscribe(() => {
       this.loading = false;
-      this.ns.success('Kastengröße gelöscht', 'Die Größe wurde gelöscht.')
+      this.ns.success('Kastengröße gelöscht', 'Die Größe wurde gelöscht.');
       this.ss.crateTypeListChanged.emit();
       this.hideModal();
     },

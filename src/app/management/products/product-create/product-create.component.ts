@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { NotificationsService } from 'angular2-notifications';
 
 import { Product } from '../../../shared/models/product';
@@ -16,7 +16,6 @@ import { CategoriesService } from '../../shared/categories.service';
   styleUrls: ['./product-create.component.css']
 })
 export class ProductCreateComponent implements OnInit {
-
   units$: Observable<Unit[]>;
   categories$: Observable<Category[]>;
   hasChanges = false;
@@ -29,7 +28,7 @@ export class ProductCreateComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private ns: NotificationsService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.units$ = this.us.getAll();
@@ -40,16 +39,18 @@ export class ProductCreateComponent implements OnInit {
     const product = formValue as Product;
 
     this.loading = true;
-    this.ps.create(product).subscribe(p => {
-      this.loading = false;
-      this.hasChanges = false;
-      this.ns.success('Produkt angelegt', 'Das neue Produkt wurde angelegt.')
-      this.goToProductDetails(p.id);
-    },
-    err => {
-      this.loading = false;
-      this.ns.error('Fehler', 'Ein Fehler ist aufgetreten.');
-    });
+    this.ps.create(product).subscribe(
+      p => {
+        this.loading = false;
+        this.hasChanges = false;
+        this.ns.success('Produkt angelegt', 'Das neue Produkt wurde angelegt.');
+        this.goToProductDetails(p.id);
+      },
+      err => {
+        this.loading = false;
+        this.ns.error('Fehler', 'Ein Fehler ist aufgetreten.');
+      }
+    );
   }
 
   goToProductDetails(id: number | string) {
@@ -59,5 +60,4 @@ export class ProductCreateComponent implements OnInit {
   goToProductList() {
     this.router.navigate(['../list'], { relativeTo: this.route });
   }
-
 }

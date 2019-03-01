@@ -17,13 +17,10 @@ import { TimeSecondsPipe } from './time-seconds.pipe';
 import { TrustChallengeComponent } from './trust-challenge/trust-challenge.component';
 import { InventoryTableComponent } from './inventory-table/inventory-table.component';
 import { ModalButtonFooterComponent } from './modal-button-footer/modal-button-footer.component';
-import { AbsPipe } from "./abs.pipe";
+import { AbsPipe } from './abs.pipe';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ReactiveFormsModule
-  ],
+  imports: [CommonModule, ReactiveFormsModule],
   declarations: [
     IconComponent,
     UploadBoxComponent,
@@ -56,4 +53,4 @@ import { AbsPipe } from "./abs.pipe";
     AbsPipe
   ]
 })
-export class SharedModule { }
+export class SharedModule {}

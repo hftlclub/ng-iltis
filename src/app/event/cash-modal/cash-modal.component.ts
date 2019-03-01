@@ -1,10 +1,10 @@
 import { HelperService } from '../../core/helper.service';
 import { NotificationsService } from 'angular2-notifications';
 import { EventService } from './../shared/event.service';
-import { Component, EventEmitter, Input, NgZone, OnInit, Output } from '@angular/core';
+import { Component, NgZone, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { Subscription } from 'rxjs/Subscription';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
 
 import { Event, EventFactory } from '../../shared/models/event';
 
@@ -14,7 +14,6 @@ import { Event, EventFactory } from '../../shared/models/event';
   styleUrls: ['./cash-modal.component.css']
 })
 export class CashModalComponent implements OnInit {
-
   event: Event = EventFactory.empty();
 
   form: FormGroup;
@@ -28,7 +27,7 @@ export class CashModalComponent implements OnInit {
     private modal: BsModalRef,
     private zone: NgZone,
     private hs: HelperService
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.initForm();
@@ -48,7 +47,7 @@ export class CashModalComponent implements OnInit {
     this.form = this.fb.group({
       cashBefore: [values.cashBefore, Validators.required],
       cashAfter: [values.cashAfter, Validators.required],
-      tip: [values.tip, Validators.required],
+      tip: [values.tip, Validators.required]
     });
   }
 
@@ -60,23 +59,24 @@ export class CashModalComponent implements OnInit {
       tip: this.sanitizeFloat(val.tip)
     };
 
-
     this.loading = true;
-    this.es.updateEvent(this.event.id, newValues as Event).subscribe(event => {
-      this.loading = false;
-      this.ns.success('Kassenstand', 'Der Kassenstand wurde übernommen.');
+    this.es.updateEvent(this.event.id, newValues as Event).subscribe(
+      event => {
+        this.loading = false;
+        this.ns.success('Kassenstand', 'Der Kassenstand wurde übernommen.');
 
-      this.event.cashBefore = newValues.cashBefore;
-      this.event.cashAfter = newValues.cashAfter;
-      this.event.tip = newValues.tip;
+        this.event.cashBefore = newValues.cashBefore;
+        this.event.cashAfter = newValues.cashAfter;
+        this.event.tip = newValues.tip;
 
-      this.es.eventUpdated.emit(this.event);
-      this.hideModal();
-    },
-    err => {
-      this.loading = false;
-      this.ns.error('Fehler', 'Vorgang abgebrochen');
-    });
+        this.es.eventUpdated.emit(this.event);
+        this.hideModal();
+      },
+      err => {
+        this.loading = false;
+        this.ns.error('Fehler', 'Vorgang abgebrochen');
+      }
+    );
   }
 
   get cashAfterIsLess(): boolean {
@@ -84,12 +84,13 @@ export class CashModalComponent implements OnInit {
   }
 
   sanitizeFloat(num: any): number {
-    if (!num) { num = 0; }
+    if (!num) {
+      num = 0;
+    }
     return this.hs.commaToNumber(num);
   }
 
   hideModal() {
     this.modal.hide();
   }
-
 }

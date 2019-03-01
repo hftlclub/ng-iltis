@@ -9,18 +9,15 @@ import { Event } from '../../shared/models/event';
   styleUrls: ['./event-list.component.css']
 })
 export class EventListComponent implements OnInit {
-
   events: Event[];
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.events = this.route.snapshot.data['events']
-      .sort(this.orderByDateTime);
+    this.events = this.route.snapshot.data.events.sort(this.orderByDateTime);
   }
 
   orderByDateTime(a: Event, b: Event) {
     return b.datetime.getTime() - a.datetime.getTime();
   }
-
 }

@@ -12,14 +12,13 @@ import { ProductCrateDeleteModalComponent } from './product-crate-delete-modal/p
   styleUrls: ['./product-crates-table.component.css']
 })
 export class ProductCratesTableComponent implements OnInit {
-
   @Input() product: Product;
   createFormVisible = false;
 
-  constructor(private modalService: BsModalService, private ps: ProductService) { }
+  constructor(private modalService: BsModalService, private ps: ProductService) {}
 
   ngOnInit() {
-    this.ps.productUpdated.subscribe(() => this.createFormVisible = false);
+    this.ps.productUpdated.subscribe(() => (this.createFormVisible = false));
   }
 
   showCrateDeleteModal(crateType: CrateType) {
@@ -27,5 +26,4 @@ export class ProductCratesTableComponent implements OnInit {
     modal.content.product = this.product;
     modal.content.crateType = crateType;
   }
-
 }

@@ -1,3 +1,4 @@
+// tslint:disable:max-line-length
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
@@ -38,12 +39,7 @@ const modals = [
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    ProductsRoutingModule,
-    SharedModule,
-    NgxDatatableModule
-  ],
+  imports: [CommonModule, ProductsRoutingModule, SharedModule, NgxDatatableModule],
   declarations: [
     ProductListComponent,
     ProductDetailsComponent,
@@ -59,7 +55,6 @@ const modals = [
     ProductCategoryFilterComponent,
     ...modals
   ],
-  entryComponents: [...modals],
-  providers: [ProductListFilterService]
+  entryComponents: [...modals]
 })
-export class ProductsModule { }
+export class ProductsModule {}

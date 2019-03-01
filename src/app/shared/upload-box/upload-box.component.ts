@@ -1,12 +1,4 @@
-import {
-  Component,
-  Output,
-  ElementRef,
-  HostListener,
-  OnInit,
-  ViewChild,
-  EventEmitter
-} from '@angular/core';
+import { Component, Output, ElementRef, HostListener, OnInit, ViewChild, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'il-upload-box',

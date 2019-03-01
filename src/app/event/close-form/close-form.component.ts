@@ -11,7 +11,6 @@ import { Event } from '../../shared/models/event/event';
   styleUrls: ['./close-form.component.css']
 })
 export class CloseFormComponent implements OnInit {
-
   @Input() event: Event;
   @Input() hasTransfers: boolean;
   @Input() costs: number;
@@ -20,7 +19,7 @@ export class CloseFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private hs: HelperService) { }
+  constructor(private fb: FormBuilder, private hs: HelperService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
@@ -70,5 +69,4 @@ export class CloseFormComponent implements OnInit {
   cancelForm() {
     this.cancelled.emit();
   }
-
 }

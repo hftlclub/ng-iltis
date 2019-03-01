@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificationsService } from 'angular2-notifications';
 
 import { Product } from '../../../../shared/models/product';
@@ -12,29 +12,29 @@ import { ProductService } from '../../../../core/product.service';
   styleUrls: ['./product-size-edit-modal.component.css']
 })
 export class ProductSizeEditModalComponent {
-
   product: Product;
   size: Size;
   loading = false;
 
-  constructor(private modal: BsModalRef, private ps: ProductService, private ns: NotificationsService) { }
+  constructor(private modal: BsModalRef, private ps: ProductService, private ns: NotificationsService) {}
 
   updateSize(size: Size) {
     this.loading = true;
-    this.ps.updateSizeForProduct(this.product.id, this.size.sizeType.id, size).subscribe(() => {
-      this.loading = false;
-      this.ns.success('Größe bearbeitet', 'Gebindegröße für das Produkt wurde bearbeitet.')
-      this.ps.productUpdated.emit();
-      this.hideModal();
-    },
-    err => {
-      this.loading = false;
-      this.ns.error('Fehler', 'Vorgang abgebrochen');
-    });
+    this.ps.updateSizeForProduct(this.product.id, this.size.sizeType.id, size).subscribe(
+      () => {
+        this.loading = false;
+        this.ns.success('Größe bearbeitet', 'Gebindegröße für das Produkt wurde bearbeitet.');
+        this.ps.productUpdated.emit();
+        this.hideModal();
+      },
+      err => {
+        this.loading = false;
+        this.ns.error('Fehler', 'Vorgang abgebrochen');
+      }
+    );
   }
 
   hideModal() {
     this.modal.hide();
   }
-
 }

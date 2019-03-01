@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificationsService } from 'angular2-notifications';
 
 import { SizeType } from '../../../shared/models/sizetype';
@@ -21,7 +21,7 @@ export class SizeTypeEditModalComponent {
     this.loading = true;
     this.ss.updateSizeType(this.sizeType.id, sizeType).subscribe(() => {
       this.loading = false;
-      this.ns.success('Einheit bearbeitet', 'Die Einheit wurde bearbeitet.')
+      this.ns.success('Einheit bearbeitet', 'Die Einheit wurde bearbeitet.');
       this.ss.sizeTypeListChanged.emit();
       this.hideModal();
     },

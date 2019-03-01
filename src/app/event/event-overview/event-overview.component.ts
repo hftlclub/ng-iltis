@@ -1,4 +1,4 @@
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
@@ -14,24 +14,22 @@ import { CashModalComponent } from '../cash-modal/cash-modal.component';
   styleUrls: ['./event-overview.component.css']
 })
 export class EventOverviewComponent implements OnInit, OnDestroy {
-
   event: Event;
   calc: Calculation;
   calcLoading: boolean;
 
   eventUpdatedSub: Subscription;
 
-  constructor(private route: ActivatedRoute, private es: EventService, private modalService: BsModalService) { }
+  constructor(private route: ActivatedRoute, private es: EventService, private modalService: BsModalService) {}
 
   ngOnInit() {
-    this.event = this.route.snapshot.data['event'];
+    this.event = this.route.snapshot.data.event;
     this.loadCalculation();
 
     this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => {
       this.event = event;
       this.loadCalculation();
     });
-
   }
 
   showCashModal() {
@@ -68,5 +66,4 @@ export class EventOverviewComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.eventUpdatedSub.unsubscribe();
   }
-
 }

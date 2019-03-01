@@ -4,13 +4,11 @@ import { Resolve, ActivatedRouteSnapshot } from '@angular/router';
 import { Transaction } from '../../../shared/models/transaction';
 import { EventService } from '../event.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class TransactionsResolver implements Resolve<Transaction[]> {
-
   constructor(private es: EventService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
-    return this.es.getTransactionsByEvent(route.params['eventId']);
+    return this.es.getTransactionsByEvent(route.params.eventId);
   }
-
 }

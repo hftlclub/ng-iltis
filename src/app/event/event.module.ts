@@ -31,19 +31,10 @@ import { NewEventSelectionComponent } from './new-event-selection/new-event-sele
 import { EventInventoryComponent } from './event-inventory/event-inventory.component';
 import { CountLandingComponent } from './count-landing/count-landing.component';
 
-
-const modals = [
-  CashModalComponent,
-  DeleteModalComponent,
-  DatepickerModalComponent,
-  TimepickerModalComponent
-];
+const modals = [CashModalComponent, DeleteModalComponent, DatepickerModalComponent, TimepickerModalComponent];
 
 @NgModule({
-  imports: [
-    SharedModule,
-    EventRoutingModule
-  ],
+  imports: [SharedModule, EventRoutingModule],
   declarations: [
     ProductCardComponent,
     EventComponent,
@@ -71,9 +62,6 @@ const modals = [
     EventInventoryComponent,
     CountLandingComponent
   ],
-  entryComponents: [...modals],
-  providers: []
+  entryComponents: [...modals]
 })
-export class EventModule {
-
-}
+export class EventModule {}

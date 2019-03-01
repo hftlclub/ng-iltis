@@ -1,8 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import { ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
-import { Observable } from 'rxjs/Observable';
+import { fromEvent, Subscription } from 'rxjs';
 import { switchMap, filter } from 'rxjs/operators';
 
 import { GlobalService } from '../../core/global.service';
@@ -15,39 +14,56 @@ import { EventService } from '../shared/event.service';
   styleUrls: ['./event.component.scss'],
   animations: [
     trigger('slideInOut', [
-      state('in', style({
-        transform: 'translateX(0)'
-      })),
-      state('out', style({
-        transform: 'translateX(100%)'
-      })),
+      state(
+        'in',
+        style({
+          transform: 'translateX(0)'
+        })
+      ),
+      state(
+        'out',
+        style({
+          transform: 'translateX(100%)'
+        })
+      ),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
     ]),
     trigger('btnInOut', [
-      state('in', style({
-        right: '250px',
-      })),
-      state('out', style({
-        right: '0',
-      })),
+      state(
+        'in',
+        style({
+          right: '250px'
+        })
+      ),
+      state(
+        'out',
+        style({
+          right: '0'
+        })
+      ),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
     ]),
     trigger('containerInOut', [
-      state('in', style({
-        marginRight: '250px'
-      })),
-      state('out', style({
-        marginRight: '0'
-      })),
+      state(
+        'in',
+        style({
+          marginRight: '250px'
+        })
+      ),
+      state(
+        'out',
+        style({
+          marginRight: '0'
+        })
+      ),
       transition('in => out', animate('200ms ease-in-out')),
       transition('out => in', animate('200ms ease-in-out'))
-    ]),
+    ])
   ]
 })
 export class EventComponent implements OnInit, OnDestroy {
-
   sidebarVisible = true;
 
   event: Event;
@@ -57,34 +73,30 @@ export class EventComponent implements OnInit, OnDestroy {
 
   tabs: Tab[] = [];
 
-  constructor(
-    private route: ActivatedRoute,
-    private es: EventService,
-    private gs: GlobalService
-  ) { }
+  constructor(private route: ActivatedRoute, private es: EventService, private gs: GlobalService) {}
 
   ngOnInit() {
-    this.initEvent(this.route.snapshot.data['event']);
+    this.initEvent(this.route.snapshot.data.event);
 
     this.eventUpdatedSub = this.es.eventUpdated.subscribe(event => this.initEvent(event));
 
-    this.eventClosedSub = this.es.eventClosed.pipe(
-      switchMap(eventId => this.es.getEvent(eventId))
-    )
-    .subscribe(event => this.initEvent(event));
+    this.eventClosedSub = this.es.eventClosed
+      .pipe(switchMap(eventId => this.es.getEvent(eventId)))
+      .subscribe((event: Event) => this.initEvent(event));
 
-    this.mobileModeSub = this.gs.mobileMode.subscribe(mm => this.sidebarVisible = !mm);
+    this.mobileModeSub = this.gs.mobileMode.subscribe(mm => (this.sidebarVisible = !mm));
 
-    Observable.fromEvent(window, 'keypress').pipe(
-      filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
-    ).subscribe(e => this.toggleSidebar());
+    fromEvent(window, 'keypress')
+      .pipe(
+        filter((e: any) => e.keyCode === 115 && !(e.target instanceof HTMLInputElement)) // s
+      )
+      .subscribe(e => this.toggleSidebar());
   }
 
   initEvent(event: Event) {
     this.event = event;
     this.tabs = this.tabsData().filter(t => !t.hide);
   }
-
 
   ngOnDestroy() {
     this.eventUpdatedSub.unsubscribe();
@@ -97,7 +109,7 @@ export class EventComponent implements OnInit, OnDestroy {
   }
 
   get sidebarState(): string {
-    return (this.sidebarVisible) ? 'in' : 'out';
+    return this.sidebarVisible ? 'in' : 'out';
   }
 
   tabsData(): Tab[] {
@@ -129,24 +141,22 @@ export class EventComponent implements OnInit, OnDestroy {
       {
         label: 'Notizen',
         link: './notes',
-        icon: 'fa-file-text-o',
+        icon: 'fa-file-text-o'
       },
       {
         label: 'Infos bearbeiten',
         link: './edit',
-        icon: 'edit',
+        icon: 'edit'
       },
       {
         label: 'Ereignis schließen',
         link: './close',
         icon: 'evClose',
         hide: !this.event.active
-      },
+      }
     ];
   }
-
 }
-
 
 interface Tab {
   link: string | string[];

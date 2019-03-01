@@ -13,7 +13,6 @@ import { TimepickerModalComponent } from '../timepicker-modal/timepicker-modal.c
   styleUrls: ['./event-form.component.css']
 })
 export class EventFormComponent implements OnInit, OnChanges {
-
   @Input() uiMode: string;
   @Input() edit = false;
   @Input() initialEvent: Event;
@@ -24,10 +23,7 @@ export class EventFormComponent implements OnInit, OnChanges {
 
   form: FormGroup;
 
-  constructor(
-    private fb: FormBuilder,
-    private modalService: BsModalService
-  ) { }
+  constructor(private fb: FormBuilder, private modalService: BsModalService) {}
 
   ngOnInit() {
     const initial = this.getInitialFormValues();
@@ -42,9 +38,8 @@ export class EventFormComponent implements OnInit, OnChanges {
     this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
   }
 
-
   ngOnChanges(c: SimpleChanges) {
-    if (c['eventTypes'] && this.form) {
+    if (c.eventTypes && this.form) {
       this.rebuildForm();
     }
   }
@@ -58,7 +53,6 @@ export class EventFormComponent implements OnInit, OnChanges {
         date: this.initialEvent.datetime,
         time: this.initialEvent.datetime
       };
-
     } else {
       initial = {
         eventType: this.eventTypes[0] || '',
@@ -71,7 +65,6 @@ export class EventFormComponent implements OnInit, OnChanges {
     return initial;
   }
 
-
   rebuildForm() {
     this.form.setValue(this.getInitialFormValues());
   }
@@ -79,7 +72,6 @@ export class EventFormComponent implements OnInit, OnChanges {
   compareEventTypes(e1: EventType, e2: EventType) {
     return e1.id === e2.id;
   }
-
 
   submitForm() {
     this.submitted.emit(this.form.value);
@@ -92,7 +84,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   showDatepickerModal() {
     const modal = this.modalService.show(DatepickerModalComponent, { class: 'modal-lg' });
     modal.content.date = this.form.get('date').value;
-    modal.content.updated.subscribe(date => this.form.patchValue({ date: date }));
+    modal.content.updated.subscribe(date => this.form.patchValue({ date }));
   }
 
   showTimepickerModal() {
@@ -105,9 +97,14 @@ export class EventFormComponent implements OnInit, OnChanges {
   // and minutes ceiled to 00/15/30/45
   newDateHHMM15(): Date {
     const date = new Date();
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), date.getHours(), Math.ceil(date.getMinutes() / 15) * 15);
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      date.getHours(),
+      Math.ceil(date.getMinutes() / 15) * 15
+    );
   }
-
 
   get isEventMode(): boolean {
     return this.uiMode === 'event';
@@ -159,5 +156,4 @@ export class EventFormComponent implements OnInit, OnChanges {
 
     return strings[name][this.uiMode];
   }
-
 }

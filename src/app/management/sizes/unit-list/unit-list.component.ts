@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
 import { UnitsService } from '../../shared/units.service';
@@ -16,13 +16,13 @@ import { UnitEditModalComponent } from '../unit-edit-modal/unit-edit-modal.compo
 })
 export class UnitListComponent implements OnInit {
 
-  units$: Observable<Unit[]>
+  units$: Observable<Unit[]>;
 
   constructor(private us: UnitsService, private modalService: BsModalService) { }
 
   ngOnInit() {
     this.refreshUnits();
-    this.us.unitListChanged.subscribe(() => this.refreshUnits())
+    this.us.unitListChanged.subscribe(() => this.refreshUnits());
   }
 
   refreshUnits() {

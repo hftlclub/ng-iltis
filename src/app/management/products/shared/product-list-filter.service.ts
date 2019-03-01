@@ -1,9 +1,5 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { Observable } from 'rxjs/Observable';
-import { Subject } from 'rxjs/Subject';
-import 'rxjs/add/observable/combineLatest';
+import { combineLatest, BehaviorSubject } from 'rxjs';
 
 import { Product } from '../../../shared/models/product';
 import { ProductService } from '../../../core/product.service';
@@ -12,9 +8,8 @@ import { Filters } from './filters';
 import { GroupFilters } from './group-filters';
 import { TableSort } from './tablesort';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProductListFilterService {
-
   products$ = new BehaviorSubject<Product[]>([]);
   productsFiltered$ = new BehaviorSubject<Product[]>([]);
 
@@ -29,10 +24,10 @@ export class ProductListFilterService {
   defaultFilters: Filters = {
     categories: null,
     search: '',
-    groupFilters: { active: true, inactive: true },
+    groupFilters: { active: true, inactive: true }
   };
 
-  defaultTableSort: TableSort[] = [{dir: 'desc', prop: 'active'}, {dir: 'asc', prop: 'name'}];
+  defaultTableSort: TableSort[] = [{ dir: 'desc', prop: 'active' }, { dir: 'asc', prop: 'name' }];
 
   constructor(private ps: ProductService, private hs: HelperService) {
     this.filters$ = new BehaviorSubject(this.defaultFilters);
@@ -42,16 +37,11 @@ export class ProductListFilterService {
 
     this.tableSort$ = new BehaviorSubject(this.defaultTableSort);
 
-    Observable.combineLatest(
-      this.searchFilter$,
-      this.groupFilter$,
-      this.categoriesFilter$,
-      (search, group, categories) => ({
-        search: search,
-        groupFilters: group,
-        categories: categories
-      }))
-      .subscribe(this.filters$);
+    combineLatest(this.searchFilter$, this.groupFilter$, this.categoriesFilter$, (search, group, categories) => ({
+      search,
+      groupFilters: group,
+      categories
+    })).subscribe(this.filters$);
 
     this.filters$.subscribe(f => {
       this.productsFiltered$.next(this.filterProducts(this.products$.getValue(), f));
@@ -61,7 +51,6 @@ export class ProductListFilterService {
       this.productsFiltered$.next(this.filterProducts(p, this.filters$.getValue()));
     });
   }
-
 
   refreshProducts() {
     this.ps.getAll(true, true).subscribe(this.products$);
@@ -81,10 +70,11 @@ export class ProductListFilterService {
     this.tableSort$.next(this.defaultTableSort);
   }
 
-
   private filterProducts(products: Product[], filters: Filters): Product[] {
     let filtered: Product[];
-    filtered = products.filter(p => (filters.groupFilters.active && p.active) || (filters.groupFilters.inactive && !p.active));
+    filtered = products.filter(
+      p => (filters.groupFilters.active && p.active) || (filters.groupFilters.inactive && !p.active)
+    );
 
     if (filters.search) {
       const searchTerms = filters.search.toLowerCase().split(' ');
@@ -95,10 +85,9 @@ export class ProductListFilterService {
     }
 
     if (filters.categories) {
-      filtered = filtered.filter(p => filters.categories.includes(p.category.id))
+      filtered = filtered.filter(p => filters.categories.includes(p.category.id));
     }
 
     return filtered;
   }
-
 }

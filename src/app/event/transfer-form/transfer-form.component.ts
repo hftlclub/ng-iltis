@@ -9,7 +9,6 @@ import { Product } from '../../shared/models/product';
   styleUrls: ['./transfer-form.component.css']
 })
 export class TransferFormComponent implements OnInit {
-
   @Input() product: Product;
   @Output() submitted = new EventEmitter<any>();
   @Output() cancelled = new EventEmitter<any>();
@@ -25,15 +24,18 @@ export class TransferFormComponent implements OnInit {
   storageCounterSelectionDone = false; // true when user has selected storage/counter for private removals
   grid: any;
 
-  constructor() { }
+  constructor() {}
 
   ngOnInit() {
     this.grid = this.getGrid(this.product.sizes.length + this.product.crateTypes.length);
 
-    this.form = new FormGroup({
-      sizeTypes: new FormArray(this.product.sizes.map(s => new FormControl(0))),
-      crateTypes: new FormArray(this.product.crateTypes.map(c => new FormControl(0)))
-    }, this.atLeastOneValidator);
+    this.form = new FormGroup(
+      {
+        sizeTypes: new FormArray(this.product.sizes.map(s => new FormControl(0))),
+        crateTypes: new FormArray(this.product.crateTypes.map(c => new FormControl(0)))
+      },
+      this.atLeastOneValidator
+    );
   }
 
   submitForm() {
@@ -57,14 +59,11 @@ export class TransferFormComponent implements OnInit {
     return this.uiMode === 'private';
   }
 
-
   atLeastOneValidator(controlGroup: FormGroup) {
-    const st = controlGroup.controls['sizeTypes'];
-    const ct = controlGroup.controls['crateTypes'];
+    const st = controlGroup.get('sizeTypes') as FormArray;
+    const ct = controlGroup.get('crateTypes') as FormArray;
 
-    return (ct['controls'].some(e => e.value) || st['controls'].some(e => e.value))
-      ? null
-      : { atLeastOne: false };
+    return ct.controls.some(e => e.value) || st.controls.some(e => e.value) ? null : { atLeastOne: false };
   }
 
   getGrid(sizesLength: number) {
@@ -72,7 +71,7 @@ export class TransferFormComponent implements OnInit {
       1: { col: 4, offset: 4 },
       2: { col: 3, offset: 2 },
       3: { col: 4, offset: 0 },
-      4: { col: 3, offset: 0 },
+      4: { col: 3, offset: 0 }
     };
     return map[sizesLength] || { col: 2, offset: 0 };
   }
@@ -103,5 +102,4 @@ export class TransferFormComponent implements OnInit {
 
     return strings[name][this.uiMode];
   }
-
 }

@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class HelperService {
-
-  constructor() { }
+  constructor() {}
 
   commaToDotString(val: string): string {
     return val.replace(/\,/g, '.');
@@ -23,7 +22,6 @@ export class HelperService {
 
   containsFuzzyAll(haystacks: string[], needles: string[]): boolean {
     const haystack = haystacks.join(' ').toLowerCase();
-    return needles.every(t => haystack.indexOf(t) !== -1 ? true : false);
+    return needles.every(t => (haystack.indexOf(t) !== -1 ? true : false));
   }
-
 }

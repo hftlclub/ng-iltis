@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 import { NotificationsService } from 'angular2-notifications';
 
 import { Product } from '../../../shared/models/product';
@@ -11,7 +11,6 @@ import { ProductService } from '../../../core/product.service';
   styleUrls: ['./image-upload-modal.component.scss']
 })
 export class ImageUploadModalComponent implements OnInit {
-
   @ViewChild('fileInput') fileInput: ElementRef;
 
   product: Product;
@@ -22,11 +21,11 @@ export class ImageUploadModalComponent implements OnInit {
 
   private reader: FileReader;
 
-  constructor(private modal: BsModalRef, private ps: ProductService, private ns: NotificationsService) { }
+  constructor(private modal: BsModalRef, private ps: ProductService, private ns: NotificationsService) {}
 
   ngOnInit() {
     this.reader = new FileReader();
-    this.reader.onload = (e) => this.imageData = e.target['result'];
+    this.reader.onload = (e: any) => (this.imageData = e.target.result);
   }
 
   imageSelected(file: File) {
@@ -35,14 +34,16 @@ export class ImageUploadModalComponent implements OnInit {
   }
 
   upload() {
-    this.ps.uploadProductImage(this.file, this.product.id).subscribe(e => {
-      this.ps.productUpdated.emit();
-      this.ns.success('Bild aktualisiert', 'Das Produktbild wurde aktualisiert.');
-      this.hideModal();
-    },
-    err => {
-      this.ns.error('Fehler', 'Vorgang abgebrochen');
-    });
+    this.ps.uploadProductImage(this.file, this.product.id).subscribe(
+      e => {
+        this.ps.productUpdated.emit();
+        this.ns.success('Bild aktualisiert', 'Das Produktbild wurde aktualisiert.');
+        this.hideModal();
+      },
+      err => {
+        this.ns.error('Fehler', 'Vorgang abgebrochen');
+      }
+    );
   }
 
   hideModal() {

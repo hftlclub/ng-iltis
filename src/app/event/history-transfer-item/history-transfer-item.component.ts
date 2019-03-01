@@ -8,7 +8,5 @@ import { Transfer } from '../../shared/models/transfer';
   styleUrls: ['./history-transfer-item.component.scss']
 })
 export class HistoryTransferItemComponent {
-
   @Input() transfer: Transfer;
-
 }

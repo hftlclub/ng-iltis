@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
@@ -15,10 +15,9 @@ import { CrateTypeDeleteModalComponent } from '../crate-type-delete-modal/crate-
   styleUrls: ['./crate-types.component.css']
 })
 export class CrateTypesComponent implements OnInit {
-
   crateTypes$: Observable<CrateType[]>;
 
-  constructor(private ss: SizesService, private modalService: BsModalService) { }
+  constructor(private ss: SizesService, private modalService: BsModalService) {}
 
   ngOnInit() {
     this.refreshSizeTypes();
@@ -26,9 +25,7 @@ export class CrateTypesComponent implements OnInit {
   }
 
   refreshSizeTypes() {
-    this.crateTypes$ = this.ss.getAllCrateTypes().pipe(
-      map(cts => cts.sort((a, b) => a.id - b.id))
-    );
+    this.crateTypes$ = this.ss.getAllCrateTypes().pipe(map(cts => cts.sort((a, b) => a.id - b.id)));
   }
 
   showDeleteModal(ct: CrateType) {
@@ -44,5 +41,4 @@ export class CrateTypesComponent implements OnInit {
   showCreateModal() {
     this.modalService.show(CrateTypeCreateModalComponent);
   }
-
 }

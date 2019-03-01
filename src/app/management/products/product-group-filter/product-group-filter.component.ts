@@ -8,7 +8,6 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-group-filter.component.scss']
 })
 export class ProductGroupFilterComponent implements OnInit {
-
   form: FormGroup;
   groups = [
     {
@@ -21,7 +20,7 @@ export class ProductGroupFilterComponent implements OnInit {
     }
   ];
 
-  constructor(private pfs: ProductListFilterService) { }
+  constructor(private pfs: ProductListFilterService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -41,5 +40,4 @@ export class ProductGroupFilterComponent implements OnInit {
     box.setValue(!box.value);
     this.valueChanged();
   }
-
 }

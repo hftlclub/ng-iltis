@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-import { Observable } from 'rxjs/Observable';
+import { BsModalRef } from 'ngx-bootstrap/modal';
+import { Observable } from 'rxjs';
 import { NotificationsService } from 'angular2-notifications';
 
 import { SizeType } from '../../../shared/models/sizetype';

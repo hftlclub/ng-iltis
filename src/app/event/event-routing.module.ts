@@ -61,7 +61,7 @@ const routes: Routes = [
         component: EventOverviewComponent,
         resolve: {
           event: EventResolver
-        },
+        }
       },
       {
         path: 'products',
@@ -77,7 +77,7 @@ const routes: Routes = [
         resolve: {
           event: EventResolver,
           eventTypes: EventTypesResolver
-        },
+        }
       },
       {
         path: 'close',
@@ -85,7 +85,7 @@ const routes: Routes = [
         resolve: {
           event: EventResolver,
           transfers: TransfersResolver
-        },
+        }
       },
       {
         path: 'inventory',
@@ -106,7 +106,7 @@ const routes: Routes = [
           products: ProductsResolver,
           inventory: InventoryResolver,
           transfers: TransfersResolver
-        },
+        }
       },
       {
         path: 'newtransfer/:productId',
@@ -121,17 +121,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: [
-    ProductsResolver,
-    ProductResolver,
-    EventsResolver,
-    EventResolver,
-    TransfersResolver,
-    TransactionsResolver,
-    EventTypesResolver,
-    PermissionResolver,
-    InventoryResolver
-  ]
+  exports: [RouterModule]
 })
-export class EventRoutingModule { }
+export class EventRoutingModule {}

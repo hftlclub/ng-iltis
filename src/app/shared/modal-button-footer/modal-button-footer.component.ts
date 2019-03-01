@@ -6,12 +6,9 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./modal-button-footer.component.css']
 })
 export class ModalButtonFooterComponent implements OnInit {
-
   @Input() breakpoint = 'sm';
 
-  constructor() { }
+  constructor() {}
 
-  ngOnInit() {
-  }
-
+  ngOnInit() {}
 }

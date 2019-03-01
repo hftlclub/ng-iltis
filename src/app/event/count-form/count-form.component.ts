@@ -1,10 +1,9 @@
-import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import _ from 'lodash';
+import { keyBy, mapValues, flatMap, forIn, uniq, uniqBy, max } from 'lodash-es';
 
 import { Transfer } from '../../shared/models/transfer';
 import { Size } from '../../shared/models/size';
-import { Inventory } from '../../shared/models/inventory';
 import { Category } from '../../shared/models/category';
 import { Product } from '../../shared/models/product';
 
@@ -14,7 +13,6 @@ import { Product } from '../../shared/models/product';
   styleUrls: ['./count-form.component.css']
 })
 export class CountFormComponent implements OnInit {
-
   @Input() products: Product[];
   @Input() inventory: any[];
   @Input() transfers: Transfer[];
@@ -28,39 +26,29 @@ export class CountFormComponent implements OnInit {
   maxTypeColsNum: number;
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     this.categories = this.productsToCategoryArray(this.products);
 
     this.categories = this.categories.map(c => {
-      c.sizeTypes = _.uniqBy(
-        _.flatMap(c.products, p => p.sizes.map(s => s.sizeType)),
-        t => t.id
-      );
+      c.sizeTypes = uniqBy(flatMap(c.products, p => p.sizes.map(s => s.sizeType)), t => t.id);
 
-      c.crateTypes = _.uniqBy(
-        _.flatMap(c.products, p => p.crateTypes),
-        t => t.id
-      );
+      c.crateTypes = uniqBy(flatMap(c.products, p => p.crateTypes), t => t.id);
 
       c.typeColsNum = c.sizeTypes.length + c.crateTypes.length;
 
       return c;
     });
 
-    this.maxTypeColsNum = _.max(this.categories.map(c => c.typeColsNum));
+    this.maxTypeColsNum = max(this.categories.map(c => c.typeColsNum));
 
     // IDs of products that we already have tranasfers for
-    this.transferredProducts = _.uniq(this.transfers.map(t => t.product.id));
+    this.transferredProducts = uniq(this.transfers.map(t => t.product.id));
 
     this.form = this.fb.group({
       categories: this.fb.array(
-        this.categories.map(
-          c => this.fb.array(
-            c.products.map(p => this.productToFormGroup(p, this.inventory))
-          )
-        )
+        this.categories.map(c => this.fb.array(c.products.map(p => this.productToFormGroup(p, this.inventory))))
       )
     });
 
@@ -68,37 +56,33 @@ export class CountFormComponent implements OnInit {
   }
 
   submitForm() {
-    const products = _.flatMap(this.form.get('categories').value, (category, ci) => {
+    const products = flatMap(this.form.get('categories').value, (category, ci) => {
       return category.map((product, pi) => {
         product.id = this.categories[ci].products[pi].id;
         return product;
       });
-    })
-    .filter(p => p.active);
+    }).filter(p => p.active);
 
-    const crateTypesMap = _.keyBy(
-      _.flatMap(this.products, p => p.crateTypes),
-      c => c.id
-    );
+    const crateTypesMap = keyBy(flatMap(this.products, p => p.crateTypes), c => c.id);
 
-    const output = _.flatMap(products, p => {
-      const sizeTypesAmounts = _.mapValues(p.sizeTypes, v => parseInt(v, 0));
+    const output = flatMap(products, p => {
+      const sizeTypesAmounts = mapValues(p.sizeTypes, v => parseInt(v, 0));
 
-      _.forIn(p.crateTypes, (numCrates, ctId) => {
+      forIn(p.crateTypes, (numCrates, ctId) => {
         const ct = crateTypesMap[ctId];
         const stId = ct.sizeType.id;
         sizeTypesAmounts[stId] += ct.slots * numCrates;
       });
 
-      const productWithSizeTypes = _.mapValues(sizeTypesAmounts, (amount, stId) => {
+      const productWithSizeTypes = mapValues(sizeTypesAmounts, (amount, stId) => {
         return {
-          amount: amount,
+          amount,
           sizeTypeId: parseInt(stId, 10),
           productId: p.id
         };
       });
 
-      return _.values(productWithSizeTypes);
+      return Object.values(productWithSizeTypes);
     });
 
     this.submitted.emit(output);
@@ -108,12 +92,9 @@ export class CountFormComponent implements OnInit {
     this.cancelled.emit();
   }
 
-
   setFormGroupActive(ci: number, pi: number, active = true) {
-    this.form.get(['categories', ci, pi, 'active'])
-      .setValue(active);
+    this.form.get(['categories', ci, pi, 'active']).setValue(active);
   }
-
 
   productToFormGroup(p: Product, inv: any[]): FormGroup {
     const invForProduct = inv.filter(i => i.product.id === p.id);
@@ -152,8 +133,6 @@ export class CountFormComponent implements OnInit {
     });
   }
 
-
-
   productsToCategoryArray(products: Product[]): Category[] {
     const categories = {};
 
@@ -174,7 +153,6 @@ export class CountFormComponent implements OnInit {
         firstUnit: c.products[0].unit
       }));
   }
-
 
   hasSizeTypeId(sizes: Size[], id: number): boolean {
     return !!sizes.find(s => s.sizeType.id === id);

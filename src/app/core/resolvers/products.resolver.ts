@@ -4,9 +4,8 @@ import { ActivatedRouteSnapshot, Resolve } from '@angular/router';
 import { Product } from '../../shared/models/product';
 import { ProductService } from '../product.service';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class ProductsResolver implements Resolve<Product[]> {
-
   constructor(private ps: ProductService) {}
 
   resolve(route: ActivatedRouteSnapshot) {
@@ -14,5 +13,4 @@ export class ProductsResolver implements Resolve<Product[]> {
     const inactSizes = !!route.data.showInactiveSizes;
     return this.ps.getAll(inactProducts, inactSizes);
   }
-
 }

@@ -1,11 +1,10 @@
 import { ProductListFilterService } from '../shared/product-list-filter.service';
-import { Component, ComponentRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Observable } from 'rxjs/Observable';
+import { Observable } from 'rxjs';
 import { TableColumn, DatatableComponent } from '@swimlane/ngx-datatable';
 
 import { Product } from '../../../shared/models/product';
-import { ProductService } from '../../../core/product.service';
 import { filter, map } from 'rxjs/operators';
 
 @Component({
@@ -14,7 +13,6 @@ import { filter, map } from 'rxjs/operators';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
-
   @ViewChild(DatatableComponent) datatable: DatatableComponent;
   @ViewChild('tplImg') tplImg: TemplateRef<any>;
   @ViewChild('tplActive') tplActive: TemplateRef<any>;
@@ -27,7 +25,7 @@ export class ProductListComponent implements OnInit {
 
   columns: TableColumn[];
 
-  constructor(public pfs: ProductListFilterService, private router: Router, private route: ActivatedRoute) { }
+  constructor(public pfs: ProductListFilterService, private router: Router, private route: ActivatedRoute) {}
 
   ngOnInit() {
     this.pfs.refreshProducts();
@@ -40,7 +38,7 @@ export class ProductListComponent implements OnInit {
       { name: 'Kategorie', cellTemplate: this.tplCategory, prop: 'category', comparator: this.categoryComparator },
       { name: 'Beschreibung', prop: 'description' },
       { name: 'Einheit', prop: 'unit.full' },
-      { name: 'Aktionen', cellTemplate: this.tplActions, sortable: false, width: 200 },
+      { name: 'Aktionen', cellTemplate: this.tplActions, sortable: false, width: 200 }
     ];
 
     // navigate to detail page on row doubleclick
@@ -48,25 +46,30 @@ export class ProductListComponent implements OnInit {
       .pipe(filter(e => e.type === 'dblclick'))
       .subscribe(e => this.router.navigate(['..', e.row.id], { relativeTo: this.route }));
 
-    this.datatable.sort
-      .pipe(map(e => e.sorts))
-      .subscribe(this.pfs.tableSort$);
+    this.datatable.sort.pipe(map(e => e.sorts)).subscribe(this.pfs.tableSort$);
   }
 
   categoryComparator(a: any, b: any) {
-    if (a.name.toLowerCase() < b.name.toLowerCase()) { return -1; }
-    if (a.name.toLowerCase() > b.name.toLowerCase()) { return 1; }
+    if (a.name.toLowerCase() < b.name.toLowerCase()) {
+      return -1;
+    }
+    if (a.name.toLowerCase() > b.name.toLowerCase()) {
+      return 1;
+    }
   }
 
   activeComparator(a: any, b: any) {
-    if (a && !b) { return -1; }
-    if (!a && b) { return 1; }
+    if (a && !b) {
+      return -1;
+    }
+    if (!a && b) {
+      return 1;
+    }
   }
 
   getRowClass(row) {
     return {
-      'inactive': !row.active
+      inactive: !row.active
     };
   }
-
 }

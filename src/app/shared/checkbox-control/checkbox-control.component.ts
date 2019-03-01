@@ -1,7 +1,6 @@
 import { Component, OnInit, forwardRef } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
 
-
 @Component({
   selector: 'il-checkbox-control',
   templateUrl: './checkbox-control.component.html',
@@ -15,23 +14,22 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class CheckboxControlComponent {
-
-  private _value = false;
+  private realValue = false;
 
   propagateChange: any = () => {};
   validateFn: any = () => {};
 
   get value(): boolean {
-    return this._value;
+    return this.realValue;
   }
 
   set value(val) {
-    this._value = val;
+    this.realValue = val;
     this.propagateChange(val);
   }
 
   toggleValue() {
-    this.value = !this._value;
+    this.value = !this.realValue;
   }
 
   writeValue(value) {
@@ -43,5 +41,4 @@ export class CheckboxControlComponent {
   }
 
   registerOnTouched() {}
-
 }

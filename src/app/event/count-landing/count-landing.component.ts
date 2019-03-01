@@ -8,13 +8,12 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./count-landing.component.scss']
 })
 export class CountLandingComponent implements OnInit {
-
   event: Event;
 
-  constructor(private route: ActivatedRoute) { }
+  constructor(private route: ActivatedRoute) {}
 
   ngOnInit() {
-    this.event = this.route.snapshot.data['event'];
+    this.event = this.route.snapshot.data.event;
   }
 
   get isActive(): boolean {
@@ -24,5 +23,4 @@ export class CountLandingComponent implements OnInit {
   get countAllowed(): boolean {
     return this.event.eventType.countAllowed;
   }
-
 }

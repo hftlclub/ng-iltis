@@ -5,5 +5,6 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000'
+  // apiUrl: 'http://localhost:3000'
+  apiUrl: 'https://api-c72153a5f17fed21c5.iltis.stecker.club'
 };

@@ -31,20 +31,7 @@ import { ProductResolver } from './resolvers/product.resolver';
     TimepickerModule.forRoot(),
     AuthModule
   ],
-  exports: [
-    SimpleNotificationsModule,
-    BsDropdownModule
-  ],
-  providers: [
-    HealthCheckService,
-    HasChangesGuard,
-    ProductService,
-    GlobalService,
-    HelperService,
-    UploadService,
-    ProductResolver,
-    ProductsResolver
-  ]
+  exports: [SimpleNotificationsModule, BsDropdownModule]
 })
 export class CoreModule {
   constructor() {

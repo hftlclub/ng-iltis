@@ -2,10 +2,9 @@ import { Component, Input, OnChanges, SimpleChanges } from '@angular/core';
 
 @Component({
   selector: 'il-icon',
-  template: '<i class="fa" [ngClass]="iconClass" aria-hidden="true"></i>',
+  template: '<i class="fa" [ngClass]="iconClass" aria-hidden="true"></i>'
 })
 export class IconComponent implements OnChanges {
-
   iconClass = '';
 
   @Input() for: string;
@@ -51,5 +50,4 @@ export class IconComponent implements OnChanges {
     this.iconClass = this.iconMap[this.for] || this.for;
     this.iconClass += ' ' + this.classes;
   }
-
 }

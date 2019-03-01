@@ -7,12 +7,7 @@ import { SharedModule } from '../shared/shared.module';
 import { InventoryComponent } from './inventory/inventory.component';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    InventoryRoutingModule,
-    SharedModule
-  ],
-  declarations: [InventoryComponent],
-  providers: [InventoryService]
+  imports: [CommonModule, InventoryRoutingModule, SharedModule],
+  declarations: [InventoryComponent]
 })
-export class InventoryModule { }
+export class InventoryModule {}

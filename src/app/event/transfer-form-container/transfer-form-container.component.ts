@@ -13,7 +13,6 @@ import { EventService } from '../shared/event.service';
   styleUrls: ['./transfer-form-container.component.css']
 })
 export class TransferFormContainerComponent implements OnInit {
-
   event: Event;
   product: Product;
   loading = false;
@@ -27,11 +26,11 @@ export class TransferFormContainerComponent implements OnInit {
     private router: Router,
     private es: EventService,
     private ns: NotificationsService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.product = this.route.snapshot.data['product'];
-    this.event = this.route.parent.snapshot.data['event'];
+    this.product = this.route.snapshot.data.product;
+    this.event = this.route.parent.snapshot.data.event;
 
     switch (this.event.eventType.uiMode) {
       case 'event':
@@ -52,57 +51,52 @@ export class TransferFormContainerComponent implements OnInit {
     }
 
     if (this.event.eventType.uiMode === 'private') {
-      this.es.checkPermission().subscribe(perm => this.noCounterRemoval = !perm.createEventCountAllowed);
+      this.es.checkPermission().subscribe(perm => (this.noCounterRemoval = !perm.createEventCountAllowed));
     }
   }
-
 
   submitForm(data) {
     const { controls, outgoing, storage } = data;
     const stChanges = {};
-    controls['sizeTypes'].value
-      .map(this.sanitizeInt)
-      .forEach((e, i) => {
-        const stid = this.product.sizes[i].sizeType.id;
-        stChanges[stid] = e;
-      });
+    controls.sizeTypes.value.map(this.sanitizeInt).forEach((e, i) => {
+      const stid = this.product.sizes[i].sizeType.id;
+      stChanges[stid] = e;
+    });
 
-    controls['crateTypes'].value
-      .map(this.sanitizeInt)
-      .forEach((e, i) => {
-        const ct = this.product.crateTypes[i];
-        const stid = ct.sizeType.id;
-        stChanges[stid] += e * ct.slots;
-      });
+    controls.crateTypes.value.map(this.sanitizeInt).forEach((e, i) => {
+      const ct = this.product.crateTypes[i];
+      const stid = ct.sizeType.id;
+      stChanges[stid] += e * ct.slots;
+    });
 
-    const transfers = Object.keys(stChanges).map(stid => {
-      return {
-        product: { id: this.product.id },
-        sizeType: { id: this.sanitizeInt(stid) },
-        change: stChanges[stid],
-      };
-    })
-    .filter(t => t.change);
-
-
+    const transfers = Object.keys(stChanges)
+      .map(stid => {
+        return {
+          product: { id: this.product.id },
+          sizeType: { id: this.sanitizeInt(stid) },
+          change: stChanges[stid]
+        };
+      })
+      .filter(t => t.change);
 
     const direction = outgoing ? 'out' : 'in';
     const destination = storage ? 'storage' : 'counter';
 
-    const eventId = this.route.parent.snapshot.params['eventId'];
+    const eventId = this.route.parent.snapshot.params.eventId;
     this.loading = true;
 
-    this.es.createTransfer(direction, destination, eventId, transfers).subscribe(res => {
-      this.loading = false;
-      this.es.transfersAdded.emit(res);
-      this.ns.success('Buchung', 'Die Buchung wurde erfasst.');
-      this.navigateToProductsPage();
-    },
-    err => {
-      this.loading = false;
-      this.ns.error('Fehler', 'Vorgang abgebrochen');
-    });
-
+    this.es.createTransfer(direction, destination, eventId, transfers).subscribe(
+      res => {
+        this.loading = false;
+        this.es.transfersAdded.emit(res);
+        this.ns.success('Buchung', 'Die Buchung wurde erfasst.');
+        this.navigateToProductsPage();
+      },
+      err => {
+        this.loading = false;
+        this.ns.error('Fehler', 'Vorgang abgebrochen');
+      }
+    );
   }
 
   cancelForm() {
@@ -114,8 +108,9 @@ export class TransferFormContainerComponent implements OnInit {
   }
 
   sanitizeInt(num: any) {
-    if (!num) { num = 0; }
+    if (!num) {
+      num = 0;
+    }
     return parseInt(num, 10);
   }
-
 }

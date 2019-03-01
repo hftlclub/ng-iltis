@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
 import { map } from 'rxjs/operators';
 import { BsModalService } from 'ngx-bootstrap';
 
@@ -8,6 +7,7 @@ import { CategoriesService } from '../../shared/categories.service';
 import { CategoryCreateModalComponent } from '../category-create-modal/category-create-modal.component';
 import { CategoryEditModalComponent } from '../category-edit-modal/category-edit-modal.component';
 import { CategoryDeleteModalComponent } from '../category-delete-modal/category-delete-modal.component';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'il-category-list',
@@ -15,10 +15,9 @@ import { CategoryDeleteModalComponent } from '../category-delete-modal/category-
   styleUrls: ['./category-list.component.css']
 })
 export class CategoryListComponent implements OnInit {
-
   categories$: Observable<Category[]>;
 
-  constructor(private cs: CategoriesService, private modalService: BsModalService) { }
+  constructor(private cs: CategoriesService, private modalService: BsModalService) {}
 
   ngOnInit() {
     this.refreshCategories();
@@ -26,9 +25,9 @@ export class CategoryListComponent implements OnInit {
   }
 
   refreshCategories() {
-    this.categories$ = this.cs.getAll(true).pipe(
-      map(cc => cc.sort((a, b) => b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1))
-    );
+    this.categories$ = this.cs
+      .getAll(true)
+      .pipe(map(cc => cc.sort((a, b) => (b.name.toLowerCase() > a.name.toLowerCase() ? -1 : 1))));
   }
 
   showDeleteModal(c: Category) {
@@ -44,5 +43,4 @@ export class CategoryListComponent implements OnInit {
   showCreateModal() {
     this.modalService.show(CategoryCreateModalComponent);
   }
-
 }

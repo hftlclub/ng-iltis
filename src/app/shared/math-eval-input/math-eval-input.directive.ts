@@ -7,8 +7,7 @@ import * as mexp from 'math-expression-evaluator';
 @Directive({
   selector: '[ilMathEval]'
 })
-export class MathEvalInputDirective  {
-
+export class MathEvalInputDirective {
   @Input() roundToInt = false;
 
   constructor(private control: NgControl, private hs: HelperService) {}
@@ -24,10 +23,9 @@ export class MathEvalInputDirective  {
       value = mexp.eval(exp);
     } catch (e) {}
 
-    if (this.roundToInt) { value = Math.ceil(value); }
+    if (this.roundToInt) {
+      value = Math.ceil(value);
+    }
     return value;
   }
-
-
-
 }

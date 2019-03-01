@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
+import { Subscription } from 'rxjs';
 import { NotificationsService } from 'angular2-notifications';
 
 import { EventType, EventTypeFactory } from '../../shared/models/eventtype';
@@ -13,7 +13,6 @@ import { EventService } from '../shared/event.service';
   styleUrls: ['./new-event-form.component.css']
 })
 export class NewEventFormComponent implements OnInit, OnDestroy {
-
   eventTypesAll: EventType[];
   eventTypes: EventType[];
   uiMode: string;
@@ -28,17 +27,15 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
     private router: Router,
     private es: EventService,
     private ns: NotificationsService
-  ) { }
-
+  ) {}
 
   ngOnInit() {
-    this.eventTypesAll = this.route.snapshot.data['eventTypes'];
-    this.createCountAllowed = this.route.snapshot.data['permission'].createEventCountAllowed;
+    this.eventTypesAll = this.route.snapshot.data.eventTypes;
+    this.createCountAllowed = this.route.snapshot.data.permission.createEventCountAllowed;
 
-    this.eventTypes = this.updateUiMode(this.route.snapshot.params['uiMode']);
-    this.paramsSub = this.route.params.subscribe(p => this.eventTypes = this.updateUiMode(p['uiMode']));
+    this.eventTypes = this.updateUiMode(this.route.snapshot.params.uiMode);
+    this.paramsSub = this.route.params.subscribe(p => (this.eventTypes = this.updateUiMode(p.uiMode)));
   }
-
 
   updateUiMode(uiMode: string) {
     this.uiMode = uiMode;
@@ -57,7 +54,6 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
     this.paramsSub.unsubscribe();
   }
 
-
   createEvent(formValue) {
     const newEvent: Event = EventFactory.fromObj({
       eventType: formValue.eventType,
@@ -66,35 +62,39 @@ export class NewEventFormComponent implements OnInit, OnDestroy {
       active: true
     });
 
-
     this.loading = true;
-    this.es.createEvent(newEvent).subscribe(event => {
-      this.loading = false;
-      this.hasChanges = false;
-      this.ns.success('Ereignis', 'Das Ereignis wurde angelegt.');
+    this.es.createEvent(newEvent).subscribe(
+      event => {
+        this.loading = false;
+        this.hasChanges = false;
+        this.ns.success('Ereignis', 'Das Ereignis wurde angelegt.');
 
-      let redirectUri;
-      switch (this.uiMode) {
-        case 'private':
-          redirectUri = ['../../', event.id, 'products']; break;
-        default:
-          redirectUri = ['../../', event.id]; break;
+        let redirectUri;
+        switch (this.uiMode) {
+          case 'private':
+            redirectUri = ['../../', event.id, 'products'];
+            break;
+          default:
+            redirectUri = ['../../', event.id];
+            break;
+        }
+        this.router.navigate(redirectUri, { relativeTo: this.route });
+      },
+      err => {
+        this.loading = false;
+        this.ns.error('Fehler', 'Vorgang abgebrochen');
       }
-      this.router.navigate(redirectUri, { relativeTo: this.route });
-    },
-    err => {
-      this.loading = false;
-      this.ns.error('Fehler', 'Vorgang abgebrochen');
-    });
+    );
   }
-
 
   mergeDateTime(date: Date, time: Date) {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      time.getHours(),
+      time.getMinutes(),
+      time.getSeconds()
+    );
   }
-
-
-
-
-
 }

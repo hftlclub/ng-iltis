@@ -27,12 +27,7 @@ import { InfoComponent } from './info/info.component';
 const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule, CategoriesModule];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NavBarComponent,
-    ConnectionLostModalComponent,
-    InfoComponent
-  ],
+  declarations: [AppComponent, NavBarComponent, ConnectionLostModalComponent, InfoComponent],
   imports: [
     CoreModule,
     BrowserModule,
@@ -42,14 +37,7 @@ const lazyModules = [EventModule, ManagementModule, SizesModule, ProductsModule,
     AppRoutingModule,
     ...lazyModules // lazy loaded modules are still imported because of https://github.com/angular/angular/issues/14324
   ],
-  providers: [
-    EventService,
-    UnitsService,
-    SizesService,
-    CategoriesService,
-    InfoService,
-    { provide: LOCALE_ID, useValue: 'de' }
-  ],
+  providers: [{ provide: LOCALE_ID, useValue: 'de' }],
   entryComponents: [ConnectionLostModalComponent],
   bootstrap: [AppComponent]
 })

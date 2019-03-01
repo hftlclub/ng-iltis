@@ -9,23 +9,11 @@ import { CategoryDeleteModalComponent } from './category-delete-modal/category-d
 import { CategoryEditModalComponent } from './category-edit-modal/category-edit-modal.component';
 import { CategoryCreateModalComponent } from './category-create-modal/category-create-modal.component';
 
-const modals = [
-  CategoryCreateModalComponent,
-  CategoryEditModalComponent,
-  CategoryDeleteModalComponent
-]
+const modals = [CategoryCreateModalComponent, CategoryEditModalComponent, CategoryDeleteModalComponent];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    CategoriesRoutingModule,
-    SharedModule
-  ],
-  declarations: [
-    CategoryListComponent,
-    CategoryFormComponent,
-    ...modals
-  ],
+  imports: [CommonModule, CategoriesRoutingModule, SharedModule],
+  declarations: [CategoryListComponent, CategoryFormComponent, ...modals],
   entryComponents: [...modals]
 })
-export class CategoriesModule { }
+export class CategoriesModule {}

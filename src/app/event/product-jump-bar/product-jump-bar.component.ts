@@ -6,7 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./product-jump-bar.component.css']
 })
 export class ProductJumpBarComponent {
-
   @Input() categories;
-
 }

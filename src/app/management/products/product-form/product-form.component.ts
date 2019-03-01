@@ -11,7 +11,6 @@ import { Unit } from '../../../shared/models/unit';
   styleUrls: ['./product-form.component.css']
 })
 export class ProductFormComponent implements OnInit {
-
   @Input() loading = false;
   @Input() buttonLabel = 'Speichern';
 
@@ -25,7 +24,7 @@ export class ProductFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder) {}
 
   ngOnInit() {
     const initial = this.getInitialFormValues();
@@ -40,7 +39,6 @@ export class ProductFormComponent implements OnInit {
     this.form.valueChanges.subscribe(v => this.valueChanged.emit(v));
   }
 
-
   getInitialFormValues() {
     let initial;
     if (this.initialProduct) {
@@ -50,7 +48,6 @@ export class ProductFormComponent implements OnInit {
         category: this.initialProduct.category.id,
         unit: this.initialProduct.unit.id
       };
-
     } else {
       initial = {
         name: '',
@@ -70,12 +67,11 @@ export class ProductFormComponent implements OnInit {
       description: formValue.description,
       category: { id: parseInt(formValue.category, 0) },
       unit: { id: parseInt(formValue.unit, 0) }
-    }
+    };
     this.submitted.emit(product);
   }
 
   cancelForm() {
     this.cancelled.emit();
   }
-
 }

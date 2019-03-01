@@ -11,9 +11,7 @@ function commaToDotString(val: string): string {
 
 export class IlValidators {
   static notZero(control: AbstractControl): ValidationErrors | null {
-    return control.value === '0' || control.value === 0
-      ? { notZero: { valid: false } }
-      : null;
+    return control.value === '0' || control.value === 0 ? { notZero: { valid: false } } : null;
   }
 
   static min(min: number): ValidatorFn {
@@ -24,9 +22,7 @@ export class IlValidators {
       const value = parseFloat(commaToDotString(control.value));
       // Controls with NaN values after parsing should be treated as not having a
       // minimum, per the HTML forms spec: https://www.w3.org/TR/html5/forms.html#attr-input-min
-      return !isNaN(value) && value < min
-        ? { min: { min: min, actual: control.value } }
-        : null;
+      return !isNaN(value) && value < min ? { min: { min, actual: control.value } } : null;
     };
   }
 }

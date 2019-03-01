@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, ValidationErrors } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NotificationsService } from 'angular2-notifications';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
@@ -13,8 +13,6 @@ import { EventService } from '../shared/event.service';
   styleUrls: ['./delete-modal.component.css']
 })
 export class DeleteModalComponent implements OnInit {
-
-
   event: Event;
 
   form: FormGroup;
@@ -27,7 +25,7 @@ export class DeleteModalComponent implements OnInit {
     private es: EventService,
     private ns: NotificationsService,
     private modal: BsModalRef
-  ) { }
+  ) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -36,8 +34,8 @@ export class DeleteModalComponent implements OnInit {
   }
 
   exactValueValidator(value: any) {
-    return function(fc: FormControl): { [error: string]: any } {
-      return (fc.value === value) ? null : { exactValue: false };
+    return (fc: FormControl): ValidationErrors => {
+      return fc.value === value ? null : { exactValue: false };
     };
   }
 
@@ -50,7 +48,6 @@ export class DeleteModalComponent implements OnInit {
       this.hideModal();
       this.router.navigate(['/event']);
     });
-
   }
 
   hideModal() {

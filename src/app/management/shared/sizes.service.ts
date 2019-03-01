@@ -1,22 +1,16 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of';
+import { Observable } from 'rxjs';
 
 import { SizeType } from '../../shared/models/sizetype';
 import { CrateType } from '../../shared/models/cratetype';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class SizesService {
-
   sizeTypeListChanged = new EventEmitter<any>();
   crateTypeListChanged = new EventEmitter<any>();
 
-  constructor(
-    private http: HttpClient,
-    @Inject('API_URL') private api
-  ) { }
+  constructor(private http: HttpClient, @Inject('API_URL') private api) {}
 
   getAllSizeTypes(): Observable<SizeType[]> {
     return this.http.get<SizeType[]>(`${this.api}/sizetypes`);
@@ -34,7 +28,6 @@ export class SizesService {
     return this.http.delete(`${this.api}/sizetype/${stId}`);
   }
 
-
   getAllCrateTypes(): Observable<CrateType[]> {
     return this.http.get<CrateType[]>(`${this.api}/cratetypes`);
   }
@@ -50,5 +43,4 @@ export class SizesService {
   deleteCrateType(ctId: number): Observable<any> {
     return this.http.delete(`${this.api}/cratetype/${ctId}`);
   }
-
 }

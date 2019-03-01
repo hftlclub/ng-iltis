@@ -6,8 +6,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./event-overview-card.component.css']
 })
 export class EventOverviewCardComponent {
-
   @Input() title: string;
   @Input() icon: string;
-
 }

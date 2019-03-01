@@ -1,6 +1,6 @@
 import { Transaction } from '../models/transaction';
 import { Component, Input, OnChanges, OnInit, SimpleChanges } from '@angular/core';
-import _ from 'lodash';
+import { groupBy } from 'lodash-es';
 
 import { SizeType } from '../models/sizetype';
 import { Product } from '../models/product';
@@ -13,7 +13,6 @@ import { Inventory } from '../models/inventory';
   styleUrls: ['./inventory-table.component.scss']
 })
 export class InventoryTableComponent implements OnInit, OnChanges {
-
   @Input() inventory: Inventory[];
   @Input() transactions: Transaction[];
   @Input() withTransactions: boolean;
@@ -21,12 +20,11 @@ export class InventoryTableComponent implements OnInit, OnChanges {
   @Input() showDate = true;
   productGroups: ProductGroup[];
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   ngOnChanges(c: SimpleChanges) {
     if (this.withTransactions && (c.inventory || c.transactions)) {
       this.productGroups = this.transformToTableData(this.inventory, this.transactions);
-
     } else if (!this.withTransactions && this.inventory && c.inventory) {
       this.productGroups = this.transformToTableData(this.inventory);
     }
@@ -51,28 +49,28 @@ export class InventoryTableComponent implements OnInit, OnChanges {
       ...inv,
       totalVolume: inv.total * inv.sizeType.amount,
       isBelowMin: inv.total <= inv.minStock,
-      isCloseToMin: inv.minStock && inv.total < (inv.minStock + 20) && inv.total > inv.minStock,
+      isCloseToMin: inv.minStock && inv.total < inv.minStock + 20 && inv.total > inv.minStock,
       changeTotal: transactions.length ? findTransactionChange(inv.product.id, inv.sizeType.id) : null
     });
 
     const buildGroup = g => ({
       product: g[0].product,
-      inventory: g.map(buildInventory).map(addInventoryCalculations),
+      inventory: g.map(buildInventory).map(addInventoryCalculations)
     });
 
     const addGroupCalculations = g => ({
       ...g,
       totalVolume: g.inventory.reduce((acc, inv) => acc + inv.totalVolume, 0),
       someBelowMin: g.inventory.some(inv => inv.isBelowMin),
-      someCloseToMin: g.inventory.some(inv => inv.isCloseToMin),
+      someCloseToMin: g.inventory.some(inv => inv.isCloseToMin)
     });
 
-    return Object.values(_.groupBy(inventory, inv => inv.product.id))
-      .map(buildGroup).map(addGroupCalculations)
+    return Object.values(groupBy(inventory, inv => inv.product.id))
+      .map(buildGroup)
+      .map(addGroupCalculations)
       .sort((a, b) => a.product.name.localeCompare(b.product.name));
   }
 }
-
 
 interface ProductGroup {
   product: Product;

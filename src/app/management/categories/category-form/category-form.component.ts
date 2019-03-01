@@ -10,7 +10,6 @@ import { HelperService } from '../../../core/helper.service';
   styleUrls: ['./category-form.component.css']
 })
 export class CategoryFormComponent implements OnInit {
-
   @Input() edit = false;
   @Input() initialValue = CategoryFactory.empty();
   @Input() buttonIcon = 'ok';
@@ -21,12 +20,12 @@ export class CategoryFormComponent implements OnInit {
 
   form: FormGroup;
 
-  constructor(private fb: FormBuilder, private hs: HelperService) { }
+  constructor(private fb: FormBuilder, private hs: HelperService) {}
 
   ngOnInit() {
     this.form = this.fb.group({
       name: [this.initialValue.name, [Validators.required]],
-      description: [this.initialValue.description],
+      description: [this.initialValue.description]
     });
   }
 
@@ -43,5 +42,4 @@ export class CategoryFormComponent implements OnInit {
   cancel() {
     this.cancelled.emit();
   }
-
 }

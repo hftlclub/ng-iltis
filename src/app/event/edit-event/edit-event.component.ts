@@ -1,11 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs/Subscription';
 import { NotificationsService } from 'angular2-notifications';
 import { BsModalService } from 'ngx-bootstrap/modal';
 
-import { EventType, EventTypeFactory } from '../../shared/models/eventtype';
-import { Event, EventFactory } from '../../shared/models/event';
+import { EventType } from '../../shared/models/eventtype';
+import { Event } from '../../shared/models/event';
 import { EventService } from '../shared/event.service';
 import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
 
@@ -15,7 +14,6 @@ import { DeleteModalComponent } from '../delete-modal/delete-modal.component';
   styleUrls: ['./edit-event.component.css']
 })
 export class EditEventComponent implements OnInit {
-
   eventTypes: EventType[];
   event: Event;
   loading = false;
@@ -27,13 +25,11 @@ export class EditEventComponent implements OnInit {
     private es: EventService,
     private ns: NotificationsService,
     private modalService: BsModalService
-  ) { }
-
+  ) {}
 
   ngOnInit() {
-    this.event = this.route.snapshot.data['event'];
-    this.eventTypes = this.route.snapshot.data['eventTypes']
-      .filter(e => e.uiMode === this.event.eventType.uiMode);
+    this.event = this.route.snapshot.data.event;
+    this.eventTypes = this.route.snapshot.data.eventTypes.filter(e => e.uiMode === this.event.eventType.uiMode);
   }
 
   showDeleteModal() {
@@ -41,8 +37,7 @@ export class EditEventComponent implements OnInit {
     modal.content.event = this.event;
   }
 
-
-  updateEvent(formValue) {
+  updateEvent(formValue: any) {
     const newValues = {
       datetime: this.mergeDateTime(formValue.date, formValue.time),
       description: formValue.description,
@@ -52,22 +47,31 @@ export class EditEventComponent implements OnInit {
     const newEvent: Event = Object.assign({}, this.event, newValues);
 
     this.loading = true;
-    this.es.updateEvent(newEvent.id, newEvent).subscribe(event => {
-      this.loading = false;
-      this.hasChanges = false;
-      this.ns.success('Ereignis', 'Das Ereignis wurde bearbeitet.');
+    this.es.updateEvent(newEvent.id, newEvent).subscribe(
+      event => {
+        this.loading = false;
+        this.hasChanges = false;
+        this.ns.success('Ereignis', 'Das Ereignis wurde bearbeitet.');
 
-      this.es.eventUpdated.emit(newEvent);
-      this.navigateToEventPage();
-    },
-    err => {
-      this.loading = false;
-      this.ns.error('Fehler', 'Vorgang abgebrochen');
-    });
+        this.es.eventUpdated.emit(newEvent);
+        this.navigateToEventPage();
+      },
+      err => {
+        this.loading = false;
+        this.ns.error('Fehler', 'Vorgang abgebrochen');
+      }
+    );
   }
 
   mergeDateTime(date: Date, time: Date) {
-    return new Date(date.getFullYear(), date.getMonth(), date.getDate(), time.getHours(), time.getMinutes(), time.getSeconds());
+    return new Date(
+      date.getFullYear(),
+      date.getMonth(),
+      date.getDate(),
+      time.getHours(),
+      time.getMinutes(),
+      time.getSeconds()
+    );
   }
 
   cancelForm() {
@@ -77,5 +81,4 @@ export class EditEventComponent implements OnInit {
   navigateToEventPage() {
     this.router.navigate(['../'], { relativeTo: this.route });
   }
-
 }

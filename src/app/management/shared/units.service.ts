@@ -1,33 +1,25 @@
 import { Injectable, Inject, EventEmitter } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/throw';
-import 'rxjs/add/observable/of';
-
-import { Unit } from '../../shared/models/unit';
+import { Observable } from 'rxjs';
 import { map, retry } from 'rxjs/operators';
 
-@Injectable()
-export class UnitsService {
+import { Unit } from '../../shared/models/unit';
 
+@Injectable({ providedIn: 'root' })
+export class UnitsService {
   unitListChanged = new EventEmitter<any>();
 
-  constructor(
-    private http: HttpClient,
-    @Inject('API_URL') private api
-  ) { }
+  constructor(private http: HttpClient, @Inject('API_URL') private api) {}
 
   getAll(): Observable<Unit[]> {
-    return this.http.get<Unit[]>(`${this.api}/units`)
-      .pipe(
-        retry(3),
-        map(units => units.filter(u => u.full))
-      );
+    return this.http.get<Unit[]>(`${this.api}/units`).pipe(
+      retry(3),
+      map(units => units.filter(u => u.full))
+    );
   }
 
   getSingle(id: number): Observable<Unit> {
-    return this.http.get<Unit>(`${this.api}/unit/${id}`)
-      .pipe(retry(3));
+    return this.http.get<Unit>(`${this.api}/unit/${id}`).pipe(retry(3));
   }
 
   delete(unitId: number): Observable<any> {
@@ -41,6 +33,4 @@ export class UnitsService {
   update(unitId: number, unit: Unit): Observable<any> {
     return this.http.put(`${this.api}/unit/${unitId}`, unit);
   }
-
-
 }

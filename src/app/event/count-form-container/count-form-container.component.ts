@@ -13,7 +13,6 @@ import { EventService } from '../shared/event.service';
   styleUrls: ['./count-form-container.component.css']
 })
 export class CountFormContainerComponent implements OnInit {
-
   products: Product[];
   inventory: Inventory[];
   transfers: Transfer[];
@@ -26,13 +25,13 @@ export class CountFormContainerComponent implements OnInit {
     private router: Router,
     private es: EventService,
     private ns: NotificationsService
-  ) { }
+  ) {}
 
   ngOnInit() {
-    this.mode = this.route.snapshot.params['mode'];
-    this.eventId = this.route.parent.snapshot.params['eventId'];
-    this.products = this.route.snapshot.data['products'];
-    this.transfers = this.route.snapshot.data['transfers'];
+    this.mode = this.route.snapshot.params.mode;
+    this.eventId = this.route.parent.snapshot.params.eventId;
+    this.products = this.route.snapshot.data.products;
+    this.transfers = this.route.snapshot.data.transfers;
 
     // in counter count mode, remove crate types so that only size types can be counted
     if (this.mode === 'counter') {
@@ -44,15 +43,13 @@ export class CountFormContainerComponent implements OnInit {
 
     // the actual number of items of a sizetype is needed in `Inventory.amount`
     // depending on the mode (storage or counter), it's in different keys
-    this.inventory = this.route.snapshot.data['inventory']
-      .map(inv => {
-        inv.amount = (this.mode === 'counter') ? inv.counter : inv.storage;
-        delete inv.storage;
-        delete inv.counter;
-        return inv;
-      });
+    this.inventory = this.route.snapshot.data.inventory.map(inv => {
+      inv.amount = this.mode === 'counter' ? inv.counter : inv.storage;
+      delete inv.storage;
+      delete inv.counter;
+      return inv;
+    });
   }
-
 
   processNewValues(items: any[]) {
     const transfers = items.map(it => ({
@@ -61,8 +58,8 @@ export class CountFormContainerComponent implements OnInit {
       change: it.amount
     }));
 
-    this.es.transmitCount(this.mode, this.eventId, transfers)
-      .subscribe(res => {
+    this.es.transmitCount(this.mode, this.eventId, transfers).subscribe(
+      res => {
         this.hasChanges = false;
         this.es.countFinished.emit(res);
         this.ns.success(this.storageMode ? 'Lagerzählung' : 'Kühlschrankzählung', 'Die Zählung wurde erfasst.');
@@ -70,7 +67,8 @@ export class CountFormContainerComponent implements OnInit {
       },
       err => {
         this.ns.error('Fehler', 'Vorgang abgebrochen');
-      });
+      }
+    );
   }
 
   cancelForm() {
@@ -84,5 +82,4 @@ export class CountFormContainerComponent implements OnInit {
   get storageMode(): boolean {
     return this.mode === 'storage';
   }
-
 }

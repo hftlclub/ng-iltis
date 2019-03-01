@@ -1,6 +1,5 @@
 import { Component, EventEmitter } from '@angular/core';
-import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
-
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
   selector: 'il-datepicker-modal',
@@ -8,18 +7,24 @@ import { BsModalRef } from 'ngx-bootstrap/modal/bs-modal-ref.service';
   styleUrls: ['./datepicker-modal.component.css']
 })
 export class DatepickerModalComponent {
-
-  date: Date;// = new Date();
+  date: Date;
   updated = new EventEmitter<Date>();
 
-  constructor(private modal: BsModalRef) { }
+  constructor(private modal: BsModalRef) {}
 
   setDate(mode: string): void {
     switch (mode) {
-      case 'yesterday': this.date = new Date(Date.now() - 86400000); break;
-      case 'lastwed': this.date = this.getNextLastWeekday(3, -1); break;
-      case 'nextwed': this.date = this.getNextLastWeekday(3, 1); break;
-      default: this.date = new Date();
+      case 'yesterday':
+        this.date = new Date(Date.now() - 86400000);
+        break;
+      case 'lastwed':
+        this.date = this.getNextLastWeekday(3, -1);
+        break;
+      case 'nextwed':
+        this.date = this.getNextLastWeekday(3, 1);
+        break;
+      default:
+        this.date = new Date();
     }
   }
 
@@ -31,9 +36,9 @@ export class DatepickerModalComponent {
 
     const m = new Date().getUTCDay();
     d = d % 7;
-    const dayOffset = (direction * (d - m) + 6) % 7 + 1;
+    const dayOffset = ((direction * (d - m) + 6) % 7) + 1;
     // (-1 * (6 - 3) + 6) % 7 + 1
-    return new Date(Date.now() + (86400000 * direction * dayOffset));
+    return new Date(Date.now() + 86400000 * direction * dayOffset);
   }
 
   submitForm() {
@@ -44,7 +49,4 @@ export class DatepickerModalComponent {
   hideModal() {
     this.modal.hide();
   }
-
-
-
 }

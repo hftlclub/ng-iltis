@@ -8,7 +8,5 @@ import { Transaction } from '../../shared/models/transaction';
   styleUrls: ['./history-transaction-item.component.scss']
 })
 export class HistoryTransactionItemComponent {
-
   @Input() transaction: Transaction;
-
 }

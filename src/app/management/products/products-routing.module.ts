@@ -47,12 +47,11 @@ const routes: Routes = [
     resolve: {
       product: ProductResolver
     }
-  },
+  }
 ];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  exports: [RouterModule],
-  providers: [CategoriesResolver]
+  exports: [RouterModule]
 })
-export class ProductsRoutingModule { }
+export class ProductsRoutingModule {}

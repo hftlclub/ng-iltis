@@ -13,21 +13,21 @@ import { ControlValueAccessor, NG_VALUE_ACCESSOR } from '@angular/forms';
   ]
 })
 export class CounterControlComponent implements ControlValueAccessor {
-  private _counterValue = 0;
+  private realCounterValue = 0;
 
-  @Input() minValue: number = -Infinity;
-  @Input() maxValue: number = Infinity;
+  @Input() minValue = -Infinity;
+  @Input() maxValue = Infinity;
   @Input() disabled = false;
 
   propagateChange: any = () => {};
   validateFn: any = () => {};
 
   get counterValue(): number {
-    return this._counterValue;
+    return this.realCounterValue;
   }
 
   set counterValue(val) {
-    this._counterValue = val;
+    this.realCounterValue = val;
     this.propagateChange(val);
   }
 
@@ -54,6 +54,4 @@ export class CounterControlComponent implements ControlValueAccessor {
       this.counterValue--;
     }
   }
-
-
 }

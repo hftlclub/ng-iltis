@@ -14,9 +14,7 @@ export class NavBarComponent implements OnInit {
   constructor(private router: Router) {}
 
   ngOnInit() {
-    this.router.events.pipe(
-      filter(ev => ev instanceof NavigationEnd)
-    ).subscribe(ev => this.collapsed = true);
+    this.router.events.pipe(filter(ev => ev instanceof NavigationEnd)).subscribe(ev => (this.collapsed = true));
   }
 
   toggleCollapse() {
