@@ -1,9 +1,9 @@
 <div class="input-group">
-  <span class="input-group-addon" (click)="searchInput.focus()">
-    <il-icon for="fa-search"></il-icon>
+  <span class="input-group-prepend" (click)="searchInput.focus()">
+    <il-icon class="input-group-text" for="fa-search"></il-icon>
   </span>
-  <input type="text" class="form-control" placeholder="Filter" [formControl]="control" maxLength="255" #searchInput>
-  <span class="input-group-btn">
+  <input type="text" class="form-control" placeholder="Filter" [formControl]="control" maxLength="255" #searchInput />
+  <span class="input-group-append">
     <button class="btn btn-secondary" type="button" (click)="reset()">
       <il-icon for="fa-close"></il-icon>
     </button>

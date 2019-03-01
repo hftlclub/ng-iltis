@@ -20,6 +20,7 @@ export class EventFormComponent implements OnInit, OnChanges {
   @Output() submitted = new EventEmitter<any>();
   @Output() cancelled = new EventEmitter<any>();
   @Output() valueChanged = new EventEmitter<any>();
+  loading = false;
 
   form: FormGroup;
 

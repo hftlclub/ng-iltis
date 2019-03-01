@@ -1,14 +1,14 @@
 <form [formGroup]="form" (ngSubmit)="submitForm()">
   <div class="modal-body">
-
     <ng-content></ng-content>
 
     <div class="form-group">
       <label>Bezeichnung</label>
-      <span class="small pull-right text-muted">Verbale Bezeichnung, z.B.
+      <span class="small pull-right text-muted">
+        Verbale Bezeichnung, z.B.
         <em>Flasche, Beutel, …</em>
       </span>
-      <input type="text" class="form-control form-control-lg" formControlName="description" maxLength="255">
+      <input type="text" class="form-control form-control-lg" formControlName="description" maxLength="255" />
     </div>
 
     <div class="form-group" *ngIf="!edit">
@@ -20,18 +20,21 @@
 
     <div class="form-group">
       <label>Füllmenge</label>
-      <span class="small pull-right text-muted">Numerische Angabe, z.B.
+      <span class="small pull-right text-muted">
+        Numerische Angabe, z. B.
         <em>0,33</em>
       </span>
 
       <div class="input-group">
-        <input type="text" class="form-control form-control-lg" formControlName="amount" ilMathEval maxLength="15">
-        <span class="input-group-addon">
-          <span *ngIf="edit">{{ initialValue.unit.full }}</span>
-          <span *ngIf="!edit">{{ getUnitById(form.get('unit').value)?.full }}</span>
+        <input type="text" class="form-control form-control-lg" formControlName="amount" ilMathEval maxLength="15" />
+        <span class="input-group-append">
+          <span *ngIf="edit" class="input-group-text">{{ initialValue.unit.full }}</span>
+          <span *ngIf="!edit" class="input-group-text">{{ getUnitById(form.get('unit').value)?.full }}</span>
         </span>
       </div>
-      <small *ngIf="edit" class="form-text">Die Füllmenge kann nicht bearbeitet werden. Bitte lege dazu eine neue Gebindegröße an.</small>
+      <small *ngIf="edit" class="form-text">
+        Die Füllmenge kann nicht bearbeitet werden. Bitte lege dazu eine neue Gebindegröße an.
+      </small>
     </div>
   </div>
 

@@ -1,3 +1,5 @@
+<div *ngIf="showDate" class="mb-3"><strong>Stand:</strong> {{ date | date: 'medium' }} Uhr</div>
+
 <table class="table table-bordered" *ngIf="productGroups">
   <thead>
     <tr>
@@ -15,11 +17,18 @@
 
   <tbody>
     <ng-container *ngFor="let g of productGroups">
-      <tr *ngFor="let inv of g.inventory; first as firstOfGroup"
+      <tr
+        *ngFor="let inv of g.inventory; first as firstOfGroup"
         [class.table-warning]="inv.isCloseToMin"
-        [class.table-danger]="inv.isBelowMin">
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.table-warning]="g.someCloseToMin" [class.table-danger]="g.someBelowMin">
-          <img [src]="g.product.imgFilename" width="30" height="30" alt="" class="hidden-print">
+        [class.table-danger]="inv.isBelowMin"
+      >
+        <td
+          *ngIf="firstOfGroup"
+          [attr.rowspan]="g.inventory.length"
+          [class.table-warning]="g.someCloseToMin"
+          [class.table-danger]="g.someBelowMin"
+        >
+          <img [src]="g.product.imgFilename" width="30" height="30" alt="" class="hidden-print" />
           <strong>{{ g.product.name }}</strong>
         </td>
         <td>{{ inv.sizeType.description }} {{ inv.sizeType.amount | number }} {{ g.product.unit.full }}</td>
@@ -27,23 +36,37 @@
         <td>{{ inv.counter }}</td>
         <td [class.text-warning]="inv.isCloseToMin" [class.text-danger]="inv.isBelowMin">
           <strong>{{ inv.total }}</strong>
-          <il-icon for="fa fa-exclamation-circle" *ngIf="inv.isCloseToMin" title="Mindestbestand bald unterschritten"></il-icon>
-          <il-icon for="fa fa-exclamation-triangle" *ngIf="inv.isBelowMin" title="Mindestbestand unterschritten"></il-icon>
+          <il-icon
+            for="fa fa-exclamation-circle"
+            *ngIf="inv.isCloseToMin"
+            title="Mindestbestand bald unterschritten"
+          ></il-icon>
+          <il-icon
+            for="fa fa-exclamation-triangle"
+            *ngIf="inv.isBelowMin"
+            title="Mindestbestand unterschritten"
+          ></il-icon>
         </td>
         <td *ngIf="withTransactions">
-          <span class="badge" [ngClass]="inv.changeTotal < 0 ? 'badge-danger' : 'badge-success'" *ngIf="inv.changeTotal">
-            {{ inv.changeTotal < 0 ? '–' : '+' }} {{ inv.changeTotal | abs }} </span>
+          <span
+            class="badge"
+            [ngClass]="inv.changeTotal < 0 ? 'badge-danger' : 'badge-success'"
+            *ngIf="inv.changeTotal"
+          >
+            {{ inv.changeTotal < 0 ? '–' : '+' }} {{ inv.changeTotal | abs }}
+          </span>
         </td>
         <td>{{ inv.minStock }}</td>
-        <td>{{ inv.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}</td>
-        <td *ngIf="firstOfGroup" [attr.rowspan]="g.inventory.length" [class.table-warning]="g.someCloseToMin" [class.table-danger]="g.someBelowMin">
-          {{ g.totalVolume | number:'1.0-3' }} {{ g.product.unit.full }}
+        <td>{{ inv.totalVolume | number: '1.0-3' }} {{ g.product.unit.full }}</td>
+        <td
+          *ngIf="firstOfGroup"
+          [attr.rowspan]="g.inventory.length"
+          [class.table-warning]="g.someCloseToMin"
+          [class.table-danger]="g.someBelowMin"
+        >
+          {{ g.totalVolume | number: '1.0-3' }} {{ g.product.unit.full }}
         </td>
       </tr>
     </ng-container>
   </tbody>
 </table>
-
-<div *ngIf="showDate">
-  <strong>Stand:</strong> {{ date | date:'medium' }} Uhr
-</div>
